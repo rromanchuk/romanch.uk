@@ -1,0 +1,33 @@
+
+
+html {
+  background: url('../images/ryan_romanchuk.jpg') no-repeat left center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+footer {
+  height: 100px;
+  position: fixed;
+  bottom: 0px;
+  .ios {
+    margin-left: 20px;
+  }
+  .info {
+    background-color: black;
+    color: white;
+    opacity: 0.8;
+    height: 30px;
+    width: 200px;
+    display:table-cell;
+    vertical-align:middle;
+    a {
+      color: white;
+      line-height: 30px;
+      vertical-align: middle;
+      padding-left: 20px;
+    }
+  }
+}
