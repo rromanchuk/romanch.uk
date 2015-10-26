@@ -11,6 +11,8 @@ footer {
   bottom: 0px; }
   footer .ios {
     margin-left: 20px; }
+  footer .deadpool {
+    opacity: 0.3; }
   footer .info {
     background-color: black;
     color: white;
