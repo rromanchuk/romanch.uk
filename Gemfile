@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
-gem 'slim'
-gem 's3_website'
-gem 'sass'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '3.1.0'
