@@ -8,7 +8,8 @@ sudo mkdir -p /var/www/romanch.uk
 sudo chown ubuntu:ubuntu /var/www/romanch.uk
 
 rm -rf /var/www/romanch.uk/codedeploy
-mkdir -p /var/www/romanch.uk/codedeploy
+mkdir -p /var/www/romanch.uk/codedeploy/public
+mkdir -p /var/www/romanch.uk/codedeploy/config
 
 mkdir -p /home/ubuntu/shared_bundle
 mkdir -p /home/ubuntu/assets
