@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source ~/.bashrc
+export PATH="./bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/bin:$PATH"
 
 cd /var/www/romanch.uk/codedeploy
 bin/rails db:migrate

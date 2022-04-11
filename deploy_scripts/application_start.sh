@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source ~/.bashrc
+export PATH="./bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/bin:$PATH"
 
 cd /var/www/romanch.uk/
 mv /var/www/romanch.uk/codedeploy /var/www/romanch.uk/"$DEPLOYMENT_ID"
