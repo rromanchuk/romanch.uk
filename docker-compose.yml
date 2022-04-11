@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13.4-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: rails
+  redis:
+    image: redis:6.2.3-buster
+    ports:
+      - 6379:6379
+    restart: always
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - 8000:8000
