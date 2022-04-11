@@ -1,0 +1,29 @@
+version: 0.0
+os: linux
+files:
+  - source: /personal
+    destination: /var/www/romanch.uk/codedeploy
+permissions:
+  - object: /var/www/romanch.uk/codedeploy
+    owner: ubuntu
+    group: ubuntu
+    pattern: "*"
+    mode: 775
+    type:
+      - file
+      - directory
+hooks:
+  BeforeInstall:
+    - location: deploy_scripts/before_install.sh
+      runas: ubuntu
+  AfterInstall:
+    - location: deploy_scripts/bundle_install.sh
+      runas: ubuntu
+    - location: deploy_scripts/compile_assets.sh
+      runas: ubuntu
+    - location: deploy_scripts/migrate.sh
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: deploy_scripts/application_start.sh
+      runas: ubuntu
