@@ -7,7 +7,7 @@ permissions:
   - object: /var/www/romanch.uk/codedeploy
     owner: ubuntu
     group: ubuntu
-    pattern: "*"
+    pattern: "**"
     mode: 775
     type:
       - file
