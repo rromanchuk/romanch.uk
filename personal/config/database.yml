@@ -83,4 +83,4 @@ production:
   <<: *default
   database: personal_production
   username: personal
-  password: <%= ENV["PERSONAL_DATABASE_PASSWORD"] %>
+  #password: <%= ENV["PERSONAL_DATABASE_PASSWORD"] %>
