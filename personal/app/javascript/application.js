@@ -4,6 +4,9 @@ import "controllers"
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import { faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDuQ4EhdFuCoX5OeIRig5lw-xBlNm1KUlo",
@@ -18,3 +21,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+library.add(faLinkedin, faStackOverflow, faGithub)
+dom.i2svg()

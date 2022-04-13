@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "bootstrap": "^5.1.3",
     "sass": "^1.50.0"
   },
   "scripts": {
