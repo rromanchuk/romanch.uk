@@ -3,5 +3,5 @@ Rails.application.routes.draw do
     root "utils#index"
   end
   
-  root "home#status"
+  root "home#index"
 end
