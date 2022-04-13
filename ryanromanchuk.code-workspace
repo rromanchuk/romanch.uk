@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"github.copilot",
+			"kaiwood.endwise",
+			"eamodio.gitlens",
+			"ecmel.vscode-html-css",
+			"redhat.vscode-yaml",
+			"dbaeumer.vscode-eslint"
+		]
+	}
+}

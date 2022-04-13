@@ -1,0 +1,31 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+Requires=puma.socket
+
+[Service]
+# Puma supports systemd's `Type=notify` and watchdog service
+# monitoring, if the [sd_notify](https://github.com/agis/ruby-sdnotify) gem is installed,
+# as of Puma 5.1 or later.
+# On earlier versions of Puma or JRuby, change this to `Type=simple` and remove
+# the `WatchdogSec` line.
+Type=simple
+
+
+User=ubuntu
+Group=ubuntu
+
+EnvironmentFile=/etc/environment
+WorkingDirectory=/var/www/romanch.uk/current
+ExecStart=/var/www/romanch.uk/current/bin/puma -w 2 -t 5:10 -e production
+
+
+SyslogIdentifier=puma
+StandardOutput=append:/home/ubuntu/log/puma.log
+StandardError=append:/home/ubuntu/log/puma_error.log
+
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

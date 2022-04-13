@@ -1,0 +1,12 @@
+[Unit]
+Description=Puma HTTP Server Accept Sockets
+
+[Socket]
+ListenStream=/home/ubuntu/tmp/sockets/puma.sock
+
+
+ReusePort=true
+Backlog=1024
+
+[Install]
+WantedBy=sockets.target

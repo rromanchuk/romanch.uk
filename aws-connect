@@ -1,0 +1,379 @@
+#!/bin/bash
+
+# Wrapper around AWS session manager for instance access and SSH tunnels
+
+programname=$0
+version=1.0.17
+
+# Defaults
+action=ssh
+default_aws_region=us-east-1
+aws_profile=''
+default_tunnel_remote_port=22
+default_tunnel_local_port=9999
+interactive_mode=0
+
+version() {
+  echo "${version}"
+}
+
+usage() {
+  echo "Usage:"
+  echo ""
+  echo "$programname [-a ssh|tunnel|document] [-d <document name>] [-c <document parameters>] [-g <github access token location>] [-n <instance name>|-t <instance tag>] [-r <region>] [-p <profile name>] [-o <port>] [-x <instance id>] [-l] [-s] [-h] [-v]"
+  echo ""
+  echo "  -a   Connect interactive session (ssh), establish tunnel (tunnel), or run an ssm document (document) on an instance (default: ssh)"
+  echo "  -d   Specify the name of the ssm document to run. Only needed if running ssm document action."
+  echo "  -w   Values for the ssm document arguments (Optional)"
+  echo "  -g   The location in aws ssm parameter store of the github token to use (Optional)"
+  echo "  -c   The name of the cloudwatch group to store logs in. Required for running documents, defaults to aws-connect"
+  echo "  -l   Flag if the command is going to be long running(8hrs +)"
+  echo "  -n   Value for the Name tag of an EC2 instance"
+  echo "  -t   Specify a tag instead of a name. The tag can be 'key' or 'key=value'"
+  echo "  -r   AWS region (default: us-east-1)"
+  echo "  -p   AWS profile (default: none)"
+  echo "  -f   Remote tunnel port (only applicable in tunnel mode); Defaults to 22"
+  echo "  -o   Local tunnel port (only applicable in tunnel mode; default: 9999)"
+  echo "  -x   override Name tag and connect direct to given instance ID"
+  echo "  -s   Pick a specific instance ID"
+  echo "  -h   Display this help"
+  echo "  -v   Display version"
+  exit 1
+}
+
+compareable_version() {
+  echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }';
+}
+
+get_instances_by_tag() {
+  tag_key=${1%%=*}
+  tag_value=${1#*=}
+  region=$2
+  profile=$3
+
+  if [ "$tag_value" == "$1" ]; then
+    # No tag value specified
+    tag_filter="Name=tag-key,Values=${tag_key}"
+  else
+    tag_filter="Name=tag:${tag_key},Values=${tag_value}"
+  fi
+
+  instance_ids_list=$(aws ec2 describe-instances \
+    --filters "$tag_filter" "Name=instance-state-name,Values=running"  \
+    --query 'Reservations[*].Instances[*].{Instance:InstanceId,Name:Tags[?Key==`Name`]|[0].Value}' \
+    --output text \
+    --region "${region}" \
+    --profile "${profile}")
+
+  # Returns a space delimitted list of instance_id,Name
+  echo "${instance_ids_list}"
+}
+
+# get the options and set flags
+while getopts "a:d:c:f:g:w:n:t:r:p:o:x:shvl" OPTION; do
+  case $OPTION in
+  v)
+    version
+    exit 0
+    ;;
+  h)
+    usage
+    exit 1
+    ;;
+  a)
+    action=$OPTARG
+    ;;
+  r)
+    aws_region=$OPTARG
+    ;;
+  p)
+    aws_profile=$OPTARG
+    ;;
+  n)
+    tag_value="Name=$OPTARG"
+    ;;
+  t)
+    tag_value=$OPTARG
+    ;;
+  x)
+    instance_id=$OPTARG
+    ;;
+  o)
+    tunnel_local_port=$OPTARG
+    if [ "${tunnel_local_port}" -le 1024 ]; then
+      echo "Port must be greater than 1024"
+      exit 1
+    fi
+    ;;
+  s)
+    interactive_mode=1
+    ;;
+  d)
+    document_name=$OPTARG
+    ;;
+  w)
+    document_parameters=$OPTARG
+    ;;
+  g)
+    github_token_location=$OPTARG
+    ;;      
+  c)
+    cloudwatch_group=$OPTARG
+    ;;
+  l)
+    long_running="true"
+    ;;
+  f)
+    tunnel_remote_port=$OPTARG
+    ;;
+  *)
+    echo "Incorrect options provided"
+    exit 1
+    ;;
+  esac
+done
+
+# Make sure there is a version of the AWS CLI that supports session manager
+minimum_aws_cli_version=1.16.299
+current_aws_cli_version=$(aws --version 2>&1 | awk '{split($1,array,"/")} END {print array[2]}')
+
+if [ "$(compareable_version "${current_aws_cli_version}")" -lt "$(compareable_version "${minimum_aws_cli_version}")" ]; then
+  echo "Error: AWS CLI version must be greater than ${minimum_aws_cli_version}. Please update your aws cli (pip install awscli --upgrade or brew upgrade awscli)"
+  exit 1
+fi
+
+# Check to make sure the session manager plugin is installed
+if [ ! -e /usr/local/bin/session-manager-plugin ] && [ ! session-manager-plugin ]; then
+  echo "AWS SessionManagerPlugin is not found - installing"
+  echo "See the AWS Session Manager Plugin Docs for more information: http://docs.aws.amazon.com/console/systems-manager/session-manager-plugin-not-found"
+
+  echo "Downloading session manager..."
+  curl -s "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "/tmp/sessionmanager-bundle.zip"
+
+  echo "Extracing session manager..."
+  pushd /tmp || exit 1
+  unzip /tmp/sessionmanager-bundle.zip
+  popd || exit 1
+
+  echo "Installing (this will require you to login to your mac)..."
+  sudo /tmp/sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
+  rm -rf /tmp/sessionmanager-bundle*
+fi
+
+# Check for mandatory args
+if [ -z "${tag_value}" ] && [ -z "${instance_id}" ]; then
+  usage
+  exit 1
+fi
+
+# If no region parameter passed then try to find one otherwise we default
+if [ -z "${aws_region:+x}" ]; then
+  if [ -n "${aws_profile}" ]; then
+    aws_region=$(aws --profile "${aws_profile}" configure get region)
+  fi
+
+  if [ -z "${aws_region:+x}" ]; then
+    aws_region="${AWS_REGION}"
+  fi
+
+  if [ -z "${aws_region:+x}" ]; then
+    aws_region="${default_aws_region}"
+  fi
+fi
+
+# If instance ID is set via -x, use it
+# If both tag and instance ID are set, use instance id
+if [ -z "${instance_id}" ]; then
+  # Get the list of instances
+  instance_ids=$(get_instances_by_tag "${tag_value}" "${aws_region}" "${aws_profile}")
+
+  if [ -z "${instance_ids}" ]; then
+    echo "No instances available with tag ${tag_value} in region ${aws_region}"
+  else
+    # Parse instance id ouput
+    declare -a arr_instance_ids
+    declare -a arr_instance_names
+    i=1
+    while IFS= read -r line; do
+        arr_instance_ids[i]=$(sed -e 's/^\([^[:blank:]]\{1,\}\).*$/\1/' <<< "$line")
+        arr_instance_names[i]=$(sed -e 's/^\([^[:blank:]]\{1,\}[[:blank:]]\{1,\}\)//' <<< "$line")
+
+        i=$(( i + 1 ))
+    done <<< "$instance_ids"
+
+    if [ "${interactive_mode}" -eq 1 ]; then
+      echo "Select an instance to connect to"
+
+      inst_num=1
+      for instance in "${arr_instance_ids[@]}"; do
+        echo "${inst_num}) ${arr_instance_ids[inst_num]} (${arr_instance_names[inst_num]})"
+        inst_num=$(( inst_num + 1 ))
+      done
+
+      num_instances=$(( inst_num - 1))
+
+      echo -n "(default is 1): "
+      read -r choice_num
+
+      if [ -z "${choice_num}" ]; then
+        choice_num=1
+      elif [ ${choice_num} -gt ${num_instances} ]; then
+        echo "Input must be between 1 and ${num_instances}"
+        exit 1
+      fi
+
+      instance_id=${arr_instance_ids[choice_num]}
+      instance_name=${arr_instance_names[choice_num]}
+    else
+      # We only need one instance
+      instance_id=${arr_instance_ids[1]}
+      instance_name=${arr_instance_names[1]}
+    fi
+  fi
+fi
+
+  # SSH, tunnel, or document
+if [ "${action}" == "ssh" ]; then
+  echo "Establishing session manager connection to ${instance_name} (${instance_id})"
+  if [ -z "${document_name}" ]; then
+    aws ssm start-session \
+      --target "${instance_id}" \
+      --region "${aws_region}" \
+      --profile "${aws_profile}"
+  else
+    aws ssm start-session \
+      --target "${instance_id}" \
+      --document-name "${document_name}" \
+      --region "${aws_region}" \
+      --profile "${aws_profile}"
+  fi
+elif [ "${action}" == "tunnel" ]; then
+  echo "Creating tunnel to ${tag_value} (${instance_id})"
+  aws ssm start-session \
+    --target "${instance_id}" \
+    --document-name AWS-StartPortForwardingSession \
+    --parameters "{\"portNumber\":[\"${tunnel_remote_port:-$default_tunnel_remote_port}\"],\"localPortNumber\":[\"${tunnel_local_port:-$default_tunnel_local_port}\"]}" \
+    --region "${aws_region}" \
+    --profile "${aws_profile}"
+elif [ "${action}" == "document" ]; then
+
+  if [ -n "${github_token_location}" ]; then
+    arguments="githubTokenLocation=\"${github_token_location}\""
+  fi
+
+  if [ -n "${document_parameters}" ]; then
+    if [ -n "${arguments}" ]; then
+      arguments="${arguments},parameters='${document_parameters}'"
+    else
+      arguments="parameters='${document_parameters}'"
+    fi
+  fi
+
+  if [ -n "${long_running}" ]; then
+    if [ -n "${arguments}" ]; then
+      arguments="${arguments},longRunning='${long_running}'"
+    else
+      arguments="longRunning='${long_running}'"
+    fi
+  fi
+
+  if [ -z "${cloudwatch_group}" ]; then
+    cloudwatch_group="aws-connect"
+  fi
+
+  echo "Running ${document_name} on instance ${instance_id}"  
+
+  # create the send-command as a string so that parameters can be appended on if needed
+  aws_command="aws ssm send-command \
+    --instance-ids ${instance_id} \
+    --document-name \"${document_name}\" \
+    --comment \"Document run using aws-connect\" \
+    --output text \
+    --region \"${aws_region}\" \
+    --profile \"${aws_profile}\" \
+    --cloud-watch-output-config '{\"CloudWatchLogGroupName\":\"${cloudwatch_group}\",\"CloudWatchOutputEnabled\":true}' \
+    --query \"Command.CommandId\""
+
+  if [ -n "${arguments}" ]; then
+    arguments=$( echo "${arguments}" | sed 's/ /\\ /g' )
+    arguments=$( echo "${arguments}" | tr "," "\," )
+    aws_command="${aws_command} --parameters '${arguments}'"
+  fi
+
+  # execute the command
+  sh_command_id=$(eval $aws_command)
+
+  if [ "$?" != "0" ]; then
+    echo "Unable to execute command!"
+    exit 0
+  fi
+
+  echo "Command ID: $sh_command_id"
+  
+  # get the status of the command
+  status=$(aws ssm list-command-invocations \
+    --command-id "${sh_command_id}" \
+    --details \
+    --output text \
+    --no-paginate \
+    --query "CommandInvocations[0].Status")
+
+  ssm_failed_statuses=("Cancelled"
+  "Failed"
+  "DeliveryTimedOut"
+  "ExecutionTimedOut"
+  "InvalidPlatform"
+  "Undeliverable"
+  "Terminated"
+  "AccessDenied"
+  "InvalidParameters"
+  "TimedOut"
+  "")
+
+  # while the command has not failed or succeeded check the status every 5 seconds
+  endLoop="false"
+  while [ "${endLoop}" == "false" ]; do
+
+    echo "Command still running..."
+    sleep 5
+    
+    status=$(aws ssm list-command-invocations \
+      --command-id "${sh_command_id}" \
+      --details \
+      --output text \
+      --no-paginate \
+      --query "CommandInvocations[0].Status")  
+
+    # check if the command has failed
+    for (( i = 0; i < "${#ssm_failed_statuses[@]}"; i++ )); do
+      if [ "${ssm_failed_statuses[$i]}" == "${status}" ]; then
+        echo "Failure Status: ${ssm_failed_statuses[$i]}!"
+        endLoop="true"
+      fi
+    done
+
+    # check if the command has succeeded. If so then get the command output
+    if [ "Success" == "${status}" ]; then
+
+      log_streams=$(aws logs describe-log-streams --log-group-name ${cloudwatch_group} --log-stream-name-prefix "${sh_command_id}/${instance_id}" --output text --query "logStreams[*].logStreamName")
+
+      for log in ${log_streams[@]}; do
+
+        aws logs get-log-events --log-group-name "${cloudwatch_group}" --log-stream-name "${log}" --query "events[0].message"
+        printf "\n\n"
+
+      done
+
+      printf "Log output is limited to 1MB. For the full logs, visit: "
+      printf 'https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logsV2:log-groups/log-group/%s/$3FlogStreamNameFilter=%s/%s \n' "${cloudwatch_group}" "${sh_command_id}" "${instance_id}"
+
+      endLoop="true"
+    fi
+
+  done
+
+else
+  echo "Unknown action ${action} specified"
+  usage
+  exit 1
+fi
