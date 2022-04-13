@@ -1,0 +1,5 @@
+compose: docker compose up
+#web: bin/rails server -p 3000
+css: yarn build:css --watch
+devlog: tail -f log/development.log
+pumalog: tail -f ~/Library/Logs/puma-dev.log
