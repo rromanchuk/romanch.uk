@@ -2,13 +2,21 @@
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Action": "s3:List*",
+            "Resource": [
+                "arn:aws:s3:::personal-www",
+                "arn:aws:s3:::personal-www/*"
+            ],
+            "Effect": "Allow"
+        },
+        {
             "Action": [
-                "s3:List*",
+                "s3:GetObject",
                 "s3:PutObject"
             ],
             "Resource": [
-                "arn:aws:s3:::ryanromanchuk-www",
-                "arn:aws:s3:::ryanromanchuk-www/assets/*"
+                "arn:aws:s3:::personal-www",
+                "arn:aws:s3:::personal-www/assets/*"
             ],
             "Effect": "Allow"
         }

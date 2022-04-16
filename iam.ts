@@ -8,9 +8,15 @@ const policy = {
       .allow()
       .allListActions()
       .compact()
+      .onBucket('personal-www')
+      .onObject('personal-www', '*')
+      .toJSON(),
+    new statement.S3()
+      .allow()
+      .toGetObject()
       .toPutObject()
-      .onBucket('ryanromanchuk-www')
-      .onObject('ryanromanchuk-www', 'assets/*')
+      .onBucket('personal-www')
+      .onObject('personal-www', 'assets/*')
       .toJSON(),
     
   ],

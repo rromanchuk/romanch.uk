@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us" class="h-100">
+  <head>
+    <%= render 'shared/meta' %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+
+    
+    <meta
+      name="theme-color"
+      content="#eeeeee"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#111111"
+      media="(prefers-color-scheme: light)"
+    />
+
+  </head>
+  <body class="d-flex flex-column h-100">
+    <div class="container">
+      <%= render 'shared/nav' %>
+      <div class="body">
+        <%= yield %>
+      </div>   
+    </div>
+    <%= render 'shared/footer' %>
+  </body>
+</html>

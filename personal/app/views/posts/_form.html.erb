@@ -1,0 +1,13 @@
+<%= simple_form_for post do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :body, wrapper_html: { 'data-controller': 'rich-text' }, input_html: { 'data-rich-text-target': 'markup', class: 'tinymce' } %>
+  <%= f.input :tags_as_string, as: :string %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>
+
+
+<script type="module">
+
+</script>

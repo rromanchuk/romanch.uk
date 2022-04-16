@@ -11,3 +11,7 @@ pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-aut
 pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js"
 pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-brands-svg-icons@6.1.1/index.es.js"
 pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-svg-core@6.1.1/index.es.js"
+
+#pin "tinymce" # @6.0.1
+pin "utils", to: "utils.js"
+

@@ -15,7 +15,7 @@ Type=simple
 User=ubuntu
 Group=ubuntu
 
-EnvironmentFile=/etc/environment
+EnvironmentFile=/home/ubuntu/.env
 WorkingDirectory=/var/www/romanch.uk/current
 ExecStart=/var/www/romanch.uk/current/bin/puma -w 2 -t 5:10 -e production
 
