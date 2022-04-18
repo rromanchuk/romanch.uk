@@ -94,4 +94,12 @@ Rails.application.configure do
 
   config.lograge.enabled = true
   config.lograge.formatter = Lograge::Formatters::Logstash.new
+  config.lograge.custom_options = lambda do |event|
+    { 
+      url: event.payload[:url],
+      ua: event.payload[:ua],
+      user_id: event.payload[:user_id],
+      amzn_oidc_identity: event.payload[:amzn_oidc_identity]
+    }
+  end
 end

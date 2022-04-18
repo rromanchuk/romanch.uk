@@ -27,3 +27,4 @@ module Personal
 end
 
 Credentials = Rails.application.credentials.config[Rails.env.to_sym]
+HOSTNAME = Socket.gethostname || 'unknown host'
