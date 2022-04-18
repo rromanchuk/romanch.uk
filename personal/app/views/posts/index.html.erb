@@ -1,5 +1,7 @@
 <%= turbo_frame_tag "new_post", target: "_top" %>
-<%= link_to "New post", new_post_path, data: { turbo_frame: "new_post" } %>
+<% if current_user %>
+  <%= link_to "New post", new_post_path, data: { turbo_frame: "new_post" } %>
+<% end %>
 <%= turbo_frame_tag :posts do %>
   <div class="archive">
     <h1 class="archive-year">2022</h1>

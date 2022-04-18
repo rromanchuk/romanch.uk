@@ -22,4 +22,6 @@ module ApplicationHelper
   def lesc(text)
     LatexToPdf.escape_latex(text)
   end
+
+  def config() = Rails.configuration.general
 end

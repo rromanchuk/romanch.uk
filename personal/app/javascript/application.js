@@ -4,7 +4,6 @@ import "controllers"
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithCredential, GoogleAuthProvider } from "firebase/auth";
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -28,22 +27,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-
-
-const googleOneTapCallback = (response) => {
-  console.log("google callback")
-  const auth = getAuth();
-  let credential = GoogleAuthProvider.credential(response.credential);
-  signInWithCredential(auth, credential).catch((error) => {
-    console.log(error)
-    // // Handle Errors here.
-    // const errorCode = error.code;
-    // const errorMessage = error.message;
-    // // The email of the user's account used.
-    // const email = error.email;
-    // // The credential that was used.
-    // const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-}
-window.googleOneTapCallback = googleOneTapCallback
