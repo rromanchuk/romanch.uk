@@ -1,13 +1,25 @@
-<%= simple_form_for post do |f| %>
+<%= simple_form_for post, html: { } do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
   <%= f.input :description %>
-  <%= f.input :body, wrapper_html: { 'data-controller': 'rich-text' }, input_html: { 'data-rich-text-target': 'markup', class: 'tinymce' } %>
+  <%= f.input :body, value: post.body.html_safe, input_html: { rows: "15" } %>
+  
   <%= f.input :tags_as_string, as: :string %>
   <%= f.submit class: "btn-primary" %>
 <% end %>
 
 
+
+<div data-quill-current-value="<%= {body: post.body}.to_json.html_safe %>">
+    <!-- Create the toolbar container -->
+    <div id="toolbar">
+      <button class="ql-bold">Bold</button>
+      <button class="ql-italic">Italic</button>
+    </div>
+    <div data-quill-target='editor'>
+      <%= simple_format post.body %>
+    </div>
+  </div>
 <script type="module">
 
 </script>

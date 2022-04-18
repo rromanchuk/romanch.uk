@@ -4,5 +4,8 @@ class HomeController < ApplicationController
     head :ok
   end
   def index; end
-  def arhive; end
+
+  def resume
+   @pdf = File.open(File.join(Rails.root, 'latex', 'main.pdf')).read
+  end
 end

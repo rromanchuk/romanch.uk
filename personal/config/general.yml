@@ -1,0 +1,9 @@
+default: &default
+  title: Ryan Romanchuk
+
+
+production:
+  <<: *default
+
+development:
+  <<: *default

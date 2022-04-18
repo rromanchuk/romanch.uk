@@ -1,6 +1,10 @@
 // Entry point for your Sass build
 @import 'bootstrap/scss/bootstrap';
 
+@import 'quill.core.css';
+@import 'quill.snow.css';
+
+
 .button_to {
   display: inline;
 }

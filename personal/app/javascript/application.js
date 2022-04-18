@@ -5,8 +5,12 @@ import "controllers"
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithCredential, GoogleAuthProvider } from "firebase/auth";
+
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
+
+library.add(faLinkedin, faStackOverflow, faGithub)
+dom.i2svg()
 
 
 
@@ -24,8 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-library.add(faLinkedin, faStackOverflow, faGithub)
-dom.i2svg()
+
 
 const googleOneTapCallback = (response) => {
   console.log("google callback")

@@ -22,6 +22,7 @@ module Personal
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.general = config_for(:general)
   end
 end
 

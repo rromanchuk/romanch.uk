@@ -1,6 +1,13 @@
 <title><%= yield(:page_title) || 'Ryan Romanchuk' %></title>
-
+<meta name="description" content="<%= yield(:page_description) %>">
+<meta name="keywords" content="<%= yield(:page_keywords) %>">
+<link rel="canonical" href="<%= yield(:canonical_url) %>" />
 
 <meta name="apple-itunes-app" content="app-id=1109640290, app-argument=https://getspar.com/pid/personal">
 <meta content="<%= yield(:page_description) %>" name="description" />
 <meta content="ua0bOK-G5Ddcx6e_Dz-Sl6J3lym5fRFPd3m5Z1ljLGU" name="google-site-verification" />
+
+
+<meta property="og:title" content="<%= yield(:page_title) %>">
+<meta property="og:description" content="<%= yield(:page_description) %>">
+<meta property="og:image" content="<%= yield(:share_image) %>">
