@@ -2,7 +2,7 @@
   <%= f.error_notification %>
   <%= f.input :title %>
   <%= f.input :description %>
-  <%= f.input :body, value: raw(post.body), input_html: { rows: "15" } %>
+  <%= f.input :body, value: post.body, input_html: { rows: "15" } %>
   
   <%= f.input :tags_as_string, as: :string %>
   <%= f.submit class: "btn-primary" %>
@@ -11,15 +11,15 @@
 
 
 <div data-quill-current-value="<%== {body: post.body}.to_json %>">
-    <!-- Create the toolbar container -->
-    <div id="toolbar">
-      <button class="ql-bold">Bold</button>
-      <button class="ql-italic">Italic</button>
-    </div>
-    <div data-quill-target='editor'>
-      <%== post.body %>
-    </div>
+  <!-- Create the toolbar container -->
+  <div id="toolbar">
+    <button class="ql-bold">Bold</button>
+    <button class="ql-italic">Italic</button>
   </div>
+  <div data-quill-target='editor'>
+  </div>
+</div>
+
 <script type="module">
 
 </script>

@@ -48,13 +48,13 @@ gem 'simple_form'
 gem 'aws-sdk-s3', require: false
 gem 'coderay'
 gem 'redcarpet'
-gem 'rails-latex'
-gem 'cognito_token_verifier'
+gem 'rails-latex', require: false
+gem 'cognito_token_verifier', require: false
 gem "lograge"
 gem "logstash-event"
 gem 'sitemap_generator'
-# Use Sass to process CSS
-# gem "sassc-rails"
+gem 'oj', require: false
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

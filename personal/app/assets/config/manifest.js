@@ -3,3 +3,4 @@
 //= link_tree ../../../vendor/javascript .js
 //= link_tree ../builds
 //= link favicon/browserconfig.xml
+//= link ryan_romanchuk.pdf

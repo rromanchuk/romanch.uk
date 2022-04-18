@@ -7,6 +7,6 @@ class HomeController < ApplicationController
   def index; end
 
   def resume
-    @pdf = File.open(File.join(Rails.root, 'latex', 'main.pdf')).read
+    @pdf = File.open(File.join(Rails.root, 'app', 'assets', 'documents', 'ryan_romanchuk.pdf')).read
   end
 end

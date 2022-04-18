@@ -76,32 +76,18 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  #config.log_formatter = ::Logger::Formatter.new
 
-  # Use a different logger for distributed setups.
-  # require "syslog/logger"
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
-  if true #ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::Logger.new(STDOUT) #ActiveSupport::TaggedLogging.new(logger)
-  end
+  # if true #ENV["RAILS_LOG_TO_STDOUT"].present?
+  #   logger           = ActiveSupport::Logger.new(STDOUT)
+  #   logger.formatter = config.log_formatter
+  #   config.logger    = ActiveSupport::Logger.new(STDOUT) #ActiveSupport::TaggedLogging.new(logger)
+  # end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
 
-  config.lograge.enabled = true
-  config.colorize_logging = false
-  config.lograge.ignore_actions = ['HomeController#status']
-  config.lograge.formatter = Lograge::Formatters::Logstash.new
-  config.lograge.custom_options = lambda do |event|
-    { 
-      url: event.payload[:url],
-      ua: event.payload[:ua],
-      user_id: event.payload[:user_id],
-      amzn_oidc_identity: event.payload[:amzn_oidc_identity]
-    }
-  end
+  
 end

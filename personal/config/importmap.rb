@@ -14,6 +14,7 @@ pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesom
 
 pin "utils", to: "utils.js"
 
+
 pin "quill" # @1.3.7
 pin "buffer" # @2.0.0
 
