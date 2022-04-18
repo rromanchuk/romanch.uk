@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :users
   resources :posts
-  resource :sessions
   namespace :demo, path: "/demo" do
     root "utils#index"
   end
