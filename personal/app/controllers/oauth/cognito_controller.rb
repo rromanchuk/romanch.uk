@@ -7,11 +7,11 @@ module Oauth
     end
 
     def handle_expired_token(exception)
-      puts exception.message
+      rase exception
     end
   
     def handle_invalid_token(exception)
-      puts exception.message
+      rase exception
     end
   end
 end
