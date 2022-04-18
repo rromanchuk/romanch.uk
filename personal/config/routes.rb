@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   
   get 'healthcheck', to: 'home#status'
+  get 'logout', to: "sessions#logout"
   root "home#index"
 end

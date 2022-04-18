@@ -1,6 +1,6 @@
 default: &default
   title: Ryan Romanchuk
-
+  auth_url: https://auth.romanch.uk
 
 production:
   <<: *default

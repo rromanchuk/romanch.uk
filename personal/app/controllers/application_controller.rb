@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   def client_ip() = request.headers['true-client-ip']
   def user_agent() = request.headers['User-Agent']
 
+  def config() = Rails.configuration.general
+
   def append_info_to_payload(payload)
     super
     payload[:remote_ip] = client_ip
