@@ -50,6 +50,8 @@ gem 'coderay'
 gem 'redcarpet'
 gem 'rails-latex'
 gem 'cognito_token_verifier'
+gem "lograge"
+gem "logstash-event"
 # Use Sass to process CSS
 # gem "sassc-rails"
 

@@ -17,14 +17,10 @@ Group=ubuntu
 
 EnvironmentFile=/home/ubuntu/.env
 WorkingDirectory=/var/www/romanch.uk/current
-ExecStart=/var/www/romanch.uk/current/bin/puma -w 2 -t 5:10 -e production
+ExecStart=/var/www/romanch.uk/current/bin/puma -w 0 -t 1:10 -e production
 
 
 SyslogIdentifier=puma
-StandardOutput=append:/home/ubuntu/log/puma.log
-StandardError=append:/home/ubuntu/log/puma_error.log
-
-
 Restart=always
 
 [Install]
