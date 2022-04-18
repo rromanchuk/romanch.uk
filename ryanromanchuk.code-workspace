@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "../send"
+			"path": "../cognito_token_verifier"
 		}
 	],
 	"extensions": {
