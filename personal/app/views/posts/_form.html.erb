@@ -2,7 +2,7 @@
   <%= f.error_notification %>
   <%= f.input :title %>
   <%= f.input :description %>
-  <%= f.input :body, value: raw post.body, input_html: { rows: "15" } %>
+  <%= f.input :body, value: raw(post.body), input_html: { rows: "15" } %>
   
   <%= f.input :tags_as_string, as: :string %>
   <%= f.submit class: "btn-primary" %>
