@@ -7,7 +7,7 @@ files:
     destination: /etc/systemd/system/puma.service
   - source: /conf/romanch.uk.conf
     destination: /etc/nginx/conf.d/romanch.uk.conf
-  file_exists_behavior: OVERWRITE
+file_exists_behavior: OVERWRITE
 permissions:
   - object: /var/www/romanch.uk/codedeploy
     owner: ubuntu
