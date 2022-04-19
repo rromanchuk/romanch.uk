@@ -54,6 +54,7 @@ gem "lograge"
 gem "logstash-event"
 gem 'sitemap_generator'
 gem 'oj', require: false
+gem 'friendly_id'
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]

@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
   Gutentag::ActiveRecord.call self
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 
   def tags_as_string
     tag_names.join(", ")

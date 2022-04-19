@@ -123,6 +123,8 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     gutentag (2.6.1)
@@ -294,6 +296,7 @@ DEPENDENCIES
   cognito_token_verifier
   cssbundling-rails (~> 1.1)
   debug
+  friendly_id
   gutentag
   importmap-rails
   lograge

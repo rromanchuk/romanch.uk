@@ -5,7 +5,7 @@ class PostsController < ApplicationController
                                  password: Credentials[:http_auth_pw]
   end
 
-  let(:post) { Post.find(params[:id]) }
+  let(:post) { Post.friendly.find(params[:id]) }
   let(:posts) { Post.all }
   def show; end
   

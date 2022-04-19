@@ -1,7 +1,7 @@
 
 <%= turbo_frame_tag post do %>
   <article class="archive-item">
-    <span class="post-date archive-date fs-4"><%= post.created_at.strftime("%B %d, %Y") %></span>
+    <time datetime="<%= post.created_at %>" class="post-date archive-date fs-4"><%= post.created_at.strftime("%B %d, %Y") %></time>
    <%= link_to post.title, post_path(post), class: 'archive-title fs-4', data: { turbo_frame: "_top" } %>
   </article>
   <%# link_to "Show", post_path(post), data: { turbo_frame: "_top" } %>

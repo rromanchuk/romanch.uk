@@ -5,7 +5,12 @@
 <%= turbo_frame_tag post do %>
   <article class="post">
     <h1><%= post.title %></h1>
-    <span class="fs-4 text-muted"><%= post.created_at.strftime("%b %d, %y") %></span>
+    <time datetime="<%= post.created_at %>" class="fs-4 text-muted"><%= post.created_at.strftime("%b %d, %y") %></time>
     <div class="mt-4"><%= markdown(post.body) %></div>
+    <ul class="list-inline">
+      <% post.tag_names.each do |tag| %>
+        <%= tag.li tag, class: 'list-inline-item' %>
+      <% end %>
+    </ul>
   </article>
 <% end %>
