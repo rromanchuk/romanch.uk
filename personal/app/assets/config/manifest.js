@@ -4,3 +4,6 @@
 //= link_tree ../builds
 //= link favicon/browserconfig.xml
 //= link ryan_romanchuk.pdf
+//= link quill.core.css
+//= link quill.snow.css
+//= link coderay.css
