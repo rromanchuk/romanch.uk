@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   resources :users, only: [:show]
-  resources :posts
-  resources :tags, only: [] do
-    resources :posts, only: [:index]
+  resources :posts, shallow: true do
+    resources :tags
   end
+
+
+  get :editor, to: 'home#editor'
+
 
   namespace :demo, path: "/demo" do
     root "utils#index"

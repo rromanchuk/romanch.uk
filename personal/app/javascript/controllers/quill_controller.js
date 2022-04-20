@@ -3,26 +3,26 @@ import { Controller } from "@hotwired/stimulus"
 import Quill from "quill"
 
 export default class extends Controller {
-  static targets = [ "editor", "test" ]
+  static targets = [ "editor", "toolbar" ]
     
   connect() {
+    console.log("connect")
+  }
 
-    var editor = new Quill(this.editorTarget, {
-      modules: { toolbar: '#toolbar' },
+  editorTargetConnected(elem) {
+    var options = {
+      debug: 'info',
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, false] }],
+          ['bold', 'italic', 'underline'],
+          ['image', 'code-block']
+        ]
+      },
+      placeholder: 'Compose an epic...',
+      readOnly: false,
       theme: 'snow'
-    });
-    
-
-    editor.on('text-change', (delta, oldDelta, source) => {
-      if (source == 'api') {
-        console.log("An API call triggered this change.");
-      } else if (source == 'user') {
-        console.log("A user action triggered this change.");
-        console.log(editor.getText())
-        console.log(this.testTarget)
-        this.testTarget.value = editor.getText()
-      }
-    });
-
+    };
+    new Quill(elem, options);
   }
 }

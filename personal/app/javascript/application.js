@@ -5,11 +5,13 @@ import "controllers"
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import { config, library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
 
+
+config.mutateApproach = 'sync'
 library.add(faLinkedin, faStackOverflow, faGithub)
-dom.i2svg()
+dom.watch()
 
 
 
@@ -27,3 +29,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+export { analytics };
