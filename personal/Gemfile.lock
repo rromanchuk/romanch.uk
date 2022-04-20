@@ -146,6 +146,7 @@ GEM
       activesupport (>= 4.2)
       aes_key_wrap
       bindata
+    jwt (2.3.0)
     lograge (0.12.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -299,6 +300,7 @@ DEPENDENCIES
   friendly_id
   gutentag
   importmap-rails
+  jwt
   lograge
   logstash-event
   oj

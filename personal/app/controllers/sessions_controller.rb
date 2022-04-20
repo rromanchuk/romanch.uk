@@ -1,11 +1,16 @@
 class SessionsController < ApplicationController
+  
   def logout
-    cookies.delete '_alb_personal'
-    reset_session
+    logout!
     redirect_to "#{config.auth_url}?client_id=#{Credentials[:cognito_client]}", allow_other_host: true
   end
 
   def login
-    #"https://<your_domain>/login?response_type=code&client_id=<your_app_client_id>&redirect_uri=<your_callback_url>"
+    if Rails.env.development?
+      session[:amzn_oidc_identity] = '54467d4a-f7bc-457d-aa72-55842106b02e'
+    end
+
+    require_user!
+    redirect_to root_path
   end
 end

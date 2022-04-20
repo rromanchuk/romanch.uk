@@ -10,8 +10,10 @@
     <time datetime="<%= post.created_at %>" class="fs-4 text-muted"><%= post.created_at.strftime("%b %d, %y") %></time>
     <div class="mt-4"><%= markdown(post.body) %></div>
     <ul class="list-inline">
-      <% post.tag_names.each do |tag| %>
-        <%= tag.li tag, class: 'list-inline-item' %>
+      <% post.tag_names.each do |name| %>
+        <%= tag.li class: 'list-inline-item' do %>
+          <%= link_to name, posts_path(q: name) %>
+        <% end %>
       <% end %>
     </ul>
   </article>

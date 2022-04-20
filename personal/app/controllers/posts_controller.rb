@@ -1,15 +1,12 @@
 class PostsController < ApplicationController
 
-  if Rails.env.production?
-    http_basic_authenticate_with name: 'ryan',
-                                 password: Credentials[:http_auth_pw]
-  end
 
   let(:post) { Post.friendly.find(params[:id]) }
   let(:posts) { Post.all }
   def show; end
   
   def new
+    require_me!
     @new_post = Post.new
   end
   

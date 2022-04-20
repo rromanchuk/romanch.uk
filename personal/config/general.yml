@@ -2,9 +2,12 @@ default: &default
   title: Ryan Romanchuk
   auth_url: https://auth.romanch.uk
   apex_url: https://romanch.uk
+  cognito_redirect: https://romanch.uk/oauth2/idpresponse
 
 production:
   <<: *default
 
 development:
   <<: *default
+  apex_url: https://personal.test
+  cognito_redirect: https://personal.test/oauth2/idpresponse
