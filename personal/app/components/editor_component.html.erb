@@ -1,0 +1,10 @@
+<%- content_for(:styles) { 'quill' } %>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "quill" %>
+<% end %>
+
+<%= tag.div data: {controller: :quill} do %>
+  <%= tag.div  data: {quill_target: :editor}, id: :quill_container %>
+<% end %>
+
+
