@@ -1,10 +1,23 @@
 <%- content_for(:styles) { 'quill' } %>
 <% content_for :head do %>
-  <%= javascript_import_module_tag "quill" %>
+  <%# javascript_import_module_tag "quill" %>
 <% end %>
 
+<script type="module">
+  import {hljs} from 'application'
+  window.hljs = hljs
+</script>
+
 <%= tag.div data: {controller: :quill} do %>
-  <%= tag.div  data: {quill_target: :editor}, id: :quill_container %>
+  <%= simple_form_for post, html: { } do |f| %>
+    <%= f.error_notification %>
+   
+    <%= tag.div data: {quill_target: :editor, quill_original_value: post.delta_content }, id: :quill_container %>
+    <%= f.input_field :delta_content, as: :hidden, data: {quill_target: :deltaContent} %>
+    <%= f.input_field :body, as: :hidden, data: {quill_target: :body} %>
+    <%= f.submit class: "btn-primary", data: {action: "quill#save"}  %>
+  <% end %>
+  
 <% end %>
 
 

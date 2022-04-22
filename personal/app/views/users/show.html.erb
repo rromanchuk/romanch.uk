@@ -1,2 +1,5 @@
-<p><%= amzn_oidc_identity %></p>
-<p><%= amzn_oidc_data %></p>
+
+
+<%= turbo_frame_tag user do %>
+  <%= ap(user.attributes, html: true, plain: true, ruby19_syntax: true).html_safe %>
+<% end %>

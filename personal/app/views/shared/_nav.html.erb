@@ -17,6 +17,11 @@
         <li class="nav-item">
           <%= link_to "Scratchpad", posts_path, class: "nav-link" %>
         </li>
+        <% if current_user %>
+          <li class="nav-item">
+            <%= link_to "Account", posts_path, class: "nav-link" %>
+          </li>
+          <% end %>
       </ul>
     </div>
   </div>

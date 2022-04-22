@@ -46,6 +46,8 @@ gem "bootsnap", require: false
 gem 'gutentag'
 gem 'simple_form'
 gem 'aws-sdk-s3', require: false
+
+gem 'aws-sdk-cognitoidentityprovider'
 gem 'coderay'
 gem 'redcarpet'
 gem 'rails-latex', require: false
@@ -57,6 +59,8 @@ gem 'oj', require: false
 gem 'friendly_id'
 gem 'jwt'
 gem "view_component"
+gem "awesome_print"
+gem "oauth2"
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]

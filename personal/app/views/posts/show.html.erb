@@ -4,6 +4,12 @@
 
 
 
+<%= turbo_frame_tag "edit_post", target: "_top" %>
+
+<% if current_user %>
+  <%= link_to "Edit", edit_post_path(post), data: { turbo_frame: 'edit_post' } %>
+  <%= button_to "Destory", post_path(post), method: :delete %>
+<% end %>
 <%= turbo_frame_tag post do %>
   <article class="post">
     <h1><%= post.title %></h1>

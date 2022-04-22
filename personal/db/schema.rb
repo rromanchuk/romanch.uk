@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_20_221740) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_22_095242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_221740) do
 
   create_table "gutentag_taggings", force: :cascade do |t|
     t.integer "tag_id", null: false
-    t.integer "taggable_id", null: false
+    t.uuid "taggable_id", null: false
     t.string "taggable_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_221740) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "taggings_count", default: 0, null: false
+    t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
     t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
   end
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_221740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.string "username"
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 

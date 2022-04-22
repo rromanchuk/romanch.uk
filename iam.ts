@@ -18,6 +18,13 @@ const policy = {
       .onBucket('personal-www')
       .onObject('personal-www', 'assets/*')
       .toJSON(),
+    new statement.CognitoIdp()
+      .allow()
+      .allListActions()
+      .allReadActions()
+      .compact()
+      .onUserPool('us-east-1_Zqtg9pmNf')
+      .toJSON(),
     
   ],
 };

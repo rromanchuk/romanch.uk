@@ -8,7 +8,15 @@ import { getAnalytics } from "firebase/analytics";
 import { config, library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
 
+import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/es/highlight.min.js';
+import javascript from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/es/languages/javascript.min.js';
+import ruby from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/es/languages/ruby.min.js'
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('ruby', ruby);
 
+hljs.configure({   // optionally configure hljs
+  languages: ['javascript', 'ruby']
+});
 
 config.mutateApproach = 'sync'
 library.add(faLinkedin, faStackOverflow, faGithub)
@@ -30,4 +38,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export { analytics };
+export { analytics, hljs };
