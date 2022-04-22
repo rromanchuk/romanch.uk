@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   let(:post) { Post.friendly.find(params[:id]) }
   let(:posts) { Post.all }
+  #let(:html_content) { MarkdownToHtml.call(post_params[:markdown_content]) }
   
   def show; end
   
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
   end
    
   def edit
-    
+
   end
   
   
@@ -28,15 +29,16 @@ class PostsController < ApplicationController
 
   def update
     post.update!(post_params)
-
   end
 
   def destroy
     post.destroy
     redirect_to posts_path
   end
-
+  
+  private
+ 
   def post_params
-    params.require(:post).permit(:body, :title, :description, :tags_as_string, :delta_content)
+    params.require(:post).permit(:markdown_content, :html_content, :title, :description, :tags_as_string, :delta_content)
   end
 end

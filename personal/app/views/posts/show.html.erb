@@ -2,7 +2,10 @@
 <%- content_for(:page_author) { '' } %>
 <%- content_for(:page_description) { post.description } %>
 
-
+<script type="module">
+  import {hljs} from 'application'
+  hljs.highlightAll();
+</script>
 
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 
@@ -14,7 +17,7 @@
   <article class="post">
     <h1><%= post.title %></h1>
     <time datetime="<%= post.created_at %>" class="fs-4 text-muted"><%= post.created_at.strftime("%b %d, %y") %></time>
-    <div class="mt-4"><%= markdown(post.body) %></div>
+    <div class="mt-4"><%= post.html_content.html_safe %></div>
     <ul class="list-inline">
       <% post.tag_names.each do |name| %>
         <%= tag.li class: 'list-inline-item' do %>

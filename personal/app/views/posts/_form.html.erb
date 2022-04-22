@@ -1,10 +1,11 @@
 
-<%= simple_form_for post, html: { } do |f| %>
+<%= simple_form_for post, html: { data: {controller: :post} } do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
   <%= f.input :description %>
-  <%= f.input :body, value: post.body, input_html: { rows: "15" } %>
+  <%= f.input :markdown_content, value: post.markdown_content, input_html: { rows: "15", data: {post_target: :markdown} } %>
+  <%= f.input :html_content, value: post.html_content, input_html: { rows: "15", data: {post_target: :html} } %>
   <%= f.input :delta_content, hidden: true %>
   <%= f.input :tags_as_string, as: :string %>
-  <%= f.submit class: "btn-primary" %>
+  <%= f.submit class: "btn-primary", data: {action: "post#save"}  %>
 <% end %>

@@ -14,10 +14,11 @@
         <li class="nav-item">
           <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Scratchpad", posts_path, class: "nav-link" %>
-        </li>
-        <% if current_user %>
+        
+        <% if current_user.me? %>
+          <li class="nav-item">
+            <%= link_to "Scratchpad", posts_path, class: "nav-link" %>
+          </li>
           <li class="nav-item">
             <%= link_to "Account", posts_path, class: "nav-link" %>
           </li>

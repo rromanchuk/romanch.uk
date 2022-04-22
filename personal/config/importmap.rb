@@ -18,6 +18,27 @@ pin "utils", to: "utils.js"
 pin "quill" # @1.3.7
 pin "buffer" # @2.0.0
 
+pin "highlight", to: "highlight.min.js"
+pin "ruby.js", to: "languages/ruby.min.js"
+pin "markdown.js", to: "languages/markdown.min.js"
+pin "javascript.js", to: "languages/javascript.min.js"
+pin "bash.js", to: "languages/bash.min.js"
+pin "swift.js", to: "languages/swit.min.js"
+pin "erb.js", to: "languages/erb.min.js"
 
-pin "highlight.js/lib/core", to: "highlight.js--lib--core.js" # @11.5.1
-pin "highlight.js/lib/languages/javascript", to: "highlight.js--lib--languages--javascript.js" # @11.5.1
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/json.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/python.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/ruby.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/bash.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/swift.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/objectivec.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/javascript.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/latex.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/erb.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/css.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/nginx.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/yaml.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/xml.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/shell.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/scss.min.js
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/markdown.min.js
