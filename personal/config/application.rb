@@ -20,6 +20,10 @@ module Personal
       g.orm :active_record, primary_key_type: :uuid
     end
 
+
+
+    config.assets.gzip = false
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -28,22 +32,6 @@ module Personal
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.general = config_for(:general)
-
-    config.logger = CustomLogger.logger
-    config.log_formatter = Utils::Formatters::Json.new
-
-    config.lograge.enabled = true
-    config.colorize_logging = false
-    config.lograge.ignore_actions = ['HomeController#status']
-    config.lograge.formatter = Lograge::Formatters::Logstash.new
-    config.lograge.custom_options = lambda do |event|
-      { 
-        url: event.payload[:url],
-        ua: event.payload[:ua],
-        user_id: event.payload[:user_id],
-        amzn_oidc_identity: event.payload[:amzn_oidc_identity]
-      }
-    end
   end
 end
 

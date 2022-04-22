@@ -18,3 +18,6 @@ pin "utils", to: "utils.js"
 pin "quill" # @1.3.7
 pin "buffer" # @2.0.0
 
+
+pin "highlight.js/lib/core", to: "highlight.js--lib--core.js" # @11.5.1
+pin "highlight.js/lib/languages/javascript", to: "highlight.js--lib--languages--javascript.js" # @11.5.1

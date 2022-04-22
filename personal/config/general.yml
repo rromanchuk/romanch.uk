@@ -3,6 +3,7 @@ default: &default
   auth_url: https://auth.romanch.uk
   apex_url: https://romanch.uk
   cognito_redirect: https://romanch.uk/oauth2/idpresponse
+  my_id: 54467d4a-f7bc-457d-aa72-55842106b02e
 
 production:
   <<: *default
