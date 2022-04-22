@@ -15,7 +15,7 @@
           <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         
-        <% if current_user.me? %>
+        <% if current_user&.me? %>
           <li class="nav-item">
             <%= link_to "Scratchpad", posts_path, class: "nav-link" %>
           </li>

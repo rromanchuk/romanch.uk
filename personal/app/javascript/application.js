@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import { fontAwesomeInit, highlightInit, firebaseInit } from "./init";
+import { fontAwesomeInit, highlightInit, firebaseInit } from "initialize";
 
 fontAwesomeInit()
 const hljs = highlightInit()

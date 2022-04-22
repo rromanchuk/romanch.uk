@@ -5,6 +5,7 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin_all_from "app/javascript/initialize", under: "initialize"
 
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"
 pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"
