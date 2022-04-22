@@ -20,11 +20,9 @@ module Sessionable
 
   def not_authorized_error
     session[:original_request] = request.original_url
+    redirect_to(oauth_cognito_authorize_path) and return if Rails.env.development?
 
-    logout!
-    respond_to do |format|
-      format.html { redirect_to("#{config.auth_url}/login?response_type=code&client_id=#{Credentials[:cognito_client]}&redirect_uri=#{config.cognito_redirect}", allow_other_host: true) and return }
-    end
+    raise 
   end
 
   def find_by_session
@@ -46,7 +44,6 @@ module Sessionable
   def set_current_user(user)
     @current_user = user
     session[:user_id] = user.id
-    session[:amzn_oidc_identity] = user.cognito_id
   end
 
   def logout!
