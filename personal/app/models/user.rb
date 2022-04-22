@@ -3,6 +3,6 @@ class User < ApplicationRecord
   friendly_id :username, use: :slugged
 
   def me?
-    username == :ryan
+    username&.to_sym == :ryan
   end
 end

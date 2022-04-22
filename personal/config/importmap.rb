@@ -24,7 +24,7 @@ pin "ruby.js", to: "languages/ruby.min.js"
 pin "markdown.js", to: "languages/markdown.min.js"
 pin "javascript.js", to: "languages/javascript.min.js"
 pin "bash.js", to: "languages/bash.min.js"
-pin "swift.js", to: "languages/swit.min.js"
+pin "swift.js", to: "languages/swift.min.js"
 pin "erb.js", to: "languages/erb.min.js"
 
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/json.min.js

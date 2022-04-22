@@ -1,20 +1,5 @@
-import { fontAwesomeInit } from './fa';
-
-import hljs from 'highlight';
-import javascript from 'javascript.js';
-import ruby from 'ruby.js'
-import markdown from 'markdown.js'
-
-const highlightInit = () => {
-  hljs.registerLanguage('javascript', javascript);
-  hljs.registerLanguage('ruby', ruby);
-  hljs.registerLanguage('markdown', markdown);
-
-  hljs.configure({   // optionally configure hljs
-    languages: ['javascript', 'ruby', 'markdown']
-  });
-  return hljs
-}
+import { fontAwesomeInit } from 'initialize/fa';
+import { highlightInit } from 'initialize/highlight';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDuQ4EhdFuCoX5OeIRig5lw-xBlNm1KUlo",
