@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  require_user!
+  before_action :require_user!
 
   def logout
     logout!
