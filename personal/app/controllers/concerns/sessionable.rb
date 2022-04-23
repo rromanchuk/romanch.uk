@@ -22,7 +22,7 @@ module Sessionable
     session[:original_request] = request.original_url
     redirect_to(oauth_cognito_authorize_path) and return if Rails.env.development?
 
-    raise 
+    redirect_to login_path 
   end
 
   def find_by_session

@@ -34,8 +34,10 @@
           <%= yield %>
         </main>
         <div class="g-col-lg-4">
-          <%= render SearchComponent.new %>
-          <%= render CategoriesComponent.new %>
+          <% if current_user&.me? %>
+            <%= render SearchComponent.new %>
+            <%= render CategoriesComponent.new %>
+          <% end %>
         </div>
       </div>
     </div>

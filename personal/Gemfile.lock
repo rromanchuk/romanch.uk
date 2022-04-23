@@ -1,6 +1,15 @@
 GIT
+  remote: https://github.com/heartcombo/simple_form.git
+  revision: 60f73d2424a6c53beea77b0779d910768d4fb055
+  branch: main
+  specs:
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
+
+GIT
   remote: https://github.com/puma/puma.git
-  revision: a4b5c2fc61cf05b86f9c87787d463c50e7e4da2e
+  revision: 0f6ab1272a6bff0987b848a4bf59de5d7298229b
   specs:
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -78,23 +87,23 @@ GEM
     aes_key_wrap (1.1.0)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.577.0)
+    aws-partitions (1.579.0)
     aws-sdk-cognitoidentityprovider (1.65.0)
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.130.1)
+    aws-sdk-core (3.130.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.55.0)
+    aws-sdk-kms (1.56.0)
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.113.0)
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
-    aws-sigv4 (1.4.0)
+    aws-sigv4 (1.5.0)
       aws-eventstream (~> 1, >= 1.0.2)
     bindata (2.4.10)
     bindex (0.8.1)
@@ -127,10 +136,10 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
-    faraday (2.0.1)
+    faraday (2.2.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (2.0.1)
+    faraday-net_http (2.0.2)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     globalid (1.0.0)
@@ -267,9 +276,6 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    simple_form (5.1.0)
-      actionpack (>= 5.2)
-      activemodel (>= 5.2)
     sitemap_generator (6.2.1)
       builder (~> 3.0)
     sprockets (4.0.3)
@@ -342,7 +348,7 @@ DEPENDENCIES
   redcarpet
   redis
   selenium-webdriver
-  simple_form
+  simple_form!
   sitemap_generator
   sprockets-rails
   stimulus-rails

@@ -44,7 +44,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 gem 'gutentag'
-gem 'simple_form'
+gem 'simple_form', github: 'heartcombo/simple_form', branch: 'main'
 gem 'aws-sdk-s3', require: false
 
 gem 'aws-sdk-cognitoidentityprovider'
