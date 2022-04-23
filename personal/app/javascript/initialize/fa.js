@@ -7,4 +7,4 @@ const fontAwesomeInit = () => {
   dom.watch()
 }
 
-export {fontAwesomeInit}
+export { fontAwesomeInit }

@@ -17,5 +17,4 @@ export default class extends Controller {
     var md = new MarkdownIt();
     this.htmlTarget.value = md.render(this.markdownTarget.value);;
   }
-
 }
