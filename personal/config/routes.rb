@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     get :me, on: :collection
   end
   
-  resources :posts, shallow: true do
-    resources :tags
+  resources :tags, param: :name, only: [] do
+    resources :posts, only: [:index], on: :collection
   end
+  resources :posts
 
 
   get :editor, to: 'home#editor'

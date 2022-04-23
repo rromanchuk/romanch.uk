@@ -2,6 +2,7 @@
 
 # See: https://medium.com/@eric.programmer/removing-the-hack-in-rails-controllers-52396463c40d
 module Lettable
+
   def let name, &blk
     iv = "@#{name}"
 

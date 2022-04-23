@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag *style_tags, "data-turbo-track": "reload" %>
+    
     <%= javascript_importmap_tags %>
     <% yield :head %>
     <meta charset="utf-8" />
@@ -24,11 +25,18 @@
     />
 
   </head>
-  <body class="d-flex flex-column h-100">
+  <body class="h-100 d-flex flex-column">
     <div class="container">
       <%= render 'shared/nav' %>
-      <div class="body">
-        <%= yield %>
+      <div class="grid">
+        <main class="g-col-lg-8">
+          
+          <%= yield %>
+        </main>
+        <div class="g-col-lg-4">
+          <%= render SearchComponent.new %>
+          <%= render CategoriesComponent.new %>
+        </div>
       </div>
     </div>
     <%= render 'shared/footer' %>

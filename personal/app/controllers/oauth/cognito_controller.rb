@@ -22,7 +22,8 @@ module Oauth
         token = client.auth_code.get_token(params[:code], redirect_uri: Credentials[:cognito_token_callback])
         user = token.get('/oauth2/userInfo').parsed
         User.find_or_create_by!(cognito_id: user['sub']).tap do |_user|
-          _user.update!(username: user['username'], email: user['email'])
+          #_user.update!(username: user['username'], email: user['email'])
+          _user.update!(username: user['username'])
           set_current_user(_user)
         end
       rescue OAuth2::Error => e

@@ -61,6 +61,7 @@ gem 'jwt'
 gem "view_component"
 gem "awesome_print"
 gem "oauth2"
+gem 'pg_search'
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
@@ -91,3 +92,5 @@ group :test do
 end
 
 
+
+gem "pagy", "~> 5.10"

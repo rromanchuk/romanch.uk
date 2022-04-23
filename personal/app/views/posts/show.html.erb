@@ -10,20 +10,12 @@
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 
 <% if current_user %>
-  <%= link_to "Edit", edit_post_path(post), data: { turbo_frame: 'edit_post' } %>
-  <%= button_to "Destory", post_path(post), method: :delete %>
+  <%= link_to "Edit", edit_post_path(post), data: { turbo_action: "replace" } %>
+  <%= link_to "Destory", post_path(post), data: {turbo_method: :delete}  %>
 <% end %>
 <%= turbo_frame_tag post do %>
   <article class="post">
-    <h1><%= post.title %></h1>
-    <time datetime="<%= post.created_at %>" class="fs-4 text-muted"><%= post.created_at.strftime("%b %d, %y") %></time>
-    <div class="mt-4"><%= post.html_content.html_safe %></div>
-    <ul class="list-inline">
-      <% post.tag_names.each do |name| %>
-        <%= tag.li class: 'list-inline-item' do %>
-          <%= link_to name, posts_path(q: name) %>
-        <% end %>
-      <% end %>
-    </ul>
+    <%= render PostHeaderComponent.new(post) %>
+    <%= render PostBodyComponent.new(post) %>
   </article>
 <% end %>

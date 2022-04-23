@@ -1,0 +1,11 @@
+<!-- Post header-->
+<header class="mb-4">
+  <!-- Post title-->
+  <h1 class="fw-bolder mb-1"><%= post.title %></h1>
+  <!-- Post meta content-->
+  <div class="text-muted fst-italic mb-2">Posted on <time datetime="<%= post.created_at %>"><%= post.created_at.strftime("%B %d, %Y") %></time> by ryan</div>
+  <!-- Post categories-->
+  <% post.tag_names.each do |name| %>
+    <%= link_to name, tag_posts_path(tag_name: name), class: 'badge bg-secondary text-decoration-none link-light' %>
+  <% end %>
+</header>

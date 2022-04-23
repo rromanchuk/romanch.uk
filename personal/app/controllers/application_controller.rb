@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   extend Lettable
   include Sessionable
+  include Pagy::Backend
   
   layout 'blog'
 

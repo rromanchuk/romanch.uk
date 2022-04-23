@@ -1,9 +1,12 @@
 class Post < ApplicationRecord
+  include PgSearch::Model
+  multisearchable against: [:title, :description, :markdown_content]
+  
   Gutentag::ActiveRecord.call self
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  validates_presence_of :title, :body
+  validates_presence_of :title
 
   def tags_as_string
     tag_names.join(", ")

@@ -1,5 +1,5 @@
 
-<%= simple_form_for post, html: { data: {controller: :post} } do |f| %>
+<%= simple_form_for post, html: { data: {controller: :post, turbo_frame: :_top} } do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
   <%= f.input :description %>
