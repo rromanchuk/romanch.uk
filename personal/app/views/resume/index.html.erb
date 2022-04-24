@@ -1,40 +1,25 @@
 
 
-
-
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  Link with href
-</a>
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
   View latex source
 </button>
 
-<% content_for :right do %>
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Source</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<% content_for :offcanvas do %>
+  <div class="offcanvas show offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Source</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <%= tag.pre do %>
+        <%= tag.code source, class: "language-latex", id: "code" %>
+      <% end %>
+    </div>
   </div>
-  <div class="offcanvas-body">
-    <%= tag.pre do %>
-      <%= tag.code source, class: "language-latex" %>
-    <% end %>
-  </div>
-</div>
-
-
-<script type="module">
-  //import { bootstrap } from 'application'
-
-  // var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
-  // var offcanvasList = offcanvasElementList.map(function (offcanvasEl) {
-  //   return new bootstrap.Offcanvas(offcanvasEl)
-  // })
-</script>
 <% end %>
 
 
-<% content_for :left do %>
+<% content_for :pdf do %>
   <%= render 'pdf' %>
 <% end %>
 

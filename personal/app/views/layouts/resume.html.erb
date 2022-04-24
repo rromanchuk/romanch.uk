@@ -15,14 +15,15 @@
 
   <body>
     <div class="container-fluid">
-      <div class="card text-center">
-        <div class="card-body">
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid d-flex justify-content-end">
           <%= yield %>
         </div>
-        <%= yield :left %>
-      </div>
+      </nav>
+      <%= yield :pdf %>
     </div>
-    <%= yield :right %>
+    <%= yield :offcanvas %>
+    <link rel="modulepreload" href="worker.js">
     <script type="module">
       import {hljs} from 'application'
       hljs.highlightAll();

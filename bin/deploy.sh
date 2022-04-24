@@ -1,7 +1,7 @@
 #!/bin/sh
 set -euxo pipefail;
 source .env
-REVISION=$(git rev-parse HEAD)
+REVISION=$(git rev-parse --short HEAD)
 LOG=$(git log -5 --pretty=reference)
 
 aws deploy create-deployment \
