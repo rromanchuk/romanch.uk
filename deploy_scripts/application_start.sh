@@ -1,6 +1,5 @@
-#!/bin/sh
-set -euxo pipefail;
-#export PATH="./bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/bin:$PATH"
+#!/bin/bash
+set -eo pipefail
 source /home/ubuntu/.env
 
 

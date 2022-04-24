@@ -1,5 +1,5 @@
-#!/bin/sh
-set -euxo pipefail;
+#!/bin/bash
+set -eo pipefail
 source /home/ubuntu/.env
 
 
