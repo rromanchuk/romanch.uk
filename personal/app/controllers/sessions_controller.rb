@@ -5,7 +5,10 @@ class SessionsController < ApplicationController
     logout!
   end
   
-  # Virtual path for Cognito login
+  # Virtual path for ALB cognito authentication on the ALB listener. The url
+  # path of /login with will require valid session and redirect to hosted
+  # cognito UI. If you want to forece non-alb terminated oauth, or on local
+  # environment use /oauth/cognito/authorize 
   def login
     redirect_to root_path
   end

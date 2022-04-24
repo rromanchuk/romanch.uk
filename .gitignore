@@ -2,3 +2,10 @@
 .env
 .sass-cache
 .tex
+
+/ignore/*
+!/ignore/.keep
+
+/node_modules
+
+iam.ts

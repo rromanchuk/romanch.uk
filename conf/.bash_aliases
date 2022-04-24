@@ -1,0 +1,1 @@
+alias logs="~/log/"

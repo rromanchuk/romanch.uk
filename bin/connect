@@ -1,0 +1,4 @@
+#!/bin/sh
+source .env
+set -euxo pipefail;
+./bin/aws-connect -n personal -p $EC2_IAM_ROLE

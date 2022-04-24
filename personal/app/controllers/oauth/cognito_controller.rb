@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Oauth
+  # A reachable route for  Cognito authentication (traditional) flow. This url path
+  # should not trigger an ALB listener
   class CognitoController < ApplicationController
 
     let(:client) do
