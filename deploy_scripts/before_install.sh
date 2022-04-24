@@ -1,5 +1,5 @@
-#!/bin/bash
-set -eo pipefail
+#!/usr/bin/env bash
+set -euxo pipefail
 source /home/ubuntu/.env
 
 
@@ -29,3 +29,5 @@ gem install bundler
 bundle config --global deployment true
 bundle config set --global path /home/ubuntu/shared_bundle
 bundle config set --local path /home/ubuntu/shared_bundle
+
+exit 0

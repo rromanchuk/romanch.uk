@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eo pipefail
 source /home/ubuntu/.env
 
@@ -12,3 +12,5 @@ cd /var/www/romanch.uk/current
 
 sudo systemctl start nginx
 sudo systemctl restart puma
+
+exit 0
