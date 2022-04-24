@@ -3,6 +3,7 @@ $enable-grid-classes: false;
 $enable-cssgrid: true;
 $container-classes: true;
 $enable-container-classes: true;
+$offcanvas-horizontal-width: 40vw;
 
 @import 'bootstrap/scss/bootstrap';
 @import 'custom/container'; 

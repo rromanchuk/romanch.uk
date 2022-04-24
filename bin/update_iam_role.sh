@@ -11,7 +11,7 @@ done;
 
 aws iam create-policy-version \
  --policy-arn $EC2_IAM_ROLE \
- --policy-document file://iam.json --set-as-default --profile $AWS_PROFILE
+ --policy-document file://iam.json --set-as-default --profile $AWS_PROFILE --output json | jq '.'
 
 rm iam.json
 

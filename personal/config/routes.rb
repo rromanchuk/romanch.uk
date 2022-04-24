@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :posts, only: [:index], on: :collection
   end
   resources :posts
+  
+  
 
 
   get :editor, to: 'home#editor'
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   #get 'resume', to: 'home#resume'
+  get '/s/resume', to: 'resume#index'
   get 'healthcheck', to: 'home#status'
   get 'logout', to: "sessions#logout"
   get 'login', to: "sessions#login"

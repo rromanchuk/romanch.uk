@@ -11,4 +11,4 @@ aws deploy create-deployment \
     --description "$LOG" \
     --github-location repository=rromanchuk/ryanromanchuk.com,commitId="$REVISION" \
     --profile "$AWS_PROFILE" \
-    --output text
+    --output json | jq '.'
