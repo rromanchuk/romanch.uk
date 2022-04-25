@@ -8,8 +8,7 @@ sudo chown ubuntu:ubuntu /var/www/romanch.uk
 
 sudo rm -rf /var/www/romanch.uk/codedeploy
 mkdir -p /var/www/romanch.uk/codedeploy
-# mkdir -p /var/www/romanch.uk/codedeploy/public
-# mkdir -p /var/www/romanch.uk/codedeploy/config
+
 
 mkdir -p /home/ubuntu/shared_bundle
 mkdir -p /home/ubuntu/assets
@@ -20,10 +19,6 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/tmp/
 
 cd /var/www/romanch.uk/codedeploy
 
-
-
-rbenv global 3.1.0
-gem install bundler
 
 bundle config --global deployment true
 bundle config set --global path /home/ubuntu/shared_bundle
