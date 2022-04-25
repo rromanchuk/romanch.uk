@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 source /home/ubuntu/.env
+printenv
 
 cd /var/www/romanch.uk/codedeploy
 bin/rails assets:precompile
