@@ -1,6 +1,6 @@
 #!/bin/sh
 set -euxo pipefail;
-source .env
+eval "$(bin/shdotenv)"
 REVISION=$(git rev-parse HEAD)
 LOG=$(git log -5 --pretty=reference)
 

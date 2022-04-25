@@ -1,6 +1,7 @@
 #!/bin/sh
 set -euxo pipefail;
-
-source .env
+eval "$(bin/shdotenv)"
 
 ./bin/aws-connect -n personal -p $AWS_PROFILE
+
+exit 0

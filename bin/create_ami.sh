@@ -1,7 +1,6 @@
 #!/bin/sh
-source .env
 set -euxo pipefail;
-source .env
+eval "$(bin/shdotenv)"
 REVISION=$(git rev-parse --short HEAD)
 
 

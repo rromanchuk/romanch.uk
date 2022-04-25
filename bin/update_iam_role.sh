@@ -1,6 +1,6 @@
 #!/bin/sh
 set -euxo pipefail;
-source .env
+eval "$(bin/shdotenv)"
 cd conf/iam
 tsc iam.ts && node iam.js > iam.json && rm iam.js
 
