@@ -4,9 +4,9 @@ eval "$(bin/shdotenv)"
 REVISION=$(git rev-parse --short HEAD)
 
 
-instanceId="$(aws ec2 describe-instances --profile "$AWS_PROFILE" --output json | jq -r ".Reservations[].Instances[0].InstanceId")"
-imageId="$(aws ec2 create-image --no-reboot --instance-id "$instanceId" --name "$REVISION" --profile "$AWS_PROFILE" --output json | jq ".ImageId")"
-sourceVersion="$(aws ec2 describe-launch-template-versions --launch-template-name personal --profile "$AWS_PROFILE" --output json | jq -r ".LaunchTemplateVersions[0].VersionNumber")"
+instanceId="$(aws ec2 describe-instances | jq -r ".Reservations[].Instances[0].InstanceId")"
+imageId="$(aws ec2 create-image --no-reboot --instance-id "$instanceId" --name "$REVISION" | jq ".ImageId")"
+sourceVersion="$(aws ec2 describe-launch-template-versions --launch-template-name personal | jq -r ".LaunchTemplateVersions[0].VersionNumber")"
 
 aws ec2 create-launch-template-version \
   --launch-template-name personal 

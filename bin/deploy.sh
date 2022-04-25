@@ -10,5 +10,4 @@ aws deploy create-deployment \
     --deployment-group-name production \
     --description "$LOG" \
     --github-location repository=rromanchuk/ryanromanchuk.com,commitId="$REVISION" \
-    --profile "$AWS_PROFILE" \
     --output json | jq '.'
