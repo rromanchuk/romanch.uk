@@ -15,10 +15,8 @@ pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortaweso
 pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-svg-core@6.1.1/index.es.js"
 
 #pin "bootstrap", to: "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.esm.min.js"
-#pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.0/dist/esm/index.js"
+pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.0/dist/esm/index.js"
 
-pin_all_from "@popperjs/core", under: "@popperjs/core"
-#pin "@popperjs/core", to: "@popperjs/core/index.js"
 pin "bootstrap", to: "bootstrap/bootstrap.esm.js"
 pin 'pdfjs/pdf_viewer', to: 'pdfjs/pdf_viewer.js'
 
