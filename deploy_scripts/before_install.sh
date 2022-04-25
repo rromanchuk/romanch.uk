@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -euxo pipefail
-source /home/ubuntu/.env
-export DATABASE_URL="$DATABASE_URL"
-export RAILS_ENV="$RAILS_ENV"
-export PATH="$PATH"
-printenv
-
+eval "$(shdotenv -e ${HOME}/.env)"
 
 
 sudo mkdir -p /var/www/romanch.uk

@@ -6,7 +6,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/initialize", under: "initialize"
-pin "worker.js", to: "app/javascript/worker.js", preload: true
+
 
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"
 pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"
@@ -17,7 +17,8 @@ pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesom
 #pin "bootstrap", to: "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.esm.min.js"
 #pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.0/dist/esm/index.js"
 
-pin "@popperjs/core", to: "@popperjs/core/index.js"
+pin_all_from "@popperjs/core", under: "@popperjs/core"
+#pin "@popperjs/core", to: "@popperjs/core/index.js"
 pin "bootstrap", to: "bootstrap/bootstrap.esm.js"
 pin 'pdfjs/pdf_viewer', to: 'pdfjs/pdf_viewer.js'
 
