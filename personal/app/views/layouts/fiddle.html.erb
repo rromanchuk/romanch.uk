@@ -12,13 +12,8 @@
     <main class="main" id="top">
       <div class="container" data-layout="container">
         <div class="content">
-          <%= render "layouts/flash" %>
           <%= yield %>
         </div>
-        <div id="modals">
-          <%= yield :modals %>
-        </div>
-        <div id="toasts" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11"></div>
       </div>
     </main>
   </body>

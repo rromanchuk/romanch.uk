@@ -2,12 +2,12 @@
 <div class="card mb-4">
   <div class="card-header">Categories</div>
   <div class="card-body">
-      <div class="grid">
+      <div class="row">
         <% Gutentag::Tag.names_for_scope(Post).first(6).compact.in_groups_of(3) do |chunk| %>
-          <div class="g-col-sm-6">
+          <div class="col-sm-6">
               <ul class="list-unstyled mb-0">
                 <% chunk.each do |name| %>
-                  <li><%= name ? link_to(name, tag_posts_path(tag_name: name)) : '' %></li>
+                  <li><%= name ? link_to(name, tag_posts_path(tag_name: name), data: { turbo_frame: "posts" }) : '' %></li>
                 <% end %>
               </ul>
           </div>

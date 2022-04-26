@@ -28,11 +28,11 @@
   <body class="h-100 d-flex flex-column">
     <div class="container">
       <%= render 'shared/nav' %>
-      <div class="grid">
-        <main class="g-col-lg-8 g-col-12">
+      <div class="row">
+        <main class="col-lg-8 col-12">
           <%= yield %>
         </main>
-        <div class="g-col-lg-4 d-none d-lg-block">
+        <div class="col-lg-4 d-none d-lg-block">
           <%= turbo_frame_tag :right_col do %>
             <% if current_user&.me? %>
               <%= render SearchComponent.new %>

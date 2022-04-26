@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/build/pdf.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/web/pdf_viewer.js"></script> 
 <div class="position-relative d-flex justify-content-center">
-  <div id="viewerContainer" class="position-absolute">
+  <div id="viewerContainer" class="position-absolute img-fluid">
     <div id="viewer" class="pdfViewer"></div>
   </div>
 </div>
@@ -33,7 +33,7 @@
   eventBus.on("pagesinit", function () {
     console.log("pagesinit");
     // We can use pdfViewer now, e.g. let's change default scale.
-    pdfViewer.currentScaleValue = "auto";
+    pdfViewer.currentScaleValue = "page-fit";
 
     // // We can try searching for things.
     // if (SEARCH_FOR) {

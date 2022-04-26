@@ -1,12 +1,20 @@
 class PostsController < ApplicationController
 
   before_action :require_me!, except: [:index, :show]
-  let(:dr_pagy)
+  let(:dr_pagy) 
   let(:post) { Post.friendly.find(params[:id]) }
   
   let(:posts) do
-    @dr_pagy, _posts = pagy(posts_relation, items: 2)
-    _posts
+   if (tag_name = params[:tag_name])
+      @dr_pagy = nil
+      Post.tagged_with(names: [tag_name], match: :any)
+    elsif (q = params[:q])
+      @dr_pagy = nil
+      PgSearch.multisearch(q).where(searchable_type: "Post").includes(:searchable)
+    else
+      @dr_pagy, _posts = pagy(Post.all, items: 10)
+      _posts
+    end
   end
   
   def show; end
@@ -41,15 +49,6 @@ class PostsController < ApplicationController
   end
   
   private
-  def posts_relation
-    if (tag_name = params[:tag_name])
-      Post.tagged_with(names: [tag_name], match: :any)
-    elsif (q = params[:q])
-      PgSearch.multisearch(q).where(searchable_type: "Post").includes(:searchable)
-    else
-      Post.all
-    end
-  end
   
   def post_params
     params.require(:post).permit(:markdown_content, :html_content, :title, :description, :tags_as_string, :delta_content)

@@ -1,0 +1,97 @@
+
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/build/pdf.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/web/pdf_viewer.js"></script> 
+<div class="position-relative d-flex justify-content-center">
+  <div id="viewerContainer" class="position-absolute img-fluid">
+    <div id="viewer" class="pdfViewer"></div>
+  </div>
+</div>
+<%# <div class="card-img-bottom">
+  <canvas id="the-canvas" class="img-fluid ratio ratio-16x9"></canvas>
+</div> %>
+
+
+<script id="script">
+  var rawPdf = "<%= Base64.strict_encode64(pdf) %>";
+  var pdfData = atob(rawPdf);
+
+  var pdfjsLib = window['pdfjs-dist/build/pdf'];
+  
+  const container = document.getElementById("viewerContainer");
+  const eventBus = new pdfjsViewer.EventBus();
+  // (Optionally) enable hyperlinks within PDF files.
+  const pdfLinkService = new pdfjsViewer.PDFLinkService({
+    eventBus,
+  });
+  const pdfViewer = new pdfjsViewer.PDFViewer({
+    container,
+    eventBus,
+    linkService: pdfLinkService,
+  });
+  pdfLinkService.setViewer(pdfViewer);
+  eventBus.on("pagesinit", function () {
+    console.log("pagesinit");
+    // We can use pdfViewer now, e.g. let's change default scale.
+    pdfViewer.currentScaleValue = "page-fit";
+
+    // // We can try searching for things.
+    // if (SEARCH_FOR) {
+    //   eventBus.dispatch("find", { type: "", query: SEARCH_FOR });
+    // }
+  });
+  
+
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/build/pdf.worker.min.js';
+  // Asynchronous download of PDF
+  var loadingTask = pdfjsLib.getDocument({data: pdfData});
+  (async function () {
+    const pdfDocument = await loadingTask.promise;
+    // Document loaded, specifying document for the viewer and
+    // the (optional) linkService.
+    pdfViewer.setDocument(pdfDocument);
+
+    pdfLinkService.setDocument(pdfDocument, null);
+  })();
+  
+  // loadingTask.promise.then(function(pdf) {
+  //   console.log('PDF loaded');
+    
+  //     // Fetch the first page
+  //     var pageNumber = 1;
+  //     pdf.getPage(pageNumber).then(function(page) {
+  //     console.log('Page loaded');
+      
+  //     var scale = 1.5;
+  //     var viewport = page.getViewport({scale: scale});
+  //     var outputScale = window.devicePixelRatio || 1;
+
+  //     // Prepare canvas using PDF page dimensions
+  //     var canvas = document.getElementById('the-canvas');
+  //     var context = canvas.getContext('2d');
+  //     canvas.width = Math.floor(viewport.width * outputScale);
+  //     canvas.height = Math.floor(viewport.height * outputScale);
+  //     canvas.style.width = Math.floor(viewport.width) + "px";
+  //     canvas.style.height =  Math.floor(viewport.height) + "px";
+  //     var transform = outputScale !== 1
+  //       ? [outputScale, 0, 0, outputScale, 0, 0]
+  //       : null;
+
+  //     // Render PDF page into canvas context
+  //     var renderContext = {
+  //       canvasContext: context,
+  //       transform: transform,
+  //       viewport: viewport
+  //     };
+  //     var renderTask = page.render(renderContext);
+  //     renderTask.promise.then(function () {
+  //       console.log('Page rendered');
+  //     });
+  //   });
+  // }, function (reason) {
+  //   // PDF loading error
+  //   console.error(reason);
+  // });
+</script>
+

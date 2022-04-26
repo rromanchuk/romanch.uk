@@ -1,7 +1,7 @@
 <nav>
   <ul class="pagination">
     <li class="page-item">
-      <% if dr_pagy.prev %>
+      <% if dr_pagy&.prev %>
         <%= link_to(
           "< Previous page",
           posts_path(page: dr_pagy.prev),
@@ -13,7 +13,7 @@
       <% end %>
     </li>
     <li class="page-item">
-      <% if dr_pagy.next %>
+      <% if dr_pagy&.next %>
         <%= link_to(
           "Next page >",
           posts_path(page: dr_pagy.next),
