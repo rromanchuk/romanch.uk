@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   #get 'resume', to: 'home#resume'
   get '/s/resume', to: 'resume#index'
+  get 'fiddle', to: 'fiddle#index'
   get 'healthcheck', to: 'home#status'
   get 'logout', to: "sessions#logout"
   get 'login', to: "sessions#login"
