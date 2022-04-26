@@ -7,7 +7,7 @@
           <div class="col-sm-6">
               <ul class="list-unstyled mb-0">
                 <% chunk.each do |name| %>
-                  <li><%= name ? link_to(name, tag_posts_path(tag_name: name), data: { turbo_frame: "posts" }) : '' %></li>
+                  <li><%= name ? link_to(name, tag_posts_path(tag_name: name), data: { turbo_frame: "posts", turbo_action: 'replace' }) : '' %></li>
                 <% end %>
               </ul>
           </div>
