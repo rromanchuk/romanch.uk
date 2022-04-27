@@ -1,8 +1,5 @@
 
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sourcePannel" aria-controls="sourcePannel">
-  View latex source
-</button>
 
 <% content_for :offcanvas do %>
   <%= render OffCanvasComponent.new(target: "sourcePannel", title: "Source") do |component| %>
@@ -15,9 +12,18 @@
 <% end %>
 
 
-<% content_for :pdf do %>
-  <%= render 'pdf' %>
-<% end %>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid d-flex justify-content-end">
+    <a class="navbar-brand" href="#">Home</a>
+    <%= link_to "Download", asset_path('romanchuk.pdf'), class: "btn btn-primary me-2" %>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sourcePannel" aria-controls="sourcePannel">
+      View latex source
+    </button>
+  </div>
+</nav>
+
+<%= render 'pdf' %>
+
 
 
 

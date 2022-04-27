@@ -8,9 +8,9 @@ class PostsController < ApplicationController
    if (tag_name = params[:tag_name])
       @dr_pagy = nil
       Post.tagged_with(names: [tag_name], match: :any)
-    elsif (q = params[:q])
+    elsif (q = params[:q].presence)
       @dr_pagy = nil
-      PgSearch.multisearch(q).where(searchable_type: "Post").includes(:searchable)
+      Post.search(q)
     else
       @dr_pagy, _posts = pagy(Post.all, items: 10)
       _posts

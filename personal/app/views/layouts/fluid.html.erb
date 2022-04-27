@@ -15,14 +15,13 @@
 
   <body>
     <div class="container-fluid">
-      <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid d-flex justify-content-end">
-          <%= yield %>
-        </div>
-      </nav>
+     
+      <%= yield %>
       <%= yield :pdf %>
     </div>
+    
     <%= yield :offcanvas %>
+    <%= turbo_frame_tag "modal" %>
 
     <script type="module">
       import {hljs} from 'application'

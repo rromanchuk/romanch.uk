@@ -8,6 +8,6 @@ class HomeController < ApplicationController
   def editor; end
 
   def resume
-    @pdf = File.open(File.join(Rails.root, 'app', 'assets', 'documents', 'ryan_romanchuk.pdf')).read
+    @pdf = File.open(File.join(Rails.root, 'app', 'assets', 'documents', 'romanchuk.pdf')).read
   end
 end

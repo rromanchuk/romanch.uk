@@ -1,10 +1,13 @@
 <%# turbo_frame_tag "new_post", target: "_top" %>
+
+
 <% if current_user %>
   <%= link_to "New post", new_post_path, data: { turbo_action: :replace } %>
 <% end %>
 <%= turbo_frame_tag :posts, autoscroll: "true" do %>
   <div class="archive">
-    <h1 class="archive-year">2022</h1>
+    <h4>Posts</h4>
+    <hr />
     <%= render posts %>
   </div>
   <%# pagy_nav(dr_pagy) %>

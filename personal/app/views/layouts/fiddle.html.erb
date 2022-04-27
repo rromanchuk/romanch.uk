@@ -6,16 +6,13 @@
     <% yield :head %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link href="https://cdn.jsdelivr.net/npm/video.js@7.18.1/dist/video-js.min.css" rel="stylesheet">
   </head>
 
   <body>
     <main class="main" id="top">
       <div class="container" data-layout="container">
-        <div class="content">
-          <%= yield %>
-          <%= render VideoComponent.new %>
-        </div>
+        <%= yield %>
+        <%= link_to "Modal", resume_video_path(key: :l35), class: "btn btn-primary me-2", data: { turbo_frame: 'modal' } %>
       </div>
     </main>
   </body>

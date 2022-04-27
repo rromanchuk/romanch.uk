@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   include PgSearch::Model
   multisearchable against: [:title, :description, :markdown_content]
+  pg_search_scope :search, against: [:title, :markdown_content]
   
   Gutentag::ActiveRecord.call self
   extend FriendlyId

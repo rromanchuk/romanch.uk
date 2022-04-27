@@ -6,28 +6,27 @@ export default class extends Controller {
   static targets = [ "video" ]
 
   static values = {
-    poster: String,
-    streamUrl: String,
-    autoplay: String,
-    preload: String,
-    controls: Boolean,
-    debug: Boolean,
+    autoplay: {type: String, default: 'any'},
+    preload: {type: String, default: 'auto'},
+    controls: {type: Boolean, default: true},
+    debug: {type: Boolean, default: true},
   }
 
   connect() {
     console.log("connect")
-    const options ={
-      poster: this.posterValue,
-      controls: this.controlsValue,
-      autoplay: this.autoplayValue,
-      preload: this.preloadValue,
-      debug: this.debugValue,
-      responsive: true,
-    }
+    if (!this.player) {
+      const options ={
+        controls: this.controlsValue,
+        autoplay: this.autoplayValue,
+        preload: this.preloadValue,
+        debug: this.debugValue,
+        fluid: true
+      }
 
-    this.player = videojs(this.videoTarget, {}, function() {
-      console.log('player ready')
-    });
+      this.player = videojs(this.videoTarget, options, function() {
+        console.log('player ready')
+      });
+    }
   }
 
   disconnect() {

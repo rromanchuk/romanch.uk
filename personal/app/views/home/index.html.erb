@@ -30,8 +30,8 @@
   <%# console %>
 <% end %>
 
-<%# turbo_frame_tag :posts, src: posts_path do %>
-  <%# <div>
-    Placeholder content
-  </div> %>
-<%# end %>
+<section class="row d-none">
+  <%= turbo_frame_tag :posts, src: posts_path do %>
+
+  <% end %>
+</section>

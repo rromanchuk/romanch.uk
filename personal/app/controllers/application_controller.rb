@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   def client_ip() = request.headers['true-client-ip']
   def user_agent() = request.headers['User-Agent']
   def config() = Rails.configuration.general
+  def asset_exists?(path) = Rails.application.assets.resolve(path).present?
+
 
   
   def append_info_to_payload(payload)

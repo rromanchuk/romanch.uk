@@ -1,8 +1,9 @@
 
 <%= turbo_frame_tag post do %>
-  <article class="archive-item">
-    <time datetime="<%= post.created_at %>" class="post-date archive-date fs-4"><%= post.created_at.strftime("%B %d, %Y") %></time>
-   <%= link_to post.title, post_path(post), class: 'archive-title fs-4', data: { turbo_frame: "_top" } %>
+  <article class="d-flex justify-content-between mb-2">
+    
+   <h6 class="fw-normal"><%= link_to post.title, post_path(post), class: 'archive-title', data: { turbo_frame: "_top" } %></h6>
+   <time datetime="<%= post.created_at %>" class=""><%= post.created_at.strftime("%B %d, %Y") %></time>
   </article>
   <%# link_to "Show", post_path(post), data: { turbo_frame: "_top" } %>
   <%# link_to "Edit", edit_post_path(post), data: { turbo_frame: "_top" } %>
