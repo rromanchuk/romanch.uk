@@ -1,0 +1,66 @@
+name: RSpec
+
+on: push
+
+jobs:
+  test:
+    timeout-minutes: 15
+
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./personal
+
+    services:
+      postgres:
+        image: postgres:13.4-alpine
+        env:
+          POSTGRES_DB: personal_test
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Install apt packages
+        run: |
+          sudo apt-get update -
+          sudo apt-get -yqq install zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+
+      - name: Setup ruby, bundler, gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install npm packages
+        run: yarn install --frozen-lockfile
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Run tests
+        env: # Or as an environment variable
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          RAILS_ENV: test
+          COVERAGE: 1
+        run: |
+          bundle exec rake db:reset
+          bundle exec rspec
