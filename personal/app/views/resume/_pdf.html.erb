@@ -7,14 +7,12 @@
     <div id="viewer" class="pdfViewer"></div>
   </div>
 </div>
-<%# <div class="card-img-bottom">
-  <canvas id="the-canvas" class="img-fluid ratio ratio-16x9"></canvas>
-</div> %>
+
 
 
 <script id="script">
-  var rawPdf = "<%= Base64.strict_encode64(pdf) %>";
-  var pdfData = atob(rawPdf);
+;
+  var pdfUrl = "<%= asset_url('romanchuk.pdf') %>";
 
   var pdfjsLib = window['pdfjs-dist/build/pdf'];
   
@@ -45,7 +43,7 @@
 
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/build/pdf.worker.min.js';
   // Asynchronous download of PDF
-  var loadingTask = pdfjsLib.getDocument({data: pdfData});
+  var loadingTask = pdfjsLib.getDocument({url: pdfUrl});
   (async function () {
     const pdfDocument = await loadingTask.promise;
     // Document loaded, specifying document for the viewer and
