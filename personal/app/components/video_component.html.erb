@@ -2,12 +2,14 @@
 <% content_for :head do %>
 
 <% end %>
-<%= tag.div class: "", 
-  data: {
-    controller: :video, 
-    video_stream_url: asset_path(key)
-    } do %>
-  <%= tag.video class: "video-js", data: {video_target: :video} do %>
-    <source src="<%= asset_path(key) %>" type="application/vnd.apple.mpegurl">
-  <% end%>
-<% end %>
+
+  <%= tag.div class: "h-100", 
+    data: {
+      controller: :video, 
+      video_stream_url: asset_path(video.key),
+      video_aspect_value: video.aspect
+      } do %>
+    <%= tag.video class: "video-js", data: {video_target: :video} do %>
+      <source src="<%= asset_path(video.key) %>" type="application/vnd.apple.mpegurl">
+    <% end%>
+  <% end %>

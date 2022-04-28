@@ -10,17 +10,21 @@ export default class extends Controller {
     preload: {type: String, default: 'auto'},
     controls: {type: Boolean, default: true},
     debug: {type: Boolean, default: true},
+    aspect: {type: String, default: '16:9'},
   }
 
   connect() {
     console.log("connect")
+    console.log(this.aspectValue)
     if (!this.player) {
       const options ={
         controls: this.controlsValue,
         autoplay: this.autoplayValue,
         preload: this.preloadValue,
         debug: this.debugValue,
-        fluid: true
+        aspect: this.aspectValue,
+        responsive: true,
+        fill: true
       }
 
       this.player = videojs(this.videoTarget, options, function() {

@@ -1,1 +1,3 @@
-<%= image_tag params[:key], class: 'img-fluid' %>
+<% if asset_exists?(params[:key]) %>
+  <%= image_tag params[:key], class: 'img-fluid' %>
+<% end %>
