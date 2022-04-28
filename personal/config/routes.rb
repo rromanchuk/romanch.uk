@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   namespace :serve, path: "/serve" do
     get 'image', to: 'images#show'
-    get 'video', to: 'videos#show'
+    resources :videos, only: [:show]
   end
 
   namespace :oauth do
