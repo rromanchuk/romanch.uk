@@ -11,3 +11,5 @@ aws deploy create-deployment \
     --description "$LOG" \
     --github-location repository=rromanchuk/ryanromanchuk.com,commitId="$REVISION" \
     --output json | jq '.'
+
+exit 0
