@@ -1,3 +1,8 @@
-<% if asset_exists?(params[:key]) %>
-  <%= image_tag params[:key], class: 'img-fluid' %>
+
+<%= turbo_frame_tag "modal" do %>
+  <%= render ModalComponent.new do |component| %>
+    <% component.body do %>
+      <%= image_tag params[:key], class: 'img-fluid' %>
+    <% end %>
+  <% end %>
 <% end %>
