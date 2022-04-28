@@ -7,4 +7,3 @@
 
 //= link_tree ../builds
 //= link favicon/browserconfig.xml
-//= link romanchuk.pdf
