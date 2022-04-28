@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     resources :posts, only: [:index], on: :collection
   end
   resources :posts
-  resources :videos, only: [:index]
-  
+  resources :videos
+  resources :images
 
 
   get :editor, to: 'home#editor'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   namespace :serve, path: "/serve" do
-    get 'image', to: 'images#show'
+    resources :images, only: [:show]
     resources :videos, only: [:show]
   end
 

@@ -2,6 +2,12 @@
 <%- content_for(:page_author) { '' } %>
 <%- content_for(:page_description) { post.description } %>
 
+<% content_for :json_ld do %>
+  <script type="application/ld+json">
+    <%== json_ld(post).to_json %>
+  </script>
+<% end %>
+
 <script type="module">
   import {hljs} from 'application'
   hljs.highlightAll();

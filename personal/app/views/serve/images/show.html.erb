@@ -2,7 +2,7 @@
 <%= turbo_frame_tag "modal" do %>
   <%= render ModalComponent.new do |component| %>
     <% component.body do %>
-      <%= image_tag params[:key], class: 'img-fluid' %>
+      <%= image_tag image.key, class: 'img-fluid' %>
     <% end %>
   <% end %>
 <% end %>

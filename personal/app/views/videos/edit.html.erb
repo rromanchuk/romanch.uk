@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "edit_video" do %>
+  <%= tag.div class: 'row justify-content-center' do %>
+    <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
+      <h1>Edit video</h1>
+      <%= turbo_frame_tag video do %>
+        <%= render 'form' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

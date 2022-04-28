@@ -3,6 +3,23 @@
 <% content_for :share_image, nil %>
 <% content_for :canonical_url, config.apex_url %>
 
+<% content_for :json_ld do %>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "type": "Person",
+      "jobTitle": "Software Egnineer",
+      "name": "Ryan Romanchuk",
+      "email": "mailto:ryan@romanch.uk",
+      "url": "./",
+      "sameAs" : [
+        "https://github.com/rromanchuk",
+        "https://www.linkedin.com/in/rromanchuk"
+      ]
+    }
+  </script>
+<% end %>
+
 <header>
   <h1>Ryan Romanchuk</h1>
 </header>

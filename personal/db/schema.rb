@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_28_093506) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_28_191854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_28_093506) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "caption"
+    t.string "title"
+    t.string "geo_location"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -90,6 +93,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_28_093506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.string "title"
+    t.string "description"
+    t.string "thumbnail_key"
     t.index ["slug"], name: "index_videos_on_slug", unique: true
   end
 

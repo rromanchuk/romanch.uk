@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-  extend FriendlyId
-  friendly_id :username, use: :slugged
+  include Sluggable
 
+  def slug_candidates = [:username]
+  
   def me?
     username&.to_sym == :ryan
   end
