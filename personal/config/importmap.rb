@@ -24,7 +24,6 @@ pin 'pdfjs/pdf_viewer', to: 'pdfjs/pdf_viewer.js'
 pin "utils", to: "utils.js"
 
 
-pin "quill" # @1.3.7
 pin "buffer" # @2.0.0
 
 pin "highlight", to: "highlight.min.js"
@@ -35,6 +34,8 @@ pin "bash.js", to: "languages/bash.min.js"
 pin "swift.js", to: "languages/swift.min.js"
 pin "erb.js", to: "languages/erb.min.js"
 pin "latex.js", to: "languages/latex.min.js"
+pin "python.js", to: "languages/python.min.js"
+pin "scss.js", to: "languages/scss.min.js"
 
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/json.min.js
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/python.min.js

@@ -6,7 +6,7 @@ import swift from 'swift.js'
 import bash from 'bash.js'
 import erb from 'erb.js'
 import latex from 'latex.js'
-
+import python from 'python.js'
 
 const highlightInit = () => {
   hljs.registerLanguage('javascript', javascript);
@@ -16,9 +16,10 @@ const highlightInit = () => {
   hljs.registerLanguage('bash', bash);
   hljs.registerLanguage('erb', erb);
   hljs.registerLanguage('latex', latex);
+  hljs.registerLanguage('python', python);
 
   hljs.configure({   // optionally configure hljs
-    languages: ['javascript', 'ruby', 'markdown', 'swift', 'bash', 'erb', 'latex']
+    languages: ['javascript', 'ruby', 'markdown', 'swift', 'bash', 'erb', 'latex', 'python']
   });
   return hljs
 }
