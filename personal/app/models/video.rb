@@ -6,6 +6,6 @@ class Video < ApplicationRecord
 
   auto_strip_attributes :title, :description
 
-  def slug_candidates = [:key]  
+  def slug_candidates = [:title, :key]  
   def search_against = [:title, :description, :key]
 end

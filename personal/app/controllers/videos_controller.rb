@@ -34,6 +34,6 @@ class VideosController < ApplicationController
   private
   
   def video_params
-    params.require(:video).permit(:key, :thumbnail_key, :title, :description, :tags_as_string)
+    params.require(:video).permit(:key, :thumbnail_key, :title, :description, :tags_as_string, :slug)
   end
 end

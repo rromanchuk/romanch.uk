@@ -7,5 +7,5 @@ class Image < ApplicationRecord
 
   auto_strip_attributes :title, :caption
 
-  def slug_candidates = [:key]
+  def slug_candidates = [:title, :key]
 end
