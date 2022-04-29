@@ -8,4 +8,9 @@ class Video < ApplicationRecord
 
   def slug_candidates = [:title, :key]  
   def search_against = [:title, :description, :key]
+
+
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
 end
