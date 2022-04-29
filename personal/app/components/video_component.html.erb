@@ -3,14 +3,13 @@
 
 <% end %>
 
-  <%= tag.div class: "h-100", 
-    data: {
-      controller: :video, 
-      video_stream_url: asset_path(video.key),
-      video_aspect_value: video.aspect,
-      video_poster_value: video.thumbnail_key ? asset_path(video.thumbnail_key) : ''
-      } do %>
-    <%= tag.video class: "video-js", data: {video_target: :video} do %>
-      <source src="<%= asset_path(video.key) %>" type="application/vnd.apple.mpegurl">
-    <% end%>
-  <% end %>
+<%= tag.div class: "h-100", 
+  data: {
+    controller: :video, 
+    video_aspect_value: video.aspect,
+    video_poster_value: video.thumbnail_key ? asset_url(video.thumbnail_key) : ''
+    } do %>
+  <%= tag.video class: "video-js", data: {video_target: :video} do %>
+    <source src="<%= asset_url(video.key) %>" type="application/vnd.apple.mpegurl">
+  <% end%>
+<% end %>

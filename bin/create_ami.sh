@@ -12,7 +12,7 @@ aws ec2 create-launch-template-version \
   --launch-template-name personal \
   --version-description $REVISION \
   --source-version $sourceVersion \
-  --launch-template-data ImageId=${imageId} | jq '.'
+  --launch-template-data ImageId=${imageId} | jq '.LaunchTemplateVersion.VersionNumber'
 
 echo "Created image $imageId"
 
