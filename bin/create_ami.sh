@@ -9,11 +9,10 @@ imageId="$(aws ec2 create-image --no-reboot --instance-id "$instanceId" --name "
 sourceVersion="$(aws ec2 describe-launch-template-versions --launch-template-name personal | jq -r ".LaunchTemplateVersions[0].VersionNumber")"
 
 aws ec2 create-launch-template-version \
-  --launch-template-name personal 
+  --launch-template-name personal \
   --version-description $REVISION \
   --source-version $sourceVersion \
-  --launch-template-data ImageId=${imageId} \
-  --profile $AWS_PROFILE | jq '.'
+  --launch-template-data ImageId=${imageId} | jq '.'
 
 echo "Created image $imageId"
 
