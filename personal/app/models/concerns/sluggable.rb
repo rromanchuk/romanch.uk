@@ -3,7 +3,7 @@ module Sluggable
 
   included do
     extend FriendlyId
-    friendly_id :slug_source, use: :slugged
+    friendly_id :slug_candidates, use: :slugged
   end
 
   def slug_candidates

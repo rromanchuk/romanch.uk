@@ -1,0 +1,20 @@
+#!/bin/sh
+set -euxo pipefail;
+eval "$(bin/shdotenv)"
+
+aws s3 sync personal/public/static s3://personal-www/static \
+ --exclude '*' --include '*audio.mp4' \
+ --content-type 'audio/mp4'
+
+aws s3 sync personal/public/static s3://personal-www/static \
+ --exclude '*' --include '*.m3u8' \
+ --content-type='application/vnd.apple.mpegurl' 
+
+aws s3 sync personal/public/static s3://personal-www/static \
+ --exclude '*' --include '*vc.mp4' \
+ --content-type='video/mp4' 
+
+aws s3 sync personal/public/static s3://personal-www/static \
+ --exclude '*' --include '*.jpg' --include '*.jpeg'
+
+exit 0

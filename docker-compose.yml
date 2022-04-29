@@ -2,6 +2,8 @@ version: '3'
 services:
   postgres:
     image: postgres:13.4-alpine
+    volumes:
+      - romanchuk-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
@@ -21,3 +23,5 @@ services:
     image: amazon/dynamodb-local:latest
     ports:
       - 8000:8000
+volumes:
+  romanchuk-data:

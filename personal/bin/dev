@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+eval "$(bin/shdotenv --env ../.env)"
+
 if ! command -v overmind &> /dev/null
 then
   echo "Installing overmind..."

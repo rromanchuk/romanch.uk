@@ -1,4 +1,4 @@
-compose: docker compose up
+compose: docker compose -f ../docker-compose.yml up 
 #web: bin/rails server -p 3000
 css: yarn build:css --watch
 devlog: tail -f log/development.log

@@ -1,6 +1,7 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "https://romanch.uk"
-
+SitemapGenerator::Sitemap.default_host = 'https://romanch.uk'
+SitemapGenerator::Sitemap.verbose = true
+SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
   #
@@ -22,15 +23,14 @@ SitemapGenerator::Sitemap.create do
   # Add all articles:
   #
   Post.find_each do |post|
-    add article_path(post), lastmod: post.updated_at
+    add(post_path(post), lastmod: post.updated_at)
   end
 
   Image.find_each do |image|
-    {
-      loc: image_url(image.key),
-      caption: image.caption,
-      geo_location:
-    }
-    add serve_image_path(image), images: [], lastmod: image.updated_at
+    add(serve_image_path(image.slug), images: [{
+          loc: image.key,
+          caption: image.caption,
+          geo_location: image.geo_location
+        }], lastmod: image.updated_at)
   end
 end
