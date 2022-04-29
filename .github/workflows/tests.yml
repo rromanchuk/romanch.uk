@@ -64,4 +64,4 @@ jobs:
           COVERAGE: 1
         run: |
           bundle exec rails db:reset
-          bundle exec rspec
+          bundle exec rails test
