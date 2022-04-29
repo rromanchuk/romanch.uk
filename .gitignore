@@ -7,5 +7,6 @@
 !/ignore/.keep
 
 /node_modules
+personal/public/videos/*
 
 iam.ts

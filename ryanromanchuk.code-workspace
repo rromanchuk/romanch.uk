@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "../cognito_token_verifier"
+		},
+		{
+			"path": "../xptools"
+		},
+		{
+			"path": "../OLD/old"
 		}
 	],
 	"extensions": {
