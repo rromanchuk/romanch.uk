@@ -16,7 +16,7 @@ export default class extends Controller {
 
   connect() {
     console.log("connect")
-    console.log(this.aspectValue)
+    console.log(this.posterValue)
     if (!this.player) {
       const options ={
         controls: this.controlsValue,
@@ -29,7 +29,7 @@ export default class extends Controller {
         poster: this.posterValue,
       }
 
-      this.player = videojs(this.videoTarget, options, function() {
+      this.player = videojs('video-player', options, function() {
         console.log('player ready')
       });
     }

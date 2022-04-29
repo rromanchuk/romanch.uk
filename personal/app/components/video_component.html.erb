@@ -9,7 +9,7 @@
     video_aspect_value: video.aspect,
     video_poster_value: video.thumbnail_key ? asset_url(video.thumbnail_key) : ''
     } do %>
-  <%= tag.video class: "video-js", data: {video_target: :video} do %>
+  <%= tag.video class: "video-js", id: "video-player", data: {video_target: :video} do %>
     <source src="<%= asset_url(video.key) %>" type="application/vnd.apple.mpegurl">
   <% end%>
 <% end %>
