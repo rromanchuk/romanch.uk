@@ -11,6 +11,7 @@ export default class extends Controller {
     controls: {type: Boolean, default: true},
     debug: {type: Boolean, default: true},
     aspect: {type: String, default: '16:9'},
+    poster: {type: String, default: ''},
   }
 
   connect() {
@@ -24,7 +25,8 @@ export default class extends Controller {
         debug: this.debugValue,
         aspect: this.aspectValue,
         responsive: true,
-        fill: true
+        fill: true,
+        poster: this.posterValue,
       }
 
       this.player = videojs(this.videoTarget, options, function() {

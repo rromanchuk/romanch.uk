@@ -16,6 +16,8 @@ done
 
 mkdir -p tmp
 
+ffmpeg -ss 00:00:02 -i $KEY -frames:v 1 -q:v 2 tmp/thumbnail.jpg
+
 ffmpeg -hide_banner -y -i $KEY \
     -filter_complex "[0:v:0]split=3[SPLIT_1][SPLIT_2][SPLIT_3] ; [SPLIT_1]scale=width=-2:height=1440[VIDEO_HEVC_1440] ; [SPLIT_2]scale=width=-2:height=1080[VIDEO_HEVC_1080] ; [SPLIT_3]scale=width=-2:height=720[VIDEO_AVC_720]" \
     -preset 'veryfast' -pix_fmt:v 'yuv420p' \

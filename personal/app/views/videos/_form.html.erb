@@ -1,7 +1,9 @@
 <%= simple_form_for video, html: { data: { turbo_frame: :_top} } do |f| %>
   <%= f.error_notification %>
   <%= f.input :key %>
+  <%= f.input :thumbnail_key %>
   <%= f.input :title %>
   <%= f.input :description %>
+  <%= f.input :slug %>
   <%= f.submit class: "btn-primary" %>
 <% end %>
