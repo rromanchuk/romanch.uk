@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_28_191854) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_30_012521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,12 +67,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_28_191854) do
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.text "body"
-    t.boolean "published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.jsonb "delta_content", default: {}, null: false
     t.text "html_content"
     t.text "markdown_content"
     t.index ["slug"], name: "index_posts_on_slug", unique: true

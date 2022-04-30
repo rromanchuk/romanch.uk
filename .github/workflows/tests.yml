@@ -1,4 +1,4 @@
-name: RSpec
+name: Tests
 
 on: push
 
