@@ -16,6 +16,8 @@ echo "Dumped database"
 pg_restore -v --clean --no-acl --no-owner -h localhost -U postgres  -d personal_development dump.sql
 echo "Restored database"
 
+rm dump.sql
+
 pid=$!
 
 exit 0

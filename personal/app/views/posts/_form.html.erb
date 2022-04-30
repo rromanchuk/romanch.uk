@@ -5,8 +5,6 @@
   <%= f.input :description %>
   <%= f.input :markdown_content, value: post.markdown_content, input_html: { rows: "15", data: {post_target: :markdown} } %>
   <%= f.input :html_content, value: post.html_content, input_html: { rows: "5", data: {post_target: :html} } %>
-  <%= f.input :body, as: :hidden %>
-  <%= f.input :delta_content, as: :hidden %>
   <%= f.input :tags_as_string, as: :string %>
   <%= f.submit class: "btn-primary", data: {action: "post#save"}  %>
 <% end %>

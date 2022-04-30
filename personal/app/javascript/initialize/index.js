@@ -12,11 +12,21 @@ const firebaseConfig = {
 };
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 
 const firebaseInit = () => {
-  const app = initializeApp(firebaseConfig);
-  return getAnalytics(app);
+  return initializeApp(firebaseConfig);
 }
 
-export {fontAwesomeInit, highlightInit, firebaseInit}
+const gtmInit = () => {
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://metrics.romanch.uk/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MBP9J44');
+
+
+
+}
+
+export {fontAwesomeInit, highlightInit, firebaseInit, gtmInit}
