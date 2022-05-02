@@ -16,8 +16,10 @@
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 
 <% if current_user %>
-  <%= link_to "Edit", edit_post_path(post), data: { turbo_action: "replace" } %>
-  <%= link_to "Destory", post_path(post), data: {turbo_method: :delete}  %>
+<div class="d-flex">
+  <%= link_to "Edit", edit_post_path(post), class: 'btn btn-link btn-sm', data: { turbo_action: "replace" } %>
+  <%= button_to "Destory", post_path(post), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
+</div>
 <% end %>
 <%= turbo_frame_tag post do %>
   <article class="post">

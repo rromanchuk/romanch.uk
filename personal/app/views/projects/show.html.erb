@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "modal", target: '_top' do %>
+  <%= render ModalComponent.new(size: '') do |component| %>
+    <% component.body do %>
+      <%= render CarouselComponent.new %>
+    <% end %>
+  <% end %>
+<% end %>

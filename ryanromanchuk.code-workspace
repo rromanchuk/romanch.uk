@@ -8,9 +8,6 @@
 		},
 		{
 			"path": "../xptools"
-		},
-		{
-			"path": "../OLD/old"
 		}
 	],
 	"extensions": {

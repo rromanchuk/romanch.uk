@@ -5,7 +5,7 @@
     aria-hidden="true" 
     data-controller="modal"
     >
-    <div class="modal-dialog modal-fullscreen">
+    <%= tag.div class: "modal-dialog #{size}" do %>
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title"></h5>
@@ -18,5 +18,5 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>

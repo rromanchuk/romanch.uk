@@ -1,13 +1,21 @@
 
 class HomeController < ApplicationController
+  layout :layout_for_page
+
   def status
     head :ok
   end
   
   def index; end
-  def editor; end
 
-  def resume
-    @pdf = File.open(File.join(Rails.root, 'app', 'assets', 'documents', 'romanchuk.pdf')).read
+  private
+
+  def layout_for_page
+    case action_name.to_sym
+    when :index
+      'blog'
+    else
+      'fluid'
+    end
   end
 end

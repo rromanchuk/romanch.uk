@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :videos
   resources :images
+  resources :projects, only: [:index, :show]
 
 
-  get :editor, to: 'home#editor'
 
 
   namespace :demo, path: "/demo" do
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     get "cognito/authorize", to: "cognito#authorize"
   end
 
-  #get 'resume', to: 'home#resume'
   get '/s/resume', to: 'resume#index'
   get '/s/resume/video/:key', to: 'resume#video', as: :resume_video
   
