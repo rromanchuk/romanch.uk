@@ -7,6 +7,10 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/initialize", under: "initialize"
 
+# pin 'pdf.js', to: "pdfjs/build/pdf.js"
+# pin 'pdf.worker.js', to: "pdfjs/build/pdf.worker.js"
+# pin 'pdf_viewer.js', to: "pdfjs/web/pdf_viewer.js"
+#pin_all_from "pdfjs/build", under: "build"
 
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"
 pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"
@@ -18,7 +22,7 @@ pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesom
 pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.0/dist/esm/index.js"
 
 pin "bootstrap", to: "bootstrap/bootstrap.esm.js"
-pin 'pdfjs/pdf_viewer', to: 'pdfjs/pdf_viewer.js'
+
 
 #pin "bootstrap", to: "bootstrap.min.js"
 pin "utils", to: "utils.js"

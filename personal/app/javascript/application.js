@@ -6,6 +6,10 @@ import { getAnalytics } from "firebase/analytics";
 
 import { fontAwesomeInit, highlightInit, firebaseInit, gtagInit } from "initialize";
 
+document.addEventListener("turbo:load", function(event) {
+  console.log("trubo:load")
+  window.dataLayer = window.dataLayer || [];
+})
 
 gtagInit()
 

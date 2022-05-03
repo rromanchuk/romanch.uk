@@ -1,9 +1,10 @@
 
 import { Controller } from "@hotwired/stimulus"
-
+import { logEvent } from "firebase/analytics";
+import { analytics } from "application";
 
 export default class extends Controller {
-  static targets = ["form"];
+  static targets = ["form", "input"];
   connect() {
     console.log("connect")
   }
@@ -16,6 +17,8 @@ export default class extends Controller {
   }
 
   _submit() {
+    console.log(this.inputTarget.value)
     this.formTarget.requestSubmit();
+    logEvent(analytics, 'search', {search_term: this.inputTarget.value});
   }
 }

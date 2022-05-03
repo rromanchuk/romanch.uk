@@ -8,7 +8,7 @@
 
 
 <%= turbo_frame_tag "modal" do %>
-  <%= render ModalComponent.new do |component| %>
+  <%= render ModalComponent.new(title: video.title) do |component| %>
     <% component.body do %>
       <%= render VideoComponent.new(video: video) %>
     <% end %>
