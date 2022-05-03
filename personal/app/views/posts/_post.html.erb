@@ -1,6 +1,6 @@
 
 <%= turbo_frame_tag post do %>
-  <article class="d-flex justify-content-between mb-2">
+  <article class="d-flex justify-content-between mb-1">
     
    <h6 class="fw-normal"><%= link_to post.title, post_path(post), class: 'archive-title', data: { turbo_frame: "_top" } %></h6>
    <time datetime="<%= post.created_at %>" class=""><%= post.created_at.strftime("%B %d, %Y") %></time>

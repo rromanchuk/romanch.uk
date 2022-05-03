@@ -4,9 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "../cognito_token_verifier"
-		},
-		{
 			"path": "../xptools"
 		}
 	],

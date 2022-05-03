@@ -4,8 +4,10 @@ import "controllers"
 import * as bootstrap from 'bootstrap';
 import { getAnalytics } from "firebase/analytics";
 
-import { fontAwesomeInit, highlightInit, firebaseInit, gtmInit } from "initialize";
+import { fontAwesomeInit, highlightInit, firebaseInit, gtagInit } from "initialize";
 
+
+gtagInit()
 
 fontAwesomeInit()
 const hljs = highlightInit()
@@ -14,13 +16,5 @@ const hljs = highlightInit()
 const firebaseApp = firebaseInit()
 const analytics = getAnalytics(firebaseApp);
 
-window.gtag('config', 'G-24Q5EDRSF7', {
-  'transport_url': 'https://metrics.romanch.uk',
-  'first_party_collection': true,
-});
-gtmInit()
-
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 
 export {  hljs, bootstrap, firebaseApp, analytics };
