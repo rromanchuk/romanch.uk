@@ -11,6 +11,6 @@ class Post < ApplicationRecord
 
   
 
-  def slug_candidates = [:key]
+  def slug_candidates = [:title]
 
 end

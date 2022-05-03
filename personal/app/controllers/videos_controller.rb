@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :require_user!
+  before_action :require_me!
   
   let(:videos) { Video.all }
   let(:video) { Video.friendly.find(params[:id]) }
