@@ -1,4 +1,4 @@
-<%- content_for(:page_title) { 'Ryan Romanchuk' } %>
+<%- content_for :page_title, 'Ryan Romanchuk' %>
 <% content_for :page_description, nil %>
 <% content_for :share_image, nil %>
 <% content_for :canonical_url, config.apex_url %>
@@ -20,35 +20,40 @@
   </script>
 <% end %>
 
-<header>
-  <h1>Ryan Romanchuk</h1>
-</header>
-<main>
-  <section class="mb-3">
-    <p class="h5 text-muted lead">Full-stack developer in the <a href="https://getspar.com">consumer mobile</a> space.</p>
-  </section>
-  <section class="">
-    <span>Find me on the World Wide Web</span>
-    <ul class="fa-ul">
-      <li>
-        <span class="fa-li"><i class="fa-brands fa-github"></i></span><a href="https://github.com/rromanchuk">github</a>
-      </li>
-      <li>
-        <span class="fa-li"><i class="fa-brands fa-stack-overflow"></i></span><a href="https://stackoverflow.com/users/775762/ryan-romanchuk">stackoverflow</a>
-      </li>
-      <li>
-        <span class="fa-li"><i class="fa-brands fa-linkedin"></i></span><a href="https://www.linkedin.com/in/rromanchuk/">linkedin</a>
-      </li>
-    </ul>
-  </section>
-</main>
+<%= turbo_frame_tag :landing do %>
+  <header>
+    <h1>Ryan Romanchuk</h1>
+  </header>
+  <main>
+    <section class="mb-3">
+      <p class="h5 text-muted lead">Full-stack developer in the <a href="https://getspar.com">consumer mobile</a> space.</p>
+    </section>
+    <section class="">
+      <span>Find me on the World Wide Web</span>
+      <ul class="fa-ul">
+        <li>
+          <span class="fa-li"><i class="fa-brands fa-github"></i></span><a href="https://github.com/rromanchuk">github</a>
+        </li>
+        <li>
+          <span class="fa-li"><i class="fa-brands fa-stack-overflow"></i></span><a href="https://stackoverflow.com/users/775762/ryan-romanchuk">stackoverflow</a>
+        </li>
+        <li>
+          <span class="fa-li"><i class="fa-brands fa-linkedin"></i></span><a href="https://www.linkedin.com/in/rromanchuk/">linkedin</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+<% end %>
 
 <% if Rails.env.development? %>
   <%# console %>
 <% end %>
 
-<section class="row d-none">
-  <%= turbo_frame_tag :posts, src: posts_path do %>
 
+
+<section class="row">
+  <hr class="col-3 col-md-2 mt-5">
+  <%= turbo_frame_tag :posts, src: posts_path, loading: :lazy do %>
+    <section class="row d-none"> </section>
   <% end %>
 </section>

@@ -1,4 +1,8 @@
-<%= tag.div id: target, tabindex: "-1", class: "offcanvas offcanvas-start", aria_labelledb: "#{target}Label" do %>
+<%= tag.div id: target, 
+  tabindex: "-1", 
+  class: "offcanvas offcanvas-start",
+  aria_labelledb: "#{target}Label",
+  data: {controller: :off_canvas} do %>
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="#{target}Label">Source</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

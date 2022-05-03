@@ -1,6 +1,13 @@
 
+<%- content_for(:page_title) { image.title } %>
+<%- content_for(:page_keywords) { image.tags_as_string } %>
+<%- content_for(:share_image) { image.key } %>
+<%- content_for(:canonical_url) { serve_image_url(id: image.slug) } %>
+
+<%= turbo_frame_tag :landing, src: root_path, loading: :lazy %>
+
 <%= turbo_frame_tag "modal" do %>
-  <%= render ModalComponent.new do |component| %>
+  <%= render ModalComponent.new(title: image.title) do |component| %>
     <% component.body do %>
       <%= image_tag image.key, class: 'img-fluid' %>
     <% end %>

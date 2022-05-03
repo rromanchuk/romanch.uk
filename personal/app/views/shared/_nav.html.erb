@@ -6,15 +6,15 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
+          <%= link_to "Home", root_path, class: "nav-link #{active_class(root_path)}" %>
         </li>
-        
-        <% if current_user&.me? %>
-          <li class="nav-item">
-            <%= link_to "Scratchpad", posts_path, class: "nav-link #{current_page?(posts_path) ? 'active' : ''}" %>
-          </li>
-        <% end %>
+        <li class="nav-item">
+          <%= link_to "Scratchpad", posts_path, class: "nav-link #{active_class(posts_path)}" %>
+        </li>
       </ul>
+      <%= form_with(url: posts_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'posts'}, class: 'd-flex') do |f| %>
+        <%= f.text_field(:q, class: "form-control", placeholder: "Search", data: {action: 'input->search#submit'}) %>
+      <% end %>
     </div>
   </div>
 </nav>

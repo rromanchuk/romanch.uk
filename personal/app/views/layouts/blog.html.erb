@@ -26,10 +26,6 @@
 
   </head>
   <body class="h-100 d-flex flex-column">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://metrics.romanch.uk/ns.html?id=GTM-MBP9J44"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div class="container">
       <%= render 'shared/nav' %>
       <div class="row">
@@ -39,8 +35,9 @@
         <div class="col-lg-4 d-none d-lg-block">
           <%= turbo_frame_tag :right_col do %>
             <% if current_user&.me? %>
-              <%= render SearchComponent.new %>
+              <%# render SearchComponent.new %>
               <%= render CategoriesComponent.new %>
+              <%= yield(:right_col) %>
             <% end %>
           <% end %>
         </div>
