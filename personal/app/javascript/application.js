@@ -8,7 +8,7 @@ import { fontAwesomeInit, highlightInit, firebaseInit, gtagInit } from "initiali
 
 document.addEventListener("turbo:load", function(event) {
   console.log("trubo:load")
-  window.dataLayer = window.dataLayer || [];
+  
 })
 
 gtagInit()
@@ -18,7 +18,7 @@ const hljs = highlightInit()
 //const analytics = firebaseInit()
 
 const firebaseApp = firebaseInit()
-const analytics = getAnalytics(firebaseApp);
+const analytics = getAnalytics(firebaseApp, {debug_mode: true, transport_url: 'https://metrics.romanch.uk'});
 
 
 export {  hljs, bootstrap, firebaseApp, analytics };
