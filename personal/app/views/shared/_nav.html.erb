@@ -16,7 +16,7 @@
         </li>
       </ul>
       <%= form_with(url: posts_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'posts'}, class: 'd-flex') do |f| %>
-        <%= f.text_field(:q, class: "form-control", placeholder: "Search", data: {action: 'input->search#submit', search_target: 'input'}) %>
+        <%= f.text_field(:q, class: "form-control", placeholder: "Find a snippet", data: {action: 'input->search#submit', search_target: 'input'}) %>
       <% end %>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="card-header">Search</div>
   <div class="card-body">
     <%= form_with(url: posts_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'posts'}) do |f| %>
-        <%= f.text_field(:q, class: "form-control", placeholder: "Search", data: {action: 'input->search#submit'}) %>
+        <%= f.text_field(:q, class: "form-control", placeholder: "Find snippets", data: {action: 'input->search#submit'}) %>
     <% end %>
       <%# <div class="input-group">
           <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search">

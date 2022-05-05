@@ -1,7 +1,8 @@
 <%# turbo_frame_tag "new_post", target: "_top" %>
 
 
-<h4>Posts</h4>
+
+<p>Personal pastebin-like snippets for myself, and because it's more fun than sending myself slack messages.</p>
 <% if current_user %>
   <%= link_to "New post", new_post_path, data: { turbo_action: :replace } %>
 <% end %>
