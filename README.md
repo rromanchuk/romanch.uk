@@ -8,6 +8,8 @@ brew install ruby-build
 brew install puma/puma/puma-dev
 brew install overmind
 brew install tmux
+brew install yarn
+brew install jq
 
 # Configure some DNS settings that have to be done as root
 sudo puma-dev -setup
@@ -16,23 +18,39 @@ puma-dev -install
 
 rbenv install 3.1.0
 gem install bundler
+bin/update_awscli
+cp .env.example .env
 ```
 #### Local
 
-```
+```bash
 yarn install
-```
-
-```bash
 puma-dev link -n personal personal/
-```
 
-```bash
-bundle install
-bin/dev
-
+cd personal && bundle install
 bin/rails db:create && bin/rails db:migrate
 
-# Restarting
+# Start local environment, tail -f 
+bin/dev
+
+# Restart local puma
 touch tmp/restart.txt
+
+# Deploy
+bin/deploy
+
+# Non assets pipline 
+bin/upload-external
+
+# Update ec2 iam profile
+bin/update_iam_role
+
+# Connect
+bin/connect
+
+# Create AMI, update launch template, update default, trigger instance refresh on ASG
+bin/create_ami
+
+# Test
+bin/rails test
 ```
