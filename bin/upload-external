@@ -20,6 +20,9 @@ aws s3 sync personal/public/static s3://personal-www/static \
 aws s3 sync personal/public/static s3://personal-www/static \
  --exclude '*' --include '*.jpg' --include '*.jpeg'
 
+ aws s3 sync personal/public/static s3://personal-www/static \
+ --exclude '*' --include '*.pdf'
+
 aws s3 cp personal/public/sitemap.xml s3://personal-www/sitemap.xml --content-type 'text/xml'
 aws s3 cp personal/public/robots.txt s3://personal-www/robots.txt --content-type 'text/plain' 
 

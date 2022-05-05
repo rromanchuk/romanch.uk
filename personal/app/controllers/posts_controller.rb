@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       @dr_pagy = nil
       Post.search(q)
     else
-      @dr_pagy, _posts = pagy(Post.all, items: 10)
+      @dr_pagy, _posts = pagy(Post.recent, items: 10)
       _posts
     end
   end

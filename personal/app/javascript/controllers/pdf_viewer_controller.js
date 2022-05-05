@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
 
   connect() {
-    var pdfUrl = "https://romanch.uk/static/docs/v1/romanchuk.pdf";
+    var pdfUrl = "https://romanch.uk/static/docs/v2/romanchuk.pdf";
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     var pdfjsViewer = window['pdfjs-dist/web/pdf_viewer'];
     const container = document.getElementById("viewerContainer");
