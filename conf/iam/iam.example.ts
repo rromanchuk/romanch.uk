@@ -30,6 +30,8 @@ const policy = {
       .toPutObject()
       .onBucket('personal-www')
       .onObject('personal-www', 'assets/*')
+      .onObject('personal-www', 'sitemap.xml')
+      .onObject('personal-www', 'robots.txt')
       .toJSON(),
     new statement.CognitoIdp()
       .allow()
