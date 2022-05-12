@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../xptools"
+		},
+		{
+			"path": "../X-Publish"
 		}
 	],
 	"extensions": {

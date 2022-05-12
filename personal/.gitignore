@@ -34,3 +34,8 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+/ignore/*
+!/ignore/.keep
+
+dump.sql
