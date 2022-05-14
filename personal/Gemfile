@@ -63,6 +63,7 @@ gem "awesome_print"
 gem "oauth2"
 gem 'pg_search'
 gem "auto_strip_attributes"
+gem 'high_voltage'
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]

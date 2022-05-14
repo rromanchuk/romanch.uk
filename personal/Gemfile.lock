@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/puma/puma.git
-  revision: 20df56b7cabb4e4cada493d51894b08c7406bc4a
+  revision: 914a0022cc10e566141096ad8599f5ef5114c0b6
   specs:
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -148,6 +148,7 @@ GEM
       activesupport (>= 5.0)
     gutentag (2.6.1)
       activerecord (>= 3.2.0)
+    high_voltage (3.1.2)
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
@@ -300,7 +301,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.1)
-    view_component (2.54.1)
+    view_component (2.55.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (4.2.0)
@@ -335,6 +336,7 @@ DEPENDENCIES
   debug
   friendly_id
   gutentag
+  high_voltage
   importmap-rails
   jwt
   lograge

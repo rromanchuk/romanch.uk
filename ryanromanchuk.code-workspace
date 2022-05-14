@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../X-Publish"
+		},
+		{
+			"path": "../potree"
 		}
 	],
 	"extensions": {
