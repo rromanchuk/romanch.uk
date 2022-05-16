@@ -1,6 +1,6 @@
 
 import { Controller } from "@hotwired/stimulus"
-import * as threeJs from 'https://esm.run/three';
+
 
 
 export default class extends Controller {

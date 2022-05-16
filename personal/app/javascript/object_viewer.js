@@ -39,7 +39,7 @@ const environments = [
   {
     id: 'venice-sunset',
     name: 'Venice Sunset',
-    path: 'assets/environment/venice_sunset_1k.hdr',
+    path: '/static/environment/venice_sunset_1k.hdr',
     format: '.hdr'
   },
   {
