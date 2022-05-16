@@ -23,6 +23,15 @@ pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.0/dist/esm
 
 pin "bootstrap", to: "bootstrap/bootstrap.esm.js"
 
+pin "three", to: "https://ga.jspm.io/npm:three@0.140.2/build/three.module.js"
+pin "three/examples/jsm/loaders/GLTFLoader.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/loaders/GLTFLoader.js"
+pin "three/examples/jsm/controls/OrbitControls.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/controls/OrbitControls.js"
+
+pin "three/examples/jsm/libs/meshopt_decoder.module.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/libs/meshopt_decoder.module.js"
+pin "three/examples/jsm/libs/stats.module.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/libs/stats.module.js"
+pin "three/examples/jsm/loaders/RGBELoader.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/loaders/RGBELoader.js"
+pin "three-vignette.js", to: "three-vignette.js"
+pin "object_viewer"
 
 pin "utils", to: "utils.js"
 
@@ -57,3 +66,4 @@ pin "scss.js", to: "languages/scss.min.js"
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/scss.min.js
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/markdown.min.jspin "video.js" # @7.18.1
 
+pin "dat.gui", to: "https://ga.jspm.io/npm:dat.gui@0.7.9/build/dat.gui.module.js"

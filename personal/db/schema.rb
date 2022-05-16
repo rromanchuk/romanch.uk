@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_30_012521) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_16_065126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_012521) do
     t.string "slug"
     t.text "html_content"
     t.text "markdown_content"
+    t.boolean "published"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
