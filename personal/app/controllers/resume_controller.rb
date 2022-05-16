@@ -1,7 +1,7 @@
 class ResumeController < ApplicationController
   
   layout 'fluid'
-  before_action :require_me!
+  before_action :require_user!
 
   let(:source) { File.open(File.join(Rails.root, 'app', 'views', 'resume', 'source.tex')).read }
   def index; end

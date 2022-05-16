@@ -22,7 +22,7 @@ export default class extends Controller {
 		});
 
 		var path = "/static/pointclouds/USGS_LPC_WI_Winnebago_TL_2014_LAS_2019/ept.json";
-		var name = "lion";
+		var name = "USGS_LPC_WI_Winnebago_TL_2014_LAS_2019";
 
 		var getQueryParam = function(name) {
 			name = name.replace(/[\[\]]/g, "\\$&");
@@ -40,6 +40,9 @@ export default class extends Controller {
 			material.size = 3;
 			material.pointSizeType = Potree.PointSizeType.FIXED;
 			material.shape = Potree.PointShape.SQUARE;
+			material.activeAttributeName = "intensity gradient";
+			//material.pointColorType = Potree.PointColorType.INTENSITY;
+			//material.gradient = Potree.Gradients.GRAYSCALE;
 			//material.pointColorType = Potree.PointColorType.INTENSITY_GRADIENT;
 			if(material.intensityRange[0] === Infinity){
 				material.intensityRange = [0, 65536];
