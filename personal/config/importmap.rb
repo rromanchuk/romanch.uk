@@ -31,6 +31,8 @@ pin "three/examples/jsm/libs/meshopt_decoder.module.js", to: "https://ga.jspm.io
 pin "three/examples/jsm/libs/stats.module.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/libs/stats.module.js"
 pin "three/examples/jsm/loaders/RGBELoader.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/loaders/RGBELoader.js"
 pin "three-vignette.js", to: "three-vignette.js"
+pin "three-vignette.vert.js", to: "three-vignette.vert.js"
+pin "three-vignette.frag.js", to: "three-vignette.frag.js"
 pin "object_viewer"
 
 pin "utils", to: "utils.js"
