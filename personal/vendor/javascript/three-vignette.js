@@ -12,8 +12,8 @@
   Vector2
 } from 'three';
 
-import vert from './three-vignette.vert.js';
-import frag from './three-vignette.frag.js';
+import vert from 'three-vignette.vert.js';
+import frag from 'three-vignette.frag.js';
 
 function createBackground (opt) {
   opt = opt || {}
