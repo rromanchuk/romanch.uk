@@ -15,7 +15,17 @@ class ApplicationController < ActionController::Base
   def config() = Rails.configuration.general
   def asset_exists?(path) = Rails.application.assets.resolve(path).present?
 
+  rescue_from ActionPolicy::Unauthorized do |ex|
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: ex.result.reasons.full_messages.map { |msg|
+                               turbo_stream.append('toasts', partial: 'shared/toast',
+                                                             locals: { body: msg })
+                             }
+      end
+    end
 
+  end
   
   def append_info_to_payload(payload)
     super

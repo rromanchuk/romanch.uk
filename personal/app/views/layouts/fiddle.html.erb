@@ -6,12 +6,10 @@
     <%= yield :head %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-   
-    
-    
   </head>
 
   <body>
+    <%= render 'shared/noscript' %>
     <main class="main" id="top">
       <div class="container" data-layout="container">
         <%= yield %>

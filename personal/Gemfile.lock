@@ -17,6 +17,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    action_policy (0.6.0)
+      ruby-next-core (>= 0.11.0)
     actioncable (7.0.3)
       actionpack (= 7.0.3)
       activesupport (= 7.0.3)
@@ -273,6 +275,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
+    ruby-next-core (0.15.1)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.1.0)
@@ -324,6 +327,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action_policy
   auto_strip_attributes
   awesome_print
   aws-sdk-cognitoidentityprovider

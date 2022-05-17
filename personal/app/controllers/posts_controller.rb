@@ -1,18 +1,21 @@
 class PostsController < ApplicationController
-
+  
   before_action :require_me!, except: [:index, :show]
   let(:dr_pagy) 
   let(:post) { Post.friendly.find(params[:id]) }
   
   let(:posts) do
-   if (tag_name = params[:tag_name])
-      @dr_pagy = nil
-      Post.tagged_with(names: [tag_name], match: :any)
+    if (tag_name = params[:tag_name])
+      relation = authorized_scope(Post.tagged_with(names: [tag_name], match: :any))
+      @dr_pagy, _posts = pagy(relation, items: 10)
+      _posts
     elsif (q = params[:q].presence)
-      @dr_pagy = nil
-      Post.search(q)
+      relation = authorized_scope(Post.search(q))
+      @dr_pagy, _posts = pagy(relation, items: 10)
+      _posts
     else
-      @dr_pagy, _posts = pagy(Post.recent, items: 10)
+      relation = authorized_scope(Post.recent)
+      @dr_pagy, _posts = pagy(relation, items: 10)
       _posts
     end
   end
@@ -21,6 +24,11 @@ class PostsController < ApplicationController
   
   def new
     @new_post = Post.new
+  end
+
+  def index
+    authorize!
+    flash[:notice] = "Welcome to the blog!"
   end
    
   def edit

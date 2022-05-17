@@ -25,10 +25,7 @@
     />
   </head>
   <body class="h-100 d-flex flex-column">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://metrics.romanch.uk/ns.html?id=GTM-MBP9J44"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <%= render 'shared/noscript' %>
     <div class="container">
       <%= render 'shared/nav' %>
       <div class="row">
@@ -37,15 +34,18 @@
         </main>
         <div class="col-lg-4 d-none d-lg-block">
           <%= turbo_frame_tag :right_col do %>
-            <% if current_user&.me? %>
-              <%# render SearchComponent.new %>
-              <%= render CategoriesComponent.new %>
-              <%= yield(:right_col) %>
-            <% end %>
+            <%# render SearchComponent.new %>
+            <%= render CategoriesComponent.new %>
+            <%= yield(:right_col) %>
           <% end %>
         </div>
       </div>
       <%= turbo_frame_tag "modal", target: '_top' %>
+      <div id="toasts" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <% flash.each do |key, value| %>
+          <%= render 'shared/toast', body: value %>
+        <% end %>
+      </div>
     </div>
     <%= render 'shared/footer' %>
   </body>

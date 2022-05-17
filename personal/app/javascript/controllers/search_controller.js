@@ -6,7 +6,7 @@ import { analytics } from "application";
 export default class extends Controller {
   static targets = ["form", "input"];
   connect() {
-    console.log("connect")
+    console.log("search reporting for duty")
   }
 
   submit() {

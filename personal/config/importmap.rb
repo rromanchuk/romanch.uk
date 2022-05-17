@@ -34,6 +34,7 @@ pin "three-vignette.js", to: "three-vignette.js"
 pin "three-vignette.vert.js", to: "three-vignette.vert.js"
 pin "three-vignette.frag.js", to: "three-vignette.frag.js"
 pin "object_viewer"
+pin "cloud_viewer"
 
 pin "utils", to: "utils.js"
 

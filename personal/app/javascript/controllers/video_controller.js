@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("connect")
+    console.log("video reporting for duty")
     console.log(this.posterValue)
     if (!this.player) {
       const options ={
