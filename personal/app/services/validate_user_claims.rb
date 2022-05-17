@@ -1,4 +1,4 @@
-class ValidateUserClaims < Base
+class ValidateUserClaims < Service
   attr_reader :claims
 
   let(:jwt_headers) { claims.split('.')[0] }
