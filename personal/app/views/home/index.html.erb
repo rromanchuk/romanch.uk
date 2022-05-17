@@ -1,7 +1,9 @@
 <%- content_for :page_title, 'Ryan Romanchuk' %>
 <% content_for :page_description, nil %>
 <% content_for :share_image, nil %>
-<% content_for :canonical_url, my_config.apex_url %>
+<% content_for :canonical_link_tag do %>
+  <link rel="canonical" href="<%= root_url(host: 'romanch.uk') %>" />
+<% end %>
 
 <% content_for :json_ld do %>
   <%= render 'shared/me' %>

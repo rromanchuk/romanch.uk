@@ -5,8 +5,12 @@
 
 <% content_for :json_ld do %>
   <script type="application/ld+json">
-    <%== json_ld(post).to_json %>
+    <%= json_ld(post).html_safe %>
   </script>
+<% end %>
+
+<% content_for :canonical_link_tag do %>
+  <link rel="canonical" href="<%= post_url(post, host: 'romanch.uk') %>" />
 <% end %>
 
 <script type="module">
