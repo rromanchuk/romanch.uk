@@ -2,6 +2,7 @@
 
 one:
   title: Get the marketing version metadata on Ubuntu 
+  published: true
   markdown_content: |
     ```bash
     cat /etc/os-release
@@ -21,3 +22,10 @@ one:
 
 two:
   title: This is post two
+  published: true
+
+unpublished:
+  title: This post isnt published
+  published: false
+  markdown_content: |
+    ## Draft

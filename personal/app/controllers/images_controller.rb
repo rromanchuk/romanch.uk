@@ -1,5 +1,4 @@
 class ImagesController < ApplicationController
-  before_action :require_me!
   
   let(:images) { Image.all }
   let(:image) { Image.friendly.find(params[:id]) }

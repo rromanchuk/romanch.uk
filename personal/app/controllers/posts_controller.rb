@@ -1,8 +1,5 @@
 class PostsController < ApplicationController
-  
-  #before_action :require_me!, except: [:index, :show]
-  
-
+    
   let(:dr_pagy) 
   let(:post) { Post.friendly.find(params[:id]) }
   

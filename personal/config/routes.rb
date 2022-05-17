@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get :video, to: 'modals#video'
   end
 
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :index] do
     get :me, on: :collection
   end
   

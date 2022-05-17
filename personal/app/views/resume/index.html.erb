@@ -1,5 +1,8 @@
 
 
+<% content_for :json_ld do %>
+  <%= render 'shared/me' %>
+<% end %>
 
 <% content_for :offcanvas do %>
   <%= render OffCanvasComponent.new(target: "sourcePannel", title: "Source") do |component| %>
