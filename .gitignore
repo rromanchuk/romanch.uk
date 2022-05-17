@@ -10,3 +10,7 @@
 personal/public/videos/*
 
 iam.ts
+
+/personal/public/assets
+/personal/public/static/*
+/tmp/*
