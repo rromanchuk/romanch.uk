@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
 
   layout 'blog'
+  helper_method :amzn_oidc_data
 
   delegate :request_id, to: :request
   # ALB injected headers indicating authenticated user
