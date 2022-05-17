@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  action_policy:
+    policy:
+      post:
+        show?: "Not found"
   hello: "Hello world"

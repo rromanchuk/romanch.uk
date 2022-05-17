@@ -6,7 +6,13 @@ class HomeController < ApplicationController
     head :ok
   end
   
-  def index; end
+  def index
+    authorize!
+  end
+
+  def implicit_authorization_target
+    :home
+  end
 
   private
 

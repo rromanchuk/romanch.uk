@@ -7,6 +7,8 @@ class ApplicationPolicy < ActionPolicy::Base
   #
   # Read more about authorization context: https://actionpolicy.evilmartians.io/#/authorization_context
   authorize :user, optional: true
+  
+
   private
 
   def me?

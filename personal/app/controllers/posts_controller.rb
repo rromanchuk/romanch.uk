@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   
-  before_action :require_me!, except: [:index, :show]
+  #before_action :require_me!, except: [:index, :show]
+  
+
   let(:dr_pagy) 
   let(:post) { Post.friendly.find(params[:id]) }
   
@@ -20,24 +22,26 @@ class PostsController < ApplicationController
     end
   end
   
-  def show; end
+  def show
+    authorize! post
+  end
   
   def new
     @new_post = Post.new
+    authorize! @new_post
   end
 
   def index
     authorize!
-    flash[:notice] = "Welcome to the blog!"
   end
    
   def edit
-
+    authorize! post
   end
-  
   
   def create
     @new_post = Post.new(post_params)
+    authorize! @new_post
     if @new_post.save
       redirect_to posts_path
     else
@@ -46,11 +50,13 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize! post
     post.update!(post_params)
     redirect_to post_path(post), status: 303
   end
 
   def destroy
+    authorize! post
     post.destroy
     redirect_to posts_path, status: 303
   end
