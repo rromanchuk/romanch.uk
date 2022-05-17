@@ -282,6 +282,14 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sentry-rails (5.3.1)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 5.3.1)
+    sentry-ruby (5.3.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      sentry-ruby-core (= 5.3.1)
+    sentry-ruby-core (5.3.1)
+      concurrent-ruby
     sitemap_generator (6.2.1)
       builder (~> 3.0)
     sprockets (4.0.3)
@@ -357,6 +365,8 @@ DEPENDENCIES
   redcarpet
   redis
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   simple_form!
   sitemap_generator
   sprockets-rails
