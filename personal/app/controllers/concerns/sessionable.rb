@@ -20,7 +20,10 @@ module Sessionable
 
   def not_authorized_error
     session[:original_request] = request.original_url
-    redirect_to(oauth_cognito_authorize_path) and return if Rails.env.development?
+    if Rails.env.development?
+      redirect_to(oauth_cognito_authorize_path) 
+      return 
+    end
 
     redirect_to login_path 
   end

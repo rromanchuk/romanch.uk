@@ -4,6 +4,7 @@ class Image < ApplicationRecord
   include Taggable
   include Searchable
   include Sluggable
+  belongs_to :post, optional: true
 
   auto_strip_attributes :title, :caption
 

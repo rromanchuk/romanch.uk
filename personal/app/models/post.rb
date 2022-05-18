@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   include Sluggable
   include Searchable
   include Taggable
+  has_many :videos
+  has_many :images
 
   pg_search_scope :search, against: %i[title markdown_content]
   validates_presence_of :title

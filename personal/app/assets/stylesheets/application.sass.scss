@@ -13,7 +13,14 @@ $offcanvas-horizontal-width: 40vw;
 @import "video.js/dist/video-js";
 
 
-
+.loggedOut {
+  opacity: 0.5;
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+}
 
 .navbar {
   margin-bottom: 2rem;

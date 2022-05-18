@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   end
 
   get '/s/resume', to: 'resume#index'
-  get '/s/resume/video/:key', to: 'resume#video', as: :resume_video
+  get '/s/resume/download', to: 'resume#download', as: :download_resume
   
   get 'fiddle', to: 'fiddle#index'
   get 'healthcheck', to: 'home#status'

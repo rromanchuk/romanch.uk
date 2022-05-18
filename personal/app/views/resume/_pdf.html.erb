@@ -1,8 +1,5 @@
-
-
-
 <div class="position-relative d-flex justify-content-center" data-controller="pdf-viewer">
-  <div id="viewerContainer" class="position-absolute img-fluid">
+  <div id="viewerContainer" class="position-absolute img-fluid <%= current_user ? '' : 'loggedOut'%>">
     <div id="viewer" class="pdfViewer"></div>
   </div>
 </div>

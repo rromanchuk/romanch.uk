@@ -5,20 +5,24 @@ class ImagesController < ApplicationController
   
   def new
     @image = Image.new
+    authorize! image
   end
 
   def destroy
+    authorize! image
     image.destroy
     redirect_to images_path, status: 303
   end
 
   def update
+    authorize! image
     image.update!(image_params)
     redirect_to images_path, status: 303
   end
 
   def create
     @image = Image.new(image_params)
+    authorize! image
 
     if image.save
       redirect_to images_path
