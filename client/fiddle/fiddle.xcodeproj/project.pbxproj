@@ -44,6 +44,7 @@
 		9405D2FA28348DEC0040DDC8 /* fiddleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fiddleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9405D2FE28348DEC0040DDC8 /* fiddleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fiddleUITests.swift; sourceTree = "<group>"; };
 		9405D30028348DEC0040DDC8 /* fiddleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fiddleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9405D30D2835EBB10040DDC8 /* scratch.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = scratch.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +99,7 @@
 				9405D2E528348DEA0040DDC8 /* ContentView.swift */,
 				9405D2E728348DEB0040DDC8 /* Assets.xcassets */,
 				9405D2E928348DEB0040DDC8 /* Preview Content */,
+				9405D30D2835EBB10040DDC8 /* scratch.playground */,
 			);
 			path = fiddle;
 			sourceTree = "<group>";
