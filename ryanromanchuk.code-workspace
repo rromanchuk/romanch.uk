@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "../../../../Volumes/HD2/ssd/O4XP"
+		},
+		{
+			"path": "../cognito_token_verifier"
 		}
 	],
 	"extensions": {
