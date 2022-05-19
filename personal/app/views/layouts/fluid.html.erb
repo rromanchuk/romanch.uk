@@ -7,11 +7,11 @@
     <%= stylesheet_link_tag *style_tags, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= yield :head %>
-    <%= yield :canonical_link_tag %>
+    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark light" />
-    <%= render 'application/favicon' %>
+    
   </head>
 
   <body>
@@ -28,7 +28,7 @@
     
     <%= yield :offcanvas %>
     <%= turbo_frame_tag "modal" %>
-
+    <%= render 'shared/footer' %>
     <script type="module">
       import {hljs} from 'application'
       hljs.highlightAll();

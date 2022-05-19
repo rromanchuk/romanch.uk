@@ -5,9 +5,16 @@
 <%- content_for(:share_image) { image.key } %>
 <%- content_for(:canonical_url) { serve_image_url(id: image.slug) } %>
 
-<%= turbo_frame_tag :landing, src: root_path, loading: :lazy %>
+<h1><%= image.title %></h1>
+<figure class="figure">
+  <%= image_tag image.key, class: 'img-fluid' %>
+  <figcaption class="figure-caption text-end"><%= image.caption %></figcaption>
+</figure>
 
-<%= turbo_frame_tag "modal" do %>
+<%# turbo_frame_tag :landing, src: root_path, loading: :lazy %>
+
+
+<% turbo_frame_tag "modal" do %>
   <%= render ModalComponent.new(title: image.title, size: 'modal-lg') do |component| %>
     <% component.body do %>
       <figure class="figure">
