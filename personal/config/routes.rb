@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     get "cognito/authorize", to: "cognito#authorize"
   end
 
+  namespace :romanchuk_open, path: "/romanchuk_open" do
+    get "/pages/*id" => 'pages#show', as: :page, format: false
+  end
+
   get '/s/resume', to: 'resume#index'
   get '/s/resume/download', to: 'resume#download', as: :download_resume
   

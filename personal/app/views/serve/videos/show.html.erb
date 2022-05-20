@@ -4,6 +4,12 @@
 <%- content_for(:share_image) { video.thumbnail_key } %>
 <%- content_for(:canonical_url) { serve_video_url(id: video.slug) } %>
 
+
+<script type="application/ld+json">
+  <%= video_json_ld(video).target!.html_safe %>
+</script>
+
+
 <%# turbo_frame_tag :landing, src: root_path, loading: :lazy %>
 <div class="card bg-dark text-white">
   <img src="<%= video.thumbnail_key %>" class="card-img" alt="...">

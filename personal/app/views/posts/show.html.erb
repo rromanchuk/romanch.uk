@@ -3,20 +3,16 @@
 <%- content_for(:page_description) { post.description } %>
 <%- content_for(:page_keywords) { post.tags_as_string } %>
 
-<% content_for :json_ld do %>
-  <script type="application/ld+json">
-    <%= json_ld(post).html_safe %>
-  </script>
-<% end %>
+
+<script type="application/ld+json">
+  <%= post_json_ld(post).target!.html_safe %>
+</script>
+
 
 <% content_for :canonical_link_tag do %>
   <link rel="canonical" href="<%= post_url(post, host: 'romanch.uk') %>" />
 <% end %>
 
-<script type="module">
-  import {hljs} from 'application'
-  hljs.highlightAll();
-</script>
 
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 
@@ -32,3 +28,8 @@
     <%= render PostBodyComponent.new(post) %>
   </article>
 <% end %>
+
+<script type="module">
+  import {hljs} from 'application'
+  hljs.highlightAll();
+</script>

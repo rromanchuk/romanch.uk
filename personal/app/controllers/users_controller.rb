@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  let(:user) { User.find params[:id] }
+  let(:user) { User.friendly.find params[:id] }
   let(:users) { User.recent }
   
   def show; end
