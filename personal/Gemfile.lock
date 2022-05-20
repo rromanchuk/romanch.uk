@@ -162,6 +162,9 @@ GEM
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     jmespath (1.6.1)
     json (2.6.2)
     json-jwt (1.13.0)
@@ -350,6 +353,7 @@ DEPENDENCIES
   gutentag
   high_voltage
   importmap-rails
+  jbuilder
   jwt
   lograge
   logstash-event
