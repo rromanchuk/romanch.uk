@@ -12,6 +12,7 @@ export default class extends Controller {
     debug: {type: Boolean, default: true},
     aspect: {type: String, default: '16:9'},
     poster: {type: String, default: ''},
+    fill: {type: Boolean, default: true},
   }
 
   connect() {
@@ -24,8 +25,8 @@ export default class extends Controller {
         preload: this.preloadValue,
         debug: this.debugValue,
         aspect: this.aspectValue,
-        responsive: true,
-        fill: true,
+        responsive: false,
+        fill: this.fillValue,
         poster: this.posterValue,
       }
 

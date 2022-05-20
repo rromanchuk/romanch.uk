@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
 
-  layout 'blog'
+
   helper_method :amzn_oidc_data, :amzn_oidc_identity
 
   delegate :request_id, to: :request

@@ -4,8 +4,15 @@
 <%- content_for(:share_image) { video.thumbnail_key } %>
 <%- content_for(:canonical_url) { serve_video_url(id: video.slug) } %>
 
-<%= turbo_frame_tag :landing, src: root_path, loading: :lazy %>
-
+<%# turbo_frame_tag :landing, src: root_path, loading: :lazy %>
+<div class="card bg-dark text-white">
+  <img src="<%= video.thumbnail_key %>" class="card-img" alt="...">
+  <div class="card-img-overlay">
+    <h5 class="card-title"><%= video.title %></h5>
+    <p class="card-text"><%= video.description %></p>
+    <a href="<%= serve_video_path(id: video.slug) %>" class="btn btn-primary"><i class="fa-solid fa-circle-play"></i> Play</a>
+  </div>
+</div>
 
 <%= turbo_frame_tag "modal" do %>
   <%= render ModalComponent.new(title: video.title) do |component| %>

@@ -15,9 +15,6 @@ Rails.application.routes.draw do
   resources :images
   resources :projects, only: [:index, :show]
 
-
-
-
   namespace :demo, path: "/demo" do
     root "utils#index"
   end
@@ -35,9 +32,10 @@ Rails.application.routes.draw do
   get '/s/resume', to: 'resume#index'
   get '/s/resume/download', to: 'resume#download', as: :download_resume
   
-  get 'fiddle', to: 'fiddle#index'
   get 'healthcheck', to: 'home#status'
   get 'logout', to: "sessions#logout"
   get 'login', to: "sessions#login"
-  root "home#index"
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+  get :healthcheck, to: 'pages#show', id: 'status'
+  root to: 'pages#show', id: 'home'
 end

@@ -5,11 +5,18 @@
 <%- content_for(:share_image) { image.key } %>
 <%- content_for(:canonical_url) { serve_image_url(id: image.slug) } %>
 
-<h1><%= image.title %></h1>
-<figure class="figure">
-  <%= image_tag image.key, class: 'img-fluid' %>
-  <figcaption class="figure-caption text-end"><%= image.caption %></figcaption>
-</figure>
+
+
+<div class="card bg-dark text-white">
+  <img src="<%= image.key %>" class="card-img" alt="...">
+  <div class="card-img-overlay">
+    <h5 class="card-title"><%= image.title %></h5>
+    <p class="card-text"><%= image.caption %></p>
+    <% image.tag_names.each do |name| %>
+      <%= tag.span name, class: 'badge bg-secondary text-decoration-none link-light' %>
+    <% end %>
+  </div>
+</div>
 
 <%# turbo_frame_tag :landing, src: root_path, loading: :lazy %>
 

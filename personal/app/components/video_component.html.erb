@@ -1,13 +1,11 @@
 
-<% content_for :head do %>
-
-<% end %>
 
 <%= tag.div class: "h-100", 
   data: {
     controller: :video, 
     video_aspect_value: video.aspect,
-    video_poster_value: video.thumbnail_key || ''
+    video_poster_value: video.thumbnail_key || '',
+    video_fill_value: fill
     } do %>
   <%= tag.video class: "video-js", id: "video-player", data: {video_target: :video} do %>
     <source src="<%= video.key %>" type="application/vnd.apple.mpegurl">

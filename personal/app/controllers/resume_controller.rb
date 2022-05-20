@@ -1,6 +1,6 @@
 class ResumeController < ApplicationController
   
-  layout 'fluid'
+  # layout 'fluid'
 
   let(:source) { File.open(File.join(Rails.root, 'app', 'views', 'resume', 'source.tex')).read }
   def index

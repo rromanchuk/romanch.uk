@@ -9,34 +9,13 @@
   <%= render 'shared/me' %>
 <% end %>
 
-<%= turbo_frame_tag :landing do %>
-  <header>
-    <h1>Ryan Romanchuk</h1>
-  </header>
-  <main>
-    <section class="mb-3">
-      <p class="h5 text-muted lead">Full-stack developer in the <a href="https://getspar.com">consumer mobile</a> space.</p>
-    </section>
-    <section class="">
-      <span>Find me on the World Wide Web</span>
-      <ul class="fa-ul">
-        <li>
-          <span class="fa-li"><i class="fa-brands fa-github"></i></span><a href="https://github.com/rromanchuk">github</a>
-        </li>
-        <li>
-          <span class="fa-li"><i class="fa-brands fa-stack-overflow"></i></span><a href="https://stackoverflow.com/users/775762/ryan-romanchuk">stackoverflow</a>
-        </li>
-        <li>
-          <span class="fa-li"><i class="fa-brands fa-linkedin"></i></span><a href="https://www.linkedin.com/in/rromanchuk/">linkedin</a>
-        </li>
-      </ul>
-    </section>
-  </main>
+
+<% content_for :right_col do %>
+  <%= render CategoriesComponent.new %>
 <% end %>
 
-<% if Rails.env.development? %>
-  <%# console %>
-<% end %>
+
+<%= render 'landing' %>
 
 
 
