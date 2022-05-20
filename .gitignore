@@ -11,7 +11,7 @@ personal/public/videos/*
 
 iam.ts
 
-/client/fiddle/*
+/client/*
 /personal/public/assets
 /personal/public/static/*
 /tmp/*
