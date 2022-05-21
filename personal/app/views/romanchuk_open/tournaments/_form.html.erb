@@ -1,0 +1,7 @@
+<%= simple_form_for tournament, html: { data: {turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :city %>
+  <%# f.input :country %>
+  <%= f.input :images, input_html: { multiple: true } %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>

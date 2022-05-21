@@ -1,5 +1,5 @@
 module RomanchukOpen
-  class ApplicationController < ActionController::Base
-  
+  class ApplicationController < ApplicationController
+    layout 'romanchuk_open'
   end
 end

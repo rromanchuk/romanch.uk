@@ -3,7 +3,7 @@ module RomanchukOpen
   class PagesController < RomanchukOpen::ApplicationController
     include HighVoltage::StaticPage
   
-    layout "romanchuk_open/layouts/application"
+    layout "romanchuk_open"
     
     private
     def page_finder_factory

@@ -2,9 +2,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-
+  static values = {
+    url: String,
+  }
   connect() {
-    var pdfUrl = "https://romanch.uk/static/docs/v4/romanchuk_public.pdf";
+    var pdfUrl = this.urlValue
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     var pdfjsViewer = window['pdfjs-dist/web/pdf_viewer'];
     const container = document.getElementById("viewerContainer");
