@@ -25,11 +25,7 @@ module RomanchukOpen
 
     private
     def tournament_params
-      params.require(:romanchuk_open_tournament).permit(:city, :country, images: [])
-    end
-
-    def images_params
-      params.require(:romanchuk_open_tournament).permit(images: [])
+      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, images: [])
     end
   end
 end
