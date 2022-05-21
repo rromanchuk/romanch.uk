@@ -26,17 +26,21 @@ class RomanchukOpen::Tournament < ApplicationRecord
     '/static/romanchukopen/1985_12.jpg',
     '/static/romanchukopen/1985_13.jpg',
     '/static/romanchukopen/1985_14.jpg',
-    '/static/romanchukopen/1985_15.jpg',
-    '/static/romanchukopen/1985_16.jpg'
+    '/static/romanchukopen/1985_15.jpg'
   ]
 
   PICS_1986 = [
     '/static/romanchukopen/1986_1.jpg',
-    '/static/romanchukopen/1986_2.jpg'
+    '/static/romanchukopen/1986_2.jpg',
+    '/static/romanchukopen/1986_3.jpg',
+    '/static/romanchukopen/1986_4.jpg',
+    '/static/romanchukopen/1986_5.jpg',
+    '/static/romanchukopen/1986_6.jpg'
   ]
 
   PICS_1987 = [
     '/static/romanchukopen/1987_1.jpg',
+    '/static/romanchukopen/1987_2.jpg',
     '/static/romanchukopen/1987_2.jpg'
   ]
 

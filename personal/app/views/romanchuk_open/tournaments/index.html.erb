@@ -8,7 +8,7 @@
           <%= image_tag "#{t.images.first&.key}", class: 'card-img' %>
         <% end %>
         <div class="card-body">
-          <h5 class="card-title"><%= "#{t.title} #{t.ocurred_on.year}" %></h5>
+          <h5 class="card-title"><%= "#{t.title} #{t.ocurred_on&.year}" %></h5>
         </div>
       </div>
     </div>

@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  constraints host: ['romanchukopen.com'] do
-
+  namespace :romanchuk_open, path: "/romanchuk_open" do
+    resources :tournaments
+    get "/pages/*id" => 'pages#show', as: :page, format: false
+    root "tournaments#index"
   end
+  
+  # constraints host: ['romanchukopen.com'] do
+  #   root "tournaments#index"
+  # end
+  
   resources :modals, only: [] do 
     get :video, to: 'modals#video'
   end
@@ -32,10 +39,7 @@ Rails.application.routes.draw do
     get "cognito/authorize", to: "cognito#authorize"
   end
 
-  namespace :romanchuk_open, path: "/romanchuk_open" do
-    resources :tournaments
-    get "/pages/*id" => 'pages#show', as: :page, format: false
-  end
+  
 
   get '/s/resume', to: 'resume#index'
   get '/s/resume/download', to: 'resume#download', as: :download_resume
