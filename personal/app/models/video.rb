@@ -5,6 +5,7 @@ class Video < ApplicationRecord
   include Sluggable
   
   belongs_to :post, optional: true
+  has_one_attached :file
 
   auto_strip_attributes :title, :description
 

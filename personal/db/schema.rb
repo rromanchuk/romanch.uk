@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_051700) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_21_071225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,8 +81,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_051700) do
     t.string "caption"
     t.string "title"
     t.string "geo_location"
-    t.uuid "post_id"
-    t.index ["post_id"], name: "index_images_on_post_id"
+    t.uuid "imageable_id"
+    t.string "imageable_type"
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
