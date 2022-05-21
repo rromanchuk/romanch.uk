@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_030922) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_21_051700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,6 +111,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_030922) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.jsonb "data", default: {}, null: false
+    t.datetime "ocurred_on"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
