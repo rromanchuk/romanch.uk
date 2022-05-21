@@ -1,7 +1,7 @@
 <%= simple_form_for tournament, html: { data: {turbo_frame: :_top} } do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
-  <%= f.input :ocurred_on, as: :date %>
+  <%= f.input :ocurred_on, as: :date, html5: true %>
   <%= f.input :city %>
   <%# f.input :country %>
   <%= f.input :images, input_html: { multiple: true } %>
