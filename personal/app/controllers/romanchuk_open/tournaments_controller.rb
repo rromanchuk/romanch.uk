@@ -28,7 +28,7 @@ module RomanchukOpen
     private
 
     def tournament_params
-      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country)
+      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :slug)
     end
   end
 end
