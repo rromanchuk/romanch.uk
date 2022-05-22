@@ -7,9 +7,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :amzn_oidc_data, :amzn_oidc_identity
 
-  delegate :request_id, to: :request
-  
-
   
 
   rescue_from ActionPolicy::Unauthorized do |ex|
@@ -40,6 +37,7 @@ class ApplicationController < ActionController::Base
     payload[:user_id] = session[:user_id] || :guest
     payload[:url] = request.original_url
     payload[:hostname] = HOSTNAME
+    payload[:host] = request.host
     payload[:amzn_oidc_identity] = amzn_oidc_identity
   end
 end

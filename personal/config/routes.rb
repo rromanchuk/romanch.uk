@@ -1,54 +1,39 @@
+class RomanchukOpenConstraint
+  def matches?(request)
+    ['romanchukopen.com', 'romanchukopen.test'].include?(request.host)
+  end
+end
+
+class PersonalConstraint
+  def matches?(request)
+    ['romanch.uk', 'personal.test'].include?(request.host)
+  end
+end
+
 Rails.application.routes.draw do
-  
+  draw :oauth
+  draw :romanchuk_open
+  draw :personal
 
-  namespace :romanchuk_open do
-    resources :tournaments
-    get "/pages/*id" => 'pages#show', as: :page, format: false
-    root to: "tournaments#index", as: :romanchuk_open_root
-  end
-
-  resources :modals, only: [] do 
-    get :video, to: 'modals#video'
-  end
-
-  resources :users, only: [:show, :index] do
-    get :me, on: :collection
-  end
-  
   resources :tags, param: :name, only: [] do
     resources :posts, only: [:index], on: :collection
   end
-  resources :posts
-  resources :videos
-  resources :images
-  resources :projects, only: [:index, :show]
 
-  namespace :serve, path: "/serve" do
+  namespace :serve, path: '/serve' do
     resources :images, only: [:show]
     resources :videos, only: [:show]
   end
 
-  namespace :oauth do
-    get "cognito/token", to: "cognito#token"
-    get "cognito/authorize", to: "cognito#authorize"
-  end
+  get 'logout', to: 'sessions#logout'
+  get 'login', to: 'sessions#login'
 
-  
-
-  get '/s/resume', to: 'resume#index'
-  get '/s/resume/download', to: 'resume#download', as: :download_resume
-  
-
-  get 'logout', to: "sessions#logout"
-  get 'login', to: "sessions#login"
-  get "/pages/*id" => 'pages#show', as: :page, format: false
   get :healthcheck, to: 'pages#show', id: 'status'
 
-
-  root to: 'pages#show', id: 'home', constraints: {host: ['romanch.uk', 'personal.test']}
-
-  scope module: 'romanchuk_open', constraints: {host: "romanchukopen.com"} do
-    root 'tournaments#index', as: :romanchuk_open
+  constraints(RomanchukOpenConstraint.new) do
+    root 'romanchuk_open/tournaments#index', as: :romanchuk_open
   end
 
+  constraints(PersonalConstraint.new) do
+    root to: 'pages#show', id: 'home'
+  end
 end
