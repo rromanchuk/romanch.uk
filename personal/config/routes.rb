@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   
   
-  constraints host: ['romanchukopen.com'] do
+  constraints host: 'romanchukopen.com' do
     namespace :romanchuk_open, path: "" do
       resources :tournaments
       get "/pages/*id" => 'pages#show', as: :page, format: false
-      root to: "tournaments#index"
+      root to: "tournaments#index", as: :romanchuk_open_root
     end
   end
 
