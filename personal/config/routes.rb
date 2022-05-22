@@ -44,8 +44,7 @@ Rails.application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
   get :healthcheck, to: 'pages#show', id: 'status'
 
-  #root to: 'romanchuk_open/tournaments#index', constraints: {host: ['romanchukopen.com']}, as: :romanchuk_open
-  root to: redirect('/romanchuk_open'), constraints: {host: ['romanchukopen.com']}, as: :romanchuk_open_redirect
+  root to: 'romanchuk_open/tournaments#index', constraints: {host: ['romanchukopen.com']}, as: :romanchuk_open
   root to: 'pages#show', id: 'home', constraints: {host: ['romanch.uk', 'personal.test']}
 
 end
