@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   get '/s/resume', to: 'resume#index'
   get '/s/resume/download', to: 'resume#download', as: :download_resume
   
-  get 'healthcheck', to: 'home#status'
+
   get 'logout', to: "sessions#logout"
   get 'login', to: "sessions#login"
   get "/pages/*id" => 'pages#show', as: :page, format: false
