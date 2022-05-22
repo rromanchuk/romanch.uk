@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  namespace :romanchuk_open, path: "/romanchuk_open" do
-    resources :tournaments
-    get "/pages/*id" => 'pages#show', as: :page, format: false
+  
+  
+  constraints host: ['romanchukopen.com'] do
+    namespace :romanchuk_open, path: "/romanchuk_open" do
+      resources :tournaments
+      get "/pages/*id" => 'pages#show', as: :page, format: false
+      root "tournaments#index"
+    end
     root "tournaments#index"
   end
-  
-  # constraints host: ['romanchukopen.com'] do
-  #   root "tournaments#index"
-  # end
   
   resources :modals, only: [] do 
     get :video, to: 'modals#video'
