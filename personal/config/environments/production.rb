@@ -94,11 +94,12 @@ Rails.application.configure do
   config.lograge.enabled = true
   config.colorize_logging = false
   config.lograge.ignore_actions = ['HomeController#status']
-  config.lograge.formatter = Lograge::Formatters::Logstash.new
+  config.lograge.formatter = Utils::Formatters::Lograge.new
   config.lograge.custom_options = lambda do |event|
     { 
       url: event.payload[:url],
       ua: event.payload[:ua],
+      host: event.payload[:host],
       user_id: event.payload[:user_id],
       amzn_oidc_identity: event.payload[:amzn_oidc_identity]
     }
