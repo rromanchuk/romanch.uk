@@ -2,16 +2,17 @@ Rails.application.routes.draw do
   
   
   constraints host: ['romanchukopen.com'] do
-    namespace :romanchuk_open, path: "/romanchuk_open" do
+    namespace :romanchuk_open, path: "" do
       resources :tournaments
       get "/pages/*id" => 'pages#show', as: :page, format: false
       root to: "tournaments#index"
     end
-
-    namespace :romanchuk_open, path: "" do
-      root to: redirect('/romanchuk_open'), as: :romanchuk_open
-    end
   end
+
+  # namespace :romanchuk_open, path: "/romanchuk_open" do
+  #   resources :tournaments
+  #   get "/pages/*id" => 'pages#show', as: :page, format: false
+  # end
 
   resources :modals, only: [] do 
     get :video, to: 'modals#video'
