@@ -5,11 +5,14 @@ Rails.application.routes.draw do
     namespace :romanchuk_open, path: "/romanchuk_open" do
       resources :tournaments
       get "/pages/*id" => 'pages#show', as: :page, format: false
-      root "tournaments#index"
+      root to: "tournaments#index"
     end
-    root "tournaments#index"
+
+    namespace :romanchuk_open, path: "" do
+      root to: redirect('/romanchuk_open'), as: :romanchuk_open
+    end
   end
-  
+
   resources :modals, only: [] do 
     get :video, to: 'modals#video'
   end
@@ -50,5 +53,8 @@ Rails.application.routes.draw do
   get 'login', to: "sessions#login"
   get "/pages/*id" => 'pages#show', as: :page, format: false
   get :healthcheck, to: 'pages#show', id: 'status'
-  root to: 'pages#show', id: 'home'
+
+  #root to: 'romanchuk_open/tournaments#index', constraints: {host: ['romanchukopen.com']}, as: :romanchuk_open
+  root to: 'pages#show', id: 'home', constraints: {host: ['romanch.uk', 'personal.test']}
+
 end
