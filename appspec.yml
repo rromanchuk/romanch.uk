@@ -5,8 +5,8 @@ files:
     destination: /var/www/romanch.uk/codedeploy
   # - source: /conf/puma.service
   #   destination: /etc/systemd/system/
-  # - source: /conf/romanch.uk.conf
-  #   destination: /etc/nginx/conf.d/
+  - source: /conf/romanch.uk.conf
+    destination: /etc/nginx/conf.d/
 file_exists_behavior: OVERWRITE
 permissions:
   - object: /var/www/romanch.uk/codedeploy
