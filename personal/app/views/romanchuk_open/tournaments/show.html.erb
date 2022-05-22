@@ -1,17 +1,29 @@
-<div class="d-flex">
-  <%= link_to "Edit", edit_romanchuk_open_tournament_path(tournament), class: 'btn btn-link btn-sm', data: { turbo_action: "replace" } %>
-  <%= button_to "Destory", romanchuk_open_tournament_path(tournament), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
-</div>
-<h1><%= tournament.title %></h1>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  <% tournament.images.each do |image| %>
-    <div class="col">
-      <div class="card shadow-sm">
-        <%= image_tag image.key, class: 'card-img-top' %>
-        <div class="card-body">
-          <%= link_to image.key, edit_image_path(image) %>
-        </div>
+<section>
+  <div class="row py-lg-5 py-5 text-center container">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light"><%= tournament.title %></h1>
+      <p class="lead text-muted">July 2022</p>
+      <div class="d-flex justify-content-center">
+        <%= link_to "Edit", edit_romanchuk_open_tournament_path(tournament), class: 'btn btn-link my-2', data: { turbo_action: "replace" } %>
+        <%= button_to "Destory", romanchuk_open_tournament_path(tournament), method: :delete, class: 'btn btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+</section>
+
+<section class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <% tournament.images.each do |image| %>
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= image_tag image.key, class: 'card-img-top' %>
+            <div class="card-body">
+              <%= link_to 'Edit', edit_image_path(image), class: 'card-link' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

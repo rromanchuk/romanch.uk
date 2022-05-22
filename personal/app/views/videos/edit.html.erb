@@ -2,6 +2,7 @@
   <%= tag.div class: 'row justify-content-center' do %>
     <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
       <h1>Edit video</h1>
+      <h6><%= video.id %></h6>
       <%= turbo_frame_tag video do %>
         <%= render 'form' %>
       <% end %>
