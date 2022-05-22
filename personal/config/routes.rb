@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   
   constraints host: 'romanchukopen.com' do
     namespace :romanchuk_open, path: "" do
-      resources :tournaments
-      get "/pages/*id" => 'pages#show', as: :page, format: false
-      root to: "tournaments#index", as: :romanchuk_open_root
+      root to: redirect('/romanchuk_open'), as: :romanchuk_open_redirect
     end
+  end
+
+  namespace :romanchuk_open do
+    resources :tournaments
+    get "/pages/*id" => 'pages#show', as: :page, format: false
+    root to: "tournaments#index", as: :romanchuk_open_root
   end
 
   # namespace :romanchuk_open, path: "/romanchuk_open" do
@@ -29,10 +33,6 @@ Rails.application.routes.draw do
   resources :videos
   resources :images
   resources :projects, only: [:index, :show]
-
-  namespace :demo, path: "/demo" do
-    root "utils#index"
-  end
 
   namespace :serve, path: "/serve" do
     resources :images, only: [:show]
