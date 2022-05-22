@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Post < ApplicationRecord
   SEARCH_AGAINST = %i[title description markdown_content]
 

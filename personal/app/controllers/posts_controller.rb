@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
-    
-  let(:dr_pagy) 
+  let(:dr_pagy)
   let(:post) { Post.friendly.find(params[:id]) }
-  
+
   let(:posts) do
     if (tag_name = params[:tag_name])
       relation = authorized_scope(Post.tagged_with(names: [tag_name], match: :any))
@@ -18,11 +17,11 @@ class PostsController < ApplicationController
       _posts
     end
   end
-  
+
   def show
     authorize! post
   end
-  
+
   def new
     @new_post = Post.new
     authorize! @new_post
@@ -31,11 +30,11 @@ class PostsController < ApplicationController
   def index
     authorize!
   end
-   
+
   def edit
     authorize! post
   end
-  
+
   def create
     @new_post = Post.new(post_params)
     authorize! @new_post
@@ -57,9 +56,9 @@ class PostsController < ApplicationController
     post.destroy
     redirect_to posts_path, status: 303
   end
-  
+
   private
-  
+
   def post_params
     params.require(:post).permit(:published, :markdown_content, :html_content, :title, :description, :tags_as_string)
   end

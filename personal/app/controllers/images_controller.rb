@@ -36,6 +36,6 @@ class ImagesController < ApplicationController
   private
   
   def image_params
-    params.require(:image).permit(:key, :title, :caption, :tags_as_string, :slug)
+    params.require(:image).permit(:key, :title, :caption, :tags_as_string, :slug, :imageable_id, :imageable_type)
   end
 end

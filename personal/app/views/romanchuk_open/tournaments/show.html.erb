@@ -9,7 +9,7 @@
       <div class="card shadow-sm">
         <%= image_tag image.key, class: 'card-img-top' %>
         <div class="card-body">
-        <%= image.key %>
+          <%= link_to image.key, edit_image_path(image) %>
         </div>
       </div>
     </div>
