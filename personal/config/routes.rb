@@ -1,12 +1,12 @@
 class RomanchukOpenConstraint
   def matches?(request)
-    ['romanchukopen.com', 'romanchukopen.test'].include?(request.host)
+    ['romanchukopen.com', 'romanchukopen.test'].include?(request.domain)
   end
 end
 
 class PersonalConstraint
   def matches?(request)
-    ['romanch.uk', 'personal.test'].include?(request.host)
+    ['romanch.uk', 'personal.test'].include?(request.domain)
   end
 end
 
