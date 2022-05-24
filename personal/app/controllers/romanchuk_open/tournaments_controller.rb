@@ -1,5 +1,7 @@
 module RomanchukOpen
   class TournamentsController < RomanchukOpen::ApplicationController
+    before_action :set_breadcrumbs
+
     let(:tournament) { Tournament.friendly.find params[:id] }
     let(:tournaments) { Tournament.oldest(:ocurred_on) }
     def new
@@ -28,10 +30,23 @@ module RomanchukOpen
       redirect_to romanchuk_open_tournament_path(tournament), status: 303
     end
 
+    def show
+      add_breadcrumb(tournament.title)
+    end
+    
+    def players
+      add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
+      add_breadcrumb("Participants")
+    end
+
     private
 
     def tournament_params
       params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :slug)
+    end
+
+    def set_breadcrumbs
+      add_breadcrumb("Tournaments", romanchuk_open_tournaments_path)
     end
   end
 end

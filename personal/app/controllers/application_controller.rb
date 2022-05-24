@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 
 
-  helper_method :amzn_oidc_data, :amzn_oidc_identity
+  helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs
 
   
 
@@ -39,5 +39,15 @@ class ApplicationController < ActionController::Base
     payload[:hostname] = HOSTNAME
     payload[:host] = request.host
     payload[:amzn_oidc_identity] = amzn_oidc_identity
+  end
+
+  
+
+  def breadcrumbs
+    @breadcrumbs ||= []
+  end
+
+  def add_breadcrumb(name, path = nil)
+    breadcrumbs << Breadcrumb.new(name, path)
   end
 end

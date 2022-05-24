@@ -5,16 +5,20 @@
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light"><%= tournament.title %></h1>
       <p class="lead text-muted"><%= tournament.ocurred_on&.strftime("%B, %Y") %></p>
-      <div class="d-flex justify-content-center">
-        <%= link_to "Edit", edit_romanchuk_open_tournament_path(tournament), class: 'btn btn-link my-2', data: { turbo_action: "replace" } %>
-        <%= button_to "Destory", romanchuk_open_tournament_path(tournament), method: :delete, class: 'btn btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
-      </div>
+      <% if current_user %>
+        <div class="hstack gap-2 justify-content-center">
+          <%= link_to "Edit", edit_romanchuk_open_tournament_path(tournament), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
+          <%= button_to "Destory", romanchuk_open_tournament_path(tournament), method: :delete, class: 'btn btn-sm btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
 
 <section class="album py-5 bg-light">
+  
   <div class="container">
+    
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <% tournament.images.each do |image| %>
         <div class="col">
