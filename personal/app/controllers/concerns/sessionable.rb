@@ -25,7 +25,7 @@ module Sessionable
       return 
     end
 
-    redirect_to login_path 
+    redirect_to(login_path) and return
   end
 
   def find_by_session

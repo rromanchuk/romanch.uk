@@ -6,11 +6,12 @@ module RomanchukOpen
     let(:tournaments) { Tournament.oldest(:ocurred_on) }
     def new
       @tournament = Tournament.new
+      authorize! tournament
     end
 
     def create
-      require_me!
       @tournament = Tournament.new(tournament_params)
+      authorize! tournament
       if tournament.save
         redirect_to romanchuk_open_tournaments_path
       else
@@ -19,13 +20,13 @@ module RomanchukOpen
     end
 
     def destroy
-      require_me!
+      authorize! tournament
       tournament.destroy
       redirect_to romanchuk_open_tournaments_path, status: 303
     end
 
     def update
-      require_me!
+      authorize! tournament
       tournament.update(tournament_params)
       redirect_to romanchuk_open_tournament_path(tournament), status: 303
     end
@@ -39,14 +40,19 @@ module RomanchukOpen
       add_breadcrumb("Participants")
     end
 
+    def newsletter
+      add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
+      add_breadcrumb("Newsletter")
+    end
+
     private
 
     def tournament_params
-      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :slug)
+      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :slug, :location)
     end
 
     def set_breadcrumbs
-      add_breadcrumb("Tournaments", romanchuk_open_tournaments_path)
+      add_breadcrumb("All years", romanchuk_open_tournaments_path)
     end
   end
 end
