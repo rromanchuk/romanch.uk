@@ -5,6 +5,10 @@
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light"><%= tournament.title %></h1>
       <p class="lead text-muted"><%= tournament.ocurred_on&.strftime("%B, %Y") %></p>
+      <p>
+        <%= link_to "Participants", players_romanchuk_open_tournament_path(tournament) %>
+        <%= link_to "Newsletter", players_romanchuk_open_tournament_path(tournament) %>
+      </p>
       <% if current_user %>
         <div class="hstack gap-2 justify-content-center">
           <%= link_to "Edit", edit_romanchuk_open_tournament_path(tournament), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
