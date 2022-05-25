@@ -6,7 +6,6 @@ module RomanchukOpen
   
     layout "romanchuk_open"
 
-    
     private
     def page_finder_factory
       DefaultPageFinder
