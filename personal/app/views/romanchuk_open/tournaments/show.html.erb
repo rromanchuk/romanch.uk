@@ -4,7 +4,7 @@
   <div class="row py-lg-5 py-5 text-center container">
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light"><%= tournament.title %></h1>
-      <p class="lead text-muted"><%= tournament.ocurred_on&.strftime("%B, %Y") %></p>
+      <p class="lead text-muted"><%= "#{tournament.ocurred_on&.strftime("%B, %Y")}, #{tournament.location}" %></p>
       <p>
         <%= link_to "Participants", players_romanchuk_open_tournament_path(tournament) %>
         <%= link_to "Newsletter", players_romanchuk_open_tournament_path(tournament) %>

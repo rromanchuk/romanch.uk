@@ -16,12 +16,12 @@ module Oauth
     end
 
     def authorize
-      redirect_to client.auth_code.authorize_url(redirect_uri: Credentials[:cognito_token_callback]), allow_other_host: true
+      redirect_to client.auth_code.authorize_url(redirect_uri: oauth_cognito_token_url), allow_other_host: true
     end
 
     def token
       begin
-        token = client.auth_code.get_token(params[:code], redirect_uri: Credentials[:cognito_token_callback])
+        token = client.auth_code.get_token(params[:code], redirect_uri: oauth_cognito_token_url)
         user = token.get('/oauth2/userInfo').parsed
         User.find_or_create_by!(cognito_id: user['sub']).tap do |_user|
           #_user.update!(username: user['username'], email: user['email'])
