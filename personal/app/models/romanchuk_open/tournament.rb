@@ -9,4 +9,8 @@ class RomanchukOpen::Tournament < ApplicationRecord
   def poster_image
     images.first&.key || 'https://via.placeholder.com/200'
   end
+
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
 end

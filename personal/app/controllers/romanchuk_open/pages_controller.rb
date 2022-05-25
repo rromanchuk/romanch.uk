@@ -12,7 +12,7 @@ module RomanchukOpen
     end
     
     def set_breadcrumbs
-      add_breadcrumb("Tournaments", romanchuk_open_tournaments_path)
+      add_breadcrumb("All years", romanchuk_open_tournaments_path)
       case params[:id]
       when 'players'
         add_breadcrumb("Participants")
