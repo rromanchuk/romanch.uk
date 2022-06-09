@@ -22,7 +22,9 @@ import { Viewer } from "object_viewer"
 
 
 export default class extends Controller {
-
+  static values = {
+    url: String,
+  }
   connect() {
     console.log("three reporting for duty")
     this.viewer = new Viewer(this.element, {});
