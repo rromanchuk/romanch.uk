@@ -28,6 +28,6 @@ export default class extends Controller {
   connect() {
     console.log("three reporting for duty")
     this.viewer = new Viewer(this.element, {});
-    this.viewer.load('/static/models/xp-mesh.gltf', '', new Map())
+    this.viewer.load(this.urlValue, '', new Map())
   }
 }
