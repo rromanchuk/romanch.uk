@@ -7,8 +7,6 @@
       <p class="lead text-muted">July 2022</p>
       <p>
         <%= link_to "All participants",romanchuk_open_page_path("players") %>
-        <!--<a href="#" class="btn btn-primary my-2">Main call to action</a> -->
-        <!--<a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
       </p>
     </div>
   </div>
@@ -26,7 +24,9 @@
             <div class="card-body">
               <h5 class="card-title"><%= "#{t.title} #{t.ocurred_on&.year}" %></h5>
               <p class="card-text"><%= t.city %></p>
-              <%= link_to "Newsletter", newsletter_romanchuk_open_tournament_path(t), class: 'card-link' %>
+              <% if t.newsletter %>
+                <%= link_to "Newsletter", newsletter_romanchuk_open_tournament_path(t), class: 'card-link' %>
+              <% end %>
               <%= link_to "Participants", players_romanchuk_open_tournament_path(t), class: 'card-link' %>
             </div>
           </div>
