@@ -9,32 +9,35 @@
 
 % TITLE NAME
 
-\namesection{Ryan}{Romanchuk}{Full Stack Software Engineer}{\contactline{\href{https://romanch.uk}{romanch.uk}}{\href{https://www.github.com/rromanchuk}{rromanchuk}}{\href{https://www.linkedin.com/in/rromanchuk}{rromanchuk}}{\href{mailto:ryan@romanch.uk}{ryan@romanch.uk}}{{1-800-NO-BOTS}}}
+\namesection{Ryan}{Romanchuk}{Software Engineer}{\contactline{\href{https://romanch.uk}{romanch.uk}}{\href{https://www.github.com/rromanchuk}{rromanchuk}}{\href{https://www.linkedin.com/in/rromanchuk}{rromanchuk}}{\href{mailto:ryan@romanch.uk}{ryan@romanch.uk}}{\href{tel:}{}}}
 
 
 % COLUMN ONE
 
-\begin{minipage}[t]{0.70\textwidth} 
+\begin{minipage}[t]{0.74\textwidth} 
 
 \section{Experience}
-\runsubsection{\href{https://getspar.com}Spar}
+\runsubsection{\href{https://getspar.com}{Spar}}
 \descript{| CTO, Co-founder }
 \location{Sep 2017 - | \st{Los Angeles} Tucson, AZ}
 \vspace{\topsep} 
+\begin{tightemize}
 \sectionsep
+\item Doing stuff is hard. Spar makes staying motivated a piece of cake.
+\end{tightemize}
 \sectionsep
 
 \runsubsection{Brighten} \textbf{(now Lox Club)}
 \descript{| CTO, Outside Hire }
 \location{Jan 2016 – Aug 2017 | Los Angeles, CA}
-\vspace{\topsep}
+% \vspace{\topsep}
 \begin{tightemize}
 \sectionsep
-\item Early stage consumer mobile-only app that experienced explosive growth and near ubiquitous adoption across American teenagers.
+\item Scaling an early stage consumer mobile-only app that experienced explosive growth and near ubiquitous adoption across American teenagers.
 \end{tightemize}
 \sectionsep
 
-\runsubsection{Frontback} \textbf{(Acquired)}
+\runsubsection{\href{https://techcrunch.com/tag/frontback/}{Frontback}} \textbf{(Acquired)}
 \descript{| iOS Developer }
 \location{Nov 2013 – Sep 2015 | San Francisco, CA}
 \begin{tightemize}
@@ -43,12 +46,12 @@
 \end{tightemize}
 \sectionsep
 
-\runsubsection{Ostrovok.ru}
+\runsubsection{\href{https://ostrovok.ru}{Ostrovok.ru}}
 \descript{| Head of Mobile }
 \location{Mar 2012 – Dec 2013 | Moscow, Russian Federation}
 \begin{tightemize}
-\item Hired as a front-end python dev, quickly moved to mobile when team learned of past experience.
-\item Launched the most revered OTA application in the Russian speaking market.
+\item Lead a new R\&D team dedicated to exploring new mobile opportunities
+\item Lead a dedicated mobile team launching the most revered OTA application in the Russian speaking market.
 \end{tightemize}
 \sectionsep
 
@@ -71,11 +74,10 @@
 \sectionsep
 
 
-
 % Projects
 
 
-\section{Projects}
+\section{\href{https://github.com/rromanchuk}{Side Projects}}
 
 \runsubsection{\href{https://github.com/rromanchuk/tipper}{Tipper}}
 \descript{| On-chain micro-transactions}
@@ -85,13 +87,14 @@
 \end{tightemize}
 \sectionsep
 
-\runsubsection{In 7 Seconds}
+\runsubsection{\href{https://github.com/rromanchuk/in7seconds}{In 7 Seconds}}
 \descript{| Tinder for Russia}
 \location{2012 | Abandoned}
+\begin{tightemize}
+\item You got to the end, but did you find the easter eggs?  
+\end{tightemize}
 \sectionsep
-\sectionsep
-\sectionsep
-\sectionsep
+% \sectionsep
 
 
 % Apps
@@ -104,60 +107,53 @@
 
 % COLUMN TWO
 
+
+% ses cloudfront cloudfromation route53 waf 
 \end{minipage} 
 \hfill
 \begin{minipage}[t]{0.25\textwidth} 
 
 
 \section{Skills}
-\subsection{Programming}
-\sectionsep
-\location{Native:}
-swift \textbullet{} swiftui \textbullet{} objectivec  \\ 
-coredata \textbullet{} realmdb \textbullet{} att \\
-avfoundation \textbullet{} sockets \textbullet{} vod \\
-\sectionsep
+% \subsection{Programming}
+% \sectionsep
+\location{Native / iOS:}
+\skill{Swift, SwiftUI, objective-c, CoreData, RealmDB, MVC, MVVM}
 \location{Server:}
-rails \textbullet{} ruby \textbullet{} python \textbullet{} bash \\
-node \textbullet{} lambda \textbullet{} postgres   \\
-aurora \textbullet{} jsonapi \textbullet{} rspec \textbullet{} jwt \\
-oauth2 \textbullet{} gtm \textbullet{} s2s attribution \\
-\sectionsep
-\location{Web:}
-es6 \textbullet{} ts \textbullet{} stimulus \textbullet{} turbo \\
-webpack \textbullet{} sass \textbullet{} importmaps \\
-yarn \textbullet{} amplify \textbullet{} firebase \textbullet{} mjml \\
-\sectionsep
-\sectionsep
-\subsection{Support and Growth}
-\sectionsep
-redis \textbullet{} dynamodb \textbullet{} lambda \\
-sns \textbullet{} sqs \textbullet{} grpc \textbullet{} cloudfront \\
-waf \textbullet{} asg \textbullet{} ansible \textbullet{} ssm \\
-cloudformation \textbullet{} sam \textbullet{} http2 \\
-brotli \textbullet{} puma \textbullet{} nginx \\
+\skill{rails, ruby, python, bash, linux, EC2, ALB / ASG}
+\location{Web / Browser:}
+\skill{JavaScript, typescript, stimulus, turbo, sass, webpack, es6 import maps, yarn, node}
+\location{Services:}
+\skill{REST, sockets, grpc, lambda, api gateway, VOD}
+\location{Stores:}
+\skill{postgres, RDS, DynamoDB, S3, EBS, EFS, (no-)SQL, ORMs}
+\location{Queues / Feeds / Cache:}
+\skill{redis, SQS, SNS, MediaConvert, CloudFront}
+\location{(Big) Data / Measurement:}
+\skill{Kinesis, elastic search, BI}
+\location{Security:}
+\skill{IAM, WAF, VPC, jwt, oauth2, cognito}
+\location{Devops:}
+\skill{TDD, continuous integration, docker, git, onboarding}
+\location{Orchestration:}
+\skill{ansible, SSM, CloudFormation, SAM, CodeDeploy, blue/green deployment}
+\location{Product:}
+\skill{agile, KPI driven, project scoping, international teams, developer advocate, shipping, stack agnostic}
+\location{Marketing:}
+\skill{mobile attribution, GTM, GA4, LTV/ARPU forecasting, SES}
+\location{Fun:}
+\skill{GIS, QGIS, gdal, pdal, dump1090, SDR, X-Plane dev}
 
 
-\sectionsep
-\sectionsep
-\subsection{/lost+found}
-\sectionsep
-ffmpeg \textbullet{} gdal \textbullet{} qgis \textbullet{} awscli  \\
-sdr \textbullet{} dump1090 \textbullet{} lidar las \\
-1/3arcsec dem \textbullet{} pdal \textbullet{} X-Plane dev \\
-
-
-% EDUCATION
-
+% aurora \textbullet{} jsonapi \textbullet{} rspec \textbullet{} jwt \\
+% grpc \textbullet{} cloudfront \textbullet{} sns \textbullet{} sqs  \\
 
 \section{Education} 
 \subsection{Santa Clara University}
+\location{2008 | Santa Clara, CA}
 \descript{Ops. Mgmt and Info Sys, BSCom}
-\location{Leavey School of Business}
-\location{2008 | Santa Clara, CA}
 \descript{Economics, BS}
-\location{College of Arts and Sciences}
-\location{2008 | Santa Clara, CA}
+
 
 \section{Ice Breakers}
 \href{https://romanch.uk/serve/images/claim}{I have a 23 acre placer gold claim} \\
