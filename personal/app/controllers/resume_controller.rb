@@ -1,15 +1,12 @@
 class ResumeController < ApplicationController
   
-  # layout 'fluid'
-
   let(:source) { File.open(File.join(Rails.root, 'app', 'views', 'resume', 'source.tex')).read }
   def index
-    flash[:notice] = "You can click on things"
   end
   
   def download
     authorize!
-    redirect_to 'https://romanch.uk/static/docs/v5/romanchuk_public.pdf', allow_other_host: true
+    redirect_to 'https://romanch.uk/static/docs/062022/romanchuk.pdf', allow_other_host: true
   end
 
   def turbo_frame_request_variant
