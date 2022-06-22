@@ -48,7 +48,7 @@ module RomanchukOpen
     private
 
     def tournament_params
-      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :location)
+      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :location, :newsletter)
     end
 
     def set_breadcrumbs
