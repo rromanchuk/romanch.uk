@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
 
   constraints(PersonalConstraint.new) do
+    get '/lidar/cardinal', to: 'three#cardinal'
     root to: 'pages#show', id: 'home'
   end
 end

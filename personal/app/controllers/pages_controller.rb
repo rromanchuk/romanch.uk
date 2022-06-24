@@ -7,7 +7,7 @@ class PagesController < ApplicationController
 
   def layout_for_page
     case params[:id].to_sym
-    when :potree, :three, :pe
+    when :potree, :three, :pe, :model_viewer, :c177
       'naked'
     else
       'application'

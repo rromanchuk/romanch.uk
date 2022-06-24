@@ -25,9 +25,24 @@ export default class extends Controller {
   static values = {
     url: String,
   }
+  //static targets = [ "container" ]
+
   connect() {
     console.log("three reporting for duty")
-    this.viewer = new Viewer(this.element, {});
+   
+    console.log(this.urlValue)
+    this.container = document.getElementById("container")
+    this.viewer = new Viewer(this.container, {});
+    this.viewer.load(this.urlValue, '', new Map())
+  }
+  
+  handleChange(evt) {
+    console.log("handle change")
+    console.log(evt)
+    console.log(evt.target)
+    console.log(evt.target.selectedOptions)
+    console.log(evt.target.value)
+    this.urlValue = evt.target.value
     this.viewer.load(this.urlValue, '', new Map())
   }
 }
