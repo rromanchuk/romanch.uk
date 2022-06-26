@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:xcode/lidar/lidar.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:xcode/Stocks/Stocks.xcodeproj">
    </FileRef>
    <FileRef
