@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "../cognito_token_verifier"
+		},
+		{
+			"path": "../../X-Plane 11/Custom Scenery/SponsoredCanopies"
 		}
 	],
 	"extensions": {
