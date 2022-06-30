@@ -179,13 +179,18 @@
 <% end %>
 
 
-
-<%# form.collection_select :product_type, Product.product_types.keys, :to_s, :titlecase, {}, data: { action: "change->forms#handleChange" } %>
+<%
+ options = [
+    ['PEOSH4CornerMember.glb', '/static/models/PEOSH4CornerMember.glb'],
+    ['PEOSH4PPC.glb', '/static/models/PEOSH4PPC.glb'],
+    ['PEOSH4Welcome.glb', '/static/models/PEOSH4Welcome.glb'],
+    ['VTOL_Goodyear_Blimp_moored.glb', '/static/models/VTOL_Goodyear_Blimp_moored.glb']
+  ]
+%>
  
 
-<%= select_tag(:model, options_for_select([['C177', '/static/models/C177.glb'], ['PEOSHBlueCanopyPELogo.gltf', '/static/models/PEOSHBlueCanopyPELogo.gltf']]), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/PEOSHBlueCanopyPELogo.gltf"  }) %>
+<%= select_tag(:model, options_for_select(options), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/PEOSH4CornerMember.glb"  }) %>
 
-<!-- <main data-controller="three" data-three-url-value="/static/models/PEOSHBlueCanopyPELogo.gltf" data-three-target="container" class="wrap"> -->
 <main id="container" class="wrap">
 
   <div class="dropzone">
