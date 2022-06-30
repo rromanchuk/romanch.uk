@@ -178,18 +178,9 @@
   </style>
 <% end %>
 
-
-<%
- options = [
-    ['PEOSH4CornerMember.glb', '/static/models/PEOSH4CornerMember.glb'],
-    ['PEOSH4PPC.glb', '/static/models/PEOSH4PPC.glb'],
-    ['PEOSH4Welcome.glb', '/static/models/PEOSH4Welcome.glb'],
-    ['VTOL_Goodyear_Blimp_moored.glb', '/static/models/VTOL_Goodyear_Blimp_moored.glb']
-  ]
-%>
  
 
-<%= select_tag(:model, options_for_select(options), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/PEOSH4CornerMember.glb"  }) %>
+<%= select_tag(:model, options_for_select(glb_models), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/PEOSH4CornerMember.glb"  }) %>
 
 <main id="container" class="wrap">
 
