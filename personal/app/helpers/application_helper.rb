@@ -34,6 +34,19 @@ module ApplicationHelper
       ['CurvedBanners/FlyingMidwest.glb', '/static/models/CurvedBanners/FlyingMidwest.glb'],
       ['CurvedBanners/FSA.glb', '/static/models/CurvedBanners/FSA.glb'],
       ['CurvedBanners/Gleim.glb', '/static/models/CurvedBanners/Gleim.glb'],
+      ['CurvedBanners/HCA.glb', '/static/models/CurvedBanners/HCA.glb'],
+      ['CurvedBanners/JustPlaneSilly.glb', '/static/models/CurvedBanners/JustPlaneSilly.glb'],
+      ['CurvedBanners/King.glb', '/static/models/CurvedBanners/King.glb'],
+      ['CurvedBanners/NAFI.glb', '/static/models/CurvedBanners/NAFI.glb'],
+      ['CurvedBanners/Nike.glb', '/static/models/CurvedBanners/Nike.glb'],
+      ['CurvedBanners/NAVI.glb', '/static/models/CurvedBanners/NAVI.glb'],
+      ['CurvedBanners/OpposingBases.glb', '/static/models/CurvedBanners/OpposingBases.glb'],
+      ['CurvedBanners/Pivot.glb', '/static/models/CurvedBanners/Pivot.glb'],
+      ['CurvedBanners/RSG.glb', '/static/models/CurvedBanners/RSG.glb'],
+      ['CurvedBanners/Sportys.glb', '/static/models/CurvedBanners/Sportys.glb'],
+      ['CurvedBanners/SQKR.glb', '/static/models/CurvedBanners/SQKR.glb'],
+      ['CurvedBanners/TFP.glb', '/static/models/CurvedBanners/TFP.glb'],
+      ['CurvedBanners/ThrustMaster.glb', '/static/models/CurvedBanners/ThrustMaster.glb'],
     ]
   end
 end
