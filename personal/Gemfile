@@ -51,7 +51,7 @@ gem 'aws-sdk-cognitoidentityprovider'
 gem 'coderay'
 gem 'redcarpet'
 gem 'rails-latex', require: false
-gem 'cognito_token_verifier', require: false
+gem 'cognito_token_verifier', github: 'rromanchuk/cognito_token_verifier', require: false
 gem "lograge"
 gem "logstash-event"
 gem 'sitemap_generator'
