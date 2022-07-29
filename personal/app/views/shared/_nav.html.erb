@@ -18,6 +18,9 @@
         <li class="nav-item">
           <%= link_to "Playgrounds", page_path("playgrounds"), class: "nav-link #{active_class(page_path("playgrounds"))}", data: { turbo_frame: "_top" } %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Flying", page_path("flying"), class: "nav-link #{active_class(page_path("flying"))}", data: { turbo_frame: "_top" } %>
+        </li>
       </ul>
       <%= form_with(url: posts_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'posts'}, class: 'd-flex') do |f| %>
         <%= f.text_field(:q, class: "form-control", placeholder: "Find a snippet", data: {action: 'input->search#submit', search_target: 'input'}) %>
