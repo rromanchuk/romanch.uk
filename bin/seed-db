@@ -6,12 +6,12 @@ eval "$(bin/shdotenv)"
 
 
 trap '[ "$pid" ] && kill "$pid"' EXIT
-bin/aws-connect -a tunnel -n personal -f 5432 &
+bin/aws-connect -a tunnel -n personal -f 5432 -p $AWS_PROFILE &
 
 echo "Waiting for tunnel to be ready..."
 sleep 10
 
-pg_dump -h 127.0.0.1 -U ryan -p 9999 -n public -Fc personal_production > dump.sql
+pg_dump -h 127.0.0.1 -U personal -p 9999 -n public -Fc personal_production > dump.sql
 echo "Dumped database"
 pg_restore -v --clean --no-acl --no-owner -h localhost -U postgres  -d personal_development dump.sql
 echo "Restored database"
