@@ -35,10 +35,10 @@ module RomanchukOpen
       add_breadcrumb(tournament.title)
     end
     
-    def players
-      add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
-      add_breadcrumb("Participants")
-    end
+    # def players
+    #   add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
+    #   add_breadcrumb("Participants")
+    # end
 
     def newsletter
       add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))

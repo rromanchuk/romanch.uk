@@ -1,6 +1,7 @@
 namespace :romanchuk_open do
+  resources :players
   resources :tournaments do
-    get :players, on: :member
+    #get :players, on: :member
     get :newsletter, on: :member
     resources :images, as: :imageable, only: [:show]
   end
