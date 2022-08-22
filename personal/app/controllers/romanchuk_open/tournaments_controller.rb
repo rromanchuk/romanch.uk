@@ -52,7 +52,7 @@ module RomanchukOpen
     end
 
     def set_breadcrumbs
-      add_breadcrumb("All years", romanchuk_open_tournaments_path)
+      add_breadcrumb("Home", romanchuk_open_tournaments_path)
     end
   end
 end

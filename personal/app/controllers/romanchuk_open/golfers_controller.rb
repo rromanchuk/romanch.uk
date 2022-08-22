@@ -49,7 +49,7 @@ module RomanchukOpen
     end
 
     def set_breadcrumbs
-      add_breadcrumb("All years", romanchuk_open_tournaments_path)
+      add_breadcrumb("Home", romanchuk_open_tournaments_path)
       if params[:tournament_id]
         add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
       end
