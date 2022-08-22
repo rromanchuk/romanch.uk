@@ -7,7 +7,10 @@ class RomanchukOpen::Tournament < ApplicationRecord
 
   def slug_candidates = %i[title ocurred_on]
 
-
+  def year
+    ocurred_on.year
+  end
+  
   def poster_image
     images.first&.key || 'https://via.placeholder.com/200'
   end

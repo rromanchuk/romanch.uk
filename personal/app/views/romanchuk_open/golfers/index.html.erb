@@ -3,6 +3,7 @@
 <table class="table table-striped table-sm">
   <thead>
     <tr>
+      <th>Name</th>
       <% RomanchukOpen::Golfer.attribute_names.each do |header| %>
         <th><%= header %></th>
       <% end %>
@@ -11,6 +12,7 @@
   <tbody>
     <% golfers.each do |golfer| %>
       <tr>
+        <td><%= golfer.name %></td>
         <% RomanchukOpen::Golfer.attribute_names.each do |header| %>
           <td class="text-break "><%= golfer.send(header) %></td>
         <% end %>

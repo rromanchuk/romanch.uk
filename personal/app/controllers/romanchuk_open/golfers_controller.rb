@@ -5,7 +5,8 @@ module RomanchukOpen
     let(:golfers) { Golfer.all }
 
     def show
-      
+      add_breadcrumb(golfer.tournament.title, romanchuk_open_tournament_path(golfer.tournament))
+      add_breadcrumb(golfer.name, romanchuk_open_player_path(golfer.player))
     end
 
     def new
