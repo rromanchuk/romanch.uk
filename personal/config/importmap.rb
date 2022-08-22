@@ -19,9 +19,9 @@ pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortaweso
 pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-svg-core@6.1.2/index.es.js"
 pin "@fortawesome/free-solid-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-solid-svg-icons@6.1.2/index.es.js"
 
-pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/esm/index.js"
+pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/esm/index.js" # @2.11.6
 
-pin "bootstrap", to: "bootstrap/bootstrap.esm.js"
+pin "bootstrap" # @5.2.0
 
 pin "three", to: "https://ga.jspm.io/npm:three@0.140.2/build/three.module.js"
 pin "three/examples/jsm/loaders/GLTFLoader.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/loaders/GLTFLoader.js"
