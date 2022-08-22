@@ -1,4 +1,5 @@
 class RomanchukOpen::Tournament < ApplicationRecord
+  self.implicit_order_column = :ocurred_on
   include Sluggable
   has_many :images, as: :imageable
   has_many :golfers, dependent: :destroy
@@ -10,7 +11,7 @@ class RomanchukOpen::Tournament < ApplicationRecord
   def year
     ocurred_on.year
   end
-  
+
   def poster_image
     images.first&.key || 'https://via.placeholder.com/200'
   end

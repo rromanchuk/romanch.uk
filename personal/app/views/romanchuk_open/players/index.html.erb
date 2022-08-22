@@ -17,133 +17,25 @@
 
 <section class="album py-5 bg-light">
   <div class="container">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Player</th>
-        <th>Years played</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% players.each do |player| %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= link_to player.name, romanchuk_open_player_path(player) %></td>
-          <td>
-            <% player.tournaments.each do |tournament|  %>
-              <%= link_to tournament.year, romanchuk_open_tournament_path(tournament) %>
-            <% end %>
-          </td>
+          <th>Player</th>
+          <th>Years played</th>
         </tr>
-      <% end %>
-      <%# <tr>
-        <td>Mike Romanchuk</td>
-        <td>1985 - 2011, 2013, 2014, 2016, 2018</td>
-      </tr>
-      <tr>
-        <td>Greg Romancuk</td>
-        <td>1985-2011, 2013, 2014 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Matt Romancuk</td>
-        <td>2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Tony Romanchuk</td>
-        <td>1985,1991, 1992, 1993, 2011</td>
-      </tr>
-      <tr>
-        <td>Rod Romanchuk</td>
-        <td>1985-2011, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Kyle Romanchuk</td>
-        <td>2014, 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Steve Romanchuk</td>
-        <td>1985-2011, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Ryan Romanchuk</td>
-        <td>2009 - 2011, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>David Romanchuk</td>
-        <td>2007, 2014, 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Galen Anthony</td>
-        <td>1995-2006, 2008, 2018</td>
-      </tr>
-      <tr>
-        <td>Dave Pulkrabek</td>
-        <td>2010, 2011,2013,2014, 2016, 2017, 2018, 2019, 2020, 2021</td>
-      </tr>
-      <tr>
-        <td>Nick Anthony</td>
-        <td>2003</td>
-      </tr>
-      <tr>
-        <td>Jamie Cortez</td>
-        <td>2007, 2018</td>
-      </tr>
-      <tr>
-        <td>Doug Larsen</td>
-        <td>2009-2011, 2012, 2013, 2016, 2017, 2018</td>
-      </tr>
-      <tr>
-        <td>Herb Anderson</td>
-        <td>1996,1998,2000, 2001</td>
-      </tr>
-      <tr>
-        <td>Ray Wiesner</td>
-        <td>1986</td>
-      </tr>
-      <tr>
-        <td>Mike Barnett</td>
-        <td>1991, 1992</td>
-      </tr>
-      <tr>
-        <td>Joel Barnett</td>
-        <td>2008 - 2013, 2018, 2019, 2021</td>
-      </tr>
-      <tr>
-        <td>Joe Garrity</td>
-        <td>1985, 1991, 1993, 1997</td>
-      </tr>
-      <tr>
-        <td>Jack McDonald</td>
-        <td>2003</td>
-      </tr>
-      <tr>
-        <td>Jim Holms</td>
-        <td>2002</td>
-      </tr>
-      <tr>
-        <td>Myles Conway</td>
-        <td>2004</td>
-      </tr>
-      <tr>
-        <td>Jeff Conway</td>
-        <td>2004</td>
-      </tr>
-      <tr>
-        <td>Tom Heimel</td>
-        <td>2008</td>
-      </tr>
-      <tr>
-        <td>Vinny Conway</td>
-        <td>2019, 2021</td>
-      </tr>
-      <tr>
-        <td>Dan Wermers	</td>
-        <td>2020</td>
-      </tr>
-      <tr>
-        <td>Tanner - Meyer Wright</td>
-        <td>2020, 2021</td>
-      </tr> %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% players.each do |player| %>
+          <tr>
+            <td><%= link_to player.name, romanchuk_open_player_path(player) %></td>
+            <td>
+              <% player.tournaments.each do |tournament|  %>
+                <%= link_to tournament.year, romanchuk_open_tournament_path(tournament) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </section>

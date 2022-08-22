@@ -2,7 +2,16 @@ module RomanchukOpen
   class GolfersController < RomanchukOpen::ApplicationController
     before_action :set_breadcrumbs
     let(:golfer) { Golfer.find params[:id] }
-    let(:golfers) { Golfer.all }
+    let(:tournament) { Tournament.friendly.find params[:tournament_id] }
+    
+    let(:golfers) do
+      if params[:tournament_id]
+        
+        tournament.golfers
+      else
+        Golfer.all
+      end
+    end
 
     def show
       add_breadcrumb(golfer.tournament.title, romanchuk_open_tournament_path(golfer.tournament))
@@ -40,6 +49,11 @@ module RomanchukOpen
     end
 
     def set_breadcrumbs
+      add_breadcrumb("All years", romanchuk_open_tournaments_path)
+      if params[:tournament_id]
+        add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
+      end
+
       add_breadcrumb("All golfers")
     end
   end
