@@ -16,6 +16,10 @@
     <% if content_for?(:share_image) %>
       <meta property="og:image" content="<%= yield(:share_image) %>">
     <% end %>
+
+    <% if content_for?(:canonical_link_tag) %>
+      <%= yield :canonical_link_tag %>
+    <% end %>
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

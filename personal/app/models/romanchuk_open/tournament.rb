@@ -1,6 +1,8 @@
 class RomanchukOpen::Tournament < ApplicationRecord
   include Sluggable
   has_many :images, as: :imageable
+  has_many :golfers, dependent: :destroy
+  has_many :players, through: :golfers
   store_accessor :data, :location, :newsletter
 
   def slug_candidates = %i[title ocurred_on]

@@ -1,0 +1,5 @@
+<%= simple_form_for player, html: { data: {turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>

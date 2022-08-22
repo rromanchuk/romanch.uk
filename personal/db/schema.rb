@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_080055) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_21_012755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -105,6 +105,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_080055) do
     t.text "markdown_content"
     t.boolean "published"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "romanchuk_open_golfers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "player_id"
+    t.uuid "tournament_id"
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_romanchuk_open_golfers_on_player_id"
+    t.index ["tournament_id"], name: "index_romanchuk_open_golfers_on_tournament_id"
+  end
+
+  create_table "romanchuk_open_players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_romanchuk_open_players_on_slug"
   end
 
   create_table "romanchuk_open_tournaments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
