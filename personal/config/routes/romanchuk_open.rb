@@ -1,4 +1,5 @@
 namespace :romanchuk_open do
+  resources :golfers
   resources :players
   resources :tournaments do
     #get :players, on: :member

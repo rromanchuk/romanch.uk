@@ -1,7 +1,7 @@
 class RomanchukOpen::Player < ApplicationRecord
   include Sluggable
   has_many :images, as: :imageable
-  has_many :golfers
+  has_many :golfers, dependent: :destroy
   has_many :tournaments, through: :golfers
 
   def slug_candidates = %i[name]

@@ -1,0 +1,6 @@
+<%= simple_form_for golfer, html: { data: {turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%= f.association :player %>
+  <%= f.association :tournament %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>

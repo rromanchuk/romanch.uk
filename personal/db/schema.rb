@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_20_234256) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_21_012755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,13 +108,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_234256) do
   end
 
   create_table "romanchuk_open_golfers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "romanchuk_open_player_id"
-    t.bigint "romanchuk_open_tournament_id"
+    t.uuid "player_id"
+    t.uuid "tournament_id"
     t.jsonb "data", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["romanchuk_open_player_id"], name: "index_romanchuk_open_golfers_on_romanchuk_open_player_id"
-    t.index ["romanchuk_open_tournament_id"], name: "index_romanchuk_open_golfers_on_romanchuk_open_tournament_id"
+    t.index ["player_id"], name: "index_romanchuk_open_golfers_on_player_id"
+    t.index ["tournament_id"], name: "index_romanchuk_open_golfers_on_tournament_id"
   end
 
   create_table "romanchuk_open_players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

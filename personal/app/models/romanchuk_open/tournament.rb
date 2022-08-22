@@ -1,7 +1,7 @@
 class RomanchukOpen::Tournament < ApplicationRecord
   include Sluggable
   has_many :images, as: :imageable
-  has_many :golfers
+  has_many :golfers, dependent: :destroy
   has_many :players, through: :golfers
   store_accessor :data, :location, :newsletter
 
