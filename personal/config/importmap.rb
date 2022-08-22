@@ -12,14 +12,14 @@ pin_all_from "app/javascript/initialize", under: "initialize"
 # pin 'pdf_viewer.js', to: "pdfjs/web/pdf_viewer.js"
 #pin_all_from "pdfjs/build", under: "build"
 
-pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"
-pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"
-pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js"
-pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-brands-svg-icons@6.1.1/index.es.js"
-pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-svg-core@6.1.1/index.es.js"
-pin "@fortawesome/free-solid-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-solid-svg-icons@6.1.1/index.es.js"
+pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"
+pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
+pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"
+pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-brands-svg-icons@6.1.2/index.es.js"
+pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-svg-core@6.1.2/index.es.js"
+pin "@fortawesome/free-solid-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-solid-svg-icons@6.1.2/index.es.js"
 
-pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.0/dist/esm/index.js"
+pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/esm/index.js"
 
 pin "bootstrap", to: "bootstrap/bootstrap.esm.js"
 
@@ -39,7 +39,7 @@ pin "cloud_viewer"
 pin "utils", to: "utils.js"
 
 
-pin "buffer" # @2.0.0
+pin "buffer" # @6.0.3
 
 pin "highlight", to: "highlight.min.js"
 pin "ruby.js", to: "languages/ruby.min.js"
@@ -70,3 +70,5 @@ pin "scss.js", to: "languages/scss.min.js"
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/markdown.min.jspin "video.js" # @7.18.1
 
 pin "dat.gui", to: "https://ga.jspm.io/npm:dat.gui@0.7.9/build/dat.gui.module.js"
+pin "base64-js" # @1.5.1
+pin "ieee754" # @1.2.1
