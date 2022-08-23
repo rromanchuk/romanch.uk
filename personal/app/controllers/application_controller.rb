@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 
 
-  helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs
+  helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs, :breadcrumbs?, :breadcrumbs_to_s
 
   
 
@@ -45,6 +45,15 @@ class ApplicationController < ActionController::Base
 
   def breadcrumbs
     @breadcrumbs ||= []
+  end
+
+  def breadcrumbs?
+    breadcrumbs.any?
+  end
+  
+  # move to decorator
+  def breadcrumbs_to_s
+    breadcrumbs.map(&:name).reverse.append("Romanchuk Open").join(" | ")
   end
 
   def add_breadcrumb(name, path = nil)

@@ -54,7 +54,7 @@ module RomanchukOpen
         add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
       end
 
-      add_breadcrumb("All golfers")
+      add_breadcrumb("Golfers")
     end
   end
 end

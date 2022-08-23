@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= render 'shared/gtm' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     
-    <title><%= breadcrumbs.map(&:name).reverse.append("Romanchuk Open").join(" | ") %></title>
     
-    <% if content_for?(:page_title) %>
+    <% if breadcrumbs? %>
+      <title><%= breadcrumbs_to_s %></title>
+      <meta property="og:title" content="<%= breadcrumbs_to_s %>">
+    <% elsif content_for?(:page_title) %>
+      <title><%= yield(:page_title) %></title>
       <meta property="og:title" content="<%= yield(:page_title) %>">
     <% end %>
 
@@ -20,22 +24,11 @@
     <% if content_for?(:canonical_link_tag) %>
       <%= yield :canonical_link_tag %>
     <% end %>
-    
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://metrics.romanch.uk/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MBP9J44');</script>
-    <!-- End Google Tag Manager -->
   </head>
 
   <body>
+    <%= render 'shared/noscript' %>
     <%= render BreadcrumbComponent.new(breadcrumbs) %>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://metrics.romanch.uk/ns.html?id=GTM-MBP9J44"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <%= yield %>
   </body>
 </html>

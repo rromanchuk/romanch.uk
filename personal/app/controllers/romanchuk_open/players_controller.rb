@@ -39,7 +39,7 @@ module RomanchukOpen
 
     def set_breadcrumbs
       add_breadcrumb("Home", romanchuk_open_tournaments_path)
-      add_breadcrumb("All players")
+      add_breadcrumb("Players", romanchuk_open_players_path)
     end
   end
 end
