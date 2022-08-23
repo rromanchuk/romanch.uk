@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 import { Offcanvas } from "bootstrap"
 
-import { logEvent } from "firebase/analytics";
-import { analytics } from "application";
+//import { logEvent } from "firebase/analytics";
+//import { analytics } from "application";
 
 export default class extends Controller {
   static values = {
@@ -20,7 +20,7 @@ export default class extends Controller {
     this.modal = new Offcanvas(this.element);
     //this.modal.show();
     this.element.addEventListener('hidden.bs.offcanvas', (event) => {
-      logEvent(analytics, 'off_canvas_close');
+      //logEvent(analytics, 'off_canvas_close');
     })
   }
 }

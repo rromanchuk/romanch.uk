@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 import { Modal } from "bootstrap"
 
-import { logEvent } from "firebase/analytics";
-import { analytics } from "application";
+//import { logEvent } from "firebase/analytics";
+//import { analytics } from "application";
 
 export default class extends Controller {
   static values = {
@@ -21,7 +21,7 @@ export default class extends Controller {
     this.modal.show();
     this.element.addEventListener('hidden.bs.modal', (event) => {
       this.element.remove();
-      logEvent(analytics, 'modal_close');
+      //logEvent(analytics, 'modal_close');
     })
   }
 }

@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import * as bootstrap from 'bootstrap';
-import { getAnalytics } from "firebase/analytics";
+//import { getAnalytics } from "firebase/analytics";
 
 import { fontAwesomeInit, highlightInit, firebaseInit, gtagInit } from "initialize";
 
@@ -18,7 +18,7 @@ const hljs = highlightInit()
 //const analytics = firebaseInit()
 
 const firebaseApp = firebaseInit()
-const analytics = getAnalytics(firebaseApp, {debug_mode: true, transport_url: 'https://metrics.romanch.uk'});
+//const analytics = getAnalytics(firebaseApp, {debug_mode: true, transport_url: 'https://metrics.romanch.uk'});
 
 
-export {  hljs, bootstrap, firebaseApp, analytics };
+export {  hljs, bootstrap, firebaseApp };
