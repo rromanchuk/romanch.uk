@@ -6,6 +6,9 @@
       <div class="d-flex">
         <%= button_to "Destory", image_path(image), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
       </div>
+      <div class="card shadow-sm">
+        <%= image_tag image.key, class: 'card-img-top' %>
+      </div>
       <%= turbo_frame_tag image do %>
         <%= render 'form' %>
       <% end %>
