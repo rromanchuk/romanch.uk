@@ -1,6 +1,6 @@
 
 import { Controller } from "@hotwired/stimulus"
-import MarkdownIt from 'https://cdn.jsdelivr.net/npm/markdown-it/+esm';
+import MarkdownIt from 'markdown-it';
 
 export default class extends Controller {
   static targets = [ "markdown", "html", "body" ]

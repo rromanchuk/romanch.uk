@@ -4,7 +4,7 @@ import "controllers"
 import * as bootstrap from 'bootstrap';
 //import { getAnalytics } from "firebase/analytics";
 
-import { fontAwesomeInit, highlightInit, firebaseInit, gtagInit } from "initialize";
+import { fontAwesomeInit, firebaseInit, gtagInit } from "initialize";
 
 document.addEventListener("turbo:load", function(event) {
   console.log("trubo:load")
@@ -12,13 +12,10 @@ document.addEventListener("turbo:load", function(event) {
 })
 
 gtagInit()
-
 fontAwesomeInit()
-const hljs = highlightInit()
-//const analytics = firebaseInit()
 
 const firebaseApp = firebaseInit()
 //const analytics = getAnalytics(firebaseApp, {debug_mode: true, transport_url: 'https://metrics.romanch.uk'});
 
 
-export {  hljs, bootstrap, firebaseApp };
+export {  bootstrap, firebaseApp };

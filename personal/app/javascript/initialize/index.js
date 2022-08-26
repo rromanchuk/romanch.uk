@@ -1,5 +1,5 @@
 import { fontAwesomeInit } from 'initialize/fa';
-import { highlightInit } from 'initialize/highlight';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDuQ4EhdFuCoX5OeIRig5lw-xBlNm1KUlo",
@@ -30,4 +30,4 @@ const gtagInit = () => {
 
 
 
-export {fontAwesomeInit, highlightInit, firebaseInit, gtagInit}
+export {fontAwesomeInit, firebaseInit, gtagInit}

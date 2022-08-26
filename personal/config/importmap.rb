@@ -11,9 +11,9 @@ pin_all_from "app/javascript/initialize", under: "initialize"
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js", preload: true
 #pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
 #pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"
-pin "@fortawesome/free-brands-svg-icons", to: "@fortawesome--free-brands-svg-icons.js" # @6.1.2
+pin "@fortawesome/free-brands-svg-icons", to: "@fortawesome--free-brands-svg-icons.js", preload: true # @6.1.2
 pin "@fortawesome/fontawesome-svg-core", to: "@fortawesome--fontawesome-svg-core.js", preload: true # @6.1.2
-pin "@fortawesome/free-solid-svg-icons", to: "@fortawesome--free-solid-svg-icons.js" # @6.1.2
+pin "@fortawesome/free-solid-svg-icons", to: "@fortawesome--free-solid-svg-icons.js", preload: true # @6.1.2
 
 pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/esm/index.js" # @2.11.6
 
@@ -47,6 +47,10 @@ pin "erb.js", to: "languages/erb.min.js"
 pin "latex.js", to: "languages/latex.min.js"
 pin "python.js", to: "languages/python.min.js"
 pin "scss.js", to: "languages/scss.min.js"
+
+
+pin "video.js", to: "https://cdn.jsdelivr.net/npm/video.js/+esm"
+pin "markdown-it", to: "https://cdn.jsdelivr.net/npm/markdown-it/+esm"
 
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/json.min.js
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/python.min.js

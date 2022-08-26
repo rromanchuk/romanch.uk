@@ -30,6 +30,7 @@
 <% end %>
 
 <script type="module">
-  import {hljs} from 'application'
+  import { highlightInit } from 'initialize/highlight';
+  const hljs = highlightInit()
   hljs.highlightAll();
 </script>
