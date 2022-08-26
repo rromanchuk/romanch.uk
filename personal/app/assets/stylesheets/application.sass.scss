@@ -13,13 +13,40 @@ $offcanvas-horizontal-width: 40vw;
 @import "video.js/dist/video-js";
 
 
+@keyframes fadeout {
+  0% { opacity:1; }
+  66% { opacity: 0.9; }
+  100% { 
+    opacity: 0.5; 
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+  }
+}
+
+@-webkit-keyframes fadeout {
+  0% { opacity:1; }
+  66% { opacity:0.9; }
+  100% { 
+    opacity: 0.5;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+  }
+}
+
 .loggedOut {
-  opacity: 0.5;
-  filter: blur(10px);
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
+  -webkit-animation: 10s ease 0s normal forwards 1 fadeout;
+  animation: 10s ease 0s normal forwards 1 fadeout;
+  // filter: blur(10px);
+  // -webkit-filter: blur(10px);
+  // -moz-filter: blur(10px);
+  // -o-filter: blur(10px);
+  // -ms-filter: blur(10px);
 }
 
 .navbar {

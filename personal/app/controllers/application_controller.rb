@@ -50,10 +50,10 @@ class ApplicationController < ActionController::Base
   def breadcrumbs?
     breadcrumbs.any?
   end
-  
+
   # move to decorator
   def breadcrumbs_to_s
-    breadcrumbs.map(&:name).reverse.append("Romanchuk Open").join(" | ")
+    breadcrumbs.map(&:name).join(" | ")
   end
 
   def add_breadcrumb(name, path = nil)
