@@ -33,7 +33,7 @@ export default class extends Controller {
       // }
     });
 
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/build/pdf.worker.min.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/static/pdfjs-dist/build/pdf.worker.min.js';
     // Asynchronous download of PDF
     var loadingTask = pdfjsLib.getDocument({url: pdfUrl});
     (async function () {

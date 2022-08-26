@@ -15,15 +15,15 @@ pin_all_from "app/javascript/initialize", under: "initialize"
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"
 pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
 pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"
-pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-brands-svg-icons@6.1.2/index.es.js"
-pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-svg-core@6.1.2/index.es.js"
-pin "@fortawesome/free-solid-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-solid-svg-icons@6.1.2/index.es.js"
+pin "@fortawesome/free-brands-svg-icons", to: "@fortawesome--free-brands-svg-icons.js" # @6.1.2
+pin "@fortawesome/fontawesome-svg-core", to: "@fortawesome--fontawesome-svg-core.js" # @6.1.2
+pin "@fortawesome/free-solid-svg-icons", to: "@fortawesome--free-solid-svg-icons.js" # @6.1.2
 
 pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/esm/index.js" # @2.11.6
 
 pin "bootstrap" # @5.2.0
 
-pin "three", to: "https://ga.jspm.io/npm:three@0.140.2/build/three.module.js"
+pin "three" # @0.143.0
 pin "three/examples/jsm/loaders/GLTFLoader.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/loaders/GLTFLoader.js"
 pin "three/examples/jsm/controls/OrbitControls.js", to: "https://ga.jspm.io/npm:three@0.140.2/examples/jsm/controls/OrbitControls.js"
 
@@ -67,8 +67,10 @@ pin "scss.js", to: "languages/scss.min.js"
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/xml.min.js
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/shell.min.js
 # https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/scss.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/markdown.min.jspin "video.js" # @7.18.1
+# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/markdown.min.js 
 
 pin "dat.gui", to: "https://ga.jspm.io/npm:dat.gui@0.7.9/build/dat.gui.module.js"
 pin "base64-js" # @1.5.1
 pin "ieee754" # @1.2.1
+
+
