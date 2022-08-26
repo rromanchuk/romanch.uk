@@ -1,6 +1,6 @@
 
 import { Controller } from "@hotwired/stimulus"
-import videojs from "https://esm.run/video.js"
+import videojs from "https://cdn.jsdelivr.net/npm/video.js/+esm"
 
 export default class extends Controller {
   static targets = [ "video" ]
