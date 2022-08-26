@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/puma/puma.git
-  revision: e9f09ba1fe6b168bed7fff59d0bdbfd65351cf9d
+  revision: 4c1a8398701e8f714490463d8088199c3191c723
   specs:
-    puma (5.6.4)
+    puma (5.6.5)
       nio4r (~> 2.0)
 
 GIT
@@ -100,11 +100,11 @@ GEM
       activerecord (>= 4.0)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.620.0)
+    aws-partitions (1.622.0)
     aws-sdk-cognitoidentityprovider (1.69.0)
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.132.0)
+    aws-sdk-core (3.136.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -183,7 +183,7 @@ GEM
       aes_key_wrap
       bindata
       httpclient
-    jwt (2.4.1)
+    jwt (2.5.0)
     lograge (0.12.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -205,7 +205,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.16.3)
-    msgpack (1.5.4)
+    msgpack (1.5.6)
     multi_xml (0.6.0)
     net-imap (0.2.3)
       digest
@@ -226,7 +226,7 @@ GEM
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    oauth2 (2.0.6)
+    oauth2 (2.0.7)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_xml (~> 0.5)
@@ -281,7 +281,7 @@ GEM
     rash_alt (0.4.12)
       hashie (>= 3.4)
     redcarpet (3.5.1)
-    redis (4.7.1)
+    redis (4.8.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
