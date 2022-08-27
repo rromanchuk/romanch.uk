@@ -1,7 +1,25 @@
 <% content_for(:page_title) { 'Experiments and playgrounds' } %>
-<ul>
-  <li><%= link_to "three.js", page_path("three") %></li>
-  <li><%= link_to "pointclouds", page_path("potree") %></li>
-  <li><%= link_to "Wittman Regional Airport Tower, 3d model", "https://romanch.uk/static/pe_kosh_tower/" %></li>
-  <li><%= link_to "C177 Cardinal Lidar", page_path("c177") %></li>
-</ul>
+
+<section>
+  <h4>three.js viewers</h4>
+  <ul>
+    <li><%= link_to "X-Plane mesh with Z19 geotiff", page_path("three"), data: { turbo: false } %></li>
+    <li><%= link_to "Simventure 2022 gtlf models", page_path("pe"), data: { turbo: false } %></li>
+  </ul>
+</section>
+
+
+<section>
+  <h4>Google's model-viewer</h4>
+  <ul>
+    <li><%= link_to "Wittman Regional Airport Tower, gtlf model", "https://romanch.uk/static/pe_kosh_tower/", data: { turbo: false } %></li>
+    <li><%= link_to "Cessna 177 (Lidar scan)", page_path("c177"), data: { turbo: false } %></li>
+  </ul>
+</section>
+
+<section>
+  <h4>Lidar elevation with Potree</h4>
+  <ul>
+    <li><%= link_to "Entwine point cloud (USGS DEM Lidar)", page_path("potree"), data: { turbo: false } %></li>
+  </ul>
+</section>

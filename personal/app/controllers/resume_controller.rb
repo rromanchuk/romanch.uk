@@ -1,12 +1,10 @@
 class ResumeController < ApplicationController
-  
   let(:source) { File.open(File.join(Rails.root, 'app', 'views', 'resume', 'source.tex')).read }
-  def index
-  end
-  
+  def index; end
+
   def download
     authorize!
-    redirect_to 'https://romanch.uk/static/docs/06212022/romanchuk.pdf', allow_other_host: true
+    redirect_to 'https://romanch.uk/static/ryan_romanchuk_noATS.pdf', allow_other_host: true
   end
 
   def turbo_frame_request_variant

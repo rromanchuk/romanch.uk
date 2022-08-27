@@ -2,6 +2,7 @@
 
 ./node_modules/sass/sass.js \
   ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css \
+  ./app/assets/stylesheets/three.sass.scss:./app/assets/builds/three.css \
   --no-source-map \
   --load-path=node_modules \
   $@

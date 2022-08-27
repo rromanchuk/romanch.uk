@@ -1,11 +1,11 @@
-class VideosController < ApplicationController  
+class VideosController < ApplicationController
   let(:videos) { Video.all }
   let(:video) { Video.friendly.find(params[:id]) }
-  
+
   def new
     @video = Video.new
   end
-  
+
   def destroy
     video.destroy
     redirect_to videos_path, status: 303
@@ -25,12 +25,12 @@ class VideosController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   def edit; end
   def index; end
 
   private
-  
+
   def video_params
     params.require(:video).permit(:key, :thumbnail_key, :title, :description, :tags_as_string, :slug)
   end

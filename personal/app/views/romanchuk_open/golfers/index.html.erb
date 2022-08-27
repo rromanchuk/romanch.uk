@@ -1,6 +1,10 @@
 <% content_for :page_title, "All golfers" %>
 <% content_for :canonical_link_tag do %>
-  <link rel="canonical" href="<%= romanchuk_open_tournament_golfers_url(tournament, host: 'romanchukopen.com') %>" />
+  <% if params[:tournament_id] %>
+    <link rel="canonical" href="<%= romanchuk_open_tournament_golfers_url(tournament, host: 'romanchukopen.com') %>" />
+  <% else %>
+    <link rel="canonical" href="<%= romanchuk_open_golfers_url(host: 'romanchukopen.com') %>" />
+  <% end %>
 <% end %>
 
 

@@ -2,16 +2,16 @@
 <html>
   <head>
     <%= render 'shared/meta' %>
+    <%= render 'shared/gtm' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-
   </head>
 
   <body>
-    <%= render 'shared/noscript' %>
     <%= yield %>
+    <%= render 'shared/honeypot' %>
+    <%= render 'shared/noscript' %>
   </body>
 </html>

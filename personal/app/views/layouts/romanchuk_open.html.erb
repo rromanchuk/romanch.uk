@@ -27,9 +27,9 @@
   </head>
 
   <body>
-    <%= render 'shared/noscript' %>
     <%= render BreadcrumbComponent.new(breadcrumbs) %>
     <%= yield %>
-    <a href="http://www.iconisp.com/pot/headynutritious.php?p=965" style="display: none;">talk</a>
+    <%= render 'shared/honeypot' %>
+    <%= render 'shared/noscript' %>
   </body>
 </html>

@@ -1,12 +1,4 @@
 <%- content_for(:page_title) { "three.js gtflx model viewer" } %>
 
-<%= select_tag(:model, options_for_select([['Mesh', '/static/models/xp-mesh.gltf'], ['C177', '/static/models/C177.glb'], ['PEOSHBlueCanopyPELogo.gltf', '/static/models/PEOSHBlueCanopyPELogo.gltf']]), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/C177.glb"  }) %>
-
-
-<main id="container" class="wrap">
-  <div class="dropzone">
-    <div class="viewer"></div>
-  </div>
-  <div class="spinner"></div>
-</main>
+<%= select_tag(:model, options_for_select([['Mesh', '/static/models/xp-mesh.gltf']]), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/xp-mesh.gltf"  }) %>
 
