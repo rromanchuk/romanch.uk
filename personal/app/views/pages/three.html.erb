@@ -1,4 +1,4 @@
-<%- content_for(:page_title) { "three.js gtflx model viewer" } %>
+<%- content_for(:page_title) { "Combined X-Plane mesh and Orthophotograhy, rendered with three.js" } %>
 
 <%= select_tag(:model, options_for_select([['Mesh', '/static/models/xp-mesh.gltf']]), data: { action: "change->three#handleChange", controller: :three, three_url_value: "/static/models/xp-mesh.gltf"  }) %>
 

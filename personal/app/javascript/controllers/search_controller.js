@@ -19,6 +19,6 @@ export default class extends Controller {
   _submit() {
     console.log(this.inputTarget.value)
     this.formTarget.requestSubmit();
-    //logEvent(analytics, 'search', {search_term: this.inputTarget.value});
+    dataLayer.push({ "event": "search", "search_term": this.inputTarget.value })
   }
 }
