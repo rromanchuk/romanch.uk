@@ -19,6 +19,6 @@ export default class extends Controller {
   _submit() {
     console.log(this.inputTarget.value)
     this.formTarget.requestSubmit();
-    dataLayer.push({ "event": "search", "search_term": this.inputTarget.value })
+    gtag('event', 'search', { 'search_term': this.inputTarget.value })
   }
 }

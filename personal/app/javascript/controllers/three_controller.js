@@ -44,6 +44,6 @@ export default class extends Controller {
     console.log(evt.target.value)
     this.urlValue = evt.target.value
     this.viewer.load(this.urlValue, '', new Map())
-    dataLayer.push({ event: "model_changed", model_name: this.urlValue })
+    gtag('event', 'model_changed', { 'model_name': this.urlValue })
   }
 }
