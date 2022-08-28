@@ -5,17 +5,13 @@ import * as bootstrap from 'bootstrap';
 //import { getAnalytics } from "firebase/analytics";
 
 import { fontAwesomeInit, firebaseInit, gtagInit } from "initialize";
-
-document.addEventListener("turbo:load", function(event) {
-  console.log("trubo:load")
-  
-})
-
 gtagInit()
 fontAwesomeInit()
 
 const firebaseApp = firebaseInit()
-//const analytics = getAnalytics(firebaseApp, {debug_mode: true, transport_url: 'https://metrics.romanch.uk'});
 
+document.addEventListener("turbo:load", function(event) {
+  console.log("trubo:load")
+})
 
 export {  bootstrap, firebaseApp };

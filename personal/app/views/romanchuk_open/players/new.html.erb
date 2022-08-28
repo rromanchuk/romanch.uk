@@ -1,1 +1,7 @@
-<%= render 'form' %>
+<%= turbo_frame_tag "player_modal" do %>
+  <%= render ModalComponent.new(title: "New player", size: "") do |component| %>
+    <% component.body do %>
+      <%= render 'form' %>
+    <% end %>
+  <% end %>
+<% end %>
