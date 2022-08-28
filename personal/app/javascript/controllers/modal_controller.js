@@ -1,9 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { Modal } from "bootstrap"
 
-//import { logEvent } from "firebase/analytics";
-//import { analytics } from "application";
-
 export default class extends Controller {
   static values = {
     title: String,
@@ -19,9 +16,10 @@ export default class extends Controller {
     }
     this.modal = new Modal(this.element);
     this.modal.show();
+    gtag('event', 'modal_open', {'page_title': this.titleValue});
     this.element.addEventListener('hidden.bs.modal', (event) => {
       this.element.remove();
-      //logEvent(analytics, 'modal_close');
+      gtag('event', 'modal_close', {'page_title': this.titleValue});
     })
   }
 }

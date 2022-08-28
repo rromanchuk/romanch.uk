@@ -1,6 +1,7 @@
 
 import { Controller } from "@hotwired/stimulus"
 import videojs from "video.js"
+//import { gtagInit } from "../initialize"
 
 export default class extends Controller {
   static targets = [ "video" ]
@@ -30,8 +31,20 @@ export default class extends Controller {
         poster: this.posterValue,
       }
 
-      this.player = videojs('video-player', options, function() {
-        console.log('player ready')
+      this.player = videojs('video-player', options, () => {
+        gtag('event', 'video_start', { 'video_url': this.player.currentSrc(), 'video_current_time': this.player.currentTime(), 'video_duration': this.player.duration() })
+      });
+
+      this.player.on('pause', function() {
+
+      });
+
+      this.player.on('play', function() {
+        
+      });
+
+      this.player.on('ended', () => {
+        gtag('event', 'video_complete', { 'video_url': this.player.currentSrc(), 'video_current_time': this.player.currentTime(), 'video_duration': this.player.duration() })
       });
     }
   }
@@ -43,3 +56,5 @@ export default class extends Controller {
     }
   }
 }
+
+// events https://docs.videojs.com/player#event:play
