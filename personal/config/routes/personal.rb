@@ -2,6 +2,7 @@
 resources :posts
 resources :videos
 resources :images
+resources :assets
 resources :projects, only: [:index, :show]
 resources :users, only: [:show, :index] do
   get :me, on: :collection

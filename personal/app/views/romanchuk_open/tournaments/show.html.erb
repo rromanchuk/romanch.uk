@@ -30,12 +30,12 @@
   <div class="container">
     
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <% tournament.images.each do |image| %>
+      <% tournament.ro_photo_assets.each do |asset| %>
         <div class="col">
           <div class="card shadow-sm">
-            <%= image_tag image.key, class: 'card-img-top' %>
+            <%= image_tag asset.key, class: 'card-img-top' %>
             <div class="card-body">
-              <%= link_to 'Edit', edit_image_path(image), class: 'card-link' %>
+              <%= link_to 'Edit', edit_asset_path(asset), class: 'card-link' %>
             </div>
           </div>
         </div>
