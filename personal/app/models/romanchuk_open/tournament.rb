@@ -16,7 +16,7 @@ class RomanchukOpen::Tournament < ApplicationRecord
   end
 
   def poster_image
-    images.first&.key || 'https://via.placeholder.com/200'
+    ro_photo_assets.first&.key || 'https://via.placeholder.com/200'
   end
 
   def should_generate_new_friendly_id?

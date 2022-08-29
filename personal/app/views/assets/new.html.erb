@@ -1,9 +1,9 @@
-<% content_for(:page_title) { 'New images' } %>
+<% content_for(:page_title) { 'New asset' } %>
 
 <%= tag.div class: 'row justify-content-center' do %>
   <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
-    <h1>New Image</h1>
-    <%= turbo_frame_tag image do %>
+    <h1>New Asset</h1>
+    <%= turbo_frame_tag asset do %>
       <%= render "form" %>
     <% end %>
 

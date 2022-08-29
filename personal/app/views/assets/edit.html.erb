@@ -7,7 +7,7 @@
         <%= button_to "Destory", asset_path(asset), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
       </div>
       <div class="card shadow-sm">
-        <%= image_tag asset.key, class: 'card-img-top' %>
+        <%= image_tag asset.thumbnail_key || asset.key, class: 'card-img-top' %>
       </div>
       <%= turbo_frame_tag asset do %>
         <%= render 'form' %>

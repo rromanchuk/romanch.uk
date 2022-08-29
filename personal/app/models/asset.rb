@@ -12,12 +12,16 @@ class Asset < ApplicationRecord
 
    # Returns true if the content_type of this blob is in the image range, like image/png.
    def image?
-    content_type.start_with?("image")
+    content_type&.start_with?("image")
   end
 
   # Returns true if the content_type of this blob is in the video range, like video/mp4.
   def video?
     content_type.start_with?("video")
+  end
+
+  def stream?
+    content_type.start_with?("application")
   end
 
   def slug_candidates = %i[title key]
