@@ -1,0 +1,5 @@
+<% if asset.image? %>
+  <p><%= link_to asset.key, edit_asset_path(id: asset.id) %>, <%= link_to 'Serve', serve_image_path(id: asset.slug || asset.id) %></p>
+<% else %>
+  <p><%= link_to asset.key, edit_asset_path(id: asset.id) %>, <%= link_to 'Serve', serve_video_path(id: asset.slug || asset.id) %></p>
+<% end %>

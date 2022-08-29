@@ -1,0 +1,10 @@
+<%= simple_form_for asset, html: { data: { turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :key %>
+  <%= f.input :title %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :slug %>
+  <%= f.input :content_type %>
+  <%= f.input :tags_as_string, as: :string %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>

@@ -1,6 +1,6 @@
 
 <%- content_for(:page_title) { image.title } %>
-<%- content_for(:page_description) { image.caption } %>
+<%- content_for(:page_description) { image.description } %>
 <%- content_for(:page_keywords) { image.tags_as_string } %>
 <%- content_for(:share_image) { image.key } %>
 <%- content_for(:canonical_url) { serve_image_url(id: image.slug) } %>
@@ -11,7 +11,7 @@
   <img src="<%= image.key %>" class="card-img" alt="...">
   <div class="card-img-overlay">
     <h5 class="card-title"><%= image.title %></h5>
-    <p class="card-text"><%= image.caption %></p>
+    <p class="card-text"><%= image.description %></p>
     <% image.tag_names.each do |name| %>
       <%= tag.span name, class: 'badge bg-secondary text-decoration-none link-light' %>
     <% end %>
@@ -26,7 +26,7 @@
     <% component.body do %>
       <figure class="figure">
         <%= image_tag image.key, class: 'img-fluid' %>
-        <figcaption class="figure-caption text-end"><%= image.caption %></figcaption>
+        <figcaption class="figure-caption text-end"><%= image.description %></figcaption>
       </figure>
     <% end %>
   <% end %>

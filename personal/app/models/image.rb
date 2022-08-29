@@ -6,7 +6,7 @@ class Image < ApplicationRecord
   include Searchable
   include Sluggable
 
-  has_one_attached :file
+
   belongs_to :imageable, polymorphic: true, optional: true
 
   auto_strip_attributes :title, :caption

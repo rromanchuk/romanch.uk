@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_012755) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_29_054151) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_012755) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "slug"
+    t.jsonb "data", default: {}, null: false
+    t.string "content_type"
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "asset_id", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_attachments_on_asset_id"
+    t.index ["record_type", "record_id", "name", "asset_id"], name: "index_attachments_uniqueness", unique: true
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
