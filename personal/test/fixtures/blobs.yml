@@ -1,0 +1,11 @@
+image:
+  key: /static/one.jpg
+  title: Image Number One
+  description: Image number one. Image number one.
+  content_type: image/jpeg
+
+video:
+  key: /static/one.jpg
+  title: Video Number One
+  description: Video number one. Video number one.
+  content_type: application/vnd.apple.mpegurl

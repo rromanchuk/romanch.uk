@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# @deprecated Use `Blob` instead.
 class Image < ApplicationRecord
   SEARCH_AGAINST = %i[title caption key]
 

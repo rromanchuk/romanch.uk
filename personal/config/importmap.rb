@@ -37,7 +37,7 @@ pin "utils", to: "utils.js"
 
 pin "buffer" # @6.0.3
 
-pin "highlight", to: "highlight.min.js"
+pin "highlight", to: "highlight.min.js", preload: true # @9.12.0
 pin "ruby.js", to: "languages/ruby.min.js"
 pin "markdown.js", to: "languages/markdown.min.js"
 pin "javascript.js", to: "languages/javascript.min.js"

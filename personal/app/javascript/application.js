@@ -10,8 +10,6 @@ fontAwesomeInit()
 
 const firebaseApp = firebaseInit()
 
-document.addEventListener("turbo:load", function(event) {
-  console.log("trubo:load")
-})
+
 
 export {  bootstrap, firebaseApp };

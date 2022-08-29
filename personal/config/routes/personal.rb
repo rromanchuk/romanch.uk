@@ -2,7 +2,7 @@
 resources :posts
 resources :videos
 
-resources :assets, path: :blobs 
+resources :blobs
 resources :projects, only: [:index, :show]
 resources :users, only: [:show, :index] do
   get :me, on: :collection

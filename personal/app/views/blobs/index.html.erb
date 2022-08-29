@@ -1,0 +1,22 @@
+<% content_for(:page_title) { 'All Blobs' } %>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <% Blob.attribute_names.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+    </tr>
+  <thead>
+  <tbody>
+    <% blobs.each do |blob| %>
+      <tr>
+        <% Blob.attribute_names.each do |header| %>
+          <td class="text-break "><%= blob.send(header) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render blobs %>

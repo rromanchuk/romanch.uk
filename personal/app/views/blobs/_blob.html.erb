@@ -1,0 +1,5 @@
+<% if blob.image? %>
+  <p><%= link_to blob.key, edit_blob_path(id: blob.id) %>, <%= link_to 'Serve', serve_image_path(id: blob.slug || blob.id) %></p>
+<% else %>
+  <p><%= link_to blob.key, edit_blob_path(id: blob.id) %>, <%= link_to 'Serve', serve_video_path(id: blob.slug || blob.id) %></p>
+<% end %>

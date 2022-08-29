@@ -21,7 +21,13 @@ const highlightInit = () => {
   hljs.configure({   // optionally configure hljs
     languages: ['javascript', 'ruby', 'markdown', 'swift', 'bash', 'erb', 'latex', 'python']
   });
-  return hljs
+
+  document.addEventListener("turbo:load", function(event) {
+    console.log("turbo:load, highlighting")
+    hljs.highlightAll();
+  }, false)
+
+  
 }
 
 export {highlightInit}
