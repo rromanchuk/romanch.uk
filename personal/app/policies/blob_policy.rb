@@ -1,4 +1,4 @@
-class AssetPolicy < ApplicationPolicy
+class BlobPolicy < ApplicationPolicy
   def index?
     me?
   end
