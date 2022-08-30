@@ -9,3 +9,5 @@ video:
   title: Video Number One
   description: Video number one. Video number one.
   content_type: application/vnd.apple.mpegurl
+  aspect: 9x16
+  thumbnail_key: /static/l35/thumbnail.jpg
