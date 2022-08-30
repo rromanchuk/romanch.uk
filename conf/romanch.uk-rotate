@@ -1,0 +1,9 @@
+"/home/ubuntu/log/*.log"
+{
+    daily
+    size 25M
+    missingok
+    compress
+    delaycompress
+    copytruncate
+  }

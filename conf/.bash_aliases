@@ -1,1 +1,5 @@
 alias logs="~/log/"
+alias sysl="journalctl -t"
+alias www="cd /var/www/romanch.uk/current"
+alias c="cd /var/www/romanch.uk/current && bin/rails c"
+alias status="systemctl status puma nginx puma.socket redis-server"

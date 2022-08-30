@@ -46,14 +46,12 @@ gem "bootsnap", require: false
 gem 'gutentag'
 gem 'simple_form', github: 'heartcombo/simple_form', branch: 'main'
 gem 'aws-sdk-s3', require: false
+gem 'down', require: false
 
 gem 'aws-sdk-cognitoidentityprovider'
-gem 'coderay'
-gem 'redcarpet'
-gem 'rails-latex', require: false
+
 gem 'cognito_token_verifier', github: 'rromanchuk/cognito_token_verifier', require: false
 gem "lograge"
-gem "logstash-event"
 gem 'sitemap_generator'
 gem 'oj', require: false
 gem 'friendly_id'
