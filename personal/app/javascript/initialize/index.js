@@ -1,6 +1,8 @@
 import { fontAwesomeInit } from 'initialize/fa';
 import { highlightInit } from 'initialize/highlight';
 
+
+
 highlightInit();
 
 const firebaseConfig = {
@@ -21,7 +23,7 @@ const firebaseInit = () => {
 }
 
 const gtagInit = () => {
-  
+
 }
 
 
