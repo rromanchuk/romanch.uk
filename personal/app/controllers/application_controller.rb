@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs, :breadcrumbs?, :breadcrumbs_to_s
+  before_action :set_sentry_context
 
   rescue_from ActionPolicy::Unauthorized do |ex|
     ap ex.result.all_details
@@ -57,5 +58,15 @@ class ApplicationController < ActionController::Base
 
   def add_breadcrumb(name, path = nil)
     breadcrumbs << Breadcrumb.new(name, path)
+  end
+
+  def set_sentry_context
+    Sentry.set_user(
+      {
+        id: current_user&.id,
+        username: current_user&.username,
+        ip_address: client_ip
+      }
+    )
   end
 end
