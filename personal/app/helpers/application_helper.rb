@@ -2,7 +2,7 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def my_config() = Rails.configuration.general
-  
+  def iid() = cookies[:iid].presence
 
   def style_tags
     ['application', *content_for(:styles)&.split(',')]

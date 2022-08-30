@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
     payload[:amzn_oidc_identity] = amzn_oidc_identity
   end
 
+  def iid
+    cookies[:iid].presence
+  end
+
   def breadcrumbs
     @breadcrumbs ||= []
   end

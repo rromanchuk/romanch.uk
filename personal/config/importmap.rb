@@ -9,6 +9,8 @@ pin_all_from "app/javascript/initialize", under: "initialize"
 
 
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js", preload: true
+pin "firebase/installations", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-installations.js"
+pin "firebase/messaging", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-messaging.js"
 #pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
 #pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"
 pin "@fortawesome/free-brands-svg-icons", to: "@fortawesome--free-brands-svg-icons.js", preload: true # @6.1.2

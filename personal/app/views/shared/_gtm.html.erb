@@ -4,12 +4,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  //gtag('set', 'user_id', '<%= current_user&.id %>');
-  gtag('set', {'currency': 'USD', 'user_id': '<%= current_user&.id %>'});
+  gtag('set', {'currency': 'USD', 'user_id': '<%= current_user&.id %>', 'app_instance_id': '<%= iid %>'});
   gtag('config', 'G-24Q5EDRSF7', {
     'transport_url': 'https://metrics.romanch.uk',
     'first_party_collection': true,
     'allow_google_signals': true,
+    'firebase_app_id': '1:460594802675:web:d7d29fd5cb673b8cea2c86',
+    
   });
 </script>
 

@@ -15,6 +15,7 @@ const firebaseConfig = {
 import { initializeApp } from "firebase/app";
 
 
+
 const firebaseInit = () => {
   return initializeApp(firebaseConfig);
 }
