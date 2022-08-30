@@ -1,0 +1,7 @@
+<script type="module">
+
+  import { getMessaging } from "firebase/messaging";
+  import { firebaseApp } from "application";
+  const messaging = getMessaging(firebaseApp);
+  const token = messaging.getToken({vapidKey: "BM2qfAWTiwZuhoJ0c2by_HKDP50tNc2z6_eKW80i0hYCd2h5pct56DWPjsLXufgPTPZo2xZ_RBSwbDo5O8r0L1E"});
+</script>

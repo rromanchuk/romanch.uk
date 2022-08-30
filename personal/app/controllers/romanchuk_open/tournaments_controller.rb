@@ -5,11 +5,17 @@ module RomanchukOpen
     let(:tournament) { Tournament.friendly.find params[:id] }
     let(:tournaments) { Tournament.oldest(:ocurred_on) }
     def new
+      require_me!
       @tournament = Tournament.new
       authorize! tournament
     end
 
+    def edit
+      require_me!
+    end
+
     def create
+      require_me!
       @tournament = Tournament.new(tournament_params)
       authorize! tournament
       if tournament.save
@@ -20,6 +26,7 @@ module RomanchukOpen
     end
 
     def destroy
+      require_me!
       authorize! tournament
       tournament.destroy
       redirect_to romanchuk_open_tournaments_path, status: 303

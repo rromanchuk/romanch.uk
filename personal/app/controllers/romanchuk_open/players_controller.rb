@@ -9,11 +9,13 @@ module RomanchukOpen
     end
 
     def new
+      require_me!
       add_breadcrumb("Create player")
       @player = Player.new
     end
 
     def create
+      require_me!
       @player = Player.new(player_params)
 
       if player.save
@@ -24,11 +26,13 @@ module RomanchukOpen
     end
 
     def update
+      require_me!
       player.update(player_params)
       redirect_to romanchuk_open_player_path(player), status: 303
     end
 
     def destroy
+      require_me!
       player.destroy
       redirect_to romanchuk_open_players_path, status: 303
     end

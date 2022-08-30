@@ -19,11 +19,13 @@ module RomanchukOpen
     end
 
     def new
+      require_me!
       add_breadcrumb("Create golfer")
       @golfer = Golfer.new
     end
 
     def create
+      require_me!
       @golfer = Golfer.new(golfer_params)
 
       if golfer.save
@@ -34,11 +36,13 @@ module RomanchukOpen
     end
 
     def update
+      require_me!
       golfer.update(golfer_params)
       redirect_to romanchuk_open_golfer_path(golfer), status: 303
     end
 
     def destroy
+      require_me!
       golfer.destroy
       redirect_to romanchuk_open_golfers_path, status: 303
     end
