@@ -20,6 +20,7 @@ class PostsController < ApplicationController
 
   def show
     authorize! post
+    fresh_when last_modified: post.updated_at.utc, etag: post
   end
 
   def new

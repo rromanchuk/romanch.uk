@@ -8,11 +8,13 @@ SitemapGenerator::Sitemap.create do
     add(post_path(post), lastmod: post.updated_at, changefreq: :monthly, priority: 0.7)
   end
 
-  Image.find_each do |image|
-    add(serve_image_path(image.slug), images: [{
-          loc: image.key,
-          caption: image.caption,
-          geo_location: image.geo_location
-        }], lastmod: image.updated_at)
+  Blob.find_each do |blob|
+    next unless blob.image?
+    
+    add(serve_image_path(blob.slug), images: [{
+          loc: blob.key,
+          caption: blob.description,
+          geo_location: blob.geo_location
+        }], lastmod: blob.updated_at)
   end
 end

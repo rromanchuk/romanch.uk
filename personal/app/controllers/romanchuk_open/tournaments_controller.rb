@@ -33,6 +33,7 @@ module RomanchukOpen
 
     def show
       add_breadcrumb(tournament.title)
+      fresh_when last_modified: tournament.updated_at.utc, etag: tournament
     end
     
     # def players

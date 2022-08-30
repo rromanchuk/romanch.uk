@@ -8,10 +8,7 @@ class Video < ApplicationRecord
 
   belongs_to :post, optional: true
 
-  auto_strip_attributes :title, :description
-
   def slug_candidates = %i[title key]
-  def search_against = %i[title description key]
 
   def should_generate_new_friendly_id?
     title_changed?

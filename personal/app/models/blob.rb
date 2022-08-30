@@ -3,8 +3,9 @@ class Blob < ApplicationRecord
   include Searchable
   include Sluggable
   SEARCH_AGAINST = %i[title description key]
-
-  store_accessor :data, :thumbnail_key, :aspect
+  
+  auto_strip_attributes :title
+  store_accessor :data, :thumbnail_key, :aspect, :geo_location
   
   has_many :attachments
   scope :unattached, -> { where.missing(:attachments) }
@@ -24,7 +25,7 @@ class Blob < ApplicationRecord
     content_type.start_with?("application")
   end
 
-  def slug_candidates = %i[title key]
+  def slug_candidates = %i[title description key]
 
   def should_generate_new_friendly_id?
     title_changed?
