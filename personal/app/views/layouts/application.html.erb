@@ -52,6 +52,16 @@
       </div>
     </div>
     <%= render 'shared/footer' %>
+    <script type="module">
+      import { firebase } from "application";
+      import { getInstallations, getId } from "firebase/installations";
+      
+      const installations = getInstallations(firebase)
+      const installationId = await getId(installations);
+      console.log(installationId);
+
+      document.cookie = "iid=" + installationId + "; SameSite=Lax; Secure";
+    </script>
     <% if Rails.env.development? %>
       <%= console %>
     <% end %>

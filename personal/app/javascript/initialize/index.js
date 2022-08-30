@@ -1,6 +1,7 @@
 import { fontAwesomeInit } from 'initialize/fa';
 import { highlightInit } from 'initialize/highlight';
 
+import { initializeApp } from "firebase/app";
 
 
 highlightInit();
@@ -11,15 +12,14 @@ const firebaseConfig = {
   projectId: "ryan-romanchuk",
   storageBucket: "ryan-romanchuk.appspot.com",
   messagingSenderId: "460594802675",
-  appId: "1:460594802675:web:d7d29fd5cb673b8cea2c86"
+  appId: "1:460594802675:web:d7d29fd5cb673b8cea2c86",
+  measurementId: "G-24Q5EDRSF7"
 };
-
-import { initializeApp } from "firebase/app";
-
 
 
 const firebaseInit = () => {
-  return initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  return app;
 }
 
 const gtagInit = () => {

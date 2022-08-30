@@ -12,7 +12,7 @@ pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.j
 pin "firebase/installations", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-installations.js"
 pin "firebase/messaging", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-messaging.js"
 #pin "firebase/auth", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
-#pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"
+pin "firebase/analytics", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js"
 pin "@fortawesome/free-brands-svg-icons", to: "@fortawesome--free-brands-svg-icons.js", preload: true # @6.1.2
 pin "@fortawesome/fontawesome-svg-core", to: "@fortawesome--fontawesome-svg-core.js", preload: true # @6.1.2
 pin "@fortawesome/free-solid-svg-icons", to: "@fortawesome--free-solid-svg-icons.js", preload: true # @6.1.2
