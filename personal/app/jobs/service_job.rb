@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ServiceJob < ApplicationJob
-  sidekiq_options retry: false
+  #sidekiq_options retry: false
   queue_as :default
 
   def perform(service_name, ...)
