@@ -30,5 +30,6 @@ aws s3 sync personal/public/static s3://personal-www/static \
 aws s3 cp personal/public/sitemap.xml s3://personal-www/sitemap.xml --content-type 'text/xml'
 aws s3 cp personal/public/robots.txt s3://personal-www/robots.txt --content-type 'text/plain' 
 aws s3 cp personal/public/romanchuk.pub s3://personal-www/romanchuk.pub --content-type 'application/x-pem-file' --content-disposition 'inline'
+aws s3 cp personal/public/firebase-messaging-sw.js s3://personal-www/firebase-messaging-sw.js
 
 exit 0
