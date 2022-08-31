@@ -51,28 +51,29 @@ pin "erb.js", to: "languages/erb.min.js"
 pin "latex.js", to: "languages/latex.min.js"
 pin "python.js", to: "languages/python.min.js"
 pin "scss.js", to: "languages/scss.min.js"
-
+pin "plaintext.js", to: "languages/plaintext.min.js"
+pin "sql.js", to: "languages/sql.min.js"
+pin "pgsql.js", to: "languages/pgsql.min.js"
+pin "json.js", to: "languages/json.min.js"
+pin "objectivec.js", to: "languages/objectivec.min.js"
 
 pin "video.js", to: "https://cdn.jsdelivr.net/npm/video.js/+esm"
 pin "markdown-it", to: "https://cdn.jsdelivr.net/npm/markdown-it/+esm"
 
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/json.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/python.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/ruby.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/bash.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/swift.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/objectivec.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/javascript.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/latex.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/erb.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/css.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/nginx.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/yaml.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/xml.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/shell.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/scss.min.js
-# https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/es/languages/markdown.min.js 
-
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/sql.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/typescript.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/xml.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/yaml.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/shell.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/pgsql.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/objectivec.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/http.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/erb.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/dockerfile.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/css.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/cmake.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/c.min.js
+# https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/languages/accesslog.min.js
 pin "dat.gui", to: "https://ga.jspm.io/npm:dat.gui@0.7.9/build/dat.gui.module.js"
 pin "base64-js" # @1.5.1
 pin "ieee754" # @1.2.1
