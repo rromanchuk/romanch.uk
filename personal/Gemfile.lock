@@ -8,6 +8,14 @@ GIT
       activemodel (>= 5.2)
 
 GIT
+  remote: https://github.com/ondrejbartas/sidekiq-cron.git
+  revision: 313bf3463dff254b44c787b79504db53dbb4fe88
+  specs:
+    sidekiq-cron (1.7.0)
+      fugit (~> 1)
+      sidekiq (>= 4.2.1)
+
+GIT
   remote: https://github.com/puma/puma.git
   revision: 33ed25bd0ecde69d749406aaccdc27675c1f056f
   specs:
@@ -147,6 +155,8 @@ GEM
     down (5.3.1)
       addressable (~> 2.8)
     erubi (1.11.0)
+    et-orbi (1.2.7)
+      tzinfo
     faraday (2.5.2)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -154,6 +164,9 @@ GEM
     ffi (1.15.5)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
+    fugit (1.6.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     gutentag (2.6.1)
@@ -242,6 +255,7 @@ GEM
       activerecord (>= 5.2)
       activesupport (>= 5.2)
     public_suffix (5.0.0)
+    raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.4)
     rack-test (2.0.2)
@@ -309,6 +323,10 @@ GEM
       sentry-ruby (~> 5.4.2)
     sentry-ruby (5.4.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    sidekiq (6.5.5)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.5.0)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
     sprockets (4.1.1)
@@ -389,6 +407,8 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
+  sidekiq
+  sidekiq-cron!
   simple_form!
   sitemap_generator
   sprockets-rails

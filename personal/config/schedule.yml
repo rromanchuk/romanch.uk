@@ -1,0 +1,5 @@
+ingest_pireps:
+  cron: "*/5 * * * *"
+  class: "Pireps::IngestJob"
+  active_job: true
+  queue: default
