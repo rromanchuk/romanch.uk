@@ -31,8 +31,6 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis"
 
-gem 'sidekiq'
-gem 'sidekiq-cron', github: 'ondrejbartas/sidekiq-cron'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -69,7 +67,10 @@ gem "action_policy"
 gem "sentry-ruby"
 gem "sentry-rails"
 
+gem "redis-client"
 
+gem 'sidekiq'
+#gem 'sidekiq-cron', github: 'ondrejbartas/sidekiq-cron'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
