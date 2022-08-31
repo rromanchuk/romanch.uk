@@ -6,7 +6,6 @@ export default class extends Controller {
   
   connect() {
     console.log('fcm controller')
-    this.requestPermission()
   }
 
   currentToken() {
