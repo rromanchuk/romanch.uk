@@ -1,8 +1,16 @@
 class SessionsController < ApplicationController
-  before_action :require_user!
+  before_action :require_user!, except: [:apple_signin, :client]
 
   def logout
     logout!
+  end
+
+  def apple_signin
+
+  end
+
+  def client
+
   end
   
   # Virtual path for ALB cognito authentication on the ALB listener. The url

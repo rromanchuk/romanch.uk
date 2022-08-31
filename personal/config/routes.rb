@@ -23,7 +23,11 @@ Rails.application.routes.draw do
     resources :images, only: [:show]
     resources :videos, only: [:show]
   end
-
+  
+  resource :sessions, only: [] do
+    get :apple_signin
+    post :client
+  end
   get 'logout', to: 'sessions#logout'
   get 'login', to: 'sessions#login'
 

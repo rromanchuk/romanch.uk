@@ -51,8 +51,9 @@
         <% end %>
       </div>
     </div>
+    <%= render 'shared/current_user' %>
     <%= render 'shared/footer' %>
-    <script type="module">
+    <%# <script type="module">
       import { firebase } from "application";
       import { getInstallations, getId } from "firebase/installations";
       
@@ -61,7 +62,8 @@
       console.log(installationId);
 
       document.cookie = "iid=" + installationId + "; SameSite=Lax; Secure";
-    </script>
+    </script> %>
+    <%= turbo_frame_tag "apple_signin" %>
     <% if Rails.env.development? %>
       <%= console %>
     <% end %>

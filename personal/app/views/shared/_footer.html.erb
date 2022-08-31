@@ -9,5 +9,11 @@
       <i class="fa-solid fa-key"></i>
       <%= link_to "pub", "/romanchuk.pub" %>
     </span>
+    <% unless current_user %>
+      <span class="mx-2">
+        <i class="fa-solid fa-person-through-window"></i>
+        <%= link_to "Enter", apple_signin_sessions_path, data: { turbo_action: :replace } %>
+      </span>
+    <% end %>
   </div>
 </footer>
