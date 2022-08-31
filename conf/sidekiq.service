@@ -1,0 +1,32 @@
+[Unit]
+Description=sidekiq
+
+After=syslog.target network.target
+
+[Service]
+# https://github.com/mperham/sidekiq/blob/master/examples/systemd/sidekiq.service#L39
+Type=notify
+WatchdogSec=10
+
+User=ubuntu
+Group=ubuntu
+
+# Greatly reduce Ruby memory fragmentation and heap usage
+# https://www.mikeperham.com/2018/04/25/taming-rails-memory-bloat/
+# https://bugs.ruby-lang.org/issues/14718
+EnvironmentFile=/home/ubuntu/.env
+
+WorkingDirectory=/var/www/romanch.uk/current
+ExecStart=/bin/bash -lc 'exec /home/ubuntu/.rbenv/shims/bundle exec sidekiq -e production'
+
+RestartSec=30
+Restart=on-failure
+
+StandardOutput=syslog
+StandardError=syslog
+
+
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target
