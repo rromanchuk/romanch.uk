@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgres:
-    image: postgres:13.4-alpine
+    image: postgres:14.5-alpine
     volumes:
       - romanchuk-data:/var/lib/postgresql/data
     ports:
