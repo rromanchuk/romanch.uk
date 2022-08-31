@@ -1,4 +1,25 @@
-<div
+<% content_for(:page_title) { 'Web push testing' } %>
+<section class="row"
   data-controller="cloud-messages">
-  <button type="button" class="btn btn-primary btn-lg" data-action="cloud-messages#requestPermission">Request Permission</button>
-</div>
+  <button type="button" class="btn btn-primary btn-lg m-3" data-action="cloud-messages#requestPermission">Request Permission</button>
+  <h5>Current cookies</h5>
+  <p data-cloud-messages-target="token"></p>
+  <section class="row mt-5">
+    <p>Send to browser</p>
+    <pre>
+      <code class="language-text bash">
+  curl -X POST -H "Authorization: key=YOUR-SERVER-KEY" -H "Content-Type: application/json" -d '{
+    "notification": {
+      "title": "Portugal vs. Denmark",
+      "body": "5 to 1",
+      "icon": "firebase-logo.png",
+      "click_action": "http://localhost:8081"
+    },
+    "to": "YOUR-IID-TOKEN"
+  }' "https://fcm.googleapis.com/fcm/send"
+      </code>
+    </pre>
+  </section>
+</section>
+
+
