@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgres:
-    image: postgres:13.4-alpine
+    image: postgres:14.5-alpine
     volumes:
       - romanchuk-data:/var/lib/postgresql/data
     ports:
@@ -9,16 +9,16 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_USER: postgres
-  # redis:
-  #   image: redis:6.2.3-buster
-  #   ports:
-  #     - 6379:6379
-  #   restart: always
-  #   healthcheck:
-  #     test: redis-cli ping
-  #     interval: 1s
-  #     timeout: 3s
-  #     retries: 30
+  redis:
+    image: redis:7.0.4
+    ports:
+      - 6379:6379
+    restart: always
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
   # dynamodb-local:
   #   image: amazon/dynamodb-local:latest
   #   ports:

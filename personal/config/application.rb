@@ -23,6 +23,7 @@ module Personal
 
 
     config.assets.gzip = false
+    config.active_job.queue_adapter = :sidekiq
 
     # Configuration for the application, engines, and railties goes here.
     #
