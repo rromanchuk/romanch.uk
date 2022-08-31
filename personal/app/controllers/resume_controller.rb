@@ -7,10 +7,6 @@ class ResumeController < ApplicationController
     redirect_to 'https://romanch.uk/static/ryan_romanchuk_noATS.pdf', allow_other_host: true
   end
 
-  def turbo_frame_request_variant
-    request.variant = :turbo_frame if turbo_frame_request?
-  end
-
   def implicit_authorization_target
     :resume
   end
