@@ -4,21 +4,21 @@ REDIS_PIREPS = RedisClient.new
 # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#select_object_content-instance_method
 module Pireps
   class Process < Service
-    attr_reader :raw_pirep
+    attr_reader :batch_file
 
     let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
 
-    def initialize(raw_pirep)
+    def initialize(batch_file)
       super()
-      @raw_pirep = raw_pirep
+      @batch_file = batch_file
     end
 
     def params
       {
         bucket: :pireps, # required
-        key: raw_pirep.key, # required
+        key: batch_file.key, # required
         expression_type: 'SQL', # required, accepts SQL,
-        expression: 'SELECT * FROM S3Object s3objec', # required
+        expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required
         input_serialization: {
           compression_type: 'GZIP',
           csv: {
@@ -45,6 +45,7 @@ module Pireps
           Rails.logger.debug event.event_type
           next unless event.event_type == :records
 
+
           raw_row_segment = event.payload.string
           row_segments << raw_row_segment
           next unless raw_row_segment.end_with?("\n")
@@ -53,11 +54,13 @@ module Pireps
           row_segments = []
           Rails.logger.debug raw_row
           CSV.parse(raw_row) do |row|
-            ap row
-            ap row.count
-            next unless row.count == 45
-
-            ap by_csv_row(row)
+            case row.count
+            when 45
+              next if row[0] == "receipt_time" # skip header row
+              by_csv_row(row)
+            when 1
+              Rails.logger.info raw_row 
+            end
           end
         end
       end
@@ -77,12 +80,40 @@ module Pireps
         latitude: row[9], # Sort key
         longitude: row[10],
         altitude_ft_msl: row[11],
+        sky_condition: [
+          {
+            sky_cover: row[12],
+            cloud_base_ft_msl: row[13],
+            cloud_top_ft_msl: row[14]
+          }.compact,
+          {
+            sky_cover: row[15],
+            cloud_base_ft_msl: row[16],
+            cloud_top_ft_msl: row[17]
+          }.compact
+        ].compact,
         sky_cover: row[12],
         cloud_base_ft_msl: row[13],
         cloud_top_ft_msl: row[14],
         sky_cover_2: row[15],
         cloud_base_ft_msl_2: row[16],
         cloud_top_ft_msl_2: row[17],
+        turbulence_condition: [
+          {
+            turbulence_type: row[18],
+            turbulence_intensity: row[19],
+            turbulence_base_ft_msl: row[20],
+            turbulence_top_ft_msl: row[21],
+            turbulence_freq: row[22]
+          }.compact,
+          {
+            turbulence_type: row[23],
+            turbulence_intensity: row[24],
+            turbulence_base_ft_msl: row[25],
+            turbulence_top_ft_msl: row[26],
+            turbulence_freq: row[27]
+          }.compact
+        ].compact,
         turbulence_type: row[18],
         turbulence_intensity: row[19],
         turbulence_base_ft_msl: row[20],
@@ -93,6 +124,20 @@ module Pireps
         turbulence_base_ft_msl_2: row[25],
         turbulence_top_ft_msl_2: row[26],
         turbulence_freq_2: row[27],
+        icing_condition: [
+          {
+            icing_type: row[28],
+            icing_intensity: row[29],
+            icing_base_ft_msl: row[30],
+            icing_top_ft_msl: row[31],
+          }.compact,
+          {
+            icing_type_2: row[32],
+            icing_intensity_1: row[33],
+            icing_base_ft_msl_2: row[34],
+            icing_top_ft_msl_2: row[35]
+          }.compact
+        ].compact,
         icing_type: row[28],
         icing_intensity: row[29],
         icing_base_ft_msl: row[30],
@@ -109,7 +154,7 @@ module Pireps
         vert_gust_kt: row[41],
         report_type: row[42],
         raw_text: row[43], # Key
-        raw_pirep_id: raw_pirep.id
+        batch_file_id: batch_file.id
       }.compact
 
       REDIS_PIREPS.call('rpush', 'pireps', payload.to_json)

@@ -7,7 +7,7 @@ module Pireps
     ENDPOINT = 'https://www.aviationweather.gov/adds/dataserver_current/current/aircraftreports.cache.csv.gz'
     let(:object) do
       Aws::S3::Object.new(bucket_name: 'pireps',
-                          key: "pireps/#{year}/#{month}/#{day}/#{prefix}_aircraftreports.cache.csv.gz",
+                          key: "current_aircraftreports/#{year}/#{month}/#{day}/#{prefix}_aircraftreports.cache.csv.gz",
                           region: 'us-east-1')
     end
     let(:redis) { RedisClient.new }
@@ -18,13 +18,24 @@ module Pireps
     let(:prefix) { last_modified.strftime('%H%M') }
     let(:io) { Down.open(ENDPOINT) }
 
+    # Headers
     let(:current_etag) { io.data[:headers]['Etag'] }
-    let(:previous_etag) { redis.call('GET', 'etag') }
+    let(:content_length) { io.data[:headers]['Content-Length'].to_i }
     let(:last_modified) { Time.parse(io.data[:headers]['Last-Modified']) }
+
+    let(:previous_etag) { redis.call('GET', 'etag') }
+    
 
     def initialize
       super()
-      Pireps::IngestJob.perform_in(5.minutes) if Sidekiq::ScheduledSet.new.size == 0
+      # Poorman's scheduler
+      if Sidekiq::ScheduledSet.new.size == 0
+        time = 5
+        50.times do
+          Pireps::Ingest.perform_at(time.minutes.from_now)
+          time += 5
+        end
+      end
     end
 
     def call
@@ -33,11 +44,14 @@ module Pireps
         return
       end
 
-      s3_etag = object.put(body: io).etag
-      pirep = Pireps::RawPirep.create!(
+      resp = object.put(body: io, storage_class: 'INTELLIGENT_TIERING')
+      pirep = Pireps::BatchFile.create!(
         key: object.key,
+        source_url: ENDPOINT,
+        source_type: :aircraftreports,
         source_etag: current_etag,
-        destination_etag: s3_etag,
+        content_length_bytes: content_length,
+        destination_etag: resp.etag,
         source_last_modified_at: last_modified,
         source_fetched_at: Time.current
       )

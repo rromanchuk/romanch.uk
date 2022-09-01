@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_053421) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_01_182250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -115,6 +115,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_053421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
+  end
+
+  create_table "pireps_batch_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "source_type", null: false
+    t.string "source_url", null: false
+    t.string "source_etag", null: false
+    t.string "destination_etag", null: false
+    t.datetime "source_last_modified_at", null: false
+    t.datetime "source_fetched_at", null: false
+    t.datetime "processed_at"
+    t.integer "num_records_processed", default: 0, null: false
+    t.integer "content_length_bytes", default: 0, null: false
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pireps_raw_pireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
