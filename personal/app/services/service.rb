@@ -20,5 +20,9 @@ class Service
     def call(...)
       new(...).call
     end
+
+    def async_call(...)
+      ServiceJob.perform_later(to_s, ...)
+    end
   end
 end

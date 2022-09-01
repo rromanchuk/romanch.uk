@@ -1,13 +1,13 @@
 require 'aws-sdk-s3'
 require 'csv'
-REDIS_PIREPS = RedisClient.new 
+REDIS_PIREPS = RedisClient.new
 # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#select_object_content-instance_method
 module Pireps
   class Process < Service
-
     attr_reader :raw_pirep
+
     let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
-    
+
     def initialize(raw_pirep)
       super()
       @raw_pirep = raw_pirep
@@ -17,12 +17,12 @@ module Pireps
       {
         bucket: :pireps, # required
         key: raw_pirep.key, # required
-        expression_type: "SQL", # required, accepts SQL,
-        expression: "SELECT * FROM S3Object s3objec", # required
+        expression_type: 'SQL', # required, accepts SQL,
+        expression: 'SELECT * FROM S3Object s3objec', # required
         input_serialization: {
-          compression_type: "GZIP",
+          compression_type: 'GZIP',
           csv: {
-            file_header_info: "IGNORE", # accepts USE, NONE
+            file_header_info: 'IGNORE' # accepts USE, NONE
           }
         },
         output_serialization: {
@@ -38,24 +38,27 @@ module Pireps
           # catch unmodeled error event in the stream
           raise event
         end
+        
         row_segments = []
         # Callback for every event that arrives
         stream.on_event do |event|
           Rails.logger.debug event.event_type
           next unless event.event_type == :records
+
           raw_row_segment = event.payload.string
           row_segments << raw_row_segment
           next unless raw_row_segment.end_with?("\n")
-          raw_row = row_segments.join("")
+
+          raw_row = row_segments.join('')
           row_segments = []
           Rails.logger.debug raw_row
           CSV.parse(raw_row) do |row|
             ap row
             ap row.count
             next unless row.count == 45
+
             ap by_csv_row(row)
           end
-          Rails.logger.debug "\n\n\n"
         end
       end
     end
@@ -108,8 +111,8 @@ module Pireps
         raw_text: row[43], # Key
         raw_pirep_id: raw_pirep.id
       }.compact
-      
-      REDIS_PIREPS.call("rpush", "pireps", payload.to_json)
+
+      REDIS_PIREPS.call('rpush', 'pireps', payload.to_json)
     end
   end
 end
