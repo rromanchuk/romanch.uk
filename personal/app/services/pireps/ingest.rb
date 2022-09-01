@@ -1,5 +1,6 @@
 require 'down'
 require 'aws-sdk-s3'
+require 'sidekiq/api'
 
 module Pireps
   class Ingest < Service
@@ -25,7 +26,7 @@ module Pireps
     
     def initialize()
       super()
-      Pireps::IngestJob.perform_in(5.minutes)
+      Pireps::IngestJob.perform_in(5.minutes) if Sidekiq::ScheduledSet.new.size == 0
     end
 
     def call

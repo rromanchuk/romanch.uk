@@ -68,6 +68,7 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 gem "redis-client"
+gem 'dynamoid'
 
 gem 'sidekiq'
 #gem 'sidekiq-cron', github: 'ondrejbartas/sidekiq-cron'

@@ -15,3 +15,4 @@ iam.ts
 /personal/public/assets
 /personal/public/static/*
 /tmp/*
+dump.sql
