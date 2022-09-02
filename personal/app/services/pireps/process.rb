@@ -57,6 +57,7 @@ module Pireps
           Rails.logger.debug raw_row
           row_columns = split_csv_line(raw_row)
           normalized_row = transform_row_columns(row_columns)
+          normalized_row[:batch_file_id] = batch_file.id
           REDIS_PIREPS.call('rpush', 'pireps', normalized_row.to_json)
         end
       end # end of stream

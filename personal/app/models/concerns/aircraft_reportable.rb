@@ -83,6 +83,6 @@ module AircraftReportable
   end
 
   def after_create_tasks
-    RawReport.create!(raw_text: raw_text, report_type: report_type, batch_file_id: batch_file_id)
+    RawReport.create!(raw_text: raw_text, report_type: report_type, batch_file_id: batch_file_id, receipt_time: receipt_time)
   end
 end

@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   include Sluggable
   include Searchable
   include Taggable
+  include Turbo::Broadcastable
   
 
 

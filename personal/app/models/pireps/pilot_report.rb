@@ -12,9 +12,9 @@ module Pireps
 
     local_secondary_index hash_key: :raw_text, range_key: :latitude, projected_attributes: :keys_only
     
-    after_create -> { broadcast_prepend_to :pilot_reports }
-    after_update -> { broadcast_replace_to :pilot_reports }
-    after_destroy -> { broadcast_remove_to :pilot_reports }
+    after_create :after_create_tasks
+  # after_update -> { broadcast_replace_to :pilot_reports }
+  # after_destroy -> { broadcast_remove_to :pilot_reports }
 
   end
 end
