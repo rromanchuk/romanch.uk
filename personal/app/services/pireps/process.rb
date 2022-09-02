@@ -34,6 +34,7 @@ module Pireps
     end
 
     def call
+      num_valid_records = 0
       client.select_object_content(params) do |stream|
         stream.on_error_event do |event|
           Rails.logger.error event.error_message
@@ -42,6 +43,7 @@ module Pireps
         end
         
         row_segments = []
+
         # Callback for every event that arrives
         stream.on_event do |event|
           Rails.logger.debug event.event_type
@@ -59,8 +61,15 @@ module Pireps
           normalized_row = transform_row_columns(row_columns)
           normalized_row[:batch_file_id] = batch_file.id
           REDIS_PIREPS.call('rpush', 'pireps', normalized_row.to_json)
+          num_valid_records += 1
         end
+
+        stream.handler.on_end_event do |event|
+          batch_file.update!(processed_at: Time.current, num_records: num_valid_records)
+        end
+
       end # end of stream
+      
     end # call
   end
 end
