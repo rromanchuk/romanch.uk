@@ -8,7 +8,7 @@ module Pireps
 
     let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
 
-    def initialize(batch_file)
+    def initialize(batch_file=BatchFile.pending.first)
       super()
       @batch_file = batch_file
     end
@@ -79,73 +79,73 @@ module Pireps
         aircraft_ref: row[8],
         latitude: row[9], # Sort key
         longitude: row[10],
-        altitude_ft_msl: row[11],
+        altitude_ft_msl: row[11]&.to_i,
         sky_condition: [
           {
             sky_cover: row[12],
-            cloud_base_ft_msl: row[13],
-            cloud_top_ft_msl: row[14]
+            cloud_base_ft_msl: row[13]&.to_i,
+            cloud_top_ft_msl: row[14]&.to_i
           }.compact,
           {
             sky_cover: row[15],
-            cloud_base_ft_msl: row[16],
-            cloud_top_ft_msl: row[17]
+            cloud_base_ft_msl: row[16]&.to_i,
+            cloud_top_ft_msl: row[17]&.to_i
           }.compact
         ].compact,
         sky_cover: row[12],
-        cloud_base_ft_msl: row[13],
-        cloud_top_ft_msl: row[14],
+        cloud_base_ft_msl: row[13]&.to_i,
+        cloud_top_ft_msl: row[14]&.to_i,
         sky_cover_2: row[15],
-        cloud_base_ft_msl_2: row[16],
-        cloud_top_ft_msl_2: row[17],
+        cloud_base_ft_msl_2: row[16]&.to_i,
+        cloud_top_ft_msl_2: row[17]&.to_i,
         turbulence_condition: [
           {
             turbulence_type: row[18],
             turbulence_intensity: row[19],
-            turbulence_base_ft_msl: row[20],
-            turbulence_top_ft_msl: row[21],
+            turbulence_base_ft_msl: row[20]&.to_i,
+            turbulence_top_ft_msl: row[21]&.to_i,
             turbulence_freq: row[22]
           }.compact,
           {
             turbulence_type: row[23],
             turbulence_intensity: row[24],
-            turbulence_base_ft_msl: row[25],
-            turbulence_top_ft_msl: row[26],
+            turbulence_base_ft_msl: row[25]&.to_i,
+            turbulence_top_ft_msl: row[26]&.to_i,
             turbulence_freq: row[27]
           }.compact
         ].compact,
         turbulence_type: row[18],
         turbulence_intensity: row[19],
-        turbulence_base_ft_msl: row[20],
-        turbulence_top_ft_msl: row[21],
+        turbulence_base_ft_msl: row[20]&.to_i,
+        turbulence_top_ft_msl: row[21]&.to_i,
         turbulence_freq: row[22],
         turbulence_type_2: row[23],
         turbulence_intensity_2: row[24],
-        turbulence_base_ft_msl_2: row[25],
-        turbulence_top_ft_msl_2: row[26],
+        turbulence_base_ft_msl_2: row[25]&.to_i,
+        turbulence_top_ft_msl_2: row[26]&.to_i,
         turbulence_freq_2: row[27],
         icing_condition: [
           {
             icing_type: row[28],
             icing_intensity: row[29],
-            icing_base_ft_msl: row[30],
-            icing_top_ft_msl: row[31],
+            icing_base_ft_msl: row[30]&.to_i,
+            icing_top_ft_msl: row[31]&.to_i,
           }.compact,
           {
             icing_type_2: row[32],
             icing_intensity_1: row[33],
-            icing_base_ft_msl_2: row[34],
-            icing_top_ft_msl_2: row[35]
+            icing_base_ft_msl_2: row[34]&.to_i,
+            icing_top_ft_msl_2: row[35]&.to_i
           }.compact
         ].compact,
         icing_type: row[28],
         icing_intensity: row[29],
-        icing_base_ft_msl: row[30],
-        icing_top_ft_msl: row[31],
+        icing_base_ft_msl: row[30]&.to_i,
+        icing_top_ft_msl: row[31]&.to_i,
         icing_type_2: row[32],
         icing_intensity_1: row[33],
-        icing_base_ft_msl_2: row[34],
-        icing_top_ft_msl_2: row[35],
+        icing_base_ft_msl_2: row[34]&.to_i,
+        icing_top_ft_msl_2: row[35]&.to_i,
         visibility_statute_mi: row[36],
         wx_string: row[37],
         temp_c: row[38],

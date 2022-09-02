@@ -7,9 +7,10 @@ module Pireps
     ENDPOINT = 'https://www.aviationweather.gov/adds/dataserver_current/current/aircraftreports.cache.csv.gz'
     let(:object) do
       Aws::S3::Object.new(bucket_name: 'pireps',
-                          key: "current_aircraftreports/#{year}/#{month}/#{day}/#{prefix}_aircraftreports.cache.csv.gz",
+                          key: "#{env}/current_aircraftreports/#{year}/#{month}/#{day}/#{prefix}_aircraftreports.cache.csv.gz",
                           region: 'us-east-1')
     end
+    let(:env) { Rails.env }
     let(:redis) { RedisClient.new }
     let(:month) { Date.current.month }
     let(:year) { Date.current.year }
@@ -32,7 +33,7 @@ module Pireps
       if Sidekiq::ScheduledSet.new.size == 0
         time = 5
         50.times do
-          Pireps::Ingest.perform_at(time.minutes.from_now)
+          Pireps::IngestJob.perform_at(time.minutes.from_now)
           time += 5
         end
       end
