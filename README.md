@@ -15,34 +15,50 @@ gem install bundler
 bin/update_awscli
 cp .env.example .env
 ```
-#### Do stuff
+
 
 ```bash
+pushd personal
 yarn install
-pushd personal && bundle install
-bin/rails db:create && bin/rails db:migrate
+bundle install
+bin/rails db:setup
+```
 
-# Start local environment, tail -f 
+Start local environment, including required services
+``` 
 bin/dev
+```
 
-# Restart local puma
+Restart local puma-dev
+```
 touch tmp/restart.txt
+```
 
-# Deploy
-popd && bin/deploy
-
-# Non assets pipline 
-bin/upload-external
-
-# Update ec2 iam profile
-bin/update_iam_role
-
-# Connect
-bin/connect
-
-# Create AMI, update launch template, update default, trigger instance refresh on ASG
-bin/create_ami
-
-# Test
+Run backend tests
+```
 bin/rails test
 ```
+
+Deploy 
+``` 
+bin/deploy
+bin/upload-external
+```
+
+Update ec2 iam insance profile role.
+```
+bin/update_iam_role
+```
+
+Connect
+```
+bin/connect
+```
+
+Create AMI, update launch template, update default, trigger instance refresh on ASG
+```
+bin/create_ami
+```
+
+
+

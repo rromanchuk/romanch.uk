@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_102142) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_213500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -117,6 +117,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_102142) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
+  create_table "pireps_batch_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "source_type", null: false
+    t.string "source_url", null: false
+    t.string "source_etag", null: false
+    t.string "destination_etag", null: false
+    t.datetime "source_last_modified_at", null: false
+    t.datetime "source_fetched_at", null: false
+    t.datetime "processed_at"
+    t.integer "num_records_processed", default: 0, null: false
+    t.integer "content_length_bytes", default: 0, null: false
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pireps_raw_pireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "source_etag", null: false
@@ -125,6 +141,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_102142) do
     t.datetime "source_fetched_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "processed_at"
+    t.index ["key"], name: "index_pireps_raw_pireps_on_key", unique: true
+  end
+
+  create_table "pireps_raw_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "batch_file_id", null: false
+    t.text "raw_text", null: false
+    t.text "report_type", null: false
+    t.datetime "receipt_time", null: false
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_file_id"], name: "index_pireps_raw_reports_on_batch_file_id"
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -195,4 +224,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_102142) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pireps_raw_reports", "pireps_batch_files", column: "batch_file_id"
 end

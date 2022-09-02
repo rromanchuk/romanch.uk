@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "../../X-Plane 11/Custom Scenery/SponsoredCanopies"
+		},
+		{
+			"path": "../appcheck-lambda"
 		}
 	],
 	"extensions": {

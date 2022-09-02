@@ -5,6 +5,7 @@ import "controllers"
 import * as bootstrap from 'bootstrap';
 import { fontAwesomeInit, firebaseInit } from "initialize";
 
+
 fontAwesomeInit()
 const firebase = firebaseInit()
 

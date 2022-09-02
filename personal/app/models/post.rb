@@ -5,14 +5,14 @@ class Post < ApplicationRecord
   include Sluggable
   include Searchable
   include Taggable
-  has_many :videos
-  has_many :images, as: :imageable
+  
 
 
   pg_search_scope :search, against: %i[title markdown_content]
   validates_presence_of :title
   auto_strip_attributes :description, :title
 
+  broadcasts_to ->(post) { "posts" }, inserts_by: :prepend
   scope :published, -> { where(published: true) }
 
   def slug_candidates = [:title]

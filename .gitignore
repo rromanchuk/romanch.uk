@@ -15,3 +15,7 @@ iam.ts
 /personal/public/assets
 /personal/public/static/*
 /tmp/*
+dump.sql
+*.cache
+/xcode/Demo*
+/xcode/Realm*

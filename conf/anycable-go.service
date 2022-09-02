@@ -1,0 +1,23 @@
+[Unit]
+Description=AnyCable Go WebSocket Server
+After=network.target
+
+[Service]
+Type=simple
+
+EnvironmentFile=/home/ubuntu/.env
+
+ExecStart=/home/ubuntu/anycable-go-linux-arm64
+ExecStop=/bin/kill -TERM $MAINPID
+
+User=ubuntu
+Group=ubuntu
+UMask=0002
+#LimitNOFILE=16384
+
+Restart=on-failure
+SyslogIdentifier=anycable-go
+
+
+[Install]
+WantedBy=multi-user.target

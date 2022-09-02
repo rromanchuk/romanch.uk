@@ -68,9 +68,12 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 gem "redis-client"
+gem 'dynamoid'
 
 gem 'sidekiq'
 #gem 'sidekiq-cron', github: 'ondrejbartas/sidekiq-cron'
+gem "anycable-rails", "~> 1.1"
+gem "anycable-rails-jwt"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"

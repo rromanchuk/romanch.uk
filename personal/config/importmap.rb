@@ -6,7 +6,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/initialize", under: "initialize"
-
+pin_all_from "app/javascript/aws", under: "aws"
 
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js", preload: true
 pin "firebase/installations", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-installations.js"
@@ -50,12 +50,17 @@ pin "swift.js", to: "languages/swift.min.js"
 pin "erb.js", to: "languages/erb.min.js"
 pin "latex.js", to: "languages/latex.min.js"
 pin "python.js", to: "languages/python.min.js"
+pin "json.js", to: "languages/json.min.js"
+pin "xml.js", to: "languages/xml.min.js"
+pin "css.js", to: "languages/css.min.js"
 pin "scss.js", to: "languages/scss.min.js"
 pin "plaintext.js", to: "languages/plaintext.min.js"
 pin "sql.js", to: "languages/sql.min.js"
 pin "pgsql.js", to: "languages/pgsql.min.js"
 pin "json.js", to: "languages/json.min.js"
 pin "objectivec.js", to: "languages/objectivec.min.js"
+pin "yaml.js", to: "languages/yaml.min.js"
+
 
 pin "video.js", to: "https://cdn.jsdelivr.net/npm/video.js/+esm"
 pin "markdown-it", to: "https://cdn.jsdelivr.net/npm/markdown-it/+esm"

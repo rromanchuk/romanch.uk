@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   draw :oauth
   draw :romanchuk_open
   draw :personal
+  draw :pireps
 
   resources :tags, param: :name, only: [] do
     resources :posts, only: [:index], on: :collection
