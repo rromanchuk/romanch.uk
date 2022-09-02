@@ -1,11 +1,16 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # Specify AnyCable WebSocket server URL to use by JS client
+  config.after_initialize do
+    config.action_cable.url = ActionCable.server.config.url = ENV.fetch("CABLE_URL", "http://localhost:8080/cable") if true #AnyCable::Rails.enabled?
+  end
   # Settings specified here will take precedence over those in config/application.rb.
   config.hosts << "personal.test"
   config.hosts << "www.personal.test"
   config.hosts << "romanchukopen.test"
   config.hosts << "www.romanchukopen.test"
+  config.action_cable.allowed_request_origins = /(\.test$)|^localhost$/
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

@@ -6,7 +6,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/initialize", under: "initialize"
-
+pin_all_from "app/javascript/aws", under: "aws"
 
 pin "firebase/app", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js", preload: true
 pin "firebase/installations", to: "https://www.gstatic.com/firebasejs/9.9.3/firebase-installations.js"
