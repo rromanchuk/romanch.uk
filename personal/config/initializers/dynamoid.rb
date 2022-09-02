@@ -1,6 +1,8 @@
 
 Dynamoid::Config.timestamps = false
 Dynamoid::Config.store_attribute_with_nil_value = false
+Dynamoid::Config.store_datetime_as_string = true
+Dynamoid::Config.store_date_as_string = true
 Dynamoid::Config.region = 'us-east-1'
 
 

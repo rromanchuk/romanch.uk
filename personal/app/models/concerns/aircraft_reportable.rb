@@ -6,7 +6,7 @@ module AircraftReportable
     table key: :raw_text, read_capacity: 1, write_capacity: 1
     range :receipt_time
     
-    field :observation_time, :datetime, store_as_string: true # [1]
+    field :observation_time, :datetime
     
     # Midpoint- if the exact location of the Aircraft Report is not provided, the midpoint between two locations is assumed.
     field :mid_point_assumed # [2]
@@ -77,6 +77,12 @@ module AircraftReportable
     field :wind_speed_kt, :integer
     field :vert_gust_kt, :integer
     field :report_type
+    field :ttl, :integer
+    field :batch_file_id
     # field :raw_text
+  end
+
+  def after_create_tasks
+    RawReport.create!(raw_text: raw_text, report_type: report_type, batch_file_id: batch_file_id)
   end
 end

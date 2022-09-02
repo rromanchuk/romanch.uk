@@ -1,3 +1,4 @@
+env ../bin/shdotenv 
 compose: docker compose -f ../docker-compose.yml up 
 #web: bin/rails server -p 3000
 #sidekiq: bin/bundle exec sidekiq

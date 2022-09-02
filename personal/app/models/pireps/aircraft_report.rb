@@ -7,8 +7,7 @@ module Pireps
   class AircraftReport < PilotReport
     include AircraftReportable
 
-    field :ttl, :integer
-    field :raw_pirep_id
+    
 
     local_secondary_index hash_key: :raw_text, range_key: :latitude, projected_attributes: :keys_only
   end

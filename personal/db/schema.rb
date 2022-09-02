@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_182250) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_213500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_182250) do
     t.index ["key"], name: "index_pireps_raw_pireps_on_key", unique: true
   end
 
+  create_table "pireps_raw_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "batch_file_id", null: false
+    t.text "raw_text", null: false
+    t.text "report_type", null: false
+    t.datetime "receipt_time", null: false
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_file_id"], name: "index_pireps_raw_reports_on_batch_file_id"
+  end
+
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -213,4 +224,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_182250) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pireps_raw_reports", "pireps_batch_files", column: "batch_file_id"
 end
