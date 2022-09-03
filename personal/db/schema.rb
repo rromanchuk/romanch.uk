@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_02_213500) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_083551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,18 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_213500) do
     t.jsonb "data", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "pireps_raw_pireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "key", null: false
-    t.string "source_etag", null: false
-    t.string "destination_etag", null: false
-    t.datetime "source_last_modified_at", null: false
-    t.datetime "source_fetched_at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "processed_at"
-    t.index ["key"], name: "index_pireps_raw_pireps_on_key", unique: true
   end
 
   create_table "pireps_raw_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -4,7 +4,7 @@ Dynamoid::Config.store_attribute_with_nil_value = false
 Dynamoid::Config.store_datetime_as_string = true
 Dynamoid::Config.store_date_as_string = true
 Dynamoid::Config.region = 'us-east-1'
-
+Dynamoid::Config.warn_on_scan = true
 
 # # In case a console/rake gets launched
 # Dynamoid.configure do |config|
