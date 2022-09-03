@@ -1,14 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Raw reports</h1>
+<%= turbo_stream_from :raw_reports %>
+<%= turbo_frame_tag :raw_reports do %>
+  <%= render raw_reports %>
+<% end %>
 
-<div id="pireps_raw_reports">
-  <% @pireps_raw_reports.each do |pireps_raw_report| %>
-    <%= render pireps_raw_report %>
-    <p>
-      <%= link_to "Show this raw report", pireps_raw_report %>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New raw report", new_pireps_raw_report_path %>

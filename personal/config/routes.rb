@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     resources :pilot_reports, only: [:index, :show]
     resources :aircraft_reports, only: [:index, :show]
     resources :batch_files, only: [:index, :show]
+    resources :raw_reports, only: [:index, :show]
   end
 
 

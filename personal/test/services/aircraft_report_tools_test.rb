@@ -8,7 +8,7 @@ class AircraftReportToolsTest <ActiveSupport::TestCase
   
   test "sanity" do
     raw_line = "2022-09-01T05:51:12Z,2022-09-01T04:30:00Z,,,,,,,B737,56.4988,-134.9229,34000,,,,,,,CHOP,LGT,,,,,,,,,,,,,,,,,,,,,,,PIREP,SIT UA /OV BKA116030/TM 0430/FL340/TP B737/TB LGT CHOP/RM ZAN,"
-    parsed_row = split_csv_line(raw_line)
+    parsed_row = CSV.parse(raw_line).first
     assert_not_nil(parsed_row)
     assert_equal(parsed_row.count, 45)
     

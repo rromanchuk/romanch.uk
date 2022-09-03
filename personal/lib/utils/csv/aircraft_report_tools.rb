@@ -6,25 +6,6 @@ module Utils
     module AircraftReportTools
       extend self
       
-      def split_csv_line(raw_line)
-        row = CSV.parse(raw_line).first
-        return nil unless row.count == 45
-        
-        row
-        # CSV.parse(raw_row) do |row|
-        #   puts row
-        #   puts row.count
-        #   case row.count
-        #   when 45
-        #     next if row[0] == "receipt_time" # skip header row
-        #     by_csv_row(row)
-        #   when 1
-        #     puts "single column"
-        #     Rails.logger.info raw_row 
-        #   end
-        # end
-      end # normalize_row
-      
       def transform_row_columns(row)
         {
           receipt_time: row[0],
@@ -36,8 +17,8 @@ module Utils
           no_flt_lvl: row[6],
           bad_location: row[7],
           aircraft_ref: row[8],
-          latitude: row[9], # Sort key
-          longitude: row[10],
+          latitude: row[9]&.to_f, # Sort key
+          longitude: row[10]&.to_f,
           altitude_ft_msl: row[11]&.to_i,
           sky_condition: [
             {
@@ -107,10 +88,10 @@ module Utils
           icing_top_ft_msl_2: row[35]&.to_i,
           visibility_statute_mi: row[36],
           wx_string: row[37],
-          temp_c: row[38],
-          wind_dir_degrees: row[39],
-          wind_speed_kt: row[40],
-          vert_gust_kt: row[41],
+          temp_c: row[38]&.to_f,
+          wind_dir_degrees: row[39]&.to_i,
+          wind_speed_kt: row[40]&.to_i,
+          vert_gust_kt: row[41&.to_i],
           report_type: row[42],
           raw_text: row[43].squish # Key
           

@@ -1,2 +1,5 @@
-<div id="<%= dom_id raw_report %>">
-</div>
+<%= turbo_frame_tag raw_report do %>
+  <div>
+    <p><%= raw_report.raw_text %></p>
+  </div>
+<% end %>
