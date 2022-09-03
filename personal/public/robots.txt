@@ -1,4 +1,6 @@
 User-Agent: *
+Disallow: /*/edit$
+Disallow: /*/new$
 Allow: /
 
 Sitemap: https://romanch.uk/sitemap.xml

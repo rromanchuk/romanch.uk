@@ -47,28 +47,25 @@ module Pireps
         # Callback for every event that arrives
         stream.on_event do |event|
           Rails.logger.debug event.event_type
-          next unless event.event_type == :records
+          case event.event_type
+          when :end
+            batch_file.update!(processed_at: Time.current, num_records: num_valid_records)
+            Pireps::Save.async_call
+          when :records
+            raw_row_segment = event.payload.string
+            row_segments << raw_row_segment
+            next unless raw_row_segment.end_with?("\n")
 
-
-          raw_row_segment = event.payload.string
-          row_segments << raw_row_segment
-          next unless raw_row_segment.end_with?("\n")
-
-          raw_row = row_segments.join('')
-          row_segments = []
-          Rails.logger.debug raw_row
-          row_columns = split_csv_line(raw_row)
-          normalized_row = transform_row_columns(row_columns)
-          normalized_row[:batch_file_id] = batch_file.id
-          REDIS_PIREPS.call('rpush', 'pireps', normalized_row.to_json)
-          num_valid_records += 1
+            raw_row = row_segments.join('')
+            row_segments = []
+            Rails.logger.debug raw_row
+            row_columns = split_csv_line(raw_row)
+            normalized_row = transform_row_columns(row_columns)
+            normalized_row[:batch_file_id] = batch_file.id
+            REDIS_PIREPS.call('rpush', 'pireps', normalized_row.to_json)
+            num_valid_records += 1
+          end
         end
-
-        stream.handler.on_end_event do |event|
-          batch_file.update!(processed_at: Time.current, num_records: num_valid_records)
-          Pireps::Save.async_call
-        end
-
       end # end of stream
       
     end # call
