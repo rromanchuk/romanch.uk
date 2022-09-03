@@ -1,8 +1,11 @@
+
+<%- content_for(:page_title) { "Ryan Romanchuk's public key" } %>
+<%- content_for(:page_description) {'A4FB 7B3C 0D92 6E83 607E  7E03 9762 7E52 36CF 2455'} %>
 <pre>
   <code class="language-plaintext">
     -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: A4FB 7B3C 0D92 6E83 607E  7E03 9762 7E52 36CF 2455
-Comment: Ryan Romanchuk <ryan@romanch.uk>
+Comment: Ryan Romanchuk
 
 xsFNBGJ/vgIBEACuknEavp1bpkOeyZZ3uN7UV96/FpwAf2QEYGPQ5S+tvU//Uh/1
 1naJjl8y+seuNFQfA6puUWBIumqDLwv/4NkUHNMxiAsxZg5SOwvGmhli97no7tE/
@@ -55,3 +58,6 @@ MdNUDLHWSk6QbJpekwHN3EWQkEdQTTHUtF7/AUZlEBjaWcFwkNKdlPGD2dI=
 -----END PGP PUBLIC KEY BLOCK-----
   </code>
 </pre>
+
+
+<%= render 'shared/me' %>

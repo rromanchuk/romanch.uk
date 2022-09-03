@@ -66,6 +66,7 @@ module Pireps
 
         stream.handler.on_end_event do |event|
           batch_file.update!(processed_at: Time.current, num_records: num_valid_records)
+          Pireps::Save.async_call
         end
 
       end # end of stream

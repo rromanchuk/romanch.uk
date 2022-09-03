@@ -7,4 +7,10 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title"
   end
+
+  test "flying" do
+    get page_url("flying"), headers: {"Host": "personal.test"}
+    assert_response :success
+    assert_select "title"
+  end
 end
