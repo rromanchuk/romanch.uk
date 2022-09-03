@@ -21,15 +21,17 @@
         <li class="nav-item">
           <%= link_to "Flying", page_path("flying"), class: "nav-link #{active_class(page_path("flying"))}", data: { turbo_frame: "_top" } %>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="">
-            Data
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark">
-            <li><%= link_to "Batches", pireps_batch_files_path, class: "dropdown-item" %></li>
-            <li><%= link_to "PIREPS", pireps_pilot_reports_path, class: "dropdown-item" %></li>
-          </ul>
-        </li>
+        <% if current_user %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="">
+              Data
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><%= link_to "Batches", pireps_batch_files_path, class: "dropdown-item" %></li>
+              <li><%= link_to "PIREPS", pireps_pilot_reports_path, class: "dropdown-item" %></li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
       <%= form_with(url: posts_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'posts'}, class: 'd-flex') do |f| %>
         <%= f.text_field(:q, class: "form-control", placeholder: "Find a snippet", data: {action: 'input->search#submit', search_target: 'input'}) %>

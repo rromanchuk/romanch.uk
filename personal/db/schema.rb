@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_03_083551) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_195645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,19 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_083551) do
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
     t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
-  end
-
-  create_table "images", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "key", null: false
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "caption"
-    t.string "title"
-    t.string "geo_location"
-    t.uuid "imageable_id"
-    t.string "imageable_type"
-    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -193,21 +180,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_083551) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "username"
+    t.jsonb "data", default: {}
     t.index ["slug"], name: "index_users_on_slug", unique: true
-  end
-
-  create_table "videos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "key", null: false
-    t.string "aspect"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "slug"
-    t.string "title"
-    t.string "description"
-    t.string "thumbnail_key"
-    t.uuid "post_id"
-    t.index ["post_id"], name: "index_videos_on_post_id"
-    t.index ["slug"], name: "index_videos_on_slug", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
