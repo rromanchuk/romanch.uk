@@ -30,16 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <% players.each do |player| %>
-          <tr>
-            <td><%= link_to player.name, romanchuk_open_player_path(player) %></td>
-            <td>
-              <% player.tournaments.each do |tournament|  %>
-                <%= link_to tournament.year, romanchuk_open_tournament_path(tournament) %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
+        <%= render players %>
       </tbody>
     </table>
   </div>

@@ -1,11 +1,11 @@
 class Pireps::RawReportsController < ApplicationController
 
-  # GET /pireps/raw_reports or /pireps/raw_reports.json
+  # GET /pireps/raw_reports
   def index
     @pireps_raw_reports = Pireps::RawReport.all
   end
 
-  # GET /pireps/raw_reports/1 or /pireps/raw_reports/1.json
+  # GET /pireps/raw_reports/1
   def show
   end
 
@@ -18,7 +18,7 @@ class Pireps::RawReportsController < ApplicationController
   def edit
   end
 
-  # POST /pireps/raw_reports or /pireps/raw_reports.json
+  # POST /pireps/raw_reports
   def create
     @raw_report = Pireps::RawReport.new(raw_report)
 
@@ -29,7 +29,7 @@ class Pireps::RawReportsController < ApplicationController
       end
   end
 
-  # PATCH/PUT /pireps/raw_reports/1 or /pireps/raw_reports/1.json
+  # PATCH/PUT /pireps/raw_reports/1
   def update
 
     if raw_report.update(pireps_raw_report_params)
@@ -40,7 +40,7 @@ class Pireps::RawReportsController < ApplicationController
 
   end
 
-  # DELETE /pireps/raw_reports/1 or /pireps/raw_reports/1.json
+  # DELETE /pireps/raw_reports/1
   def destroy
     @raw_report.destroy
      redirect_to pireps_raw_reports_url, notice: "Raw report was successfully destroyed." }

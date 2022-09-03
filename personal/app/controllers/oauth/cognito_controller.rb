@@ -17,8 +17,22 @@ module Oauth
       ) 
     end
 
-    def authorize
+    # let(:client) do
+    #   OAuth2::Client.new(
+    #     Credentials[:cognito_client],
+    #     Credentials[:cognito_client_secret], 
+    #     site: Credentials[:cognito_hosted_authorize_url],
+    #     authorize_url: "/oauth2/authorize",
+    #     token_url: "/login"
+    #   ) 
+    # end
+
+    def authorize_apple
       redirect_to client.auth_code.authorize_url(redirect_uri: oauth_cognito_token_url, identity_provider: 'SignInWithApple'), allow_other_host: true
+    end
+
+    def authorize
+      redirect_to client.auth_code.authorize_url(redirect_uri: oauth_cognito_token_url), allow_other_host: true
     end
 
     def token

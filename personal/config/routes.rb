@@ -11,28 +11,61 @@ class PersonalConstraint
 end
 
 Rails.application.routes.draw do
-  draw :oauth
-  draw :romanchuk_open
-  draw :personal
-  draw :pireps
-
-  resources :tags, param: :name, only: [] do
-    resources :posts, only: [:index], on: :collection
+  get :healthcheck, to: 'pages#show', id: 'status'
+  resources :posts
+  resources :videos
+  resources :blobs
+  resources :projects, only: [:index, :show]
+  resources :users, only: [:show, :index] do
+    get :me, on: :collection
   end
+
+  resource :sessions, only: [] do
+    get :apple_signin
+    post :client
+  end
+  
+  get 'logout', to: 'sessions#logout'
+  get 'login', to: 'sessions#login'
+  get '/s/resume', to: 'resume#index'
+  get '/s/resume/download', to: 'resume#download', as: :download_resume
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
   namespace :serve, path: '/serve' do
     resources :images, only: [:show]
     resources :videos, only: [:show]
   end
-  
-  resource :sessions, only: [] do
-    get :apple_signin
-    post :client
-  end
-  get 'logout', to: 'sessions#logout'
-  get 'login', to: 'sessions#login'
 
-  get :healthcheck, to: 'pages#show', id: 'status'
+  resources :tags, param: :name, only: [] do
+    resources :posts, only: [:index], on: :collection
+  end
+
+  namespace :oauth do
+    get "cognito/token", to: "cognito#token"
+    get "cognito/authorize", to: "cognito#authorize"
+    get "cognito/authorize_apple", to: "cognito#authorize_apple"
+  end
+
+  
+  namespace :romanchuk_open do
+    resources :golfers
+    resources :players do
+      resources :golfers, only: [:new]
+    end
+    resources :tournaments do
+      resources :golfers, only: [:index]
+      get :newsletter, on: :member
+      resources :images, as: :imageable, only: [:show]
+    end
+    get "/pages/*id" => 'pages#show', as: :page, format: false
+  end
+
+  namespace :pireps do
+    resources :pilot_reports, only: [:index, :show]
+    resources :aircraft_reports, only: [:index, :show]
+    resources :batch_files, only: [:index, :show]
+  end
+
 
   constraints(RomanchukOpenConstraint.new) do
     root 'romanchuk_open/tournaments#index', as: :romanchuk_open

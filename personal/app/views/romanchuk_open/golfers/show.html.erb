@@ -1,2 +1,5 @@
 <% content_for :page_title, "#{golfer.name} - #{golfer.tournament.title}" %>
-<h1><%= golfer.name %></h1>
+
+<% turbo_frame_tag golfer do %>
+  <h1><%= golfer.name %></h1>
+<% end %>
