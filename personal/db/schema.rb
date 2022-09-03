@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_03_195645) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_210615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,8 +123,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_195645) do
   create_table "pireps_raw_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "batch_file_id", null: false
     t.text "raw_text", null: false
-    t.text "report_type", null: false
     t.datetime "receipt_time", null: false
+    t.datetime "observation_time"
+    t.text "quality_control_flags"
+    t.text "aircraft_ref", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.integer "altitude_ft_msl"
+    t.jsonb "sky_condition", default: [], null: false
+    t.jsonb "turbulence_condition", default: [], null: false
+    t.jsonb "icing_condition", default: [], null: false
+    t.integer "visibility_statute_mi"
+    t.string "wx_string"
+    t.float "temp_c"
+    t.integer "wind_dir_degrees"
+    t.integer "wind_speed_kt"
+    t.integer "vert_gust_kt"
+    t.text "report_type", null: false
     t.jsonb "data", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

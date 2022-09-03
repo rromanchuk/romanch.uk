@@ -10,7 +10,7 @@ module Pireps
 
     let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
 
-    def initialize(batch_file=BatchFile.pending.first)
+    def initialize(batch_file = BatchFile.pending.first)
       super()
       @batch_file = batch_file
     end
@@ -20,7 +20,7 @@ module Pireps
         bucket: :pireps, # required
         key: batch_file.key, # required
         expression_type: 'SQL', # required, accepts SQL,
-        expression: "SELECT * FROM s3object s where s._43 = 'PIREP' or s._43 = 'AIREP'", # required
+        expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required
         input_serialization: {
           compression_type: 'GZIP',
           csv: {
@@ -36,14 +36,13 @@ module Pireps
     def call
       return nil unless batch_file
 
-      
       client.select_object_content(params) do |stream|
         stream.on_error_event do |event|
           Rails.logger.error event.error_message
           # catch unmodeled error event in the stream
           raise event
         end
-        
+
         row_segments = []
         num_valid_records = 0
         # Callback for every event that arrives
@@ -64,6 +63,7 @@ module Pireps
             Rails.logger.debug raw_row
             CSV.parse(raw_row) do |row|
               next unless row.count == 45
+
               normalized_row = transform_row_columns(row)
               normalized_row[:batch_file_id] = batch_file.id
               Rails.logger.info normalized_row

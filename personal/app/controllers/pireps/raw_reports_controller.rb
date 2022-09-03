@@ -1,14 +1,11 @@
 class Pireps::RawReportsController < ApplicationController
   let(:raw_report) { Pireps::RawReport.find(params[:id]) }
-  let(:raw_reports) { Pireps::RawReport.all }
+  let(:raw_reports) { Pireps::RawReport.pireps }
   # GET /pireps/raw_reports
-  def index
-   
-  end
+  def index; end
 
   # GET /pireps/raw_reports/1
-  def show
-  end
+  def show; end
 
   # GET /pireps/raw_reports/new
   def new
@@ -16,14 +13,13 @@ class Pireps::RawReportsController < ApplicationController
   end
 
   # GET /pireps/raw_reports/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /pireps/raw_reports
   def create
     @raw_report = Pireps::RawReport.new(raw_report_params)
     if raw_report.save
-      redirect_to pireps_raw_report_url(raw_report), notice: "Raw report was successfully created."
+      redirect_to pireps_raw_report_url(raw_report), notice: 'Raw report was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,21 +28,22 @@ class Pireps::RawReportsController < ApplicationController
   # PATCH/PUT /pireps/raw_reports/1
   def update
     if raw_report.update(raw_report_params)
-      redirect_to pireps_raw_report_url(raw_report), notice: "Raw report was successfully updated." 
+      redirect_to pireps_raw_report_url(raw_report), notice: 'Raw report was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity 
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /pireps/raw_reports/1
   def destroy
     raw_report.destroy
-    redirect_to pireps_raw_reports_url, notice: "Raw report was successfully destroyed." 
+    redirect_to pireps_raw_reports_url, notice: 'Raw report was successfully destroyed.'
   end
 
   private
-    # Only allow a list of trusted parameters through.
-    def raw_report_params
-      params.fetch(:pireps_raw_report, {})
-    end
+
+  # Only allow a list of trusted parameters through.
+  def raw_report_params
+    params.fetch(:pireps_raw_report, {})
+  end
 end

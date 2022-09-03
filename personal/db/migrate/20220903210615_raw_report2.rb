@@ -1,5 +1,6 @@
-class CreateRawReportsTable < ActiveRecord::Migration[7.0]
+class RawReport2 < ActiveRecord::Migration[7.0]
   def change
+    drop_table :pireps_raw_reports
     create_table :pireps_raw_reports, id: :uuid do |t|
       t.references :batch_file, type: :uuid, null: false, foreign_key: { to_table: :pireps_batch_files }
       t.text :raw_text, null: false
