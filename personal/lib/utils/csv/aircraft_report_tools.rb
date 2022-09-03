@@ -8,8 +8,8 @@ module Utils
       
       def transform_row_columns(row)
         {
-          receipt_time: row[0],
-          observation_time: [1], # sort key
+          receipt_time: Time.parse(row[0]).change(usec: 0),
+          observation_time: Time.parse([1]).change(usec: 0), # sort key
           mid_point_assumed: row[2],
           no_time_stamp: row[3],
           flt_lvl_range: row[4],

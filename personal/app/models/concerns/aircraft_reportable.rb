@@ -3,7 +3,7 @@ module AircraftReportable
   
   included do
     include Dynamoid::Document
-    table key: :raw_text, read_capacity: 1, write_capacity: 1
+    table key: :raw_text, read_capacity: 1, write_capacity: 1, timestamps: false
     range :receipt_time, :datetime
     
     field :observation_time, :datetime

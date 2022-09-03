@@ -14,7 +14,10 @@ export default class extends Controller {
 
   save() {
     console.log("save")
-    var md = new MarkdownIt();
+    var md = new MarkdownIt({
+      html: true,
+      linkify: true,
+    });
     this.htmlTarget.value = md.render(this.markdownTarget.value);;
   }
 }
