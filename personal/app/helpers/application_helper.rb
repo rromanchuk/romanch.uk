@@ -1,8 +1,8 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  def my_config() = Rails.configuration.general
-  def iid() = cookies[:iid].presence
+  def my_config = Rails.configuration.general
+  def iid = cookies[:iid].presence
 
   def style_tags
     ['application', *content_for(:styles)&.split(',')]
@@ -10,6 +10,25 @@ module ApplicationHelper
 
   def active_class(path)
     'active' if current_page?(path)
+  end
+
+  def ld_breadcrumb_items(crumbs)
+    crumbs.map.with_index do |crumb, idx|
+      {
+        "@type": 'ListItem',
+        "position": idx + 1,
+        "name": crumb.name,
+        "item": crumb.path
+      }
+    end
+  end
+
+  def ld_breadcrumbs(crumbs)
+    {
+      "@context": 'https://schema.org',
+      "@type": 'BreadcrumbList',
+      "itemListElement": ld_breadcrumb_items(crumbs)
+    }.to_json
   end
 
   def glb_models
@@ -46,7 +65,7 @@ module ApplicationHelper
       ['CurvedBanners/Sportys.glb', '/static/models/CurvedBanners/Sportys.glb'],
       ['CurvedBanners/SQKR.glb', '/static/models/CurvedBanners/SQKR.glb'],
       ['CurvedBanners/TFP.glb', '/static/models/CurvedBanners/TFP.glb'],
-      ['CurvedBanners/ThrustMaster.glb', '/static/models/CurvedBanners/ThrustMaster.glb'],
+      ['CurvedBanners/ThrustMaster.glb', '/static/models/CurvedBanners/ThrustMaster.glb']
     ]
   end
 end

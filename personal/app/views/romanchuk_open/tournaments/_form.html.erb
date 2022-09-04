@@ -5,6 +5,6 @@
   <%= f.input :newsletter %>
   <%= f.input :location %>
   <%= f.input :city %>
-  <%# f.input :country %>
+  <%= f.association :ro_photo_blobs, as: :check_boxes %>
   <%= f.submit class: "btn-primary" %>
 <% end %>

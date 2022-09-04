@@ -1,7 +1,7 @@
 env ../bin/shdotenv 
 compose: docker compose -f ../docker-compose.yml up 
 #web: bin/rails server -p 3000
-#sidekiq: bin/bundle exec sidekiq
+sidekiq: bin/bundle exec sidekiq
 css: yarn build:css --watch
 devlog: tail -f log/development.log
 pumalog: tail -f ~/Library/Logs/puma-dev.log

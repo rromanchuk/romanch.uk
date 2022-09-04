@@ -7,7 +7,7 @@ module Pireps
     scope :aireps, -> { where(report_type: 'AIREP') }
 
     def remarks
-      %r{/RM\s(.+)}.match(raw_text)[1]
+      %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
     end
 
     def urgent?
@@ -15,7 +15,7 @@ module Pireps
     end
 
     def identifier
-      /(^\w{3,4})/.match(raw_text)[1]
+      /(?<identifier>^\w{3,4})/.match(raw_text)&.[](:identifier)
     end
 
     # def find_dyn

@@ -1,22 +1,9 @@
-<nav aria-label="breadcrumb" class="navbar navbar-dark bg-dark shadow-sm">
+<nav aria-label="breadcrumb" class="navbar navbar-dark  shadow-sm">
   <div class="container-sm">
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
-      <% crumbs.each do |crumb| %>
-        <%= tag.li class: "breadcrumb-item #{crumb.link? ? 'text-white' : 'active'}" do %>
-          <% if crumb.link? %>
-              <%= link_to crumb.name, crumb.path, class: 'nav-link' %>
-            <% else %>
-              <%= crumb.name %>
-            <% end %>
-          <% end %>
-      <% end %>
+      
+      <%= bread_crumbs(crumbs) %>
+      
     </ol>
-    <div class="collapse navbar-collapse justify-content-md-center">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link">Participants</a>
-        </li>
-      </ul>
-    </div>
   </div>
 </nav>

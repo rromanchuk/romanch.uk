@@ -10,7 +10,7 @@ module Pireps
 
     let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
 
-    def initialize(batch_file = BatchFile.pending.first)
+    def initialize(batch_file = BatchFile.pending.last)
       super()
       @batch_file = batch_file
     end
@@ -66,8 +66,9 @@ module Pireps
 
               normalized_row = transform_row_columns(row)
               normalized_row[:batch_file_id] = batch_file.id
-              Rails.logger.info normalized_row
-              RedisClient.new.call('rpush', 'pireps', normalized_row.to_json)
+              # Rails.logger.info normalized_row
+              queue_size = RedisClient.new.call('rpush', 'pireps', normalized_row.to_json)
+              Rails.logger.info "Queue size: #{queue_size}"
               num_valid_records += 1
             end
           end

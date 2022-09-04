@@ -1,9 +1,0 @@
-<h1> pilot reports </h1>
-<%= turbo_stream_from :pilot_reports %>
-<%= turbo_frame_tag :pilot_reports do %>
-  <div class="row gy-3">
-    
-    <%= render partial: 'pilot_report', collection: pilot_reports %>
-    
-  </div>
-<% end %>

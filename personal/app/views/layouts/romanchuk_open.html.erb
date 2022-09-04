@@ -12,6 +12,9 @@
     <% if breadcrumbs? %>
       <title><%= breadcrumbs_to_s %></title>
       <meta property="og:title" content="<%= breadcrumbs_to_s %>">
+      <script type="application/ld+json">
+        <%== ld_breadcrumbs(breadcrumbs) %>
+      </script>
     <% elsif content_for?(:page_title) %>
       <title><%= yield(:page_title) %></title>
       <meta property="og:title" content="<%= yield(:page_title) %>">
