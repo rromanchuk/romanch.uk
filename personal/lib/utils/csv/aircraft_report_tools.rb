@@ -72,10 +72,10 @@ module Utils
               icing_top_ft_msl: row[31]&.to_i
             }.compact,
             {
-              icing_type_2: row[32],
-              icing_intensity_1: row[33],
-              icing_base_ft_msl_2: row[34]&.to_i,
-              icing_top_ft_msl_2: row[35]&.to_i
+              icing_type: row[32],
+              icing_intensity: row[33],
+              icing_base_ft_msl: row[34]&.to_i,
+              icing_top_ft_msl: row[35]&.to_i
             }.compact
           ].compact_blank,
           # icing_type: row[28],

@@ -1,8 +1,9 @@
-require "test_helper"
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  test "the truth" do
-    users(:ryan)
-    assert true
+  test 'sanity' do
+    assert_nothing_raised do
+      users(:ryan)
+    end
   end
 end

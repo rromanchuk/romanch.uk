@@ -17,24 +17,30 @@
       </tr>
       <tr class="">
         <td class="w-25 fw-semibold">Location</td>
-        <td class=""><%= "#{raw_report.latitude}#{raw_report.longitude}" %></td>
+        <td class=""><%= "#{raw_report.latitude}, #{raw_report.longitude}" %></td>
       </tr>
       <tr class="">
         <td class="w-25 fw-semibold">Flight level:</td>
         <td class=""><%= raw_report.altitude_ft_msl %></td>
       </tr>
-      <tr class="">
-        <td class="w-25 fw-semibold">Sky Conditions</td>
-        <td class=""><%= raw_report.sky_condition %></td>
-      </tr>
-      <tr class="">
-        <td class="w-25 fw-semibold">Icing Conditions</td>
-        <td class=""><%= raw_report.icing_condition %></td>
-      </tr>
-      <tr class="">
-        <td class="w-25 fw-semibold">Turbulance Conditions</td>
-        <td class=""><%= raw_report.turbulence_condition %></td>
-      </tr>
+      <% unless raw_report.sky_condition.blank? %>
+        <tr class="">
+          <td class="w-25 fw-semibold">Sky Conditions</td>
+          <td class=""><%= raw_report.sky_condition %></td>
+        </tr>
+      <% end %>
+      <% unless raw_report.icing_condition.blank? %>
+        <tr class="">
+          <td class="w-25 fw-semibold">Icing Conditions</td>
+          <td class=""><%== raw_report.icing_condition.to_json %></td>
+        </tr>
+      <% end %>
+      <% unless raw_report.icing_condition.blank? %>
+        <tr class="">
+          <td class="w-25 fw-semibold">Turbulance Conditions</td>
+          <td class=""><%= raw_report.turbulence_condition %></td>
+        </tr>
+      <% end %>
       <tr class="">
         <td class="w-25 fw-semibold">Remarks</td>
         <td class=""><%= raw_report.remarks %></td>

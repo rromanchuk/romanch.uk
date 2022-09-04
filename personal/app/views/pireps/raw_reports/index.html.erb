@@ -4,6 +4,7 @@
 <%= turbo_stream_from :raw_reports %>
 <%= turbo_frame_tag :raw_reports do %>
   <%= render raw_reports %>
+  <%= render "pager" %>
 <% end %>
 
 

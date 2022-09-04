@@ -1,8 +1,9 @@
-require "test_helper"
+require 'test_helper'
 
 class PostTest < ActiveSupport::TestCase
-  test "the truth" do
-    posts(:one)
-    assert true
+  test 'sanity' do
+    assert_nothing_raised do
+      posts(:one)
+    end
   end
 end

@@ -1,6 +1,10 @@
 class Pireps::RawReportsController < ApplicationController
+  let(:dr_pagy)
   let(:raw_report) { Pireps::RawReport.find(params[:id]) }
-  let(:raw_reports) { Pireps::RawReport.pireps }
+  let(:raw_reports) do
+    @dr_pagy, _raw_reports = pagy(Pireps::RawReport.pireps, items: 50)
+    _raw_reports
+  end
   # GET /pireps/raw_reports
   def index; end
 
