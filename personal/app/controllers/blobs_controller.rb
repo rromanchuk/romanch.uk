@@ -1,14 +1,13 @@
 class BlobsController < ApplicationController
+  before_action :require_user!
   let(:blobs) { Blob.all }
   let(:blob) { Blob.friendly.find(params[:id]) }
 
   def new
     @blob = Blob.new
-    authorize! blob
   end
 
   def destroy
-    authorize! blob
     blobs.destroy
     redirect_to blobs_path, status: 303
   end
@@ -16,7 +15,6 @@ class BlobsController < ApplicationController
   def edit; end
 
   def update
-    authorize! blobs
     blob.update!(blob_params)
     redirect_to blobs_path, status: 303
   end
@@ -33,9 +31,7 @@ class BlobsController < ApplicationController
     end
   end
 
-  def index
-    require_me!
-  end
+  def index; end
 
   private
 

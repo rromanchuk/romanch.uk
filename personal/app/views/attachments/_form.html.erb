@@ -1,0 +1,11 @@
+<%= simple_form_for attachment, html: { data: { turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :record_type do %>
+    <%= f.select :record_type, [['RomanchukOpen::Tournament', 'RomanchukOpen::Tournament']], include_blank: true %>
+  <% end %>
+  <%= f.input :record_id %>
+  <%= f.association :blob, collection: Blob.unattached.order(:name) %>
+  
+  <%= f.button :submit %>
+<% end %>

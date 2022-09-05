@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :videos
   resources :blobs
+  resources :attachments
   resources :projects, only: %i[index show]
-  resources :users, only: %i[show index] do
+  resources :users do
     get :me, on: :collection
   end
 

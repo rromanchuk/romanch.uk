@@ -1,9 +1,16 @@
 class UserPolicy < ApplicationPolicy
-
   def index?
     me?
   end
-  
+
+  def create?
+    me?
+  end
+
+  def update?
+    me?
+  end
+
   def me?
     me?
   end

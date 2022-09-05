@@ -40,7 +40,7 @@ class PostsController < ApplicationController
     @new_post = Post.new(post_params)
     authorize! @new_post
     if @new_post.save
-      redirect_to posts_path
+      redirect_to posts_path, notice: 'Post was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
   def destroy
     authorize! post
     post.destroy
-    redirect_to posts_path, status: 303
+    redirect_to posts_path, status: 303, notice: 'Post was successfully deleted.'
   end
 
   private
