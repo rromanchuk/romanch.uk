@@ -11,7 +11,7 @@ module Sessionable
   end
 
   def require_me!
-    not_authorized_error unless current_user&.cognito_id == '54467d4a-f7bc-457d-aa72-55842106b02e'
+    not_authorized_error unless me?
   end
 
   def require_user!
@@ -42,6 +42,12 @@ module Sessionable
     User.create_with({}).find_or_create_by!(cognito_id: amzn_oidc_identity).tap do |user|
       set_current_user(user)
     end
+  end
+
+  def me?
+    return false if current_user.nil?
+
+    current_user.me?
   end
 
   def set_current_user(user)
