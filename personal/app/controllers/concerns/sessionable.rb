@@ -21,8 +21,8 @@ module Sessionable
   def not_authorized_error
     session[:original_request] = request.original_url
     if Rails.env.development?
-      redirect_to(oauth_cognito_authorize_path) 
-      return 
+      redirect_to(oauth_cognito_authorize_path)
+      return
     end
 
     redirect_to(login_path) and return
@@ -30,7 +30,7 @@ module Sessionable
 
   def find_by_session
     return nil unless session[:user_id]
-    
+
     User.find_by(id: session[:user_id])&.tap do |user|
       set_current_user(user)
     end
@@ -38,7 +38,7 @@ module Sessionable
 
   def find_by_alb
     return nil unless amzn_oidc_identity
-    
+
     User.create_with({}).find_or_create_by!(cognito_id: amzn_oidc_identity).tap do |user|
       set_current_user(user)
     end
@@ -51,6 +51,6 @@ module Sessionable
 
   def logout!
     cookies.delete '_alb_personal'
-    session[:user_id] = nil
+    set_current_user(nil)
   end
 end

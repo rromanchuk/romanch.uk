@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :require_user!, except: %i[apple_signin client]
+  before_action :require_user!, except: %i[apple_signin client logout]
 
   def logout
     logout!
