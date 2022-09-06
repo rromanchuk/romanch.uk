@@ -2,8 +2,14 @@ class Pireps::RawReportsController < ApplicationController
   let(:dr_pagy)
   let(:raw_report) { Pireps::RawReport.find(params[:id]) }
   let(:raw_reports) do
-    @dr_pagy, _raw_reports = pagy(Pireps::RawReport.pireps, items: 50)
-    _raw_reports
+    case params[:filter]
+    when 'uua'
+      @dr_pagy, _raw_reports = pagy(Pireps::RawReport.pireps.urgent, items: 50)
+      _raw_reports
+    else
+      @dr_pagy, _raw_reports = pagy(Pireps::RawReport.pireps, items: 50)
+      _raw_reports
+    end
   end
   # GET /pireps/raw_reports
   def index; end

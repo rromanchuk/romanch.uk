@@ -4,7 +4,7 @@
       <% if dr_pagy&.prev %>
         <%= link_to(
           "< Previous page",
-          pireps_raw_reports_path(page: dr_pagy.prev),
+          pireps_raw_reports_path(page: dr_pagy.prev, filter: params[:filter]),
           class: "page-link",
           data: {
             turbo_action: "advance"
@@ -16,7 +16,7 @@
       <% if dr_pagy&.next %>
         <%= link_to(
           "Next page >",
-          pireps_raw_reports_path(page: dr_pagy.next),
+          pireps_raw_reports_path(page: dr_pagy.next, filter: params[:filter]),
           class: "page-link",
           data: {
             turbo_action: "advance"
