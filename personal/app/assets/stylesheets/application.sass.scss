@@ -81,3 +81,16 @@ $offcanvas-horizontal-width: 40vw;
 //   width: 210px;
 //   height: 40px;
 // }
+
+
+
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 3px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+}
+blockquote p {
+  display: inline-block;
+}

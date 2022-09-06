@@ -2,12 +2,13 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@babel/runtime": "^7.19.0",
     "@types/markdown-it": "^12.2.3",
     "bootstrap": "5.2.0-beta1",
     "cesium": "^1.93.0",
     "highlight.js": "^11.5.1",
     "sass": "^1.50.1",
-    "video.js": "^7.18.1"
+    "video.js": "^7.20.2"
   },
   "scripts": {
     "build:css": "./bin/build-css"

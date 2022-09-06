@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     get 'cognito/token', to: 'cognito#token'
     get 'cognito/authorize', to: 'cognito#authorize'
     get 'cognito/authorize_apple', to: 'cognito#authorize_apple'
+    get 'cognito/logout', to: 'cognito#logout'
   end
 
   namespace :romanchuk_open do

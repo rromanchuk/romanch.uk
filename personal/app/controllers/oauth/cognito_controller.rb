@@ -22,6 +22,10 @@ module Oauth
                   allow_other_host: true
     end
 
+    def logout
+      redirect_to client.get('/logout', params: { logout_uri: logout_url })
+    end
+
     def authorize
       redirect_to client.auth_code.authorize_url(redirect_uri: oauth_cognito_token_url), allow_other_host: true
     end
