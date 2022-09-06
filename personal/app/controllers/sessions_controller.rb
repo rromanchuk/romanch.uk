@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
   def apple_signin; end
 
   def client; end
+  def account; end
 
   # Virtual path for ALB cognito authentication on the ALB listener. The url
   # path of /login with will require valid session and redirect to hosted

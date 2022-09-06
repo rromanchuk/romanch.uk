@@ -3,6 +3,10 @@
     <table class="table table-borderless table-sm responsive">
       <tbody class="">
         <tr class="">
+          <td class="w-25 fw-semibold">Created at</td>
+          <td class=""><%= batch_file.created_at %></td>
+        </tr>
+        <tr class="">
           <td class="w-25 fw-semibold">Source type</td>
           <td class=""><%= batch_file.source_type %></td>
         </tr>
@@ -16,6 +20,10 @@
         </tr>
         <tr class="">
           <td class="w-25 fw-semibold">Records</td>
+          <td class=""><%= batch_file.num_records_processed %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Processed at</td>
           <td class=""><%= batch_file.num_records_processed %></td>
         </tr>
       </tbody>

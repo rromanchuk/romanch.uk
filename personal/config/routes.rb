@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     post :client
   end
 
+  get 'account', to: 'sessions#account'
   get 'logout', to: 'sessions#logout'
   get 'login', to: 'sessions#login'
   get '/s/resume', to: 'resume#index'

@@ -2,7 +2,9 @@ module Pireps
   class RawReport < ApplicationRecord
     self.implicit_order_column = 'receipt_time'
     include Turbo::Broadcastable
+
     belongs_to :batch_file
+    before_create :before_create_tasks
 
     store_accessor :data, :remarks, :sa_identifier
 
@@ -17,7 +19,7 @@ module Pireps
     # def dyn_prireps
     #   PilotReport.where(report_type: 'PIREP').scan_index_forward(false)
     # end
-    private
+    # private
 
     def before_create_tasks
       self.urgent = /[UA]{3}/.match?(raw_text)

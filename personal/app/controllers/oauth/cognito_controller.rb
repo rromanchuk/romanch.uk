@@ -23,7 +23,8 @@ module Oauth
     end
 
     def logout
-      redirect_to client.get('/logout', params: { logout_uri: logout_url })
+      redirect_to client.connection.build_url('/logout', { logout_uri: logout_url, client_id: Credentials[:cognito_client] }).to_s,
+                  allow_other_host: true
     end
 
     def authorize

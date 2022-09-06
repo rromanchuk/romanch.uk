@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   let(:posts) do
     if (tag_name = params[:tag_name])
       relation = authorized_scope(Post.tagged_with(names: [tag_name], match: :any))
-      @dr_pagy, _posts = pagy(relation, items: 10)
+      @dr_pagy, _posts = pagy(relation, items: 25)
       _posts
     elsif (q = params[:q].presence)
       relation = authorized_scope(Post.search(q))
@@ -13,7 +13,7 @@ class PostsController < ApplicationController
       _posts
     else
       relation = authorized_scope(Post.recent)
-      @dr_pagy, _posts = pagy(relation, items: 10)
+      @dr_pagy, _posts = pagy(relation, items: 25)
       _posts
     end
   end
