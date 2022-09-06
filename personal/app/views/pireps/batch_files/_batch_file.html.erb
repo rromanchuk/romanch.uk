@@ -11,16 +11,24 @@
           <td class=""><%= batch_file.source_type %></td>
         </tr>
         <tr class=""> 
+          <td class="w-25 fw-semibold">Source url</td>
+          <td class=""><%= batch_file.source_url %></td>
+        </tr>
+        <tr class=""> 
           <td class="w-25 fw-semibold">Source etag</td>
           <td class=""><%= batch_file.source_etag %></td>
         </tr>
         <tr class="">
-          <td class="w-25 fw-semibold">Content length</td>
-          <td class=""><%= batch_file.content_length_bytes %></td>
+          <td class="w-25 fw-semibold">Content length (bytes)</td>
+          <td class=""><%= number_to_human_size(batch_file.content_length_bytes) %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Destination key</td>
+          <td class=""><%= batch_file.key %></td>
         </tr>
         <tr class="">
           <td class="w-25 fw-semibold">Records</td>
-          <td class=""><%= batch_file.num_records_processed %></td>
+          <td class=""><%= number_to_human(batch_file.num_records_processed) %></td>
         </tr>
         <tr class="">
           <td class="w-25 fw-semibold">Processed at</td>

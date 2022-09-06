@@ -1,9 +1,12 @@
 module Pireps
   class BatchFilesController < ApplicationController
-    let(:batch_files) { BatchFile.all }
-    
-    def index
-      
+    let(:dr_pagy)
+    let(:batch_files) do
+      @dr_pagy, _batch_files = pagy(BatchFile.recent, items: 50)
+      _batch_files
     end
+    let(:redis_set_size) { RedisClient.new.call('LLEN', 'pireps') }
+
+    def index; end
   end
 end
