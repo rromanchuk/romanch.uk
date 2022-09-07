@@ -93,8 +93,9 @@ module Utils
           wind_speed_kt: row[40]&.to_i,
           vert_gust_kt: row[41&.to_i],
           report_type: row[42],
-          raw_text: row[43].squish # Key
-
+          raw_text: row[43].squish, # Key
+          urgent: /[UA]{3}/.match?(row[44].squish),
+          station_identifier: /(?<identifier>^\w{3})/.match(raw_text)&.[](:identifier)
         }.compact
       end # by_csv_row
     end

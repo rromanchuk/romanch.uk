@@ -4,9 +4,8 @@ module Pireps
     include Turbo::Broadcastable
 
     belongs_to :batch_file
-    before_create :parse_metadata!
 
-    store_accessor :data, :remarks, :sa_identifier
+    # store_accessor :data, :remarks, :sa_identifier
 
     scope :pireps, -> { where(report_type: 'PIREP') }
     scope :aireps, -> { where(report_type: 'AIREP') }
@@ -14,6 +13,7 @@ module Pireps
     scope :routine, -> { where(urgent: false, report_type: 'PIREP') }
     scope :recent, -> { order(receipt_time: :desc) }
 
+    def remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
     # def find_dyn
     #   PilotReport.find(raw_text, range_key: receipt_time)
     # end
@@ -23,10 +23,10 @@ module Pireps
     # end
     # private
 
-    def parse_metadata!
-      self.urgent = /[UA]{3}/.match?(raw_text)
-      self.remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
-      self.sa_identifier = /(?<identifier>^\w{3})/.match(raw_text)&.[](:identifier)
-    end
+    # def parse_metadata!
+    #   self.urgent = /[UA]{3}/.match?(raw_text)
+    #   self.remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
+    #   self.sa_identifier = /(?<identifier>^\w{3})/.match(raw_text)&.[](:identifier)
+    # end
   end
 end
