@@ -1,6 +1,7 @@
 module Pireps
   class RawReport < ApplicationRecord
     self.implicit_order_column = 'receipt_time'
+
     include Turbo::Broadcastable
 
     belongs_to :batch_file

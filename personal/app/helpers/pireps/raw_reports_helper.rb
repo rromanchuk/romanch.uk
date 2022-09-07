@@ -1,0 +1,2 @@
+module Pireps::RawReportsHelper
+end
