@@ -1,10 +1,26 @@
-<p style="color: green"><%= notice %></p>
 
 <h1>Raw reports</h1>
+
 <%= turbo_stream_from :raw_reports %>
-<%= turbo_frame_tag :raw_reports do %>
-  <%= render raw_reports %>
-  <%= render "pager" %>
+
+<%= turbo_frame_tag :raw_reports_header do %>
+  <nav class="nav nav-pills nav-fill">
+    <%= link_to "All", pireps_raw_reports_path, class: "nav-link active", data: {turbo_action: :replace} %>
+    <%= link_to "URGENT", uua_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
+    <%= link_to "ROUTINE", ua_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
+    <%= link_to "AIREP", airep_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
+  </nav>
+
+  <%= turbo_frame_tag :raw_reports do %>
+    <%= render raw_reports %>
+    <%= render "pager" %>
+  <% end %>
 <% end %>
+
+
+
+
+
+
 
 

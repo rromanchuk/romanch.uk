@@ -71,7 +71,11 @@ Rails.application.routes.draw do
     resources :pilot_reports, only: %i[index show]
     resources :aircraft_reports, only: %i[index show]
     resources :batch_files, only: %i[index show]
-    resources :raw_reports, only: %i[index show]
+    resources :raw_reports, only: %i[index show] do
+      get :uua, on: :collection
+      get :ua, on: :collection
+      get :airep, on: :collection
+    end
   end
 
   constraints(RomanchukOpenConstraint.new) do
