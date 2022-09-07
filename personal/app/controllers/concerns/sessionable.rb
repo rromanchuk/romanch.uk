@@ -38,6 +38,7 @@ module Sessionable
 
   def find_by_alb
     return nil unless amzn_oidc_identity
+    return nil unless ValidateUserClaims.call(amzn_oidc_data)
 
     User.create_with({}).find_or_create_by!(cognito_id: amzn_oidc_identity).tap do |user|
       set_current_user(user)

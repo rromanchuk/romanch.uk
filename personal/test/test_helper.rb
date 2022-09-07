@@ -1,7 +1,8 @@
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
-require "action_policy/test_helper"
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
+require 'action_policy/test_helper'
+require 'mocha/minitest'
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -13,10 +14,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-
 module SignInHelper
   def sign_in_as(user)
-    
+    ValidateUserClaims.expects(:call).returns(true)
+    get login_url, headers: { 'x-amzn-oidc-identity': user.cognito_id, 'x-amzn-oidc-data': 'fakedata' }
   end
 end
 

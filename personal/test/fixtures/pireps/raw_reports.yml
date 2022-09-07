@@ -4,6 +4,8 @@ ua:
   report_type: "PIREP"
   receipt_time: "Fri, 02 Sep 2022 01:35:04 +0000"
   aircraft_ref: BE9L
+  location: "POINT(-122 47 20000)"
+  urgent: false
 
 uaa:
   batch_file: :first
@@ -11,3 +13,5 @@ uaa:
   report_type: "PIREP"
   receipt_time: "Fri, 02 Sep 2022 01:35:04 +0000"
   aircraft_ref: BE9L
+  location: "POINT(-122 47 20000)"
+  urgent: true

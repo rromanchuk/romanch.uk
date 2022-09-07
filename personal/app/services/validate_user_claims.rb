@@ -9,6 +9,7 @@ class ValidateUserClaims < Service
   let(:url) { "https://public-keys.auth.elb.us-east-1.amazonaws.com/#{kid}" }
   let(:pub_key) { Faraday.get(url).body }
 
+  # x-amzn-oidc-data is a JWT token that contains the user's claims.
   def initialize(claims)
     super()
     @claims = claims
