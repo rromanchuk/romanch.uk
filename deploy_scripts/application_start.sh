@@ -14,5 +14,6 @@ cd /var/www/romanch.uk/current
 
 sudo systemctl start nginx
 sudo systemctl restart puma
+sudo systemctl restart sidekiq
 
 exit 0
