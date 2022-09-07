@@ -106,3 +106,4 @@ end
 
 gem "pagy", "~> 5.10"
 gem 'activerecord-postgis-adapter'
+gem 'httparty'

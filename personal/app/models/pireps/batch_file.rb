@@ -5,7 +5,7 @@ module Pireps
     scope :complete, -> { where.not(processed_at: nil) }
 
     def process_batch_file!
-      Pireps::Process.call(self)
+      # Pireps::Process.call(self)
     end
   end
 end

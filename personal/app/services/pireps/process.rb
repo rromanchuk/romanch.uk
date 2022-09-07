@@ -12,6 +12,13 @@ module Pireps
 
     def initialize(batch_file = BatchFile.pending.last)
       super()
+      if Sidekiq::ScheduledSet.new.size == 0
+        time = 60
+        5.times do
+          Pireps::IngestJob.perform_at(time.minutes.from_now)
+          time += 60
+        end
+      end
       @batch_file = batch_file
     end
 

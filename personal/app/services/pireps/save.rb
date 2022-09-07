@@ -1,21 +1,24 @@
 module Pireps
   class Save < Service
     let(:redis) { RedisClient.new }
-    let(:batch) { redis.call('lpop', 'pireps', 1000) || [] }
+    let(:batch) { redis.call('lpop', 'pireps', 5) || [] }
     let(:records) { batch.map { |json| JSON.parse(json) } }
 
     def call
-      begin
-        RawReport.upsert_all(records)
-      rescue StandardError => e
-        RedisClient.new.call('rpush', 'failed_pireps', records.to_json)
-        Rails.logger.info record
-        Rails.logger.error e
-        Sentry.capture_exception(e)
+      records.each do |record|
+        save_record(record)
       end
-      # Pireps::PilotReport.import(records)
       # Pireps::PilotReport.create(records)
       nil
+    end
+
+    def save_record(record)
+      RawReport.upsert(record)
+    rescue StandardError => e
+      RedisClient.new.call('rpush', 'failed_pireps', record.to_json)
+      Rails.logger.info record
+      Rails.logger.error e
+      Sentry.capture_exception(e)
     end
   end
 end
