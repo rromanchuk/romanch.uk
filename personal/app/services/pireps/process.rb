@@ -19,8 +19,9 @@ module Pireps
       {
         bucket: :pireps, # required
         key: batch_file.key, # required
-        expression_type: 'SQL', # required, accepts SQL,
-        expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required
+        expression_type: 'SQL', # required, accepts SQL
+        expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required,
+        # expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required
         input_serialization: {
           compression_type: 'GZIP',
           csv: {

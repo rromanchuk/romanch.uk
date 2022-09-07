@@ -70,10 +70,8 @@ Rails.application.routes.draw do
   end
 
   namespace :pireps do
-    resources :pilot_reports, only: %i[index show]
-    resources :aircraft_reports, only: %i[index show]
     resources :batch_files, only: %i[index show]
-    resources :raw_reports, only: %i[index show] do
+    resources :raw_reports do
       get :uua, on: :collection
       get :ua, on: :collection
       get :airep, on: :collection

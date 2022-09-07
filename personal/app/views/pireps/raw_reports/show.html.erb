@@ -1,10 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render pireps_raw_report %>
+<%= render raw_report %>
 
 <div>
-  <%= link_to "Edit this raw report", edit_pireps_raw_report_path(pireps_raw_report) %> |
+  <%= link_to "Edit this raw report", edit_pireps_raw_report_path(raw_report) %> |
   <%= link_to "Back to raw reports", pireps_raw_reports_path %>
 
-  <%= button_to "Destroy this raw report", pireps_raw_report, method: :delete %>
+  <%= button_to "Destroy this raw report", pireps_raw_report_path(raw_report), method: :delete %>
 </div>

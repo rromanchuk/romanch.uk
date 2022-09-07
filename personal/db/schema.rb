@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_04_211826) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_063711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -146,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_211826) do
     t.boolean "urgent", default: false
     t.text "station_identifier"
     t.index ["batch_file_id"], name: "index_pireps_raw_reports_on_batch_file_id"
+    t.index ["report_type", "aircraft_ref", "observation_time"], name: "index_pireps_raw_reports_uniqueness", unique: true
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
