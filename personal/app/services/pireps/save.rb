@@ -6,7 +6,7 @@ module Pireps
 
     def call
       records.each do |record|
-        RawReport.upsert!(record)
+        RawReport.upsert(record)
       rescue StandardError => e
         Rails.logger.info record
         Rails.logger.error e
