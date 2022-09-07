@@ -1,9 +1,9 @@
 version: '3'
 services:
   postgres:
-    image: postgres:14.5-alpine
-    volumes:
-      - romanchuk-data:/var/lib/postgresql/data
+    image: postgis/postgis:14-3.2
+    # volumes:
+    #   - romanchuk-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:

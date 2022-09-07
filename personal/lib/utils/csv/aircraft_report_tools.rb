@@ -5,7 +5,7 @@ module Utils
       extend self
 
       def transform_row_columns(row)
-        {
+        transformed_row = {
           receipt_time: Time.parse(row[0]),
           observation_time: Time.parse(row[1]), # sort key
           data: {
@@ -93,10 +93,13 @@ module Utils
           wind_speed_kt: row[40]&.to_i,
           vert_gust_kt: row[41&.to_i],
           report_type: row[42],
-          raw_text: row[43].squish, # Key
-          urgent: /[UA]{3}/.match?(row[44].squish),
-          station_identifier: /(?<identifier>^\w{3})/.match(raw_text)&.[](:identifier)
+          raw_text: row[43].squish # Key
         }.compact
+
+        transformed_row[:urgent] = /[UA]{3}/.match?(transformed_row[:raw_text])
+        transformed_row[:station_identifier] =
+          /(?<identifier>^\w{3})/.match(transformed_row[:raw_text])&.[](:identifier)
+        transformed_row
       end # by_csv_row
     end
   end
