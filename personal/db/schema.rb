@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_063711) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_202226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -146,7 +146,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_063711) do
     t.datetime "updated_at", null: false
     t.boolean "urgent", default: false
     t.text "station_identifier"
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
     t.index ["batch_file_id"], name: "index_pireps_raw_reports_on_batch_file_id"
+    t.index ["location"], name: "index_pireps_raw_reports_on_location", using: :gist
     t.index ["report_type", "aircraft_ref", "observation_time"], name: "index_pireps_raw_reports_uniqueness", unique: true
   end
 
