@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 class RomanchukOpenConstraint
   def matches?(request)
     ['romanchukopen.com', 'romanchukopen.test'].include?(request.domain)
@@ -77,6 +79,7 @@ Rails.application.routes.draw do
       get :airep, on: :collection
     end
   end
+  mount Sidekiq::Web => '/sidekiq' # mount Sidekiq::Web in your Rails app
 
   constraints(RomanchukOpenConstraint.new) do
     root 'romanchuk_open/tournaments#index', as: :romanchuk_open
