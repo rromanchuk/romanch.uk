@@ -5,9 +5,10 @@ module Pireps
     let(:records) { batch.map { |json| JSON.parse(json) } }
 
     def call
-      records.each do |record|
-        RawReport.upsert(record)
+      begin
+        RawReport.upsert_all(records)
       rescue StandardError => e
+        RedisClient.new.call('rpush', 'failed_pireps', records.to_json)
         Rails.logger.info record
         Rails.logger.error e
         Sentry.capture_exception(e)
