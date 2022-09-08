@@ -67,7 +67,7 @@ module Pireps
         destination_etag: s3_resp.etag,
         source_last_modified_at: end_time,
         source_fetched_at: Time.current,
-        start_time: from_time,
+        start_time:,
         end_time:
       )
 
