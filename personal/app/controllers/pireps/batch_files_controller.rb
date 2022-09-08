@@ -7,6 +7,7 @@ module Pireps
     end
     let(:batch_file) { BatchFile.find(params[:id]) }
     let(:redis_set_size) { RedisClient.new.call('LLEN', 'pireps') }
+    let(:failed_redis_set_size) { RedisClient.new.call('LLEN', 'failed_pireps') }
 
     def index; end
 

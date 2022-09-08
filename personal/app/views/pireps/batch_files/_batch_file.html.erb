@@ -19,6 +19,10 @@
           <td class=""><%= batch_file.source_url %></td>
         </tr>
         <tr class=""> 
+          <td class="w-25 fw-semibold">Download url</td>
+          <td class=""><%= link_to batch_file.public_url, batch_file.public_url, rel: "nofollow" %></td>
+        </tr>
+        <tr class=""> 
           <td class="w-25 fw-semibold">Start time</td>
           <td class=""><%= batch_file.start_time %></td>
         </tr>
@@ -27,7 +31,7 @@
           <td class=""><%= batch_file.end_time %></td>
         </tr>
         <tr class="">
-          <td class="w-25 fw-semibold">Content length (bytes)</td>
+          <td class="w-25 fw-semibold">Content length (file size)</td>
           <td class=""><%= number_to_human_size(batch_file.content_length_bytes) %></td>
         </tr>
         <tr class="">

@@ -1,13 +1,16 @@
 
-<h1>Raw reports</h1>
+<% content_for(:page_title) { 'Recent Routine PIREPS' } %>
+
 
 <%= turbo_frame_tag :raw_reports_header do %>
+  <h5>Recent Routine PIREPS</h5>
   <nav class="nav nav-pills nav-fill">
     <%= link_to "All", pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
     <%= link_to "URGENT", uua_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
     <%= link_to "ROUTINE", ua_pireps_raw_reports_path, class: "nav-link active", data: {turbo_action: :replace} %>
     <%= link_to "AIREP", airep_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
   </nav>
+  <hr/>
   <%= turbo_frame_tag :raw_reports do %>
     <%= render ua_reports %>
     <%= render "ua_pager" %>
