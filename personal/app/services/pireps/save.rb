@@ -15,10 +15,11 @@ module Pireps
     def save_record(record)
       RawReport.upsert(record)
     rescue StandardError => e
-      RedisClient.new.call('rpush', 'failed_pireps', record.to_json)
-      Rails.logger.info record
-      Rails.logger.error e
+      Rails.logger.error "Error saving record: #{e.message}, #{record[:raw_text]}"
+      redis.call('rpush', 'failed_pireps', record.to_json)
       Sentry.capture_exception(e)
+    rescue PG::UniqueViolation => e
+      Rails.logger.error "Record already exists: #{record[:raw_text]}"
     end
   end
 end
