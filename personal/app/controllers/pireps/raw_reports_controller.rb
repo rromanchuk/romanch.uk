@@ -83,7 +83,7 @@ module Pireps
     # PUT /pireps/raw_reports/1/set_geometry
     def set_geometry
       raw_report.set_geometry!
-      pireps_raw_report_url(raw_report), notice: 'Geometry was successfully set.'
+      redirect_to pireps_raw_report_url(raw_report), notice: 'Geometry was successfully set.'
     end
 
     private
