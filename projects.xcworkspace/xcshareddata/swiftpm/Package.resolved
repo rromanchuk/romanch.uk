@@ -1,30 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "fakery",
+      "identity" : "radar-sdk-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vadymmarkov/Fakery",
+      "location" : "https://github.com/radarlabs/radar-sdk-ios",
       "state" : {
-        "branch" : "master",
-        "revision" : "71cb3bf36a808534659d1248780c2bf3c4c4fc91"
-      }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core",
-      "state" : {
-        "revision" : "fd48276f88f3d55dbdcdc9e8cbf32541811d5865",
-        "version" : "12.1.0"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "dbaf1f86f5549065b627fb635afc1e8071bd1b69"
+        "revision" : "75e82adab2f028cf7e9a30abf95f81ef4746708d",
+        "version" : "3.5.3"
       }
     }
   ],

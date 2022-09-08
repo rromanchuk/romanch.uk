@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:xcode/lidar/lidar.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:xcode/Stocks/Stocks.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:xcode/RealmSandbox">
+      location = "group:iOS/Experiments/Experiments.xcodeproj">
    </FileRef>
 </Workspace>

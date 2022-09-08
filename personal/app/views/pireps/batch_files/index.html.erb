@@ -8,6 +8,7 @@
   Completed batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.complete.count), class: 'text-success' %> <br>
   Structured PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.count), class: 'text-success' %> <br>
   Structured AIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.aireps.count), class: 'text-success' %>
+  <%= button_to "Batch Now", ingest_pireps_batch_files_path, method: :post, class: "btn btn-sm btn-primary", data: {turbo_method: :post} %>
   </p>
  </section>
 <hr/>
