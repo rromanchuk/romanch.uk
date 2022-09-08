@@ -154,6 +154,7 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (4.1.0)
+    chronic (0.10.2)
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crass (1.0.6)
@@ -276,6 +277,8 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    pghero (2.8.3)
+      activerecord (>= 5)
     public_suffix (5.0.0)
     racc (1.6.0)
     rack (2.2.4)
@@ -393,6 +396,8 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.0)
@@ -431,6 +436,7 @@ DEPENDENCIES
   pagy (~> 5.10)
   pg
   pg_search
+  pghero
   puma!
   rails (~> 7.0.2, >= 7.0.2.4)
   rails_real_favicon
@@ -449,6 +455,7 @@ DEPENDENCIES
   view_component
   web-console
   webdrivers
+  whenever
 
 RUBY VERSION
    ruby 3.1.2p20

@@ -8,8 +8,12 @@
   Completed batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.complete.count), class: 'text-success' %> <br>
   Structured PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.count), class: 'text-success' %> <br>
   Structured AIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.aireps.count), class: 'text-success' %>
-  <%= button_to "Batch Now", ingest_pireps_batch_files_path, method: :post, class: "btn btn-sm btn-primary", data: {turbo_method: :post} %>
   </p>
+  <div class="d-grid gap-2 d-md-flex">
+    <%= button_to "1. Ingest", ingest_pireps_batch_files_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
+    <%= button_to "2. Process", process_csv_pireps_batch_files_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
+    <%= button_to "3. Persist", persist_models_pireps_batch_files_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
+  </div>
  </section>
 <hr/>
 <%= turbo_stream_from :batch_files %>

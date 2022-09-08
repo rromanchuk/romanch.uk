@@ -71,7 +71,9 @@ Rails.application.routes.draw do
 
   namespace :pireps do
     resources :batch_files, only: %i[index show] do
-      post :ingest, on: :collection
+      put :ingest, on: :collection
+      put :process_csv, on: :collection
+      put :persist_models, on: :collection
     end
     resources :raw_reports do
       get :uua, on: :collection
@@ -79,8 +81,8 @@ Rails.application.routes.draw do
       get :airep, on: :collection
     end
   end
-  mount Sidekiq::Web => '/sidekiq' # mount Sidekiq::Web in your Rails app
-
+  mount Sidekiq::Web, at: '/sidekiq' # mount Sidekiq::Web in your Rails app
+  mount PgHero::Engine, at: '/pghero'
   constraints(RomanchukOpenConstraint.new) do
     root 'romanchuk_open/tournaments#index', as: :romanchuk_open
   end
