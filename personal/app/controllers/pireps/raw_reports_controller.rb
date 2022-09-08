@@ -80,6 +80,12 @@ module Pireps
       redirect_to pireps_raw_reports_url, notice: 'Raw report was successfully destroyed.'
     end
 
+    # PUT /pireps/raw_reports/1/set_geometry
+    def set_geometry
+      raw_report.set_geometry!
+      pireps_raw_report_url(raw_report), notice: 'Geometry was successfully set.'
+    end
+
     private
 
     # Only allow a list of trusted parameters through.

@@ -15,6 +15,11 @@ module Pireps
     scope :recent, -> { order(receipt_time: :desc) }
 
     def remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
+
+    def set_geometry!
+      update!(location: location.factory.point(longitude, latitude, altitude_ft_msl))
+    end
+
     # def find_dyn
     #   PilotReport.find(raw_text, range_key: receipt_time)
     # end
