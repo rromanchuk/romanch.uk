@@ -109,7 +109,7 @@ Rails.application.configure do
       host: event.payload[:host],
       user_id: event.payload[:user_id] || event.payload[:amzn_oidc_identity],
       host: event.payload[:host],
-      ip: event.payload[:remote_ip]
+      ip: event.payload[:remote_ip],
       params: event.payload[:params]
     }
   end
