@@ -29,7 +29,10 @@ module Pireps
     let(:day) { start_time.day }
     let(:prefix) { start_time.hour }
     let(:io) { Down.open(req) }
-    let(:response) { HTTParty.get(req) }
+    let(:response) do
+      HTTParty.get(req,
+                   headers: { "User-Agent": 'romanch.uk/1.0 (Ryan Romanchuk/Private Pilot; Personal Project; github.com/rromanchuk/romanch.uk)' })
+    end
 
     # Headers
     let(:headers) { file.data[:headers] }
