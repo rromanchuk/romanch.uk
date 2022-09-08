@@ -110,3 +110,4 @@ gem 'activerecord-postgis-adapter'
 gem 'httparty'
 gem "pghero"
 gem 'whenever', require: false
+gem 'marginalia'
