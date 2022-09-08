@@ -1,14 +1,14 @@
-require "test_helper"
+require 'test_helper'
 
 class Pireps::RawReportsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @pireps_raw_report = pireps_raw_reports(:one)
+    @raw_report = pireps_raw_reports(:one)
   end
 
-  # test "should get index" do
-  #   get pireps_raw_reports_url
-  #   assert_response :success
-  # end
+  test 'should get index' do
+    get pireps_raw_reports_url
+    assert_response :success
+  end
 
   # test "should get new" do
   #   get new_pireps_raw_report_url
@@ -23,10 +23,10 @@ class Pireps::RawReportsControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to pireps_raw_report_url(Pireps::RawReport.last)
   # end
 
-  # test "should show pireps_raw_report" do
-  #   get pireps_raw_report_url(@pireps_raw_report)
-  #   assert_response :success
-  # end
+  test 'should show pireps_raw_report' do
+    get pireps_raw_report_url(@raw_report)
+    assert_response :success
+  end
 
   # test "should get edit" do
   #   get edit_pireps_raw_report_url(@pireps_raw_report)

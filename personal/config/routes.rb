@@ -70,7 +70,9 @@ Rails.application.routes.draw do
   end
 
   namespace :pireps do
-    resources :batch_files, only: %i[index show]
+    resources :batch_files, only: %i[index show] do
+      post :ingest, on: :collection
+    end
     resources :raw_reports do
       get :uua, on: :collection
       get :ua, on: :collection

@@ -1,13 +1,18 @@
-<h1> batch files </h1>
-<p>
- Pending batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.pending.count), class: 'text-warning' %> <br>
- Redis set size: <%= tag.span number_with_delimiter(redis_set_size), class: 'text-warning' %> <br>
- Completed batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.complete.count), class: 'text-success' %> <br>
- Structured PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.count), class: 'text-success' %> <br>
- Structured AIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.aireps.count), class: 'text-success' %>
- </p>
- <hr/>
+<% content_for(:page_title) { 'Most recent batch files' } %>
+
+<h1> Most recent batch files </h1>
+<section>
+  <p>
+  Pending batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.pending.count), class: 'text-warning' %> <br>
+  Redis set size: <%= tag.span number_with_delimiter(redis_set_size), class: 'text-warning' %> <br>
+  Completed batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.complete.count), class: 'text-success' %> <br>
+  Structured PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.count), class: 'text-success' %> <br>
+  Structured AIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.aireps.count), class: 'text-success' %>
+  </p>
+ </section>
+<hr/>
 <%= turbo_stream_from :batch_files %>
 <%= turbo_frame_tag :batch_files do %>
   <%= render batch_files %>
+  <%= render 'pager' %>
 <% end %>

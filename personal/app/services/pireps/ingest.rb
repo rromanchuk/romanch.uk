@@ -7,7 +7,7 @@ module Pireps
     ENDPOINT = 'https://www.aviationweather.gov/adds/dataserver_current/httpparam' # 'https://www.aviationweather.gov/adds/dataserver_current/httpparam/aircraftreports.cache.csv.gz'
     let(:object) do
       Aws::S3::Object.new(bucket_name: 'pireps',
-                          key: "#{env}/current_aircraftreports/#{year}/#{month}/#{day}/#{prefix}_aircraftreports.cache.csv.gz",
+                          key: "files/aircraftreports/#{env}/#{year}/#{month}/#{day}/#{prefix}_aircraftreports.csv.gz",
                           region: 'us-east-1')
     end
 
@@ -63,7 +63,9 @@ module Pireps
         content_length_bytes: content_length,
         destination_etag: s3_resp.etag,
         source_last_modified_at: end_time,
-        source_fetched_at: Time.current
+        source_fetched_at: Time.current,
+        start_time: from_time,
+        end_time:
       )
 
       redis.call('SET', 'previous_request', req)

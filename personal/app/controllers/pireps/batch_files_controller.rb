@@ -8,5 +8,10 @@ module Pireps
     let(:redis_set_size) { RedisClient.new.call('LLEN', 'pireps') }
 
     def index; end
+
+    def ingest
+      Pireps::Ingest.async_call
+      redirect_to pireps_batch_files_path, notice: 'Ingesting data...'
+    end
   end
 end
