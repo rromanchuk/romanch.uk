@@ -95,7 +95,9 @@ module Utils
           report_type: row[42],
           raw_text: row[43].squish # Key
         }.compact
-
+        transformed_row[:location] =
+          RGeo::Geographic.spherical_factory(srid: 4326, has_z_coordinate: true).point(transformed_row[:latitude],
+                                                                                       transformed_row[:longitude], transformed_row[:altitude_ft_msl])
         transformed_row[:urgent] = /[UA]{3}/.match?(transformed_row[:raw_text])
         transformed_row[:station_identifier] =
           /(?<identifier>^\w{3})/.match(transformed_row[:raw_text])&.[](:identifier)

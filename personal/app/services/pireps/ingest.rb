@@ -1,6 +1,5 @@
 require 'down'
 require 'aws-sdk-s3'
-require 'sidekiq/api'
 
 module Pireps
   class Ingest < Service
@@ -67,8 +66,8 @@ module Pireps
         destination_etag: s3_resp.etag,
         source_last_modified_at: end_time,
         source_fetched_at: Time.current,
-        start_time:,
-        end_time:
+        start_time: start_time_s,
+        end_time: end_time_s
       )
 
       redis.call('SET', 'previous_request', req)

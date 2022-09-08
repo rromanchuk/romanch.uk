@@ -12,13 +12,6 @@ module Pireps
 
     def initialize(batch_file = BatchFile.pending.last)
       super()
-      if Sidekiq::ScheduledSet.new.size == 0
-        time = 60
-        5.times do
-          Pireps::IngestJob.perform_at(time.minutes.from_now)
-          time += 60
-        end
-      end
       @batch_file = batch_file
     end
 
@@ -28,7 +21,7 @@ module Pireps
         key: batch_file.key, # required
         expression_type: 'SQL', # required, accepts SQL
         expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required,
-        # expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required
+        # expression: "SELECT * FROM s3object s", # required
         input_serialization: {
           compression_type: 'GZIP',
           csv: {
@@ -59,7 +52,8 @@ module Pireps
           case event.event_type
           when :end
             Rails.logger.info "Updating batch file num_records #{num_valid_records}"
-            batch_file.update!(processed_at: Time.current, num_records_processed: num_valid_records)
+            batch_file.update!(processed_at: Time.current, num_records_processed: num_valid_records,
+                               s3_select_expression: params[:expression])
             Pireps::Save.async_call
           when :records
             raw_row_segment = event.payload.string

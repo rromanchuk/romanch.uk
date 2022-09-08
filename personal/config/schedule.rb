@@ -26,3 +26,7 @@ end
 every 1.day do
   runner 'PgHero.capture_space_stats'
 end
+
+every :hour do
+  runner 'Pireps::Ingest.call'
+end
