@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Pireps::RawReportsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @raw_report = pireps_raw_reports(:one)
+    @raw_report = pireps_raw_reports(:ua)
   end
 
   test 'should get index' do

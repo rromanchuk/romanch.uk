@@ -18,6 +18,6 @@ class ValidateUserClaims < Service
   def call
     return false unless claims.present?
 
-    JWT.decode encoded_jwt, pub_key, nil, { algorithm: 'ES256' }
+    JWT.decode claims, pub_key, nil, { algorithm: 'ES256' }
   end
 end

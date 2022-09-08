@@ -50,6 +50,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test 'should not update post' do
     patch post_url(@post), params: { post: { title: 'updated' } }
 
-    assert_redirected_to login_path
+    assert_redirected_to page_path('who_dis')
   end
 end

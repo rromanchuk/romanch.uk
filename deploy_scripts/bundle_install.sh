@@ -14,6 +14,7 @@ ln -s /home/ubuntu/log log
 ln -s /home/ubuntu/node_modules node_modules
 ln -s /home/ubuntu/master.key config/master.key -f
 
-bundle install 
+bundle install
+bundle clean
 
 exit 0

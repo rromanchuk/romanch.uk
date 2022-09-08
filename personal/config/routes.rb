@@ -14,7 +14,9 @@ end
 
 Rails.application.routes.draw do
   get :healthcheck, to: 'pages#show', id: 'status'
-  resources :posts
+  resources :posts do
+    resources :tags, shallow: true
+  end
   resources :videos
   resources :blobs
   resources :attachments
