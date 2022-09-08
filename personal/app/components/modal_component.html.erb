@@ -8,10 +8,15 @@
     >
     <%= tag.div class: "modal-dialog #{size}" do %>
       <div class="modal-content">
-        <div class="modal-header">
-          <%= tag.h5 title, class: 'modal-title' %>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+        <% if title %>
+          <div class="modal-header">
+            <%= tag.h5 title, class: 'modal-title' %>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <% else %>
+
+        <% end %>
+        
         <div class="modal-body mb-2">
           <%= body %>
         </div>

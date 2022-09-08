@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resources :videos, only: [:show]
   end
 
-  resources :tags, param: :name, only: [] do
+  resources :tags, param: :name, only: [:index] do
     resources :posts, only: [:index], on: :collection
   end
 

@@ -39,7 +39,8 @@ module Oauth
         _user.update!(username: user['username'])
         set_current_user(_user)
       end
-      redirect_to session[:original_request] || root_path, notice: 'Success.'
+      original_request = session.delete(:original_request)
+      redirect_to original_request || root_path, notice: 'Success.'
     rescue OAuth2::Error => e
       Sentry.capture_exception(e)
       redirect_to root_path, notice: "Failed: #{e.message}"

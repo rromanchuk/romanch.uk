@@ -52,6 +52,8 @@ module Pireps
     # POST /pireps/raw_reports
     def create
       @raw_report = Pireps::RawReport.new(raw_report_params)
+      authorize! raw_report
+
       if raw_report.save
         redirect_to pireps_raw_report_url(raw_report), notice: 'Raw report was successfully created.'
       else
@@ -61,6 +63,8 @@ module Pireps
 
     # PATCH/PUT /pireps/raw_reports/1
     def update
+      authorize! raw_report
+
       if raw_report.update(raw_report_params)
         redirect_to pireps_raw_report_url(raw_report), notice: 'Raw report was successfully updated.'
       else
@@ -70,6 +74,8 @@ module Pireps
 
     # DELETE /pireps/raw_reports/1
     def destroy
+      authorize! raw_report
+
       raw_report.destroy
       redirect_to pireps_raw_reports_url, notice: 'Raw report was successfully destroyed.'
     end

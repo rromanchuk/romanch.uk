@@ -1,10 +1,15 @@
 <%= turbo_frame_tag "apple_signin" do %>
-  <%= render ModalComponent.new(title: "Who are you?", size: "", close_footer: false) do |component| %>
+  <%= render ModalComponent.new(title: nil, size: "", close_footer: false) do |component| %>
     <% component.body do %>
-      <div class="d-flex justify-content-center">
-        <%= link_to oauth_cognito_authorize_apple_path, data: { turbo: false } do %>
-          <img src='/static/continue_with_apple.png' class='img-fluid'>
-        <% end %>
+      <div class="d-flex justify-content-center text-center">
+        <main class="form-signin w-100 m-auto">
+          <img class="mb-4" src="/static/whodis.png" alt="New phone, who dis?" width="200" height="200" />
+          <%= link_to oauth_cognito_authorize_apple_path, data: { turbo: false }, rel: "nofollow" do %>
+            <img src='/static/continue_with_apple.png' alt="Continue with Apple" class='img-fluid'>
+          <% end %>
+          <hr/>
+          <%= link_to "Other providers...", login_path, class: "w-100 btn btn-sm", data: { turbo: false }, rel: "nofollow"  %>
+        </main>
       <div>
     <% end %>
   <% end %>

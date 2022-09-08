@@ -10,22 +10,20 @@ module Sessionable
     find_by_session || find_by_alb
   end
 
+  # @deprecated
   def require_me!
     not_authorized_error unless me?
   end
 
+  # @deprecated
   def require_user!
     not_authorized_error unless current_user
   end
 
   def not_authorized_error
     session[:original_request] = request.original_url
-    if Rails.env.development?
-      redirect_to(oauth_cognito_authorize_path)
-      return
-    end
 
-    redirect_to(login_path) and return
+    redirect_to(page_path('who_dis'), notice: 'You need to identify yourself first!') and return
   end
 
   def find_by_session
@@ -58,6 +56,7 @@ module Sessionable
 
   def logout!
     cookies.delete '_alb_personal'
-    set_current_user(nil)
+    @current_user = nil
+    session[:user_id] = nil
   end
 end

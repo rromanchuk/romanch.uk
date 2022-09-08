@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :require_user!, except: %i[apple_signin client logout]
+  before_action :require_user!, only: %i[account]
 
   def logout
     logout!
@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
   # cognito UI. If you want to forece non-alb terminated oauth, or on local
   # environment use /oauth/cognito/authorize
   def login
-    redirect_to root_path
+    redirect_to oauth_cognito_authorize_path
   end
 end

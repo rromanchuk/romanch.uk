@@ -77,10 +77,6 @@ $offcanvas-horizontal-width: 40vw;
   color: #212529;
 }
 
-// .signin-button {
-//   width: 210px;
-//   height: 40px;
-// }
 
 
 
@@ -91,6 +87,16 @@ blockquote {
   margin: 1.5em 10px;
   padding: 0.5em 10px;
 }
+
 blockquote p {
   display: inline-block;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
 }

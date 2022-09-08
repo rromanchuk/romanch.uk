@@ -1,0 +1,38 @@
+<% content_for :page_title, 'Please authenticate to continue' %>
+<% content_for :body_class, 'text-center' %>
+<% content_for :head do %>
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+
+  .form-signin {
+    max-width: 330px;
+    padding: 15px;
+  }
+
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+
+</style>
+<% end %>
+
+
+<main class="form-signin w-100 m-auto">
+  <img class="mb-4" src="/static/whodis.png" alt="New phone, who dis?" width="200" height="200" />
+  <%= link_to oauth_cognito_authorize_apple_path, data: { turbo: false } do %>
+    <img src='/static/continue_with_apple.png' alt="Continue with Apple" class='img-fluid'>
+  <% end %>
+  <hr/>
+  <%= link_to "Other providers...", login_path, class: "w-100 btn btn-sm", data: { turbo: false }, rel: "nofollow"  %>
+</main>
