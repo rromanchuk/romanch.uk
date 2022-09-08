@@ -20,8 +20,8 @@ module Pireps
         bucket: :pireps, # required
         key: batch_file.key, # required
         expression_type: 'SQL', # required, accepts SQL
-        expression: "SELECT * FROM s3object s where s._43 = 'PIREP'", # required,
-        # expression: "SELECT * FROM s3object s", # required
+        expression: "SELECT * FROM s3object s where s._43 = 'PIREP' OR s._43 = 'AIREP'", # required,
+        # expression: 'SELECT * FROM s3object s', # required
         input_serialization: {
           compression_type: 'GZIP',
           csv: {

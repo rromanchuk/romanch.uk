@@ -5,8 +5,11 @@
   <p>
   Pending batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.pending.count), class: 'text-warning' %> <br>
   Redis set size: <%= tag.span number_with_delimiter(redis_set_size), class: 'text-warning' %> <br>
+  Failed redis set size: <%= tag.span number_with_delimiter(redis_set_size), class: 'text-danger' %> <br>
   Completed batches: <%= tag.span number_with_delimiter(Pireps::BatchFile.complete.count), class: 'text-success' %> <br>
-  Structured PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.count), class: 'text-success' %> <br>
+  All structured PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.count), class: 'text-success' %> <br>
+  Structured URGENT PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.urgent.count), class: 'text-success' %> <br>
+  Structured Routine PIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.pireps.routine.count), class: 'text-success' %> <br>
   Structured AIREPS: <%= tag.span number_with_delimiter(Pireps::RawReport.aireps.count), class: 'text-success' %>
   </p>
   <div class="d-grid gap-2 d-md-flex">
