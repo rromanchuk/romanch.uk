@@ -17,7 +17,9 @@ module Pireps
     def remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
 
     def set_geometry!
-      update!(location: location.factory.point(longitude, latitude, altitude_ft_msl))
+      self.location = RGeo::Geographic.spherical_factory(srid: 4326, has_z_coordinate: true).point(longitude, latitude,
+                                                                                                   altitude_ft_msl)
+      save!
     end
 
     # def find_dyn
