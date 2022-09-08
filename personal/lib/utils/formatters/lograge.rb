@@ -6,8 +6,6 @@ module Utils
     class Lograge
       def call(data)
         datadog_line = {
-          duration: data.delete(:duration),
-          ddsource: :ruby
         }.merge!(format(data))
 
         "#{::Oj.dump(datadog_line, mode: :compat)}"
@@ -50,7 +48,7 @@ module Utils
                                     end
 
         # formatted_hash[:message] = "#{status_code} #{http_method}  -- #{format_hash(data)}"
-        formatted_hash
+        formatted_hash.compact
       end
 
       def format_message(data)

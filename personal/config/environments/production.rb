@@ -1,9 +1,12 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Specify AnyCable WebSocket server URL to use by JS client
   config.after_initialize do
-    config.action_cable.url = ActionCable.server.config.url = ENV.fetch("CABLE_URL", "/cable") if AnyCable::Rails.enabled?
+    if AnyCable::Rails.enabled?
+      config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL',
+                                                                          '/cable')
+    end
   end
   config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
   # Settings specified here will take precedence over those in config/application.rb.
@@ -27,7 +30,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -58,7 +61,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -81,8 +84,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  #config.log_formatter = ::Logger::Formatter.new
-
+  # config.log_formatter = ::Logger::Formatter.new
 
   # if true #ENV["RAILS_LOG_TO_STDOUT"].present?
   #   logger           = ActiveSupport::Logger.new(STDOUT)
@@ -101,13 +103,14 @@ Rails.application.configure do
   config.lograge.ignore_actions = ['HomeController#status']
   config.lograge.formatter = Utils::Formatters::Lograge.new
   config.lograge.custom_options = lambda do |event|
-    { 
+    {
       url: event.payload[:url],
       ua: event.payload[:ua],
       host: event.payload[:host],
-      user_id: event.payload[:user_id],
-      amzn_oidc_identity: event.payload[:amzn_oidc_identity]
+      user_id: event.payload[:user_id] || event.payload[:amzn_oidc_identity],
+      host: event.payload[:host],
+      ip: event.payload[:remote_ip]
+      params: event.payload[:params]
     }
   end
-  
 end
