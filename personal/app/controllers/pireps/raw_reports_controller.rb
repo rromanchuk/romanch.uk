@@ -1,5 +1,7 @@
 module Pireps
   class RawReportsController < ApplicationController
+    before_action :set_breadcrumbs
+
     let(:dr_pagy)
     let(:raw_report) { RawReport.find(params[:id]) }
     let(:raw_reports) do
@@ -11,39 +13,75 @@ module Pireps
       when 'airep'
         aireps
       else
-        @dr_pagy, _raw_reports = pagy(RawReport.pireps.recent, items: 50)
+        relation = RawReport.recent.includes(:batch_file)
+        @dr_pagy, _raw_reports = pagy(relation, items: 50)
         _raw_reports
       end
     end
 
     let(:uua_reports) do
-      @dr_pagy, _raw_reports = pagy(RawReport.pireps.urgent.recent, items: 50)
+      relation = RawReport
+                 .pireps
+                 .urgent
+                 .recent
+                 .includes(:batch_file)
+      @dr_pagy, _raw_reports = pagy(relation, items: 50)
       _raw_reports
     end
 
     let(:ua_reports) do
-      @dr_pagy, _raw_reports = pagy(RawReport.pireps.routine.recent, items: 50)
+      relation = RawReport
+                 .pireps
+                 .routine
+                 .recent
+                 .includes(:batch_file)
+      @dr_pagy, _raw_reports = pagy(relation, items: 50)
       _raw_reports
     end
 
     let(:aireps) do
-      @dr_pagy, _raw_reports = pagy(RawReport.aireps.recent, items: 50)
+      relation = RawReport
+                 .aireps
+                 .recent
+                 .includes(:batch_file)
+      @dr_pagy, _raw_reports = pagy(relation, items: 50)
       _raw_reports
     end
 
     # GET /pireps/raw_reports
-    def index; end
+    def index
+      add_breadcrumb('Raw reports')
+    end
 
-    def uua; end
-    def uu; end
-    def airep; end
+    def uua
+      add_breadcrumb('Aircraft Reports', pireps_raw_reports_path)
+      add_breadcrumb('Urgent')
+    end
+
+    def uu
+      add_breadcrumb('Aircraft Reports', pireps_raw_reports_path)
+      add_breadcrumb('Routine')
+    end
+
+    def airep
+      add_breadcrumb('Aircraft Reports', pireps_raw_reports_path)
+      add_breadcrumb('AIREP')
+    end
 
     # GET /pireps/raw_reports/1
-    def show; end
+    def show
+      add_breadcrumb('Aircraft Reports', pireps_raw_reports_path)
+      add_breadcrumb(raw_report.raw_text)
+    end
 
     # GET /pireps/raw_reports/new
     def new
       @raw_report = Pireps::RawReport.new
+    end
+
+    def debug
+      add_breadcrumb(raw_report.raw_text, pireps_raw_report_path(raw_report))
+      add_breadcrumb('Debug')
     end
 
     # GET /pireps/raw_reports/1/edit
@@ -91,6 +129,10 @@ module Pireps
     # Only allow a list of trusted parameters through.
     def raw_report_params
       params.fetch(:pireps_raw_report, {})
+    end
+
+    def set_breadcrumbs
+      add_breadcrumb('Home', root_path)
     end
   end
 end

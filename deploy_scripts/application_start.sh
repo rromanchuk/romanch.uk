@@ -15,5 +15,6 @@ cd /var/www/romanch.uk/current
 sudo systemctl start nginx
 sudo systemctl restart puma
 sudo systemctl restart sidekiq
+sudo systemctl restart anycable-rpc
 
 exit 0

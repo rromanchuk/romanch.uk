@@ -81,6 +81,7 @@ Rails.application.routes.draw do
       get :uua, on: :collection
       get :ua, on: :collection
       get :airep, on: :collection
+      get :debug, on: :member
     end
   end
   mount Sidekiq::Web, at: '/sidekiq' # mount Sidekiq::Web in your Rails app

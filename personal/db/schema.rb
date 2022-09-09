@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_08_030135) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_09_141241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -170,7 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_030135) do
     t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
     t.index ["batch_file_id"], name: "index_pireps_raw_reports_on_batch_file_id"
     t.index ["location"], name: "index_pireps_raw_reports_on_location", using: :gist
-    t.index ["report_type", "aircraft_ref", "observation_time"], name: "index_pireps_raw_reports_uniqueness", unique: true
+    t.index ["report_type", "raw_text"], name: "index_pireps_raw_reports_uniqueness", unique: true
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

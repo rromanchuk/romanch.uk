@@ -34,6 +34,8 @@ class PostsController < ApplicationController
   end
 
   def new
+    add_breadcrumb('Posts', posts_path)
+    add_breadcrumb('New')
     @new_post = Post.new
     authorize! @new_post
   end
@@ -43,6 +45,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb(post.title, post_path(post))
+    add_breadcrumb('Edit')
     authorize! post
   end
 
