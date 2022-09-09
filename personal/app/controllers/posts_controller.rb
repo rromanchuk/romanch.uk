@@ -1,17 +1,25 @@
 class PostsController < ApplicationController
+  before_action :set_breadcrumbs
+
   let(:dr_pagy)
   let(:post) { Post.friendly.find(params[:id]) }
 
   let(:posts) do
     if (tag_name = params[:tag_name])
+      add_breadcrumb('Posts', posts_path)
+      add_breadcrumb('Tagged', tags_path)
+      add_breadcrumb(tag_name)
       relation = authorized_scope(Post.tagged_with(names: [tag_name], match: :any))
       @dr_pagy, _posts = pagy(relation, items: 25)
       _posts
     elsif (q = params[:q].presence)
+      add_breadcrumb('Posts', posts_path)
+      add_breadcrumb('Search')
       relation = authorized_scope(Post.search(q))
       @dr_pagy, _posts = pagy(relation, items: 10)
       _posts
     else
+      add_breadcrumb('Posts')
       relation = authorized_scope(Post.recent)
       @dr_pagy, _posts = pagy(relation, items: 25)
       _posts
@@ -19,6 +27,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    add_breadcrumb('Posts', posts_path)
+    add_breadcrumb(post.title)
     authorize! post
     fresh_when last_modified: post.updated_at.utc, etag: post
   end
@@ -59,6 +69,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb('Home', root_path)
+  end
 
   def post_params
     params.require(:post).permit(:published, :markdown_content, :html_content, :title, :description, :tags_as_string)

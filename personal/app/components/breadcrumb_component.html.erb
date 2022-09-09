@@ -1,9 +1,14 @@
-<nav aria-label="breadcrumb" class="navbar navbar-dark  shadow-sm">
-  <div class="container-sm">
-    <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
-      
-      <%= bread_crumbs(crumbs) %>
-      
-    </ol>
-  </div>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
+    <% crumbs.each do |crumb| %>
+      <li class="breadcrumb-item <%= current_page?(crumb.path) ? 'active' : '' %>">
+        <% if crumb.path %>
+          <%= link_to crumb.name, crumb.path %>
+        <% else %>
+          <%= crumb.name %>
+        <% end %>
+      </li>
+    <% end%>    
+  </ol>
 </nav>

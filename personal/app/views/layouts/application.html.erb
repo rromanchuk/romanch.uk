@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <%= render 'shared/gtm' %>
     <%= render 'shared/meta' %>
+
+    <% if breadcrumbs? %>
+      <script type="application/ld+json">
+        <%== ld_breadcrumbs(breadcrumbs) %>
+      </script>
+    <% end %>
     <%# action_cable_meta_tag %>
     <%= action_cable_with_jwt_meta_tag(current_user: current_user) %>
     <%= csrf_meta_tags %>
@@ -33,7 +39,8 @@
   <body class="h-100 d-flex flex-column">
     <div class="container">
       <%= render 'shared/nav' %>
-      <div class="row justify-content-between">
+      <%= render BreadcrumbComponent.new(breadcrumbs) %>
+      <div class="row justify-content-between mt-2">
         <main class="col">
           <%= yield %>
           <%= render 'shared/honeypot' %>

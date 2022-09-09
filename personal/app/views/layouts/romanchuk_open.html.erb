@@ -30,7 +30,12 @@
   </head>
 
   <body>
-    <%= render BreadcrumbComponent.new(breadcrumbs) %>
+    <nav aria-label="breadcrumb" class="navbar navbar-dark shadow-sm">
+      <div class="container-sm">
+        <%= render BreadcrumbComponent.new(breadcrumbs) %>
+      </div>
+    </nav>
+    
     <%= yield %>
     <%= render 'shared/honeypot' %>
   </body>

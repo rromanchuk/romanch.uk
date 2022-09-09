@@ -10,7 +10,7 @@ module RomanchukOpen
 
     def new
       require_me!
-      add_breadcrumb("Create player")
+      add_breadcrumb('Create player')
       @player = Player.new
     end
 
@@ -41,15 +41,16 @@ module RomanchukOpen
       params.require(:romanchuk_open_player).permit(:name)
     end
 
-    def set_breadcrumbs
-      add_breadcrumb("Home", romanchuk_open_tournaments_path)
-      add_breadcrumb("Players", romanchuk_open_players_path)
-    end
-
     private
+
+    def set_breadcrumbs
+      add_breadcrumb('Home', romanchuk_open_tournaments_path)
+      add_breadcrumb('Players', romanchuk_open_players_path)
+    end
 
     def ensure_frame_response
       return unless Rails.env.development?
+
       redirect_to root_path unless turbo_frame_request?
     end
   end

@@ -1,6 +1,6 @@
 <% content_for(:page_title) { 'All tags' } %>
 
-<%= turbo_frame :tags do %>
+<%= turbo_frame_tag :tags do %>
   <ul class="list-unstyled list-inline mb-0">
     <% post_tags.each do |name| %>
       <li class="list-inline-item"><%= link_to name, tag_posts_path(tag_name: name), class: 'badge bg-secondary text-decoration-none link-light', data: {turbo_frame: "posts", turbo_action: 'advance'} %></li>

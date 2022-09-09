@@ -110,4 +110,5 @@ gem 'activerecord-postgis-adapter'
 gem 'httparty'
 gem "pghero"
 gem 'whenever', require: false
+gem 'aws-sdk-textract', require: false
 gem 'marginalia'

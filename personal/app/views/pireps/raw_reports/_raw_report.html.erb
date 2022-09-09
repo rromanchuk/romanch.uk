@@ -11,7 +11,7 @@
       </tr>
       <tr class=""> 
         <td class="w-25 fw-semibold">Observed at</td>
-        <td class=""><%= raw_report.observation_time %></td>
+        <td class=""><%= time_tag raw_report.observation_time %> <span class="text-muted">(<%= time_ago_in_words(raw_report.observation_time) %> ago)</span></td>
       </tr>
       <tr class="">
         <td class="w-25 fw-semibold">Aircraft type:</td>
@@ -19,7 +19,7 @@
       </tr>
       <tr class="">
         <td class="w-25 fw-semibold">Location</td>
-        <td class=""><%= "#{raw_report.latitude}, #{raw_report.longitude}" %><br/><%= raw_report.location %></td>
+        <td class=""><%= "#{raw_report.latitude}, #{raw_report.longitude}" %><br/><%= raw_report.location.to_s %></td>
       </tr>
       <tr class="">
         <td class="w-25 fw-semibold">Flight level:</td>

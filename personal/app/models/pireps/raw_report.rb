@@ -1,8 +1,15 @@
 module Pireps
   class RawReport < ApplicationRecord
     self.implicit_order_column = 'receipt_time'
+    OV = %r{/OV\s\w+}
+    FL = %r{/FL(\d{3}|UNKN)}
+    TP = %r{/TP\s\w{1,4}}
+    SK = %r{/SK\s(\d{3}|UNKN)\s\w{3}\s\d{3}/(\d{3}|UNKN)\s\w{3}\s\d{3}}
+    TA = %r{/TA\s-?\d{2}}
+    WV = %r{/WV\s\d{3}\d{2,3}KT?}
 
     include Turbo::Broadcastable
+    # include Dictionaries
 
     belongs_to :batch_file
 

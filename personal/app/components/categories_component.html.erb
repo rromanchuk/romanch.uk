@@ -1,17 +1,18 @@
 
 <div class="card mb-4">
-  <div class="card-header">Categories</div>
+  <div class="card-header">Recently updated</div>
   <div class="card-body">
-      <div class="row">
-        <% Gutentag::Tag.names_for_scope(Post).first(6).compact.in_groups_of(3) do |chunk| %>
-          <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <% chunk.each do |name| %>
-                  <li><%= name ? link_to(name, tag_posts_path(tag_name: name), data: { turbo_frame: "posts", turbo_action: 'replace' }) : '' %></li>
-                <% end %>
-              </ul>
-          </div>
-        <% end %>
-      </div>
+    <div class="row">
+        <div class="col">
+          <ul class="list-unstyled">
+            <% Post.published.recently_modified.limit(4).each do |post| %>
+              <li class="mb-2"><%= link_to post.title, post_path(post), data: { turbo_frame: "_top", turbo_action: 'replace' }, class: " d-block" %> <%= time_tag(post.updated_at, time_ago_in_words(post.updated_at) + " ago", class: 'fs-6 fw-lighter text-muted') %></li>
+            <% end %>
+          </ul>
+        </div>
+    </div>
   </div>
 </div>
+
+
+
