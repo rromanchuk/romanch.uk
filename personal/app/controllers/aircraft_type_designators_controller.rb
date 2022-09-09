@@ -15,11 +15,11 @@ class AircraftTypeDesignatorsController < ApplicationController
   let(:icao_type) { AircraftTypeDesignator.friendly.find(params[:id]) }
 
   def index
-    add_breadcrumb('Aircraft Type Designators')
+    add_breadcrumb(title)
   end
 
   def show
-    add_breadcrumb('Aircraft Type Designators', aircraft_type_designators_path)
+    add_breadcrumb(title, aircraft_type_designators_path)
     add_breadcrumb(icao_type.icao_code)
   end
 
@@ -30,4 +30,6 @@ class AircraftTypeDesignatorsController < ApplicationController
   def set_breadcrumbs
     add_breadcrumb('Home', root_path)
   end
+
+  def title = 'DOC 8643 - Aircraft Type Designators'
 end

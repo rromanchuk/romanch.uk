@@ -1,3 +1,6 @@
+<% content_for(:page_title) { 'DOC 8643 - Aircraft Type Designators' } %>
+
+
 <%= form_with(url: aircraft_type_designators_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'aircraft_type_designators'}, class: 'd-flex') do |f| %>
   <%= f.text_field(:q, class: "form-control", placeholder: "Cessna Cardinal", data: {action: 'input->search#submit', search_target: 'input'}) %>
 <% end %>
@@ -14,9 +17,9 @@
     <tbody>
       <% icao_types.each do |icao_type| %>
         <tr>
-          <td><%= link_to icao_type.icao_code, aircraft_type_designator_path(icao_type),  data: {turbo_action: :advance, turbo_frame: :_top} %></td>
+          <td><%= link_to icao_type.icao_code, aircraft_type_designator_path(icao_type.slug || icao_type),  data: {turbo_action: :advance, turbo_frame: :_top} %></td>
           <td><%= icao_type.manufacturer %> </td>
-          <td><%= icao_type.model %> <%# icao_type.other_models&.join(" ") %> </td>
+          <td><%= icao_type.model %></td>
         </tr>
       <% end %>
     </tbody>
