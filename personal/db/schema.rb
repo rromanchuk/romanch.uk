@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_09_194615) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_09_221031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_09_194615) do
 
   create_table "aircraft_type_designators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "icao_code", null: false
-    t.text "class"
+    t.text "aircraft_class"
     t.integer "number_of_engines"
     t.text "engine_type"
     t.text "weight_class"
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_09_194615) do
     t.jsonb "data", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "slug"
   end
 
   create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
