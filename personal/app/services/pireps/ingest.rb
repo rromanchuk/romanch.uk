@@ -1,4 +1,3 @@
-require 'down'
 require 'aws-sdk-s3'
 
 module Pireps
@@ -27,7 +26,6 @@ module Pireps
     let(:year) { start_time.year }
     let(:day) { start_time.day }
     let(:prefix) { start_time.hour }
-    let(:io) { Down.open(req) }
     let(:response) do
       HTTParty.get(req,
                    headers: { "User-Agent": 'romanch.uk/1.0 (Ryan Romanchuk/Private Pilot; Personal Project; github.com/rromanchuk/romanch.uk)' })

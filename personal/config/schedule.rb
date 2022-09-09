@@ -30,3 +30,7 @@ end
 every :hour do
   runner 'Pireps::Ingest.call'
 end
+
+every 10.minutes do
+  runner 'Pireps::Save.call'
+end

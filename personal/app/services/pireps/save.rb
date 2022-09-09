@@ -9,7 +9,7 @@ module Pireps
         save_record(record)
       end
       # Pireps::PilotReport.create(records)
-      nil
+      true
     end
 
     def save_record(record)

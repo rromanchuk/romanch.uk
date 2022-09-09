@@ -1,0 +1,2 @@
+class AircraftTypeDesignator < ApplicationRecord
+end
