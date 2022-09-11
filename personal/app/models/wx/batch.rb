@@ -13,7 +13,7 @@ module Wx
     def process_batch!
       case report_type
       when 'aircraftreports'
-        Wx::Pireps::Process.call(self)
+        Wx::Pireps::Process.async_call(self)
       when 'metars'
         # Wx::Metars::Ingest.call(self)
       end

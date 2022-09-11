@@ -31,7 +31,7 @@ module Wx
 
     def process_csv
       if allowed_to?(:ingest?, current_user, with: BatchPolicy)
-        Wx::Pireps::Process.async_call
+        Wx::Pireps::Process.async_call(Batch.pending.first)
         redirect_to wx_batches_path, notice: 'Transforming data...'
       else
         redirect_to wx_batches_path, notice: 'Not authorized'
