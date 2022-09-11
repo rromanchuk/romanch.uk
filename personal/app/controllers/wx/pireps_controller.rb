@@ -7,10 +7,13 @@ module Wx
     let(:pireps) do
       case params[:filter]
       when 'uua'
+        add_breadcrumb('Urgent')
         uua_reports
       when 'ua'
+        add_breadcrumb('Routine')
         ua_reports
       else
+        add_breadcrumb('All')
         relation = Pirep.recent.includes(:batch)
         @dr_pagy, _pireps = pagy(relation, items: 50)
         _pireps
