@@ -39,7 +39,7 @@
   <body class="h-100 d-flex flex-column">
     <div class="container">
       <%= render 'shared/nav' %>
-      <%= render BreadcrumbComponent.new(breadcrumbs) %>
+      <%= render BreadcrumbComponent.new(breadcrumbs, nil) %>
       <div class="row justify-content-between mt-2">
         <main class="col">
           <%= yield %>
