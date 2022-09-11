@@ -1,5 +1,5 @@
 module Wx
-  class BatchFilePolicy < ApplicationPolicy
+  class BatchPolicy < ApplicationPolicy
     def ingest?
       me?
     end
