@@ -4,8 +4,8 @@ module Wx
 
     let(:dr_pagy)
     let(:batches) do
-      @dr_pagy, _batch_files = pagy(Batch.recent, items: 3)
-      _batch_files
+      @dr_pagy, _batches = pagy(Batch.recent, items: 3)
+      _batches
     end
     let(:batch) { Batch.find(params[:id]) }
     let(:redis_set_size) { RedisClient.new.call('LLEN', 'pireps') }
@@ -21,7 +21,7 @@ module Wx
     end
 
     def ingest
-      if allowed_to?(:ingest?, current_user, with: Pireps::BatchFilePolicy)
+      if allowed_to?(:ingest?, current_user, with: BatchPolicy)
         Wx::Pireps::Ingest.async_call
         redirect_to wx_batches_path, notice: 'Ingesting data...'
       else
@@ -30,7 +30,7 @@ module Wx
     end
 
     def process_csv
-      if allowed_to?(:ingest?, current_user, with: Pireps::BatchFilePolicy)
+      if allowed_to?(:ingest?, current_user, with: BatchPolicy)
         Wx::Pireps::Process.async_call
         redirect_to wx_batches_path, notice: 'Transforming data...'
       else

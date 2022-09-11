@@ -23,7 +23,7 @@ module Wx
 
     let(:previous_etag) { redis.call('GET', "#{report_type}_previous_etag") }
     let(:previous_last_modified) { redis.call('GET', "#{report_type}_previous_last_modified") }
-    let(:batch_file) { Batch.new }
+    let(:batch) { Batch.new }
 
     # Time
     let(:start_time) { start_time_s ? Time.parse(start_time_s) : nil }
@@ -45,15 +45,15 @@ module Wx
 
       Rails.logger.info headers
 
-      batch_file.attributes = { key: object.key, content_length:, report_type:, start_time:, end_time:,
-                                source_url: endpoint }
+      batch.attributes = { key: object.key, content_length:, report_type:, start_time:, end_time:,
+                           source_url: endpoint }
       upload!
     end
 
     def upload!
       object.put(body: response.body, storage_class: 'INTELLIGENT_TIERING')
       Rails.logger.info "Successfully uploaded to #{object.key}"
-      batch_file.save!
+      batch.save!
       set_previous_keys!
     end
 
