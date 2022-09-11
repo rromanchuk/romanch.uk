@@ -11,7 +11,6 @@ module Wx
         key: batch.key, # required
         expression_type: 'SQL', # required, accepts SQL
         expression:, # required,
-        # expression: 'SELECT * FROM s3object s', # required
         input_serialization: {
           compression_type: 'GZIP',
           csv: {
@@ -57,7 +56,7 @@ module Wx
             row_segments = []
             Rails.logger.debug raw_row
             CSV.parse(raw_row) do |row|
-              num_valid_records += 1 if transform!(row)
+              num_valid_records += transform!(row)
             end
           end
         end
@@ -68,6 +67,8 @@ module Wx
       raise NotImplementedError
     end
 
+    # @param [Hash] row
+    # @return [Integer] num records saved
     def transform!(row)
       raise NotImplementedError
     end

@@ -8,21 +8,23 @@ module Wx
         "SELECT * FROM s3object s where s._43 = 'PIREP' or s._43 = 'AIREP'"
       end
 
+      # @param [Hash] row
+      # @return [Integer] num records saved
       def transform!(row)
         normalized_row = transform_row_columns(row)
-        return false unless row.count == 45
+        return 0 unless row.count == 45
 
         normalized_row[:batch_id] = batch.id
         report_type = normalized_row.delete(:report_type)
         case report_type
         when 'PIREP'
           normalized_row[:urgent] = /[UA]{3}/.match?(normalized_row[:raw_text])
-          Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness, returning: false)
+          Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness).length
         when 'AIREP'
-          Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness, returning: false)
+          Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness).length
+        else
+          raise(ArgumentError, "Unknown report type: #{report_type}")
         end
-
-        true
       end
     end
   end
