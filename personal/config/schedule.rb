@@ -7,7 +7,7 @@ every 1.day do
   runner 'PgHero.capture_space_stats'
 end
 
-every 5.minutes do
+every 15.minutes do
   runner 'Wx::Pireps::Ingest.call'
   # runner 'Wx::Metars::Ingest.call'
 end
