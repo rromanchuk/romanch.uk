@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_10_222737) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_11_031445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -268,6 +268,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_10_222737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["batch_id"], name: "index_wx_aireps_on_batch_id"
+    t.index ["location"], name: "index_wx_aireps_on_location", using: :gist
     t.index ["raw_text", "observation_time"], name: "index_wx_aireps_uniqueness", unique: true
   end
 
@@ -307,6 +308,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_10_222737) do
     t.datetime "updated_at", null: false
     t.boolean "urgent", default: false
     t.index ["batch_id"], name: "index_wx_pireps_on_batch_id"
+    t.index ["location"], name: "index_wx_pireps_on_location", using: :gist
     t.index ["raw_text", "observation_time"], name: "index_wx_pireps_uniqueness", unique: true
   end
 
