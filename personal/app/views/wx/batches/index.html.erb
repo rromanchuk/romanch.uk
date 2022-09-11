@@ -1,0 +1,26 @@
+<% content_for(:page_title) { 'Most recent batch files' } %>
+
+<h1> Most recent batch files </h1>
+<section>
+  <p>
+  Pending batches: <%= tag.span number_with_delimiter(Wx::Batch.pending.count), class: 'text-warning' %> <br>
+  Redis set size: <%= tag.span number_with_delimiter(redis_set_size), class: 'text-warning' %> <br>
+  Failed redis set size: <%= tag.span number_with_delimiter(failed_redis_set_size), class: 'text-danger' %> <br>
+  Completed batches: <%= tag.span number_with_delimiter(Wx::Batch.complete.count), class: 'text-success' %> <br>
+  All structured PIREPS: <%= tag.span number_with_delimiter(Wx::Pirep.count), class: 'text-success' %> <br>
+  Structured URGENT PIREPS: <%# tag.span number_with_delimiter(Wx::Pirep.urgent.count), class: 'text-success' %> <br>
+  Structured Routine PIREPS: <%# tag.span number_with_delimiter(Wx::Pirep.routine.count), class: 'text-success' %> <br>
+  Structured AIREPS: <%= tag.span number_with_delimiter(Wx::Airep.count), class: 'text-success' %>
+  </p>
+  <div class="d-grid gap-2 d-md-flex">
+    <%= button_to "1. Ingest", ingest_wx_batches_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
+    <%= button_to "2. Process", process_csv_wx_batches_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
+    <%= button_to "3. Persist", persist_models_wx_batches_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
+  </div>
+ </section>
+<hr/>
+<%= turbo_stream_from :batches %>
+<%= turbo_frame_tag :batches do %>
+  <%= render batches %>
+  <%= render 'pager' %>
+<% end %>

@@ -1,5 +1,5 @@
-module Pireps
-  class RawReportPolicy < ApplicationPolicy
+module Wx
+  class PirepPolicy < ApplicationPolicy
     def create?
       me?
     end

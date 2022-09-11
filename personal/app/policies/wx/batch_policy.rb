@@ -1,4 +1,4 @@
-module Pireps
+module Wx
   class BatchFilePolicy < ApplicationPolicy
     def ingest?
       me?

@@ -74,18 +74,34 @@ Rails.application.routes.draw do
     get '/pages/*id' => 'pages#show', as: :page, format: false
   end
 
-  namespace :pireps do
-    resources :batch_files, only: %i[index show] do
+  # namespace :pireps do
+  #   resources :batch_files, only: %i[index show] do
+  #     put :ingest, on: :collection
+  #     put :process_csv, on: :collection
+  #     put :persist_models, on: :collection
+  #   end
+  #   resources :raw_reports do
+  #     get :uua, on: :collection
+  #     get :ua, on: :collection
+  #     get :airep, on: :collection
+  #     get :debug, on: :member
+  #     get :map, on: :member
+  #   end
+  # end
+  namespace :wx do
+    resources :batches, only: %i[index show] do
       put :ingest, on: :collection
       put :process_csv, on: :collection
       put :persist_models, on: :collection
     end
-    resources :raw_reports do
+    resources :pireps, only: %i[index show] do
       get :uua, on: :collection
       get :ua, on: :collection
-      get :airep, on: :collection
       get :debug, on: :member
+      get :map, on: :member
     end
+    resources :aireps, only: %i[index show]
+    resources :tafs, only: %i[index show]
   end
   mount Sidekiq::Web, at: '/sidekiq' # mount Sidekiq::Web in your Rails app
   mount PgHero::Engine, at: '/pghero'

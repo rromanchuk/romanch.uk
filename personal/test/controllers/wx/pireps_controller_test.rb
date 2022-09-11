@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class Pireps::RawReportsControllerTest < ActionDispatch::IntegrationTest
+class Wx::PirepsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @raw_report = pireps_raw_reports(:ua)
+    @pirep = wx_pireps(:ua)
   end
 
   test 'should get index' do
-    get pireps_raw_reports_url
+    get wx_pireps_url
     assert_response :success
   end
 
@@ -24,7 +24,7 @@ class Pireps::RawReportsControllerTest < ActionDispatch::IntegrationTest
   # end
 
   test 'should show pireps_raw_report' do
-    get pireps_raw_report_url(@raw_report)
+    get wx_pirep_url(pirep)
     assert_response :success
   end
 

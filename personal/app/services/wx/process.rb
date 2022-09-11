@@ -1,27 +1,16 @@
-require 'aws-sdk-s3'
-require 'utils/csv/aircraft_report_tools'
 require 'csv'
-
-# https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#select_object_content-instance_method
-module Pireps
+require 'aws-sdk-s3'
+module Wx
   class Process < Service
-    include Utils::Csv::AircraftReportTools
-    attr_reader :batch_file
+    attr_reader :batch
 
     let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
-    let(:expression) { "SELECT * FROM s3object s where s._43 = 'PIREP' OR s._43 = 'AIREP'" }
-
-    def initialize(batch_file = BatchFile.pending.last)
-      super()
-      @batch_file = batch_file
-    end
-
-    def params
+    let(:params) do
       {
         bucket: :pireps, # required
-        key: batch_file.key, # required
+        key: batch.key, # required
         expression_type: 'SQL', # required, accepts SQL
-        expression: "SELECT * FROM s3object s where s._43 = 'PIREP' OR s._43 = 'AIREP'", # required,
+        expression:, # required,
         # expression: 'SELECT * FROM s3object s', # required
         input_serialization: {
           compression_type: 'GZIP',
@@ -35,8 +24,13 @@ module Pireps
       }
     end
 
+    def initialize(batch)
+      super()
+      @batch = batch
+    end
+
     def call
-      return nil unless batch_file
+      return nil unless batch
 
       client.select_object_content(params) do |stream|
         stream.on_error_event do |event|
@@ -52,9 +46,8 @@ module Pireps
           case event.event_type
           when :end
             Rails.logger.info "Updating batch file num_records #{num_valid_records}"
-            batch_file.update!(processed_at: Time.current, num_records_processed: num_valid_records,
-                               s3_select_expression: params[:expression])
-            Pireps::Save.async_call
+            batch.update!(processed_at: Time.current, num_records_processed: num_valid_records,
+                          s3_select_expression: expression)
           when :records
             raw_row_segment = event.payload.string
             row_segments << raw_row_segment
@@ -64,17 +57,19 @@ module Pireps
             row_segments = []
             Rails.logger.debug raw_row
             CSV.parse(raw_row) do |row|
-              next unless row.count == 45
-
-              normalized_row = transform_row_columns(row)
-              normalized_row[:batch_file_id] = batch_file.id
-              # Rails.logger.info normalized_row
-              queue_size = RedisClient.new.call('rpush', 'pireps', normalized_row.to_json)
-              num_valid_records += 1
+              num_valid_records += 1 if transform!(row)
             end
           end
         end
       end # end of stream
     end # call
+
+    def expression
+      raise NotImplementedError
+    end
+
+    def transform!(row)
+      raise NotImplementedError
+    end
   end
 end

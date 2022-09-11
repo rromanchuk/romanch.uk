@@ -1,8 +1,0 @@
-first:
-  key: development/current_aircraftreports/2022/9/2/0158_aircraftreports.cache.csv.gz
-  source_type: aircraftreports
-  source_url: https://www.aviationweather.gov/adds/dataserver_current/current/aircraftreports.cache.csv.gz
-  source_etag: "W/\"75049-1662083887105\""
-  destination_etag: "\"a78199cb3b29f96b24834f9bcdd0f009\""
-  source_last_modified_at: "Fri, 02 Sep 2022 02:04:35.152295000 UTC +00:00"
-  source_fetched_at: "Fri, 02 Sep 2022 01:58:07.000000000 UTC +00:00"

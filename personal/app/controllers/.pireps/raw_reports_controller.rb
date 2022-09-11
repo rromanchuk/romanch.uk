@@ -50,7 +50,8 @@ module Pireps
 
     # GET /pireps/raw_reports
     def index
-      add_breadcrumb('Raw reports')
+      add_breadcrumb('Aircraft Reports' pireps_raw_reports_path)
+      
     end
 
     def uua
@@ -70,6 +71,11 @@ module Pireps
 
     # GET /pireps/raw_reports/1
     def show
+      add_breadcrumb('Aircraft Reports', pireps_raw_reports_path)
+      add_breadcrumb(raw_report.raw_text)
+    end
+
+    def map
       add_breadcrumb('Aircraft Reports', pireps_raw_reports_path)
       add_breadcrumb(raw_report.raw_text)
     end

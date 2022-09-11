@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_09_221031) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_10_222737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -247,7 +247,72 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_09_221031) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  create_table "wx_aireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "batch_id", null: false
+    t.text "raw_text", null: false
+    t.datetime "receipt_time", null: false
+    t.datetime "observation_time"
+    t.text "aircraft_ref"
+    t.integer "altitude_ft_msl"
+    t.jsonb "sky_condition", default: [], null: false
+    t.jsonb "turbulence_condition", default: [], null: false
+    t.jsonb "icing_condition", default: [], null: false
+    t.integer "visibility_statute_mi"
+    t.string "wx_string"
+    t.float "temp_c"
+    t.integer "wind_dir_degrees"
+    t.integer "wind_speed_kt"
+    t.integer "vert_gust_kt"
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_wx_aireps_on_batch_id"
+    t.index ["raw_text", "observation_time"], name: "index_wx_aireps_uniqueness", unique: true
+  end
+
+  create_table "wx_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.text "report_type", null: false
+    t.text "source_url"
+    t.integer "num_records_processed", default: 0, null: false
+    t.integer "content_length", default: 0, null: false
+    t.jsonb "data", default: {}, null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "processed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "wx_pireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "batch_id", null: false
+    t.text "raw_text", null: false
+    t.datetime "receipt_time"
+    t.datetime "observation_time"
+    t.text "aircraft_ref"
+    t.integer "altitude_ft_msl"
+    t.jsonb "sky_condition", default: [], null: false
+    t.jsonb "turbulence_condition", default: [], null: false
+    t.jsonb "icing_condition", default: [], null: false
+    t.integer "visibility_statute_mi"
+    t.string "wx_string"
+    t.float "temp_c"
+    t.integer "wind_dir_degrees"
+    t.integer "wind_speed_kt"
+    t.integer "vert_gust_kt"
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "urgent", default: false
+    t.index ["batch_id"], name: "index_wx_pireps_on_batch_id"
+    t.index ["raw_text", "observation_time"], name: "index_wx_pireps_uniqueness", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "pireps_raw_reports", "pireps_batch_files", column: "batch_file_id"
+  add_foreign_key "wx_aireps", "wx_batches", column: "batch_id"
+  add_foreign_key "wx_pireps", "wx_batches", column: "batch_id"
 end

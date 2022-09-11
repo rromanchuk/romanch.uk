@@ -1,0 +1,41 @@
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org/",
+    "@type":"Dataset",
+    "name":"TDS CSV Aircraft Reports, <%= batch.start_time %>",
+    "description":"Hourly collection of compressed, raw csv aircraft reports from the TDS system.",
+    "url":"https://catalog.data.gov/dataset/ncdc-storm-events-database",
+    "sameAs":"<%= batch.source_url %>",
+    "identifier": ["<%= batch.id %>"],
+    "keywords":[
+       "PIREPS",
+       "AIREPS",
+       "UUA",
+       "UA"
+    ],
+    "isAccessibleForFree" : true,
+    "isPartOf" : "",
+    "creator":{
+       "@type":"Organization",
+       "sameAs": "https://ror.org/00tgqzw13",
+       "name":"National Weather Service",
+    },
+    "distribution":[
+       {
+          "@type":"DataDownload",
+          "encodingFormat":"application/gzip",
+          "contentUrl":"<%= batch.public_url %>",
+          "contentSize":"<%= number_to_human_size(batch.content_length) %>",
+          "uploadDate":"<%= batch.created_at %>",
+       },
+    ],
+    "temporalCoverage":"<%= batch.start_time%>/<%= batch.start_time%>",
+    "spatialCoverage":{
+       "@type":"Place",
+       "geo":{
+          "@type":"GeoShape",
+          "box":"18.0 -65.0 72.0 172.0"
+       }
+    }
+  }
+  </script>

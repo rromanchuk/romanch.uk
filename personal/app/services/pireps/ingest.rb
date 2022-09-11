@@ -33,7 +33,7 @@ module Pireps
 
     # Headers
     let(:headers) { file.data[:headers] }
-    let(:current_etag) { headers['Etag'] } # N/A, not passed when using filters
+    let(:current_etag) { response.headers['Etag'] } # N/A, not passed when using filters
     # let(:content_length) { headers['Content-Length'].to_i }
     let(:content_length) { response.headers['Content-Length'].to_i }
     let(:last_modified) { Time.parse(headers['Last-Modified']) } # N/A, not passed when using filters
