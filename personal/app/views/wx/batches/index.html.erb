@@ -8,8 +8,8 @@
   Failed redis set size: <%= tag.span number_with_delimiter(failed_redis_set_size), class: 'text-danger' %> <br>
   Completed batches: <%= tag.span number_with_delimiter(Wx::Batch.complete.count), class: 'text-success' %> <br>
   All structured PIREPS: <%= tag.span number_with_delimiter(Wx::Pirep.count), class: 'text-success' %> <br>
-  Structured URGENT PIREPS: <%# tag.span number_with_delimiter(Wx::Pirep.urgent.count), class: 'text-success' %> <br>
-  Structured Routine PIREPS: <%# tag.span number_with_delimiter(Wx::Pirep.routine.count), class: 'text-success' %> <br>
+  Structured URGENT PIREPS: <%= tag.span number_with_delimiter(Wx::Pirep.uua.count), class: 'text-success' %> <br>
+  Structured Routine PIREPS: <%= tag.span number_with_delimiter(Wx::Pirep.ua.count), class: 'text-success' %> <br>
   Structured AIREPS: <%= tag.span number_with_delimiter(Wx::Airep.count), class: 'text-success' %>
   </p>
   <div class="d-grid gap-2 d-md-flex">

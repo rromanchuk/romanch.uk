@@ -1,0 +1,35 @@
+<div class="d-flex align-items-start">
+  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <%= turbo_frame_tag :raw_reports_header do %>
+      <button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">All</button>
+      <button class="nav-link" id="v-pills-uua-tab" data-bs-toggle="pill" data-bs-target="#v-pills-uua" type="button" role="tab" aria-controls="v-pills-uua" aria-selected="false">URGENT</button>
+      <button class="nav-link" id="v-pills-ua-tab" data-bs-toggle="pill" data-bs-target="#v-pills-ua" type="button" role="tab" aria-controls="v-pills-ua" aria-selected="false">Routine</button>
+      <button class="nav-link" id="v-pills-airep-tab" data-bs-toggle="pill" data-bs-target="#v-pills-airep" type="button" role="tab" aria-controls="v-pills-airep" aria-selected="false">AIREPS</button>
+    <% end %>
+  </div>
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab" tabindex="0">
+      <%= turbo_frame_tag :raw_reports do %>
+        <%= render raw_reports %>
+        <%= render "pager" %>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="v-pills-uua" role="tabpanel" aria-labelledby="v-pills-uua-tab" tabindex="0">
+      <%= turbo_frame_tag :uua_reports, src: uua_pireps_raw_reports_path, loading: :lazy, data: {turbo_action: :advance} do %>
+        <p>loading...</p>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="v-pills-ua" role="tabpanel" aria-labelledby="v-pills-ua-tab" tabindex="0">
+      <%= turbo_frame_tag :ua_reports, src: ua_pireps_raw_reports_path, loading: :lazy, data: {turbo_action: :advance} do %>
+        <p>loading...</p>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="v-pills-airep" role="tabpanel" aria-labelledby="v-pills-airep-tab" tabindex="0">
+      <%= turbo_frame_tag :airip_reports, src: airep_pireps_raw_reports_path, loading: :lazy, data: {turbo_action: :advance} do %>
+        <p>loading...</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

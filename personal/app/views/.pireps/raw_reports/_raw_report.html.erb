@@ -1,0 +1,57 @@
+
+<%= turbo_frame_tag raw_report do %>
+<div class="col pb-3">
+  <table class="table table-borderless table-sm fluid">
+    <tbody class="">
+      <tr class="">
+        <%# <td class="w-25 fw-semibold">PIREP Text</td> %>
+        <td colspan="2" class="bg-warning <%= raw_report.urgent? ? 'bg-gradient' : 'bg-light' %>">
+          <span class=""><%= link_to raw_report.raw_text, pireps_raw_report_path(raw_report), data: {turbo_frame: :_top} %><span>
+        </td>
+      </tr>
+      <tr class=""> 
+        <td class="w-25 fw-semibold">From batch</td>
+        <td class=""><%= link_to raw_report.batch_file.id, pireps_batch_file_path(raw_report.batch_file) %></td>
+      </tr>
+      <tr class=""> 
+        <td class="w-25 fw-semibold">Observed at</td>
+        <td class=""><%= time_tag raw_report.observation_time %> <span class="text-muted">(<%= time_ago_in_words(raw_report.observation_time) %> ago)</span></td>
+      </tr>
+      <tr class="">
+        <td class="w-25 fw-semibold">Aircraft type:</td>
+        <td class=""><%= raw_report.aircraft_ref %></td>
+      </tr>
+      <tr class="">
+        <td class="w-25 fw-semibold">Location</td>
+        <td class=""><%= "#{raw_report.latitude}, #{raw_report.longitude}" %><br/><%= raw_report.location.to_s %></td>
+      </tr>
+      <tr class="">
+        <td class="w-25 fw-semibold">Flight level:</td>
+        <td class=""><%= raw_report.altitude_ft_msl %></td>
+      </tr>
+      <% unless raw_report.sky_condition.blank? %>
+        <tr class="">
+          <td class="w-25 fw-semibold">Sky Conditions</td>
+          <td class=""><%= raw_report.sky_condition %></td>
+        </tr>
+      <% end %>
+      <% unless raw_report.icing_condition.blank? %>
+        <tr class="">
+          <td class="w-25 fw-semibold">Icing Conditions</td>
+          <td class=""><%== raw_report.icing_condition.to_json %></td>
+        </tr>
+      <% end %>
+      <% unless raw_report.icing_condition.blank? %>
+        <tr class="">
+          <td class="w-25 fw-semibold">Turbulance Conditions</td>
+          <td class=""><%= raw_report.turbulence_condition %></td>
+        </tr>
+      <% end %>
+      <tr class="">
+        <td class="w-25 fw-semibold">Remarks</td>
+        <td class=""><%= raw_report.remarks %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<% end %>

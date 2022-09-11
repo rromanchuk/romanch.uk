@@ -5,21 +5,19 @@
 
 <%= turbo_stream_from :pireps %>
 <%= turbo_frame_tag :pireps_header do %>
-  <h1>All recent aircraft reports</h1>
   <nav class="nav nav-pills nav-fill">
-    <%= link_to "All", wx_pireps_path, class: "nav-link #{params[:filter].blank? ? 'active' : ''}", data: {turbo_action: :replace} %>
-    <%= link_to "URGENT", wx_pireps_path(filter: 'uua'), class: "nav-link #{params[:filter] == 'uua' ? 'active' : ''}", data: {turbo_action: :replace} %>
-    <%= link_to "ROUTINE", wx_pireps_path(filter: 'ua'), class: "nav-link #{params[:filter] == 'ua' ? 'active' : ''}", data: {turbo_action: :replace} %>
+    <%= link_to "All", wx_pireps_path, class: "nav-link #{params[:filter].blank? ? 'active' : ''}", data: {turbo_action: :replace, turbo_frame: :_top} %>
+    <%= link_to "URGENT", wx_pireps_path(filter: 'uua'), class: "nav-link #{params[:filter] == 'uua' ? 'active' : ''}", data: {turbo_action: :replace, turbo_frame: :_top} %>
+    <%= link_to "ROUTINE", wx_pireps_path(filter: 'ua'), class: "nav-link #{params[:filter] == 'ua' ? 'active' : ''}", data: {turbo_action: :replace, turbo_frame: :_top} %>
   </nav>
   <hr/>
-  <%= turbo_frame_tag :pireps do %>
-    <%= render pireps %>
-    <%= render "pager" %>
-  <% end %>
 <% end %>
 
 
-
+<%= turbo_frame_tag :pireps do %>
+  <%= render pireps %>
+  <%= render "pager" %>
+<% end %>
 
 
 

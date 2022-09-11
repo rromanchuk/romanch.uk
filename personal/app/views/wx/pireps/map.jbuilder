@@ -1,5 +1,5 @@
 json.type 'Feature'
 json.geometry do
   json.type 'Point'
-  json.coordinates [raw_report.location.longitude, raw_report.location.latitude]
+  json.coordinates [pirep.location.longitude, pirep.location.latitude]
 end

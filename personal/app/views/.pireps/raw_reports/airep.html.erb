@@ -1,0 +1,20 @@
+
+<% content_for(:page_title) { 'Recent AIREPSS' } %>
+
+<%= turbo_stream_from :raw_reports %>
+
+<%= turbo_frame_tag :raw_reports_header do %>
+  <h1>Recent AIREPS</h1>
+  <nav class="nav nav-pills nav-fill">
+    <%= link_to "All", pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
+    <%= link_to "UUA URGENT", uua_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
+    <%= link_to "UA ROUTINE", ua_pireps_raw_reports_path, class: "nav-link", data: {turbo_action: :replace} %>
+    <%= link_to "AIREP", airep_pireps_raw_reports_path, class: "nav-link active", data: {turbo_action: :replace} %>
+  </nav>
+
+  <%= turbo_frame_tag :raw_reports do %>
+    <%= render aireps %>
+    <%= render "airep_pager" %>
+  <% end %>
+<% end %>
+

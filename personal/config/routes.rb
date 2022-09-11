@@ -100,7 +100,10 @@ Rails.application.routes.draw do
       get :debug, on: :member
       get :map, on: :member
     end
-    resources :aireps, only: %i[index show]
+    resources :aireps, only: %i[index show] do
+      get :map, on: :member
+      get :debug, on: :member
+    end
     resources :tafs, only: %i[index show]
   end
   mount Sidekiq::Web, at: '/sidekiq' # mount Sidekiq::Web in your Rails app

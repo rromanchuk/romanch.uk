@@ -73,11 +73,6 @@ module Utils
           report_type: row[42],
           raw_text: row[43].squish # Key
         }.compact
-
-        # transformed_row[:urgent] = /[UA]{3}/.match?(transformed_row[:raw_text])
-        # transformed_row[:station_identifier] =
-        #   /(?<identifier>^\w{3})/.match(transformed_row[:raw_text])&.[](:identifier)
-        # transformed_row
       end # by_csv_row
     end
   end

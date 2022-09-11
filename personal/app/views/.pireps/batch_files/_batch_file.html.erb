@@ -1,0 +1,52 @@
+<%= turbo_frame_tag batch_file do %>
+  <div class="col pb-3">
+    <table class="table table-borderless table-sm responsive">
+      <tbody class="">
+        <tr class="">
+          <td class="w-25 fw-semibold">id</td>
+          <td class=""><%= link_to batch_file.id, pireps_batch_file_path(batch_file), data: {turbo_frame: :_top} %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Created at</td>
+          <td class=""><%= batch_file.created_at %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Source type</td>
+          <td class=""><%= batch_file.source_type %></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Source url</td>
+          <td class=""><%= batch_file.source_url %></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Download url</td>
+          <td class=""><%= link_to batch_file.public_url, batch_file.public_url, rel: "nofollow" %></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Start time</td>
+          <td class=""><%= batch_file.start_time %></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">End time</td>
+          <td class=""><%= batch_file.end_time %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Content length (file size)</td>
+          <td class=""><%= number_to_human_size(batch_file.content_length_bytes) %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Destination key</td>
+          <td class=""><%= batch_file.key %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Completed records</td>
+          <td class=""><%= number_to_human(batch_file.num_records_processed) %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Processed at</td>
+          <td class=""><%= batch_file.processed_at %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

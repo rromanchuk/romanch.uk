@@ -1,0 +1,10 @@
+
+<% content_for(:page_title) { 'All recent AIREPs' } %>
+
+
+<%= turbo_stream_from :aireps %>
+
+<%= turbo_frame_tag :aireps do %>
+  <%= render aireps %>
+  <%= render "pager" %>
+<% end %>

@@ -37,28 +37,29 @@ module Wx
 
     # GET /pireps/raw_reports
     def index
-      add_breadcrumb('Aircraft Reports', wx_pireps_path)
+      add_breadcrumb('Pilot Reports', wx_pireps_path)
     end
 
     def uua
-      add_breadcrumb('Aircraft Reports', wx_pireps_path)
+      add_breadcrumb('Pilot Reports', wx_pireps_path)
       add_breadcrumb('Urgent')
     end
 
     def ua
-      add_breadcrumb('Aircraft Reports', wx_pireps_path)
+      add_breadcrumb('Pilot Reports', wx_pireps_path)
       add_breadcrumb('Routine')
     end
 
     # GET /pireps/raw_reports/1
     def show
-      add_breadcrumb('Aircraft Reports', wx_pireps_path)
+      add_breadcrumb('Pilot Reports', wx_pireps_path)
       add_breadcrumb(pirep.raw_text)
     end
 
     def map
-      add_breadcrumb('Aircraft Reports', wx_pireps_path)
-      add_breadcrumb(pirep.raw_text)
+      add_breadcrumb('Pilot Reports', wx_pireps_path)
+      add_breadcrumb(pirep.raw_text, wx_pirep_path(pirep))
+      add_breadcrumb('Location Map')
     end
 
     # GET /pireps/raw_reports/new
@@ -85,20 +86,20 @@ module Wx
       authorize! pirep
 
       raw_report.destroy
-      redirect_to pireps_raw_reports_url, notice: 'Raw report was successfully destroyed.'
+      redirect_to wx_pirep_url, notice: 'Raw report was successfully destroyed.'
     end
 
     # PUT /pireps/raw_reports/1/set_geometry
     def set_geometry
       pirep.set_geometry!
-      redirect_to pireps_raw_report_url(pirep), notice: 'Geometry was successfully set.'
+      redirect_to wx_pirep_url(pirep), notice: 'Geometry was successfully set.'
     end
 
     private
 
     # Only allow a list of trusted parameters through.
     def pireps_params
-      params.fetch(:pireps_raw_report, {})
+      params.fetch(:wx_pirep, {})
     end
 
     def set_breadcrumbs
