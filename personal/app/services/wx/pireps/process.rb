@@ -17,9 +17,9 @@ module Wx
         case report_type
         when 'PIREP'
           normalized_row[:urgent] = /[UA]{3}/.match?(normalized_row[:raw_text])
-          Wx::Pirep.upsert(normalized_row)
+          Wx::Pirep.upsert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
         when 'AIREP'
-          Wx::Airep.upsert(normalized_row)
+          Wx::Airep.upsert(normalized_row, unique_by: :index_wx_aireps_uniqueness)
         end
 
         true
