@@ -16,6 +16,6 @@ ln -s /home/ubuntu/master.key config/master.key -f
 
 bundle install
 bundle clean
-bundle exec whenever --update-crontab
+
 
 exit 0

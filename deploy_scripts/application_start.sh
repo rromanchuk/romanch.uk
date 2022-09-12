@@ -17,4 +17,6 @@ sudo systemctl restart puma
 sudo systemctl restart sidekiq
 sudo systemctl restart anycable-rpc
 
+bundle exec whenever --update-crontab
+
 exit 0
