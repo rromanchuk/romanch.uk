@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_12_032106) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_170518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -239,6 +239,44 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_032106) do
     t.datetime "updated_at", null: false
     t.integer "pireps_count", default: 0
     t.integer "aireps_count", default: 0
+    t.integer "metars_count", default: 0
+  end
+
+  create_table "wx_metars", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "raw_text", null: false
+    t.text "station_id", null: false
+    t.datetime "observation_time", null: false
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
+    t.float "temp_c"
+    t.float "dewpoint_c"
+    t.integer "wind_dir_degrees"
+    t.integer "wind_speed_kt"
+    t.integer "wind_gust_kt"
+    t.float "visibility_statute_mi"
+    t.float "altim_in_hg"
+    t.float "sea_level_pressure_mb"
+    t.text "wx_string"
+    t.jsonb "sky_condition"
+    t.text "flight_category"
+    t.float "three_hr_pressure_tendency_mb"
+    t.float "maxT_c"
+    t.float "minT_c"
+    t.float "maxT24hr_c"
+    t.float "minT24hr_c"
+    t.float "precip_in"
+    t.float "pcp3hr_in"
+    t.float "pcp6hr_in"
+    t.float "pcp24hr_in"
+    t.float "snow_in"
+    t.integer "vert_vis_ft"
+    t.text "metar_type"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "batch_id"
+    t.index ["batch_id"], name: "index_wx_metars_on_batch_id"
+    t.index ["location"], name: "index_wx_metars_on_location", using: :gist
+    t.index ["station_id", "observation_time"], name: "index_wx_metars_uniqueness", unique: true
   end
 
   create_table "wx_pireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

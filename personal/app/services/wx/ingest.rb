@@ -5,7 +5,7 @@ module Wx
     let(:redis) { RedisClient.new }
     let(:object) do
       Aws::S3::Object.new(bucket_name: 'pireps',
-                          key: "files/#{report_type}/#{Rails.env}/#{year}/#{month}/#{day}/#{prefix}_#{report_type}.csv.gz",
+                          key: "tds/#{report_type}/#{Rails.env}/#{year}/#{month}/#{day}/#{prefix}_#{report_type}.csv.gz",
                           region: 'us-east-1')
     end
 

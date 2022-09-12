@@ -80,6 +80,12 @@ Rails.application.routes.draw do
       put :process_csv, on: :collection
       get :debug, on: :member
     end
+
+    resources :metars, only: %i[index show] do
+      get :debug, on: :member
+      get :points, on: :collection
+    end
+
     resources :pireps, only: %i[index show] do
       get :uua, on: :collection
       get :ua, on: :collection

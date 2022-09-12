@@ -1,0 +1,6 @@
+<% content_for(:page_title) { 'Most recent METARs' } %>
+
+<%= turbo_frame_tag :metars do %>
+  <%= render metars %>
+  <%= render PagerComponent.new(dr_pagy, previous_path: wx_metars_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_metars_path(page: dr_pagy.next, filter: params[:filter])) %>
+<% end %>

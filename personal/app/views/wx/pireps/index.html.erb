@@ -21,7 +21,7 @@
 
 <%= turbo_frame_tag :pireps do %>
   <%= render pireps %>
-  <%= render "pager" %>
+  <%= render PagerComponent.new(dr_pagy, previous_path: wx_pireps_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_pireps_path(page: dr_pagy.next, filter: params[:filter])) %>
 <% end %>
 
 
