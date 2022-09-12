@@ -19,7 +19,8 @@ sudo systemctl restart anycable-rpc
 
 bundle exec whenever --update-crontab
 
-# bin/rails sitemap:refresh
-# aws s3 cp public/sitemap.xml s3://personal-www/sitemap.xml --content-type 'text/xml'
+bin/rails sitemap:refresh:no_ping
+aws s3 sync public/sitemaps s3://personal-www/sitemaps --storage-class INTELLIGENT_TIERING 
+
 
 exit 0

@@ -3,4 +3,4 @@ Disallow: /*/edit$
 Disallow: /*/new$
 Allow: /
 
-Sitemap: https://romanch.uk/sitemap.xml
+Sitemap: https://romanch.uk/sitemaps/romanchuk/sitemap.xml

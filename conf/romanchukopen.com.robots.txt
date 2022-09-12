@@ -1,0 +1,6 @@
+User-Agent: *
+Disallow: /*/edit$
+Disallow: /*/new$
+Allow: /
+
+Sitemap: https://romanchukopen.com/sitemaps/romanchukopen/sitemap.xml
