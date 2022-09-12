@@ -4,6 +4,8 @@ eval "$(bin/shdotenv)"
 REVISION=$(git rev-parse HEAD)
 LOG=$(git log -5 --pretty=reference)
 
+
+
 aws deploy create-deployment \
     --application-name personal \
     --deployment-config-name CodeDeployDefault.AllAtOnce \
@@ -11,5 +13,7 @@ aws deploy create-deployment \
     --description "$LOG" \
     --github-location repository=rromanchuk/ryanromanchuk.com,commitId="$REVISION" \
     --output json | jq '.'
+
+cd personal && bin/rails test
 
 exit 0
