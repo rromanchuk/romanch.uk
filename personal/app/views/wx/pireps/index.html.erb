@@ -1,11 +1,11 @@
 
 
 <% content_for(:page_title) { 'All recent aircraft reports' } %>
-<div class="row row-cols p-2">
+
 <div data-controller="maps" data-maps-geo-json-value="<%= points_wx_pireps_path(format: :json) %>">
   <div id="map" style="width:100%; height:400px"> </div>
 </end>
-</div>
+
 
 <%= turbo_stream_from :pireps %>
 <%= turbo_frame_tag :pireps_header do %>

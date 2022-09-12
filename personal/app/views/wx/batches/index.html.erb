@@ -34,6 +34,22 @@
       </div>
     </div>
   </div>
+  <div class="col">
+    <div class="card" style="width: 10rem;">
+      <div class="card-body text-center">
+        <p class="card-title">Current Etags</p>
+        <p class="card-text h6 text-success"><%= ar_etag%></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" style="width: 10rem;">
+      <div class="card-body text-center">
+        <p class="card-title">Failed Redis Set</p>
+        <p class="card-text h5 text-danger"><%= failed_redis_set_size %></p>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 

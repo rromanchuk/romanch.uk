@@ -1,15 +1,15 @@
 module Wx
   class BatchesController < ApplicationController
     before_action :set_breadcrumbs
-
+    let(:redis) { RedisClient.new }
     let(:dr_pagy)
     let(:batches) do
       @dr_pagy, _batches = pagy(Batch.recent, items: 3)
       _batches
     end
     let(:batch) { Batch.find(params[:id]) }
-    let(:redis_set_size) { RedisClient.new.call('LLEN', 'pireps') }
-    let(:failed_redis_set_size) { RedisClient.new.call('LLEN', 'failed_pireps') }
+    let(:ar_etag) { redis.call('GET', 'aircraftreports_previous_etag') }
+    let(:failed_redis_set_size) { redis.call('LLEN', 'failed_pireps') }
 
     def index
       add_breadcrumb('Batches')
@@ -37,15 +37,6 @@ module Wx
       else
         redirect_to wx_batches_path, notice: 'Not authorized'
       end
-    end
-
-    def persist_models
-      # if allowed_to?(:ingest?, current_user, with: Pireps::BatchFilePolicy)
-      #   Pireps::Save.async_call
-      #   redirect_to pireps_batch_files_path, notice: 'Saving data...'
-      # else
-      #   redirect_to pireps_batch_files_path, notice: 'Not authorized'
-      # end
     end
 
     private
