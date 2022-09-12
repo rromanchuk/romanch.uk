@@ -1,5 +1,6 @@
 module Wx
   class Metar < ApplicationRecord
-    belongs_to :batch
+    self.implicit_order_column = 'observation_time'
+    belongs_to :batch, counter_cache: :metars_count
   end
 end

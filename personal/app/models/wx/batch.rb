@@ -5,6 +5,7 @@ module Wx
 
     has_many :pireps
     has_many :aireps
+    has_many :metars
 
     scope :pending, -> { where(processed_at: nil) }
     scope :complete, -> { where.not(processed_at: nil) }
@@ -18,7 +19,7 @@ module Wx
       when 'aircraftreports'
         Wx::Pireps::Process.async_call(self)
       when 'metars'
-        # Wx::Metars::Ingest.call(self)
+        Wx::Metars::Process.call(self)
       end
     end
   end

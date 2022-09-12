@@ -6,5 +6,5 @@
 
 <%= turbo_frame_tag :aireps do %>
   <%= render aireps %>
-  <%= render "pager" %>
+  <%= render PagerComponent.new(dr_pagy, previous_path: wx_aireps_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_aireps_path(page: dr_pagy.next, filter: params[:filter])) %>
 <% end %>
