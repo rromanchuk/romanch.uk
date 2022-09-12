@@ -9,7 +9,7 @@ end
 
 every 15.minutes do
   runner 'Wx::Pireps::Ingest.call'
-  # runner 'Wx::Metars::Ingest.call'
+  runner 'Wx::Metars::Ingest.call'
 end
 
 # every 30.minutes do
