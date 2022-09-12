@@ -1,25 +1,28 @@
 <% content_for :page_title, "A FUN, NEW, MOBILE PROGRAM (THAT REALLY WORKS!)" %>
-<h1>SPAR IS A FUN GAME</h1>
-<p>Doing stuff is hard. <a href="https://getspar.com">SPAR</a> makes staying motivated a piece of cake</p>
 
-<div class="ratio ratio-16x9">
+<% cache do %>
+  <h1>SPAR IS A FUN GAME</h1>
+  <p>Doing stuff is hard. <a href="https://getspar.com">SPAR</a> makes staying motivated a piece of cake</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mxOD4UwxDl4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="ratio ratio-16x9">
 
-</div>
-<div class=" row justify-content-center mt-3">
-  <a rel="nofollow" href="https://apps.apple.com/us/app/spar-accountability-tracker/id1109640290?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;">
-            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1462406400&amp;h=fbbc885da3b0048d819da93003c3cd34" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;">
-  </a>
-</div>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/mxOD4UwxDl4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "SPAR!",
-    "operatingSystem": "IOS",
-    "downloadUrl": "https://apps.apple.com/us/app/spar-accountability-tracker/id1109640290",
-    "applicationCategory": "HealthApplication"
-  }
-</script>
+  </div>
+  <div class=" row justify-content-center mt-3">
+    <a rel="nofollow" href="https://apps.apple.com/us/app/spar-accountability-tracker/id1109640290?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;">
+              <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1462406400&amp;h=fbbc885da3b0048d819da93003c3cd34" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;">
+    </a>
+  </div>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SPAR!",
+      "operatingSystem": "IOS",
+      "downloadUrl": "https://apps.apple.com/us/app/spar-accountability-tracker/id1109640290",
+      "applicationCategory": "HealthApplication"
+    }
+  </script>
+<% end %>

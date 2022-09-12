@@ -65,6 +65,8 @@ module Wx
       add_breadcrumb('Location Map')
     end
 
+    def points; end
+
     # GET /pireps/raw_reports/new
     def new
       @pirep = Pirep.new

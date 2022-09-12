@@ -1,21 +1,21 @@
 <% content_for(:page_title) { 'Flying' } %>
 
-
-<div class="row row-cols-1 row-cols-md-2 g-4">
-  <%  Blob.flying.each do |blob| %>
-    <div class="col">
-      <div class="card" style="">
-        <%= link_to(serve_video_path(id: blob.slug)) do %>
-          <img src="<%= blob.thumbnail_key %>" class="card-img-top" style="max-height: 356px; object-fit: cover;" alt="">
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title"><%= blob.title %></h5>
-          <span class="card-text text-muted"><%= blob.description %></span>
+<% cache do %>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <% flying_videos.each do |blob| %>
+      <div class="col">
+        <div class="card" style="">
+          <%= link_to(serve_video_path(id: blob.slug)) do %>
+            <img src="<%= blob.thumbnail_key %>" class="card-img-top" style="max-height: 356px; object-fit: cover;" alt="">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= blob.title %></h5>
+            <span class="card-text text-muted"><%= blob.description %></span>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-
+    <% end %>
+  </div>
+<% end %>
 
 

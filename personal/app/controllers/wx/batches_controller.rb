@@ -23,6 +23,7 @@ module Wx
     def ingest
       if allowed_to?(:ingest?, current_user, with: BatchPolicy)
         Wx::Pireps::Ingest.async_call
+        Wx::Metars::Ingest.async_call
         redirect_to wx_batches_path, notice: 'Ingesting data...'
       else
         redirect_to wx_batches_path, notice: 'Not authorized'

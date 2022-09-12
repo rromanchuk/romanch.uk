@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   include HighVoltage::StaticPage
-
+  let(:flying_videos) { Blob.flying }
   layout :layout_for_page
 
   private

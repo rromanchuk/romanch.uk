@@ -3,12 +3,6 @@
 <%- content_for(:page_description) { post.description } %>
 <%- content_for(:page_keywords) { post.tags_as_string } %>
 
-
-<script type="application/ld+json">
-  <%= post_json_ld(post).target!.html_safe %>
-</script>
-
-
 <% content_for :canonical_link_tag do %>
   <link rel="canonical" href="<%= post_url(post, host: 'romanch.uk') %>" />
 <% end %>
@@ -16,12 +10,17 @@
 
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 
+<% cache post do %>
+  <%= turbo_frame_tag post do %>
+    <article class="post">
+      <%= render PostHeaderComponent.new(post) %>
+      <%= render PostBodyComponent.new(post) %>
+    </article>
+  <% end %>
 
-<%= turbo_frame_tag post do %>
-  <article class="post">
-    <%= render PostHeaderComponent.new(post) %>
-    <%= render PostBodyComponent.new(post) %>
-  </article>
+  <script type="application/ld+json">
+    <%= post_json_ld(post).target!.html_safe %>
+  </script>
 <% end %>
 
 <% if current_user %>

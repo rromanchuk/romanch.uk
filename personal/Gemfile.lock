@@ -198,6 +198,7 @@ GEM
       activerecord (>= 3.2.0)
     hashie (5.0.0)
     high_voltage (3.1.2)
+    hiredis (0.6.3)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -437,6 +438,7 @@ DEPENDENCIES
   friendly_id
   gutentag
   high_voltage
+  hiredis
   httparty
   image_processing (~> 1.2)
   importmap-rails

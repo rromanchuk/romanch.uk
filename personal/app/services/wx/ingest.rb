@@ -32,7 +32,7 @@ module Wx
     let(:end_time) { last_modified }
     let(:end_time_s) { end_time.iso8601 }
 
-    let(:month) { end_time.strftime('%b').downcase }
+    let(:month) { end_time.month }
     let(:year) { end_time.year }
     let(:day) { end_time.day }
     let(:hour) { end_time.strftime('h%H') }

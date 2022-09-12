@@ -1,6 +1,7 @@
 
 <%- content_for(:page_title) { "Ryan Romanchuk's public key" } %>
 <%- content_for(:page_description) {'A4FB 7B3C 0D92 6E83 607E  7E03 9762 7E52 36CF 2455'} %>
+<% cache do %>
 <pre>
   <code class="language-plaintext">
     -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -59,5 +60,5 @@ MdNUDLHWSk6QbJpekwHN3EWQkEdQTTHUtF7/AUZlEBjaWcFwkNKdlPGD2dI=
   </code>
 </pre>
 
-
 <%= render 'shared/me' %>
+<% end %>

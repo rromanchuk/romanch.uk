@@ -12,7 +12,7 @@ module Wx
     include Turbo::Broadcastable
     # include Dictionaries
 
-    belongs_to :batch
+    belongs_to :batch, counter_cache: :pireps_count
 
     # store_accessor :data, :remarks, :sa_identifier
 

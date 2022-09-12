@@ -3,6 +3,9 @@ module Wx
     after_create_commit :process_batch!
     store_accessor :data, :s3_select_expression
 
+    has_many :pireps
+    has_many :aireps
+
     scope :pending, -> { where(processed_at: nil) }
     scope :complete, -> { where.not(processed_at: nil) }
 
