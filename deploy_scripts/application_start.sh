@@ -19,4 +19,7 @@ sudo systemctl restart anycable-rpc
 
 bundle exec whenever --update-crontab
 
+# bin/rails sitemap:refresh
+# aws s3 cp public/sitemap.xml s3://personal-www/sitemap.xml --content-type 'text/xml'
+
 exit 0

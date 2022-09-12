@@ -19,3 +19,4 @@ dump.sql
 *.cache
 /xcode/Demo*
 /xcode/Realm*
+personal/public/sitemap.xml
