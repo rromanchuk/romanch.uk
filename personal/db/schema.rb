@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_11_031445) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_023844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -147,53 +147,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_031445) do
     t.index ["database", "captured_at"], name: "index_pghero_space_stats_on_database_and_captured_at"
   end
 
-  create_table "pireps_batch_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "key", null: false
-    t.string "source_type", null: false
-    t.string "source_url", null: false
-    t.string "source_etag", null: false
-    t.string "destination_etag", null: false
-    t.datetime "source_last_modified_at", null: false
-    t.datetime "source_fetched_at", null: false
-    t.datetime "processed_at"
-    t.integer "num_records_processed", default: 0, null: false
-    t.integer "content_length_bytes", default: 0, null: false
-    t.jsonb "data", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pireps_raw_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "batch_file_id", null: false
-    t.text "raw_text", null: false
-    t.datetime "receipt_time", null: false
-    t.datetime "observation_time"
-    t.text "quality_control_flags"
-    t.text "aircraft_ref", null: false
-    t.float "latitude"
-    t.float "longitude"
-    t.integer "altitude_ft_msl"
-    t.jsonb "sky_condition", default: [], null: false
-    t.jsonb "turbulence_condition", default: [], null: false
-    t.jsonb "icing_condition", default: [], null: false
-    t.integer "visibility_statute_mi"
-    t.string "wx_string"
-    t.float "temp_c"
-    t.integer "wind_dir_degrees"
-    t.integer "wind_speed_kt"
-    t.integer "vert_gust_kt"
-    t.text "report_type", null: false
-    t.jsonb "data", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "urgent", default: false
-    t.text "station_identifier"
-    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
-    t.index ["batch_file_id"], name: "index_pireps_raw_reports_on_batch_file_id"
-    t.index ["location"], name: "index_pireps_raw_reports_on_location", using: :gist
-    t.index ["report_type", "raw_text"], name: "index_pireps_raw_reports_uniqueness", unique: true
-  end
-
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -314,7 +267,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_031445) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "pireps_raw_reports", "pireps_batch_files", column: "batch_file_id"
   add_foreign_key "wx_aireps", "wx_batches", column: "batch_id"
   add_foreign_key "wx_pireps", "wx_batches", column: "batch_id"
 end

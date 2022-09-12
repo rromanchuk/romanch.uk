@@ -24,7 +24,7 @@ class Wx::PirepsControllerTest < ActionDispatch::IntegrationTest
   # end
 
   test 'should show pireps_raw_report' do
-    get wx_pirep_url(pirep)
+    get wx_pirep_url(@pirep)
     assert_response :success
   end
 

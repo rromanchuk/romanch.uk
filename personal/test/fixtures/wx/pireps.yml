@@ -1,17 +1,17 @@
 ua:
-  batch_file: :first
+  batch: :first
   raw_text: "ABI UA /OV ABI250030 /TM 0118 /FL220 /TP BE9L /TA M12 /IC LGT RIME /RM ZFW ICING STOPPED DURD 170 AWC-WEB"
-  report_type: "PIREP"
-  receipt_time: "Fri, 02 Sep 2022 01:35:04 +0000"
+  receipt_time: "Fri, 02 Sep 2022 01:39:04 +0000"
+  observation_time: "Fri, 02 Sep 2022 01:39:04 +0000"
   aircraft_ref: BE9L
   location: "POINT(-122 47 20000)"
   urgent: false
 
 uaa:
-  batch_file: :first
+  batch: :first
   raw_text: "ABI UAA /OV ABI250030 /TM 0118 /FL220 /TP BE9L /TA M12 /IC LGT RIME /RM ZFW ICING STOPPED DURD 170 AWC-WEB"
-  report_type: "PIREP"
   receipt_time: "Fri, 02 Sep 2022 01:35:04 +0000"
+  observation_time: "Fri, 02 Sep 2022 01:35:04 +0000"
   aircraft_ref: BE9L
   location: "POINT(-122 47 20000)"
   urgent: true
