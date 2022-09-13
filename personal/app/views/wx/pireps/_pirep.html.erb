@@ -5,8 +5,9 @@
       <tbody class="">
         <tr class="">
           <%# <td class="w-25 fw-semibold">PIREP Text</td> %>
-          <td colspan="2" class="bg-warning <%= pirep.urgent? ? 'bg-gradient' : 'bg-light' %>">
+          <td colspan="2" class="<%= pirep.urgent? ? 'text-bg-warning' : 'text-bg-light' %>">
             <span class=""><%= link_to pirep.raw_text, wx_pirep_path(pirep), data: {turbo_frame: :_top} %><span>
+            <%= link_to 'debug', debug_wx_pirep_path(pirep), data: {turbo_frame: :_top}, class: "fs-6 text-muted fw-lighter text-decoration-none" %>
           </td>
         </tr>
         <tr class=""> 

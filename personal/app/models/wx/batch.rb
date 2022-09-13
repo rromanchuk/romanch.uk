@@ -9,6 +9,8 @@ module Wx
 
     scope :pending, -> { where(processed_at: nil) }
     scope :complete, -> { where.not(processed_at: nil) }
+    scope :aircraftreports, -> { where(report_type: :aircraftreports) }
+    scope :metars, -> { where(report_type: :metars) }
 
     def public_url
       "https://romanch.uk/#{key}"
