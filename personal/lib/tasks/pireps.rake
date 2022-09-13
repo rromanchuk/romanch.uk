@@ -1,7 +1,5 @@
 namespace :pireps do
-  desc "TODO"
+  desc 'TODO'
   task ingest: :environment do
-    Pireps::Ingest.call
   end
-
 end
