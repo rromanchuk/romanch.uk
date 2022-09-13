@@ -32,5 +32,6 @@ namespace :icaos do
       ap params
       ap AircraftTypeDesignator.upsert(params)
     end
+    AircraftTypeDesignator.find_each(&:save)
   end
 end

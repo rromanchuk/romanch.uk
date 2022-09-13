@@ -20,7 +20,7 @@ class AircraftTypeDesignatorsController < ApplicationController
 
   def show
     add_breadcrumb(title, aircraft_type_designators_path)
-    add_breadcrumb(icao_type.icao_code)
+    add_breadcrumb("#{icao_type.icao_code} #{icao_type.manufacturer} \"#{icao_type.model}\"")
   end
 
   def search; end

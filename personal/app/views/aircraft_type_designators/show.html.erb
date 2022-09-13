@@ -1,3 +1,8 @@
+<% content_for :canonical_link_tag do %>
+  <link rel="canonical" href="<%= aircraft_type_designator_url(icao_type.slug, host: 'romanch.uk') %>" />
+<% end %>
+<%- content_for(:page_title) { "#{icao_type.icao_code} #{icao_type.manufacturer} #{icao_type.model}" } %>
+
 <%= render 'disclaimer' %>
 
-<%= render 'aircraft_type_designator' %>
+<%= render icao_type %>

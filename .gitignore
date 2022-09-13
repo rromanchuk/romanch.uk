@@ -21,3 +21,4 @@ dump.sql
 /xcode/Realm*
 personal/public/sitemap.xml
 personal/public/sitemaps/*
+personal/app/views/pages/fiddle.html.erb

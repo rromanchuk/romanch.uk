@@ -22,7 +22,7 @@ aws s3 sync personal/public/static s3://personal-www/static \
 aws s3 sync personal/public/static/models s3://personal-www/static/models --storage-class INTELLIGENT_TIERING --cache-control max-age=31536000
 
 aws s3 sync personal/public/static s3://personal-www/static \
- --exclude '*' --include '*.jpg' --include '*.jpeg'
+ --exclude '*' --include '*.jpg' --include '*.jpeg'  --include '*.png'
 
  aws s3 sync personal/public/static s3://personal-www/static \
  --exclude '*' --include '*.pdf'
