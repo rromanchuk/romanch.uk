@@ -1,6 +1,6 @@
 class OneMoreTry < ActiveRecord::Migration[7.0]
   def change
-    drop_table :aircraft_type_designators
+    # drop_table :aircraft_type_designators
     create_table :aircraft_type_designators, id: :uuid do |t|
       t.text :icao_code, null: false, indexed: true, unique: true
       t.text :aircraft_class
