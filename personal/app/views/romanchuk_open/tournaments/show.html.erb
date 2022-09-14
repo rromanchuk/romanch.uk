@@ -1,6 +1,6 @@
 <% content_for :page_title, tournament.title %>
 <% content_for :canonical_link_tag do %>
-  <link rel="canonical" href="<%= romanchuk_open_tournament_url(tournament, host: 'romanchukopen.com') %>" />
+  <link rel="canonical" href="<%= romanchuk_open_tournament_url(tournament) %>" />
 <% end %>
 
 <% cache_unless current_user, tournament do %>

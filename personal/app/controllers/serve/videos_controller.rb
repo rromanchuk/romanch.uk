@@ -12,7 +12,7 @@ module Serve
     private
 
     def set_breadcrumbs
-      add_breadcrumb('Home', root_path)
+      add_breadcrumb('Home', root_url)
     end
   end
 end

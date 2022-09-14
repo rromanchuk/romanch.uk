@@ -14,17 +14,17 @@ module Wx
     end
 
     def show
-      add_breadcrumb('Aircraft Reports', wx_aireps_path)
+      add_breadcrumb('Aircraft Reports', wx_aireps_url)
       add_breadcrumb(airep.raw_text)
     end
 
     def map
-      add_breadcrumb('Aircraft Reports', wx_aireps_path)
+      add_breadcrumb('Aircraft Reports', wx_aireps_url)
       add_breadcrumb('Location Map')
     end
 
     def set_breadcrumbs
-      add_breadcrumb('Home', root_path)
+      add_breadcrumb('Home', root_url)
     end
   end
 end

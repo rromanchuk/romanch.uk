@@ -19,7 +19,7 @@ class AircraftTypeDesignatorsController < ApplicationController
   end
 
   def show
-    add_breadcrumb(title, aircraft_type_designators_path)
+    add_breadcrumb(title, aircraft_type_designators_url)
     add_breadcrumb("#{icao_type.icao_code} #{icao_type.manufacturer} \"#{icao_type.model}\"")
   end
 
@@ -28,7 +28,7 @@ class AircraftTypeDesignatorsController < ApplicationController
   private
 
   def set_breadcrumbs
-    add_breadcrumb('Home', root_path)
+    add_breadcrumb('Home', root_url)
   end
 
   def title = 'DOC 8643 - Aircraft Type Designators'

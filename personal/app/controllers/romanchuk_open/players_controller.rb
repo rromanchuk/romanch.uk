@@ -44,8 +44,8 @@ module RomanchukOpen
     private
 
     def set_breadcrumbs
-      add_breadcrumb('Home', romanchuk_open_tournaments_path)
-      add_breadcrumb('Players', romanchuk_open_players_path)
+      add_breadcrumb('Home', romanchuk_open_tournaments_url)
+      add_breadcrumb('Players', romanchuk_open_players_url)
     end
 
     def ensure_frame_response

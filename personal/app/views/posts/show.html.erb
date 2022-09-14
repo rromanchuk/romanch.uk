@@ -4,7 +4,7 @@
 <%- content_for(:page_keywords) { post.tags_as_string } %>
 
 <% content_for :canonical_link_tag do %>
-  <link rel="canonical" href="<%= post_url(post, host: 'romanch.uk') %>" />
+  <link rel="canonical" href="<%= post_url(post) %>" />
 <% end %>
 
 

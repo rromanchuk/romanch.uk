@@ -2,9 +2,9 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb" style="<%= style %>">
     <% crumbs.each do |crumb| %>
-      <li class="breadcrumb-item <%= current_page?(crumb.path) ? 'active' : '' %>">
-        <% if crumb.path %>
-          <%= link_to crumb.name, crumb.path %>
+      <li class="breadcrumb-item <%= current_page?(crumb.url) ? 'active' : '' %>">
+        <% if crumb.url %>
+          <%= link_to crumb.name, crumb.url %>
         <% else %>
           <%= crumb.name %>
         <% end %>

@@ -13,7 +13,7 @@
       <title><%= breadcrumbs_to_s %></title>
       <meta property="og:title" content="<%= breadcrumbs_to_s %>">
       <script type="application/ld+json">
-        <%== ld_breadcrumbs(breadcrumbs) %>
+        <%= breadcrumb_json_ld(breadcrumbs).target!.html_safe %>
       </script>
     <% elsif content_for?(:page_title) %>
       <title><%= yield(:page_title) %></title>

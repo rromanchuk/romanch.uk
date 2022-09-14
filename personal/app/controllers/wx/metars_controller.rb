@@ -11,23 +11,23 @@ module Wx
     end
 
     def debug
-      add_breadcrumb('METARs', wx_metars_path)
-      add_breadcrumb("#{metar.raw_text}", wx_metar_path(metar))
+      add_breadcrumb('METARs', wx_metars_url)
+      add_breadcrumb("#{metar.raw_text}", wx_metar_url(metar))
       add_breadcrumb('Debug')
     end
 
     def index
-      add_breadcrumb('METARs', wx_metars_path)
+      add_breadcrumb('METARs', wx_metars_url)
     end
 
     def show
-      add_breadcrumb('METARs', wx_metars_path)
+      add_breadcrumb('METARs', wx_metars_url)
       add_breadcrumb("#{metar.raw_text}")
       fresh_when last_modified: metar.updated_at.utc, etag: metar
     end
 
     def set_breadcrumbs
-      add_breadcrumb('Home', root_path)
+      add_breadcrumb('Home', root_url)
     end
   end
 end

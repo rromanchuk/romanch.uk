@@ -1,9 +1,9 @@
 class Breadcrumb
-  attr_reader :name, :path
+  attr_reader :name, :url
 
-  def initialize(name, path)
+  def initialize(name, url)
     @name = name
-    @path = path
+    @url = url
   end
 
   def link?
@@ -12,5 +12,9 @@ class Breadcrumb
 
   def last?(crumbs)
     self == crumbs.last
+  end
+
+  def postion(crumbs)
+    crumbs.index(self) + 1
   end
 end

@@ -56,8 +56,12 @@ class ApplicationController < ActionController::Base
     breadcrumbs.map(&:name).join(' | ')
   end
 
-  def add_breadcrumb(name, path = nil)
-    breadcrumbs << Breadcrumb.new(name, path)
+  def add_breadcrumb(name, url = nil)
+    breadcrumbs << Breadcrumb.new(name, url)
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb('Home', root_url)
   end
 
   def set_sentry_context

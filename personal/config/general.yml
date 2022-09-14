@@ -7,8 +7,10 @@ default: &default
 
 production:
   <<: *default
+  romanchukopen_host: romanchukopen.com
 
 development:
   <<: *default
   apex_url: https://personal.test
   cognito_redirect: https://personal.test/oauth2/idpresponse
+  romanchukopen_host: romanchukopen.test

@@ -39,25 +39,25 @@ module Wx
     end
 
     def index
-      add_breadcrumb('Pilot Reports', wx_pireps_path)
+      add_breadcrumb('Pilot Reports', wx_pireps_url)
     end
 
     def show
-      add_breadcrumb('Pilot Reports', wx_pireps_path)
+      add_breadcrumb('Pilot Reports', wx_pireps_url)
       add_breadcrumb(pirep.raw_text)
       fresh_when last_modified: pirep.updated_at.utc, etag: pirep
     end
 
     def debug
-      add_breadcrumb('Pilot Reports', wx_pireps_path)
-      add_breadcrumb(pirep.raw_text, wx_pirep_path(pirep))
+      add_breadcrumb('Pilot Reports', wx_pireps_url)
+      add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
       add_breadcrumb('Debug')
       fresh_when last_modified: pirep.updated_at.utc, etag: pirep
     end
 
     def map
-      add_breadcrumb('Pilot Reports', wx_pireps_path)
-      add_breadcrumb(pirep.raw_text, wx_pirep_path(pirep))
+      add_breadcrumb('Pilot Reports', wx_pireps_url)
+      add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
       add_breadcrumb('Location Map')
     end
 
@@ -69,7 +69,7 @@ module Wx
     end
 
     def debug
-      add_breadcrumb(pirep.raw_text, wx_pirep_path(pirep))
+      add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
       add_breadcrumb('Debug')
     end
 
@@ -89,7 +89,7 @@ module Wx
     end
 
     def set_breadcrumbs
-      add_breadcrumb('Home', root_path)
+      add_breadcrumb('Home', root_url)
     end
   end
 end

@@ -8,7 +8,7 @@
 
     <% if breadcrumbs? %>
       <script type="application/ld+json">
-        <%== ld_breadcrumbs(breadcrumbs) %>
+        <%= breadcrumb_json_ld(breadcrumbs).target!.html_safe %>
       </script>
     <% end %>
     <%# action_cable_meta_tag %>

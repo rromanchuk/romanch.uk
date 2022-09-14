@@ -1,24 +1,24 @@
-
 module RomanchukOpen
   class PagesController < RomanchukOpen::ApplicationController
     include HighVoltage::StaticPage
     before_action :set_breadcrumbs
-  
-    layout "romanchuk_open"
+
+    layout 'romanchuk_open'
 
     private
+
     def page_finder_factory
       DefaultPageFinder
     end
-    
+
     def set_breadcrumbs
-      add_breadcrumb("Home", romanchuk_open_tournaments_path)
+      add_breadcrumb('Home', romanchuk_open_tournaments_url)
       case params[:id]
       when 'players'
-        add_breadcrumb("Participants")
+        add_breadcrumb('Participants')
       end
     end
-    
+
     class DefaultPageFinder < HighVoltage::PageFinder
       def content_path
         'romanchuk_open/pages'
@@ -26,4 +26,3 @@ module RomanchukOpen
     end
   end
 end
-

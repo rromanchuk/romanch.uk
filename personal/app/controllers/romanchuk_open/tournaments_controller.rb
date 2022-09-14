@@ -42,15 +42,15 @@ module RomanchukOpen
       add_breadcrumb(tournament.title)
       fresh_when last_modified: tournament.updated_at.utc, etag: tournament
     end
-    
+
     # def players
     #   add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
     #   add_breadcrumb("Participants")
     # end
 
     def newsletter
-      add_breadcrumb(tournament.title, romanchuk_open_tournament_path(tournament))
-      add_breadcrumb("Newsletter")
+      add_breadcrumb(tournament.title, romanchuk_open_tournament_url(tournament))
+      add_breadcrumb('Newsletter')
     end
 
     private
@@ -60,7 +60,7 @@ module RomanchukOpen
     end
 
     def set_breadcrumbs
-      add_breadcrumb("Home", romanchuk_open_tournaments_path)
+      add_breadcrumb('Home', romanchuk_open_tournaments_url)
     end
   end
 end

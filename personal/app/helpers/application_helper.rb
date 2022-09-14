@@ -12,23 +12,18 @@ module ApplicationHelper
     'active' if current_page?(path)
   end
 
-  def ld_breadcrumb_items(crumbs)
-    crumbs.map.with_index do |crumb, idx|
-      {
-        "@type": 'ListItem',
-        "position": idx + 1,
-        "name": crumb.name,
-        "item": crumb.path
-      }
+  def breadcrumb_json_ld(crumbs)
+    Jbuilder.new do |json|
+      json.ignore_nil!
+      json.set! :@context, 'http://schema.org/'
+      json.set! :@type, 'BreadcrumbList'
+      json.itemListElement crumbs do |crumb|
+        json.set! "@type": 'ListItem'
+        json.name crumb.name
+        json.item crumb.url
+        json.postion crumb.postion(crumbs)
+      end
     end
-  end
-
-  def ld_breadcrumbs(crumbs)
-    {
-      "@context": 'https://schema.org',
-      "@type": 'BreadcrumbList',
-      "itemListElement": ld_breadcrumb_items(crumbs)
-    }.to_json
   end
 
   def glb_models
