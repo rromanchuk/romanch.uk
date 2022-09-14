@@ -11,6 +11,7 @@ module Wx
     scope :complete, -> { where.not(processed_at: nil) }
     scope :aircraftreports, -> { where(report_type: :aircraftreports) }
     scope :metars, -> { where(report_type: :metars) }
+    scope :tafs, -> { where(report_type: :tafs) }
 
     def public_url
       "https://romanch.uk/#{key}"

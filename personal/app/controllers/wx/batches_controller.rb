@@ -62,6 +62,8 @@ module Wx
         relation.metars.recent
       when 'pireps'
         relation.aircraftreports.recent
+      when 'tafs'
+        relation.tafs.recent
       else
         relation
       end
