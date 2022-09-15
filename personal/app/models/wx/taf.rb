@@ -6,7 +6,7 @@ module Wx
 
 
     # SELECT "wx_tafs".* FROM "wx_tafs" WHERE ST_Distance(ST_GeomFromText('POINT (35.17 -79.02 57.0)', 4326), "wx_tafs"."location") < 500
-    scope :near -> (point, radius) {
+    scope :near, -> (point, radius) {
       where(
         Arel.spatial(point)
           .st_distance(Taf.arel_table[:location])
