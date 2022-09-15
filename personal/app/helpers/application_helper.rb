@@ -21,7 +21,7 @@ module ApplicationHelper
         json.set! "@type": 'ListItem'
         json.name crumb.name
         json.item crumb.url
-        json.postion crumb.postion(crumbs)
+        json.position crumb.postion(crumbs)
       end
     end
   end

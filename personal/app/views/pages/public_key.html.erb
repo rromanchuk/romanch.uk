@@ -1,6 +1,9 @@
 
-<%- content_for(:page_title) { "Ryan Romanchuk's public key" } %>
-<%- content_for(:page_description) {'A4FB 7B3C 0D92 6E83 607E  7E03 9762 7E52 36CF 2455'} %>
+<%= provide(:page_title, "Ryan Romanchuk's public key") %>
+<%= provide(:page_description, 'A4FB 7B3C 0D92 6E83 607E  7E03 9762 7E52 36CF 2455') %>
+<%= provide(:canonical_url, page_url(host: 'romanch.uk')) %>
+
+
 <% cache do %>
 <pre>
   <code class="language-plaintext">

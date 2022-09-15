@@ -1,18 +1,5 @@
 
-<div class="card mb-4">
-  <div class="card-header">Recently updated</div>
-  <div class="card-body">
-    <div class="row">
-        <div class="col">
-          <ul class="list-unstyled">
-            <% Post.published.recently_modified.limit(4).each do |post| %>
-              <li class="mb-2"><%= link_to post.title, post_path(post), data: { turbo_frame: "_top", turbo_action: 'replace' }, class: " d-block" %> <%= time_tag(post.updated_at, time_ago_in_words(post.updated_at) + " ago", class: 'fs-6 fw-lighter text-muted') %></li>
-            <% end %>
-          </ul>
-        </div>
-    </div>
-  </div>
-</div>
+
 
 
 

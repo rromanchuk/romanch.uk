@@ -3,14 +3,38 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <%= render 'shared/meta' %>
-    <%= render 'shared/gtm' %>
+    
     
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%= yield :head %>
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
+    <% end -%>
+
+    <% if content_for?(:page_title) %>
+      <%= tag.title content_for(:page_title) %>
+      <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
+    <% end %>
+
+    <% if content_for?(:page_description) %>
+      <%= tag.meta name: 'description', content: content_for(:page_description) %>
+      <%= tag.meta property: 'og:description', content: content_for(:page_description) %>
+    <% end %>
+
+    <% if content_for?(:page_keywords) -%>
+      <%= tag.meta name: 'keywords', content: content_for(:page_keywords) %>
+    <% end -%>
+
+    <% if content_for?(:share_image) %>
+      <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
+    <% end %>
+
+    <%= render 'shared/gtm' %>
+    <%= render 'application/favicon' %>
   </head>
 
   <body class="<%= yield :body_class %>">

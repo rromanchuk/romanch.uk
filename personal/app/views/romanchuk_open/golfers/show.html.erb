@@ -1,4 +1,4 @@
-<% content_for :page_title, "#{golfer.name} - #{golfer.tournament.title}" %>
+<%= provide(:page_title, "#{golfer.name} - #{golfer.tournament.title}") %>
 
 <% turbo_frame_tag golfer do %>
   <h1><%= golfer.name %></h1>

@@ -1,6 +1,5 @@
-<% content_for :canonical_link_tag do %>
-  <link rel="canonical" href="<%= romanchuk_open_player_url(player, host: 'romanchukopen.com') %>" />
-<% end %>
+
+<%= provide(:canonical_url, romanchuk_open_player_url(player, host: 'romanchukopen.com')) %>
 
 <section>
   <div class="row py-lg-5 py-5 text-center container">

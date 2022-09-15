@@ -1,4 +1,4 @@
-<% content_for(:page_title) { 'Most recent batch files' } %>
+<%= provide(:page_title, 'Most recent batch files') %>
 
 <section class="row row-cols-2 row-cols-md-4 g-4">
   <div class="col">
@@ -90,6 +90,7 @@
       
     </div>
     <div class="card-footer text-muted">
+      <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
       <%= render PagerComponent.new(dr_pagy, previous_path: wx_batches_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_batches_path(page: dr_pagy.next, filter: params[:filter])) %>
     </div>
 

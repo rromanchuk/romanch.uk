@@ -8,7 +8,8 @@ brew bundle
 sudo puma-dev -setup
 # Configure puma-dev to run in the background on ports 80 and 443 with the domain `.test`.
 puma-dev -install
-puma-dev link -n personal personal/
+puma-dev link -n personal personal/  # https://personal.test
+puma-dev link -n romanchukopen personal/ # https://romanchukopen.test
 # Allow local SSL terminated (proxied) sockets ie. wss://anycable.personal.test/cable
 echo 8080 > ~/.puma-dev/anycable.personal
 

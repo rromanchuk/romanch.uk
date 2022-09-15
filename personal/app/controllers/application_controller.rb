@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def url_options
+    { host: Rails.configuration.general.romanchuk_host }.merge(super)
+  end
+
   private
 
   def request_id = request.request_id

@@ -1,29 +1,30 @@
 
-<%- content_for(:page_title) { video.title } %>
-<%- content_for(:page_keywords) { video.tags_as_string } %>
-<%- content_for(:share_image) { video.thumbnail_key } %>
-<%- content_for(:canonical_url) { serve_video_url(id: video.slug) } %>
+<%= provide(:page_title, video.title) %>
+<%= provide(:page_keywords, video.tags_as_string) %>
+<%= provide(:share_image, video.thumbnail_key) %>
+<%= provide(:canonical_url, serve_video_url(id: video.slug)) %>
 
 
-<script type="application/ld+json">
-  <%= video_json_ld(video).target!.html_safe %>
-</script>
+<% cache video do %>
+  <script type="application/ld+json">
+    <%= video_json_ld(video).target!.html_safe %>
+  </script>
 
 
-<div class="card bg-dark text-white">
-  <img src="<%= video.thumbnail_key %>" class="card-img" alt="">
-  <div class="card-img-overlay">
-    <h5 class="card-title"><%= video.title %></h5>
-    <p class="card-text"><%= video.description %></p>
-    <a href="<%= serve_video_path(id: video.slug) %>" class="btn btn-primary"><i class="fa-solid fa-circle-play"></i> Play</a>
+  <div class="card bg-dark text-white">
+    <img src="<%= video.thumbnail_key %>" class="card-img" alt="">
+    <div class="card-img-overlay">
+      <h5 class="card-title"><%= video.title %></h5>
+      <p class="card-text"><%= video.description %></p>
+      <a href="<%= serve_video_path(id: video.slug) %>" class="btn btn-primary"><i class="fa-solid fa-circle-play"></i> Play</a>
+    </div>
   </div>
-</div>
 
-<%= turbo_frame_tag "modal" do %>
-  <%= render ModalComponent.new(title: video.title) do |component| %>
-    <% component.body do %>
-      <%= render VideoComponent.new(video: video) %>
+  <%= turbo_frame_tag "modal" do %>
+    <%= render ModalComponent.new(title: video.title) do |component| %>
+      <% component.body do %>
+        <%= render VideoComponent.new(video: video) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
-

@@ -12,6 +12,7 @@ module RomanchukOpen
 
     def edit
       require_me!
+      tournament.ro_photo_blobs.build
     end
 
     def create
@@ -56,7 +57,8 @@ module RomanchukOpen
     private
 
     def tournament_params
-      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :location, :newsletter)
+      params.require(:romanchuk_open_tournament).permit(:title, :ocurred_on, :city, :country, :location, :newsletter,
+                                                        ro_photo_blobs_attributes: %i[id title description key content_type])
     end
 
     def set_breadcrumbs

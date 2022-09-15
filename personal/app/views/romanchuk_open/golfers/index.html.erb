@@ -1,11 +1,11 @@
-<% content_for :page_title, "All golfers" %>
-<% content_for :canonical_link_tag do %>
-  <% if params[:tournament_id] %>
-    <link rel="canonical" href="<%= romanchuk_open_tournament_golfers_url(tournament) %>" />
-  <% else %>
-    <link rel="canonical" href="<%= romanchuk_open_golfers_url() %>" />
-  <% end %>
-<% end %>
+<%= provide(:page_title, "All golfers") %>
+
+<% if params[:tournament_id] -%>
+  <%= provide(:canonical_url, romanchuk_open_tournament_golfers_url(tournament)) %>
+<% else %>
+  <%= provide(:canonical_url, romanchuk_open_golfers_url) %>
+<% end -%>
+
 
 <% if params[:tournament_id] %>
   <section>

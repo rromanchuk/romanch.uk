@@ -1,33 +1,35 @@
 
-<%- content_for(:page_title) { image.title } %>
-<%- content_for(:page_description) { image.description } %>
-<%- content_for(:page_keywords) { image.tags_as_string } %>
-<%- content_for(:share_image) { image.key } %>
-<%- content_for(:canonical_url) { serve_image_url(id: image.slug) } %>
+<%= provide(:page_title, image.title ) %>
+<%= provide(:page_description, image.description) %>
+<%- provide(:page_keywords, image.tags_as_string ) %>
+<%= provide(:share_image, image.key ) %>
+<%= provide(:canonical_url, serve_image_url(id: image.slug)) %>
 
 
-
-<div class="card bg-dark text-white">
-  <img src="<%= image.key %>" class="card-img" alt="...">
-  <div class="card-img-overlay">
-    <h5 class="card-title"><%= image.title %></h5>
-    <p class="card-text"><%= image.description %></p>
-    <% image.tag_names.each do |name| %>
-      <%= tag.span name, class: 'badge bg-secondary text-decoration-none link-light' %>
-    <% end %>
+<% cache image do %>
+  <div class="card bg-dark text-white">
+    <img src="<%= image.key %>" class="card-img" alt="...">
+    <div class="card-img-overlay">
+      <h5 class="card-title"><%= image.title %></h5>
+      <p class="card-text"><%= image.description %></p>
+      <% image.tag_names.each do |name| %>
+        <%= tag.span name, class: 'badge bg-secondary text-decoration-none link-light' %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<%# turbo_frame_tag :landing, src: root_path, loading: :lazy %>
+  <%# turbo_frame_tag :landing, src: root_path, loading: :lazy %>
 
 
-<% turbo_frame_tag "modal" do %>
-  <%= render ModalComponent.new(title: image.title, size: 'modal-lg') do |component| %>
-    <% component.body do %>
-      <figure class="figure">
-        <%= image_tag image.key, class: 'img-fluid' %>
-        <figcaption class="figure-caption text-end"><%= image.description %></figcaption>
-      </figure>
+  <% turbo_frame_tag "modal" do %>
+    <%# ModalComponent Updated: Sep 14, 2022 at 4pm %>
+    <%= render ModalComponent.new(title: image.title, size: 'modal-lg') do |component| %>
+      <% component.body do %>
+        <figure class="figure">
+          <%= image_tag image.key, class: 'img-fluid' %>
+          <figcaption class="figure-caption text-end"><%= image.description %></figcaption>
+        </figure>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

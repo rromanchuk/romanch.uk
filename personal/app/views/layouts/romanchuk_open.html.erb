@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render 'shared/gtm' %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     
-    
+    <%= render 'shared/gtm' %>
+    <%= yield :head %>
+
+    <% if content_for?(:page_title) -%>
+      <%= tag.title content_for(:page_title) %>
+      <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
+    <% end -%>
+
+    <% if content_for?(:page_description) -%>
+      <%= tag.meta name: 'description', content: content_for(:page_description) %>
+      <%= tag.meta property: 'og:description', content: content_for(:page_description) %>
+    <% end -%>
+
+    <% if content_for?(:page_keywords) -%>
+      <%= tag.meta name: 'keywords', content: content_for(:page_keywords) %>
+    <% end -%>
+
+    <% if content_for?(:share_image) -%>
+      <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
+    <% end -%>
+
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
+    <% end -%>
+
     <% if breadcrumbs? %>
       <title><%= breadcrumbs_to_s %></title>
       <meta property="og:title" content="<%= breadcrumbs_to_s %>">
       <script type="application/ld+json">
         <%= breadcrumb_json_ld(breadcrumbs).target!.html_safe %>
       </script>
-    <% elsif content_for?(:page_title) %>
-      <title><%= yield(:page_title) %></title>
-      <meta property="og:title" content="<%= yield(:page_title) %>">
-    <% end %>
-
-    <% if content_for?(:share_image) %>
-      <meta property="og:image" content="<%= yield(:share_image) %>">
-    <% end %>
-
-    <% if content_for?(:canonical_link_tag) %>
-      <%= yield :canonical_link_tag %>
     <% end %>
   </head>
 

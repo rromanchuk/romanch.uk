@@ -3,14 +3,11 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <%= render 'shared/gtm' %>
-    <%= render 'shared/meta' %>
+    <meta name="color-scheme" content="dark light" />    
+    <meta name="apple-itunes-app" content="app-id=1109640290, app-argument=https://getspar.com/pid/personal">
+    <meta content="ua0bOK-G5Ddcx6e_Dz-Sl6J3lym5fRFPd3m5Z1ljLGU" name="google-site-verification" />
 
-    <% if breadcrumbs? %>
-      <script type="application/ld+json">
-        <%= breadcrumb_json_ld(breadcrumbs).target!.html_safe %>
-      </script>
-    <% end %>
+    
     <%# action_cable_meta_tag %>
     <%= action_cable_with_jwt_meta_tag(current_user: current_user) %>
     <%= csrf_meta_tags %>
@@ -19,12 +16,36 @@
     <%= javascript_importmap_tags %>
     
     <%= yield :head %>
-    <%= yield :canonical_link_tag %>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark light" />
-    <%= render 'application/favicon' %>
 
+    <% if breadcrumbs? %>
+      <%= tag.script breadcrumb_json_ld(breadcrumbs).target!.html_safe, type: "application/ld+json" %>
+    <% end %>
+    
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
+    <% end -%>
+
+    <% if content_for?(:page_title) %>
+      <%= tag.title content_for(:page_title) %>
+      <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
+    <% end %>
+
+    <% if content_for?(:page_description) %>
+      <%= tag.meta name: 'description', content: content_for(:page_description) %>
+      <%= tag.meta property: 'og:description', content: content_for(:page_description) %>
+    <% end %>
+
+    <% if content_for?(:page_keywords) -%>
+      <%= tag.meta name: 'keywords', content: content_for(:page_keywords) %>
+    <% end -%>
+
+    <% if content_for?(:share_image) %>
+      <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
+    <% end %>
+
+    <%= render 'shared/gtm' %>
+    <%= render 'application/favicon' %>
+    
     <meta
       name="theme-color"
       content="#eeeeee"

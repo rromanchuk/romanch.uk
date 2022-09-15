@@ -1,4 +1,4 @@
-<% content_for(:page_title) { 'All tags' } %>
+<%= provide(:page_title, 'All tags') %>
 
 <%= turbo_frame_tag :tags do %>
   <ul class="list-unstyled list-inline mb-0">

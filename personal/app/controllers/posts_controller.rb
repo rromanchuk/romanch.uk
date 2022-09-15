@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_breadcrumbs
 
   let(:dr_pagy)
-  let(:post) { Post.friendly.find(params[:id]) }
+  let(:post) { Post.includes(:tags).friendly.find(params[:id]) }
 
   let(:posts) do
     if (tag_name = params[:tag_name])
@@ -31,6 +31,7 @@ class PostsController < ApplicationController
     add_breadcrumb(post.title)
     authorize! post
     fresh_when last_modified: post.updated_at.utc, etag: post
+    render stream: true
   end
 
   def new
@@ -42,6 +43,7 @@ class PostsController < ApplicationController
 
   def index
     authorize!
+    render stream: true
   end
 
   def edit
@@ -70,6 +72,11 @@ class PostsController < ApplicationController
     authorize! post
     post.destroy
     redirect_to posts_path, status: 303, notice: 'Post was successfully deleted.'
+  end
+
+  def recently_updated
+    @posts = Post.published.recently_modified.limit(4)
+    render stream: true
   end
 
   private

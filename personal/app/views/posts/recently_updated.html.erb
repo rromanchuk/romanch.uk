@@ -1,0 +1,7 @@
+<%= turbo_frame_tag :recently_updated do %>
+  <ul class="list-unstyled">
+    <% posts.each do |post| %>
+      <li class="mb-2"><%= link_to post.title, post_path(post), data: { turbo_frame: "_top", turbo_action: 'replace' }, class: " d-block" %> <%= time_tag(post.updated_at, time_ago_in_words(post.updated_at) + " ago", class: 'fs-6 fw-lighter text-muted') %></li>
+    <% end %>
+  </ul>
+<% end %>
