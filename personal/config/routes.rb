@@ -14,7 +14,17 @@ end
 
 Rails.application.routes.draw do
   get :healthcheck, to: 'pages#show', id: 'status'
-
+  
+  resources :posts do
+    resources :tags, shallow: true
+    get :recently_updated, on: :collection
+  end
+  resources :users do
+    get :me, on: :collection
+  end
+  resources :aircraft_type_designators, only: %i[index show] do
+    get :search, on: :collection
+  end
   resources :videos
   resources :blobs
   resources :attachments
@@ -47,6 +57,32 @@ Rails.application.routes.draw do
     resources :posts, only: [:index], on: :collection
   end
 
+  namespace :wx do
+    resources :batches, only: %i[index show] do
+      put :ingest, on: :collection
+      put :process_csv, on: :collection
+      get :debug, on: :member
+    end
+
+    resources :metars, only: %i[index show] do
+      get :debug, on: :member
+      get :points, on: :collection
+    end
+
+    resources :pireps, only: %i[index show] do
+      get :uua, on: :collection
+      get :ua, on: :collection
+      get :debug, on: :member
+      get :map, on: :member
+      get :points, on: :collection
+    end
+    resources :aireps, only: %i[index show] do
+      get :map, on: :member
+      get :debug, on: :member
+    end
+    resources :tafs, only: %i[index show]
+  end
+
   namespace :oauth do
     get 'cognito/token', to: 'cognito#token'
     get 'cognito/authorize', to: 'cognito#authorize'
@@ -75,44 +111,6 @@ Rails.application.routes.draw do
   end
 
   constraints(PersonalConstraint.new) do
-    resources :posts do
-      resources :tags, shallow: true
-      get :recently_updated, on: :collection
-    end
-
-    resources :users do
-      get :me, on: :collection
-    end
-    resources :aircraft_type_designators, only: %i[index show] do
-      get :search, on: :collection
-    end
-
-    namespace :wx do
-      resources :batches, only: %i[index show] do
-        put :ingest, on: :collection
-        put :process_csv, on: :collection
-        get :debug, on: :member
-      end
-
-      resources :metars, only: %i[index show] do
-        get :debug, on: :member
-        get :points, on: :collection
-      end
-
-      resources :pireps, only: %i[index show] do
-        get :uua, on: :collection
-        get :ua, on: :collection
-        get :debug, on: :member
-        get :map, on: :member
-        get :points, on: :collection
-      end
-      resources :aireps, only: %i[index show] do
-        get :map, on: :member
-        get :debug, on: :member
-      end
-      resources :tafs, only: %i[index show]
-    end
-
     get '/c/*attributed', to: 'pages#show', id: 'home'
     root to: 'pages#show', id: 'home'
   end

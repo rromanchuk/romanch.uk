@@ -7,6 +7,13 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     @me = users(:ryan)
     # Rails.application.config.action_dispatch.show_exceptions = true
   end
+  
+  test 'index' do
+    unpublished = posts(:unpublished)
+    get posts_url
+    assert_response :success
+    assert_not_includes(@controller.posts, unpublished)
+  end
 
   test 'show unpublished post to me' do
     sign_in_as(@me)
@@ -27,6 +34,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@me)
     get post_url(@post)
     assert_response :success
+    assert_not_empty(@controller.breadcrumbs)
   end
 
   test 'should destroy post' do

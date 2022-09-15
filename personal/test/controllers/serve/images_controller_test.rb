@@ -9,6 +9,7 @@ module Serve
       get serve_video_url(@video.slug)
       assert_response :success
       assert_select 'title'
+      assert_not_empty(@controller.breadcrumbs)
     end
   end
 end

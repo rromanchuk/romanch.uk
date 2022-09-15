@@ -1,0 +1,8 @@
+debug:
+ name: debug
+
+ubuntu:
+ name: ubuntu
+
+test:
+ name: test

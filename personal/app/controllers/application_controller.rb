@@ -20,6 +20,22 @@ class ApplicationController < ActionController::Base
     { host: Rails.configuration.general.romanchuk_host }.merge(super)
   end
 
+  def breadcrumbs
+    @breadcrumbs ||= []
+  end
+
+  def breadcrumbs?
+    breadcrumbs.any?
+  end
+
+  def add_breadcrumb(name, url = nil)
+    breadcrumbs << Breadcrumb.new(name, url)
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb('Home', root_url)
+  end
+
   private
 
   def request_id = request.request_id
@@ -47,21 +63,7 @@ class ApplicationController < ActionController::Base
     cookies[:iid].presence
   end
 
-  def breadcrumbs
-    @breadcrumbs ||= []
-  end
-
-  def breadcrumbs?
-    breadcrumbs.any?
-  end
-
-  def add_breadcrumb(name, url = nil)
-    breadcrumbs << Breadcrumb.new(name, url)
-  end
-
-  def set_breadcrumbs
-    add_breadcrumb('Home', root_url)
-  end
+  
 
   def set_sentry_context
     Sentry.set_user(

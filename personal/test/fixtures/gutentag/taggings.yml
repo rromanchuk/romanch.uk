@@ -1,0 +1,11 @@
+post_one_ubuntu:
+  tag: ubuntu
+  taggable: one (Post)
+
+two_test:
+  tag: test
+  taggable: two (Post)
+
+unbuplished_test:
+  tag: test
+  taggable: unpublished (Post)
