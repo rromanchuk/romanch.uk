@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_12_170518) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_15_095311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -303,6 +303,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_170518) do
     t.index ["batch_id"], name: "index_wx_pireps_on_batch_id"
     t.index ["location"], name: "index_wx_pireps_on_location", using: :gist
     t.index ["raw_text", "observation_time"], name: "index_wx_pireps_uniqueness", unique: true
+  end
+
+  create_table "wx_tafs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "raw_text"
+    t.text "station_id", null: false
+    t.datetime "issue_time", null: false
+    t.datetime "bulletin_time"
+    t.datetime "valid_time_from"
+    t.datetime "valid_time_to"
+    t.text "remarks"
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :has_z=>true, :geographic=>true}
+    t.jsonb "forecast"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location"], name: "index_wx_tafs_on_location", using: :gist
+    t.index ["station_id", "issue_time"], name: "index_wx_tafs_uniqueness", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

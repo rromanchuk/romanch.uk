@@ -383,3 +383,83 @@ LGIR 120420Z 26006KT CAVOK 25/15 Q1007 NOSIG,LGIR,2022-09-12T04:20:00Z,35.33,25.
 LGAV 120420Z 02006KT 9999 FEW025 24/16 Q1008 NOSIG,LGAV,2022-09-12T04:20:00Z,37.93,23.95,24.0,16.0,20,6,,6.21,29.763779,,,,,,TRUE,,,,,FEW,2500,,,,,,,VFR,,,,,,,,,,,,METAR,83.0
 LATI 120420Z VRB02KT CAVOK 15/15 Q1012 NOSIG,LATI,2022-09-12T04:20:00Z,41.42,19.72,15.0,15.0,0,2,,6.21,29.88189,,,,,,TRUE,,,,,CAVOK,,,,,,,,VFR,,,,,,,,,,,,METAR,32.0
 ```
+
+```
+irb(main):032:0> ap t[:response][7][:data][1][:TAF]
+{
+           :raw_text => "KBOI 151026Z 1510/1606 12010G20KT P6SM VCTS BKN070CB TEMPO 1510/1513 30010G20KT -SHRA OVC070 FM151300 13007KT P6SM BKN100 FM160100 20006KT P6SM VCTS BKN100CB",
+         :station_id => "KBOI", 
+         :issue_time => "2022-09-15T10:26:00Z",
+      :bulletin_time => "2022-09-15T10:26:00Z",
+    :valid_time_from => "2022-09-15T10:00:00Z",
+      :valid_time_to => "2022-09-16T06:00:00Z",
+            :remarks => "AMD",  
+           :latitude => "43.57",
+          :longitude => "-116.23",
+        :elevation_m => "860.0",
+           :forecast => [       
+        [0] {                   
+                   :fcst_time_from => "2022-09-15T10:00:00Z",
+                     :fcst_time_to => "2022-09-15T13:00:00Z",
+                 :wind_dir_degrees => "120",
+                    :wind_speed_kt => "10",
+                     :wind_gust_kt => "20",
+            :visibility_statute_mi => "6.21",
+                        :wx_string => "VCTS",
+                    :sky_condition => [
+                [0] {
+                            :sky_cover => "BKN",
+                    :cloud_base_ft_agl => "7000",
+                           :cloud_type => "CB"
+                }
+            ]
+        },
+        [1] {
+              :fcst_time_from => "2022-09-15T10:00:00Z",
+                :fcst_time_to => "2022-09-15T13:00:00Z",
+            :change_indicator => "TEMPO",
+            :wind_dir_degrees => "300",
+               :wind_speed_kt => "10",
+                :wind_gust_kt => "20",
+                   :wx_string => "-SHRA",
+               :sky_condition => [
+                [0] {
+                            :sky_cover => "OVC",
+                    :cloud_base_ft_agl => "7000"
+                }
+            ]
+        },
+        [2] {
+                   :fcst_time_from => "2022-09-15T13:00:00Z",
+                     :fcst_time_to => "2022-09-16T01:00:00Z",
+                 :change_indicator => "FM",
+                 :wind_dir_degrees => "130",
+                    :wind_speed_kt => "7",
+            :visibility_statute_mi => "6.21",
+                    :sky_condition => [
+                [0] {
+                            :sky_cover => "BKN",
+                    :cloud_base_ft_agl => "10000"
+                }
+            ]
+        },
+        [3] {
+                   :fcst_time_from => "2022-09-16T01:00:00Z",
+                     :fcst_time_to => "2022-09-16T06:00:00Z",
+                 :change_indicator => "FM",
+                 :wind_dir_degrees => "200",
+                    :wind_speed_kt => "6",
+            :visibility_statute_mi => "6.21",
+                        :wx_string => "VCTS",
+                    :sky_condition => [
+                [0] {
+                            :sky_cover => "BKN",
+                    :cloud_base_ft_agl => "10000",
+                           :cloud_type => "CB"
+                }
+            ]
+        }
+    ]
+}
+
+```

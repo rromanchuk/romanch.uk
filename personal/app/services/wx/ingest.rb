@@ -5,11 +5,11 @@ module Wx
     let(:redis) { RedisClient.new }
     let(:object) do
       Aws::S3::Object.new(bucket_name: 'pireps',
-                          key: "tds/#{report_type}/#{Rails.env}/#{year}/#{month}/#{day}/#{prefix}_#{report_type}.csv.gz",
+                          key: "tds/#{report_type}/#{Rails.env}/#{year}/#{month}/#{day}/#{prefix}_#{report_type}.#{file_type}",
                           region: 'us-east-1')
     end
 
-    let(:endpoint) { "https://www.aviationweather.gov/adds/dataserver_current/current/#{report_type}.cache.csv.gz" }
+    let(:endpoint) { "https://www.aviationweather.gov/adds/dataserver_current/current/#{report_type}.#{file_type}" }
     let(:response) do
       HTTParty.get(endpoint,
                    headers: { "User-Agent": 'romanch.uk/1.0 (Ryan Romanchuk/Private Pilot; Personal Project; github.com/rromanchuk/romanch.uk)' })
@@ -64,6 +64,10 @@ module Wx
 
     def report_type
       raise NotImplementedError
+    end
+
+    def file_type
+      'cache.csv.gz'
     end
 
     def new_data?
