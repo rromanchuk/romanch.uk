@@ -8,7 +8,10 @@ class Blob < ApplicationRecord
   store_accessor :data, :thumbnail_key, :aspect, :geo_location
 
   has_many :attachments
+  has_one :tournament_attachment, -> { tournament }, class_name: 'Attachment'
+  
   scope :images, -> { where(content_type: %w[image/jpeg image/png image/gif]) }
+  
   scope :videos, -> { where(content_type: %w[video/mp4]) }
   scope :streams, -> { where(content_type: %w[application/vnd.apple.mpegurl]) }
   scope :unattached, -> { where.missing(:attachments) }

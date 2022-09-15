@@ -5,14 +5,12 @@ module Serve
     let(:video) { Blob.friendly.find(params[:id]) }
 
     def show
+      add_breadcrumb("Flying Videos", page_url("flying"))
       add_breadcrumb(video.title)
-      fresh_when last_modified: video.updated_at.utc, etag: video
+      render stream: true
     end
 
     private
 
-    def set_breadcrumbs
-      add_breadcrumb('Home', root_url)
-    end
   end
 end

@@ -17,17 +17,20 @@ module Wx
 
     def index
       add_breadcrumb('Batches')
+      render stream: true
     end
 
     def show
       add_breadcrumb('Batches', wx_batches_url)
       add_breadcrumb("#{batch.id}")
+      render stream: true
     end
 
     def debug
       add_breadcrumb('Batches', wx_batches_url)
       add_breadcrumb("#{batch.id}", wx_batch_url(batch))
       add_breadcrumb('Debug')
+      render stream: true
     end
 
     def ingest
@@ -51,10 +54,6 @@ module Wx
     end
 
     private
-
-    def set_breadcrumbs
-      add_breadcrumb('Home', root_url)
-    end
 
     def apply_filter(relation)
       case params[:filter]

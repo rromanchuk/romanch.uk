@@ -2,16 +2,12 @@ class AircraftTypeDesignatorsController < ApplicationController
   before_action :set_breadcrumbs
   let(:dr_pagy)
   let(:icao_types) do
-    if (q = params[:q])
-      relation = AircraftTypeDesignator.search(q)
-      @dr_pagy, _icao_types = pagy(relation, items: 25)
-      _icao_types
-    else
-      relation = AircraftTypeDesignator.all
-      @dr_pagy, _icao_types = pagy(relation, items: 25)
-      _icao_types
-    end
+    relation = AircraftTypeDesignator.all
+    relation = apply_search(relation)
+    @dr_pagy, _icao_types = pagy(relation, items: 25)
+    _icao_types
   end
+  
   let(:icao_type) { AircraftTypeDesignator.friendly.find(params[:id]) }
 
   def index
@@ -29,9 +25,14 @@ class AircraftTypeDesignatorsController < ApplicationController
 
   private
 
-  def set_breadcrumbs
-    add_breadcrumb('Home', root_url)
-  end
-
   def title = 'DOC 8643 - Aircraft Type Designators'
+
+
+  def apply_search(relation)
+    if (q = params[:q])
+      relation.search(q)
+    else
+      relation
+    end
+  end
 end

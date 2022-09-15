@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Sessionable
   include Pagy::Backend
 
-  helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs, :breadcrumbs?, :breadcrumbs_to_s
+  helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs, :breadcrumbs?
   before_action :set_sentry_context
 
   rescue_from ActionPolicy::Unauthorized do |ex|
@@ -53,11 +53,6 @@ class ApplicationController < ActionController::Base
 
   def breadcrumbs?
     breadcrumbs.any?
-  end
-
-  # move to decorator
-  def breadcrumbs_to_s
-    breadcrumbs.map(&:name).join(' | ')
   end
 
   def add_breadcrumb(name, url = nil)

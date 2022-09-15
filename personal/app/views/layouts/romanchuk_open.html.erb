@@ -10,6 +10,10 @@
     <%= render 'shared/gtm' %>
     <%= yield :head %>
 
+    <% if breadcrumbs? -%>
+      <%= tag.script breadcrumb_json_ld(breadcrumbs).target!.html_safe, type: "application/ld+json" %>
+    <% end -%>
+
     <% if content_for?(:page_title) -%>
       <%= tag.title content_for(:page_title) %>
       <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
@@ -31,14 +35,6 @@
     <% if content_for?(:canonical_url) -%>
       <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
     <% end -%>
-
-    <% if breadcrumbs? %>
-      <title><%= breadcrumbs_to_s %></title>
-      <meta property="og:title" content="<%= breadcrumbs_to_s %>">
-      <script type="application/ld+json">
-        <%= breadcrumb_json_ld(breadcrumbs).target!.html_safe %>
-      </script>
-    <% end %>
   </head>
 
   <body>

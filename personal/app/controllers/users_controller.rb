@@ -1,9 +1,18 @@
 class UsersController < ApplicationController
+  before_action :set_breadcrumbs
   let(:user) { User.friendly.find params[:id] }
   let(:users) { User.recent }
 
-  def show; end
-  def index; end
+  def show
+    add_breadcrumb('Users', users_url)
+    add_breadcrumb(user.name)
+    render stream: true
+  end
+  
+  def index
+    add_breadcrumb('Users')
+    render stream: true
+  end
 
   def destroy
     user.destroy!
@@ -11,6 +20,8 @@ class UsersController < ApplicationController
   end
 
   def new
+    add_breadcrumb('Users', users_url)
+    add_breadcrumb('New')
     @user = User.new
   end
 

@@ -21,10 +21,7 @@
       <%= tag.script breadcrumb_json_ld(breadcrumbs).target!.html_safe, type: "application/ld+json" %>
     <% end %>
     
-    <% if content_for?(:canonical_url) -%>
-      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
-    <% end -%>
-
+    
     <% if content_for?(:page_title) %>
       <%= tag.title content_for(:page_title) %>
       <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
@@ -43,6 +40,10 @@
       <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
     <% end %>
 
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
+    <% end -%>
+
     <%= render 'shared/gtm' %>
     <%= render 'application/favicon' %>
     
@@ -60,7 +61,7 @@
   <body class="h-100 d-flex flex-column">
     <div class="container">
       <%= render 'shared/nav' %>
-      <%= render BreadcrumbComponent.new(breadcrumbs, nil) %>
+      <%= render(BreadcrumbComponent.new(breadcrumbs, nil)) if breadcrumbs? %>
       <div class="row justify-content-between mt-2">
         <main class="col">
           <%= yield %>
@@ -86,8 +87,8 @@
     <%= render 'shared/footer' %>
     <%= turbo_frame_tag "apple_signin" %>
     <%= turbo_frame_tag "search_results" %>
-    <% if Rails.env.development? %>
+    <% if Rails.env.development? -%>
       <%# console %>
-    <% end %>
+    <% end -%>
   </body>
 </html>

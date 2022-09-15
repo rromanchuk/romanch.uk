@@ -5,11 +5,19 @@ module RomanchukOpen
     let(:players) { Player.all }
 
     def show
+      add_breadcrumb('Players', romanchuk_open_players_url)
       add_breadcrumb(player.name)
+      render stream: true
+    end
+
+    def index
+      add_breadcrumb('Players')
+      render stream: true
     end
 
     def new
       require_me!
+      add_breadcrumb('Players', romanchuk_open_players_url)
       add_breadcrumb('Create player')
       @player = Player.new
     end
@@ -42,11 +50,6 @@ module RomanchukOpen
     end
 
     private
-
-    def set_breadcrumbs
-      add_breadcrumb('Home', romanchuk_open_tournaments_url)
-      add_breadcrumb('Players', romanchuk_open_players_url)
-    end
 
     def ensure_frame_response
       return unless Rails.env.development?

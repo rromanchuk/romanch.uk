@@ -12,9 +12,7 @@
     <div class="card-img-overlay">
       <h5 class="card-title"><%= image.title %></h5>
       <p class="card-text"><%= image.description %></p>
-      <% image.tag_names.each do |name| %>
-        <%= tag.span name, class: 'badge bg-secondary text-decoration-none link-light' %>
-      <% end %>
+      <%= render partial: 'serve/images/tag', collection: image.tags, cached: true %>
     </div>
   </div>
 

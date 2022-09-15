@@ -5,32 +5,15 @@ class PostsController < ApplicationController
   let(:post) { Post.includes(:tags).friendly.find(params[:id]) }
 
   let(:posts) do
-    if (tag_name = params[:tag_name])
-      add_breadcrumb('Posts', posts_url)
-      add_breadcrumb('Tagged', tags_url)
-      add_breadcrumb(tag_name)
-      relation = authorized_scope(Post.tagged_with(names: [tag_name], match: :any))
-      @dr_pagy, _posts = pagy(relation, items: 25)
-      _posts
-    elsif (q = params[:q].presence)
-      add_breadcrumb('Posts', posts_url)
-      add_breadcrumb('Search')
-      relation = authorized_scope(Post.search(q))
-      @dr_pagy, _posts = pagy(relation, items: 10)
-      _posts
-    else
-      add_breadcrumb('Posts')
-      relation = authorized_scope(Post.recent)
-      @dr_pagy, _posts = pagy(relation, items: 25)
-      _posts
-    end
+    relation = apply_filter
+    @dr_pagy, _posts = pagy(relation, items: 25)
+    _posts
   end
 
   def show
     add_breadcrumb('Posts', posts_url)
     add_breadcrumb(post.title)
     authorize! post
-    fresh_when last_modified: post.updated_at.utc, etag: post
     render stream: true
   end
 
@@ -81,8 +64,19 @@ class PostsController < ApplicationController
 
   private
 
-  def set_breadcrumbs
-    add_breadcrumb('Home', root_url)
+  def apply_filter
+    if (q = params[:q].presence)
+      add_breadcrumb('Posts', posts_url)
+      add_breadcrumb('Search')
+      authorized_scope(Post.search(q))
+    elsif (tag_name = params[:tag_name])
+      add_breadcrumb('Posts', posts_url)
+      add_breadcrumb('Tagged', tags_url)
+      add_breadcrumb(tag_name)
+      authorized_scope(Post.tagged_with(names: [tag_name], match: :any))
+    else
+      authorized_scope(Post.recent)
+    end
   end
 
   def post_params

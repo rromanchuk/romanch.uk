@@ -30,16 +30,7 @@
     <div class="container">
       
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <% tournament.ro_photo_blobs.each do |blob| %>
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag blob.key, class: 'card-img-top' %>
-              <div class="card-body">
-                <%= link_to 'Edit', edit_blob_path(blob), class: 'card-link' %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: 'romanchuk_open/tournaments/blob', collection: tournament.ro_photo_blobs, cached: true %>
       </div>
       
     </div>

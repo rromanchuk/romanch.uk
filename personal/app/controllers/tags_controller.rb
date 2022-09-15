@@ -8,5 +8,7 @@ class TagsController < ApplicationController
     end
   end
 
-  def index; end
+  def index
+    render stream: true
+  end
 end

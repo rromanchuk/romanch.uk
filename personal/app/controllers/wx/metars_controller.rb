@@ -18,16 +18,13 @@ module Wx
 
     def index
       add_breadcrumb('METARs', wx_metars_url)
+      render stream: true
     end
 
     def show
       add_breadcrumb('METARs', wx_metars_url)
       add_breadcrumb("#{metar.raw_text}")
-      fresh_when last_modified: metar.updated_at.utc, etag: metar
-    end
-
-    def set_breadcrumbs
-      add_breadcrumb('Home', root_url)
+      render stream: true
     end
   end
 end

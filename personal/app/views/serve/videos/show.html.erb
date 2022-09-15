@@ -6,10 +6,8 @@
 
 
 <% cache video do %>
-  <script type="application/ld+json">
-    <%= video_json_ld(video).target!.html_safe %>
-  </script>
 
+  <%= tag.script video_json_ld(video).target!.html_safe, type: "application/ld+json"  %>
 
   <div class="card bg-dark text-white">
     <img src="<%= video.thumbnail_key %>" class="card-img" alt="">

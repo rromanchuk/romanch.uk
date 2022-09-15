@@ -17,23 +17,7 @@
 <section class="album py-5 bg-light">
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <% tournaments.each do |t| %>
-        <div class="col">
-          <div class="card">
-            <%= link_to romanchuk_open_tournament_path(t) do %>
-              <%= image_tag "#{t.poster_image}", class: 'card-img' %>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= "#{t.title} #{t.ocurred_on&.year}" %></h5>
-              <p class="card-text"><%= t.city %></p>
-              <% if t.newsletter %>
-                <%= link_to "Newsletter", newsletter_romanchuk_open_tournament_path(t), class: 'card-link' %>
-              <% end %>
-              <%# link_to "Participants", players_romanchuk_open_tournament_path(t), class: 'card-link' %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render partial: 'romanchuk_open/tournaments/tournament', collection: tournaments, cached: true %>
     </div>
   </div>
 </section>

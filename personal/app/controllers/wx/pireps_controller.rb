@@ -5,54 +5,28 @@ module Wx
     let(:dr_pagy)
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
-      case params[:filter]
-      when 'uua'
-        add_breadcrumb('Urgent')
-        uua_reports
-      when 'ua'
-        add_breadcrumb('Routine')
-        ua_reports
-      else
-        add_breadcrumb('All')
-        relation = Pirep.recent.includes(:batch)
-        @dr_pagy, _pireps = pagy(relation, items: 50)
-        _pireps
-      end
-    end
-
-    let(:uua_reports) do
-      relation = Pirep
-                 .recent
-                 .uua
-                 .includes(:batch)
-      @dr_pagy, _pireps = pagy(relation, items: 50)
-      _pireps
-    end
-
-    let(:ua_reports) do
-      relation = Pirep
-                 .recent
-                 .ua
-                 .includes(:batch)
+      relation = Pirep.all
+      relation = apply_filter(relation)
       @dr_pagy, _pireps = pagy(relation, items: 50)
       _pireps
     end
 
     def index
       add_breadcrumb('Pilot Reports', wx_pireps_url)
+      render stream: true
     end
 
     def show
       add_breadcrumb('Pilot Reports', wx_pireps_url)
       add_breadcrumb(pirep.raw_text)
-      fresh_when last_modified: pirep.updated_at.utc, etag: pirep
+      render stream: true
     end
 
     def debug
       add_breadcrumb('Pilot Reports', wx_pireps_url)
       add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
       add_breadcrumb('Debug')
-      fresh_when last_modified: pirep.updated_at.utc, etag: pirep
+      render stream: true
     end
 
     def map
@@ -68,11 +42,6 @@ module Wx
       @pirep = Pirep.new
     end
 
-    def debug
-      add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
-      add_breadcrumb('Debug')
-    end
-
     # DELETE /pireps/raw_reports/1
     def destroy
       authorize! pirep
@@ -83,13 +52,23 @@ module Wx
 
     private
 
+    def apply_filter(relation)
+      case params[:filter]
+      when 'uua'
+        add_breadcrumb('Urgent')
+        relation.uua
+      when 'ua'
+        add_breadcrumb('Routine')
+        relation.ua
+      else
+        add_breadcrumb('All')
+        relation
+      end.includes(:batch).recent
+    end
+
     # Only allow a list of trusted parameters through.
     def pireps_params
       params.fetch(:wx_pirep, {})
-    end
-
-    def set_breadcrumbs
-      add_breadcrumb('Home', root_url)
     end
   end
 end

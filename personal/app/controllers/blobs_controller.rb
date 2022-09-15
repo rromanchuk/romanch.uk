@@ -1,9 +1,11 @@
 class BlobsController < ApplicationController
-  before_action :require_user!
+  before_action :require_user!, :set_breadcrumbs
   let(:blobs) { Blob.all }
   let(:blob) { Blob.friendly.find(params[:id]) }
 
   def new
+    add_breadcrumb('Blobs', blobs_url)
+    add_breadcrumb('New')
     @blob = Blob.new
   end
 
@@ -12,7 +14,11 @@ class BlobsController < ApplicationController
     redirect_to blobs_path, status: 303
   end
 
-  def edit; end
+  def edit
+    add_breadcrumb('Blobs', blobs_url)
+    add_breadcrumb(blob.title, blob_url(blob))
+    add_breadcrumb('Edit')
+  end
 
   def update
     blob.update!(blob_params)

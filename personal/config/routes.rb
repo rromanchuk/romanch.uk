@@ -60,6 +60,7 @@ Rails.application.routes.draw do
       resources :golfers, only: [:new]
     end
     resources :tournaments do
+      resources :blobs, only: [:show]
       resources :golfers, only: [:index]
       get :newsletter, on: :member
     end

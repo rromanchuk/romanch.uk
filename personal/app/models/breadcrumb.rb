@@ -17,4 +17,8 @@ class Breadcrumb
   def postion(crumbs)
     crumbs.index(self) + 1
   end
+
+  def self.title_string(crumbs)
+    crumbs.map(&:name).join(' / ')
+  end
 end

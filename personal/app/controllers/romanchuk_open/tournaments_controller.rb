@@ -42,6 +42,7 @@ module RomanchukOpen
     def show
       add_breadcrumb(tournament.title)
       fresh_when last_modified: tournament.updated_at.utc, etag: tournament
+      render stream: true
     end
 
     # def players
@@ -61,8 +62,6 @@ module RomanchukOpen
                                                         ro_photo_blobs_attributes: %i[id title description key content_type])
     end
 
-    def set_breadcrumbs
-      add_breadcrumb('Home', romanchuk_open_tournaments_url)
-    end
+    
   end
 end
