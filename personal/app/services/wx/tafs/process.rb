@@ -18,26 +18,33 @@ module Wx
         transform!
       end
 
-      # @param [Hash] row
-      # @return [Integer] num records saved
       def transform!
-        num_results = xml[:response][7][:data].shift
-        xml[:response][7][:data].each do |record|
-          taf = record.delete(:TAF)
-          params = {
-            raw_text: taf[:raw_text],
-            station_id: taf[:station_id],
-            issue_time: taf[:issue_time],
-            bulletin_time: taf[:bulletin_time],
-            valid_time_from: taf[:valid_time_from],
-            valid_time_to: taf[:valid_time_to],
-            remarks: taf[:remarks],
-            location: "POINT(#{taf[:latitude]} #{taf[:longitude]} #{taf[:elevation_m]})",
-            forecast: taf[:forecast],
-
-          }
-          Wx::Taf.insert(params)
+        toal_num_results = xml[:response][7][:data].shift
+        toatal_records_processed = 0
+        Rails.logger.info "Updating batch file num_records #{num_results}"
+        xml[:response][7][:data].in_groups_of(10) do |chunk|
+          taf_records = chunk.map do |record|
+            taf = record.delete(:TAF)
+            {
+              raw_text: taf[:raw_text],
+              station_id: taf[:station_id],
+              issue_time: taf[:issue_time],
+              bulletin_time: taf[:bulletin_time],
+              valid_time_from: taf[:valid_time_from],
+              valid_time_to: taf[:valid_time_to],
+              remarks: taf[:remarks],
+              location: "POINT(#{taf[:latitude]} #{taf[:longitude]} #{taf[:elevation_m]})",
+              forecast: taf[:forecast],
+              batch_id: batch.id
+            }
+          end
+          Rails.logger.info "Inserting chunk of #{taf_records.length} records"
+          results = Wx::Taf.insert_all(taf_records, unique_by: :index_wx_tafs_uniqueness)
+          Rails.logger.info "Inserted #{results.length} new records"
+          toatal_records_processed += results.length
         end
+        batch.update!(processed_at: Time.current, num_records_processed: toatal_records_processed)
+        nil
       end
     end
   end
@@ -118,4 +125,4 @@ end
 #             ]
 #         }
 #     ]
-}
+#}

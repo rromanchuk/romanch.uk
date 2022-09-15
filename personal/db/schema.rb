@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_15_095311) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_15_172449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -240,6 +240,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_095311) do
     t.integer "pireps_count", default: 0
     t.integer "aireps_count", default: 0
     t.integer "metars_count", default: 0
+    t.integer "tafs_count", default: 0
   end
 
   create_table "wx_metars", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -317,6 +318,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_095311) do
     t.jsonb "forecast"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "batch_id"
+    t.index ["batch_id"], name: "index_wx_tafs_on_batch_id"
     t.index ["location"], name: "index_wx_tafs_on_location", using: :gist
     t.index ["station_id", "issue_time"], name: "index_wx_tafs_uniqueness", unique: true
   end

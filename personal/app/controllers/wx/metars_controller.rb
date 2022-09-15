@@ -5,7 +5,7 @@ module Wx
     let(:metar) { Metar.find(params[:id]) }
     let(:metars) do
       add_breadcrumb('All')
-      relation = Metar.recent.includes(:batch)
+      relation = apply_filter
       @dr_pagy, _metars = pagy(relation, items: 50)
       _metars
     end
@@ -25,6 +25,15 @@ module Wx
       add_breadcrumb('METARs', wx_metars_url)
       add_breadcrumb("#{metar.raw_text}")
       render stream: true
+    end
+
+    private
+    def apply_filter(relation=Metar.all)
+      if params[:station_id]
+        relation.where(station_id: params[:station_id]) 
+      else
+        relation
+      end
     end
   end
 end

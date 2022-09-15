@@ -199,7 +199,6 @@ GEM
     hashie (5.0.0)
     high_voltage (3.1.2)
     hiredis (0.6.3)
-    hpath (0.1.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -441,7 +440,6 @@ DEPENDENCIES
   gutentag
   high_voltage
   hiredis
-  hpath
   httparty
   image_processing (~> 1.2)
   importmap-rails

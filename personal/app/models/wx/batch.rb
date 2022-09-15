@@ -22,7 +22,9 @@ module Wx
       when 'aircraftreports'
         Wx::Pireps::Process.async_call(self)
       when 'metars'
-        Wx::Metars::Process.call(self)
+        Wx::Metars::Process.async_call(self)
+      when 'tafs'
+        Wx::Tafs::Process.async_call(self)
       end
     end
   end

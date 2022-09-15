@@ -19,6 +19,18 @@ module Wx
     scope :uua, -> { where(urgent: true) }
     scope :ua, -> { where(urgent: false) }
     scope :recent, -> { order(observation_time: :desc) }
+    scope :near, -> (point, radius) {
+      where(
+        Arel.spatial(point)
+          .st_distance(Pirep.arel_table[:location])
+          .lt(radius)
+      )
+    }
+
+    # SELECT "wx_pireps".* FROM "wx_pireps" WHERE ST_Z(wx_pireps.location::geometry) > 5000;
+    scope :msl_above, -> (feet_msl) {
+      where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
+    }
 
     def remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
 
@@ -31,20 +43,5 @@ module Wx
     def urgent?
       /[UA]{3}/.match?(raw_text)
     end
-
-    # def find_dyn
-    #   PilotReport.find(raw_text, range_key: receipt_time)
-    # end
-
-    # def dyn_prireps
-    #   PilotReport.where(report_type: 'PIREP').scan_index_forward(false)
-    # end
-    # private
-
-    # def parse_metadata!
-    #   self.urgent = /[UA]{3}/.match?(raw_text)
-    #   self.remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
-    #   self.sa_identifier = /(?<identifier>^\w{3})/.match(raw_text)&.[](:identifier)
-    # end
   end
 end
