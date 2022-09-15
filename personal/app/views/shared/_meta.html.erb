@@ -3,34 +3,11 @@
 <meta name="appleid-signin-redirect-uri" content="<%= oauth_cognito_token_url %>">
 <%# <meta name="appleid-signin-use-popup" content="true"> %>
 
-<% if content_for?(:page_title) %>
-  <title><%= yield(:page_title) %></title>
-  <meta property="og:title" content="<%= yield(:page_title) %>">
-<% end %>
 
-<% if content_for?(:page_description) %>
-  <meta name="description" content="<%= yield(:page_description) %>">
-  <meta property="og:description" content="<%= yield(:page_description) %>">
-<% end %>
-
-<% if content_for?(:page_keywords) %>
-  <meta name="keywords" content="<%= yield(:page_keywords) %>">
-<% end %>
-
-<% if content_for?(:share_image) %>
-  <meta property="og:image" content="<%= yield(:share_image) %>">
-<% end %>
 
 <meta name="apple-itunes-app" content="app-id=1109640290, app-argument=https://getspar.com/pid/personal">
 <meta content="ua0bOK-G5Ddcx6e_Dz-Sl6J3lym5fRFPd3m5Z1ljLGU" name="google-site-verification" />
 
-<% if content_for?(:json_ld) %>
-  <%= yield(:json_ld) %>
-<% end %>
-
-<% if content_for?(:canonical_link_tag) %>
-  <%= yield :canonical_link_tag %>
-<% end %>
 
 <%= render 'application/favicon' %>
 

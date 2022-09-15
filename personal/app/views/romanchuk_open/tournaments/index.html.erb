@@ -1,7 +1,6 @@
-<% content_for :page_title, 'The Romanchuk Open' %>
-<% content_for :canonical_link_tag do %>
-  <link rel="canonical" href="https://romanchukopen.com" />
-<% end %>
+<%= provide(:page_title, 'The Romanchuk Open') %>
+<%= provide(:canonical_url, romanchuk_open_tournaments_url(host: 'romanchukopen.com')) %>
+
 
 <section>
   <div class="row py-lg-5 py-5 text-center container">

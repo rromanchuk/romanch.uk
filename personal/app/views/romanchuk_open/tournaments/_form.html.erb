@@ -5,6 +5,17 @@
   <%= f.input :newsletter %>
   <%= f.input :location %>
   <%= f.input :city %>
-  <%= f.association :ro_photo_blobs, as: :check_boxes %>
+  <%# f.association :ro_photo_blobs, as: :check_boxes %>
+    
+    <%= f.simple_fields_for :ro_photo_blobs do |blob| %>
+      <%# blob.input :key, as: :file, input_html: { multiple: true } %>
+      <div class="row gy-2 gx-3 align-items-center">
+        <div class="col-auto"><%= blob.input :key  %></div>
+        
+       <div class="col-auto"> <%= blob.input :title%></div>
+        <div class="col-auto"><%= blob.input :content_type %></div>
+          </div>
+    <% end %>
+
   <%= f.submit class: "btn-primary" %>
 <% end %>

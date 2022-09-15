@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "../appcheck-lambda"
+		},
+		{
+			"path": "../high_voltage"
 		}
 	],
 	"extensions": {
@@ -32,7 +35,16 @@
 			"eamodio.gitlens",
 			"ecmel.vscode-html-css",
 			"redhat.vscode-yaml",
-			"dbaeumer.vscode-eslint"
+			"dbaeumer.vscode-eslint",
+			"castwide.solargraph"
 		]
+	},
+	"settings": {
+		"editor.codeActionsOnSave": false,
+		"editor.tabSize": 2,
+		"files.associations": {
+			"*.erb": "erb"
+		},
+		"files.autoSave": "onWindowChange",
 	}
 }
