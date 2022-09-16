@@ -1,3 +1,5 @@
 <%= provide(:page_title, Breadcrumb.title_string(breadcrumbs) ) %>
 
-<%= render batch %>
+<% cache batch do -%>
+  <%= render batch %>
+<% end -%>

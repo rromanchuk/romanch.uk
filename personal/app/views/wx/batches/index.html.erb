@@ -68,32 +68,25 @@
 <%= turbo_stream_from :batches %>
 
 <%= turbo_frame_tag :batches do %>
-<div class="card">
-  <div class="card-header">
-
-    
-    <select 
-      class="form-select w-25"
-      data-controller="select"
-      data-action="select#change">
-      <option value="<%= wx_batches_path %>">All</option>
-      <option <%= params[:filter] == 'pireps' ? 'selected' : ''%> value="<%= wx_batches_path(filter: 'pireps') %>">PIREPs</option>
-      <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
-      <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
-    </select>
-    
-    
-  </div>
-  
+  <div class="card">
+    <div class="card-header">
+      <select 
+        class="form-select w-25"
+        data-controller="select"
+        data-action="select#change">
+        <option value="<%= wx_batches_path %>">All</option>
+        <option <%= params[:filter] == 'pireps' ? 'selected' : ''%> value="<%= wx_batches_path(filter: 'pireps') %>">PIREPs</option>
+        <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
+        <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
+      </select>
+    </div>
     <div class="card-body">
-      <%= render batches %>
-      
+      <%= render partial: "wx/batches/batch", collection: batches, cached: true %>
     </div>
     <div class="card-footer text-muted">
       <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
       <%= render PagerComponent.new(dr_pagy, previous_path: wx_batches_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_batches_path(page: dr_pagy.next, filter: params[:filter])) %>
     </div>
-
   </div>
 <% end %>
 

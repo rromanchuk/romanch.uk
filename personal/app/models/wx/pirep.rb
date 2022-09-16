@@ -10,7 +10,9 @@ module Wx
     WV = %r{/WV\s\d{3}\d{2,3}KT?}
 
     include Turbo::Broadcastable
-    # include Dictionaries
+    after_create_commit -> { broadcast_prepend_later_to "pireps" }
+    after_update_commit -> { broadcast_replace_later_to "pireps" }
+    after_destroy_commit -> { broadcast_remove_to "pireps" }
 
     belongs_to :batch, counter_cache: :pireps_count
 

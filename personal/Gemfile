@@ -106,7 +106,7 @@ group :test do
 end
 
 
-
+gem 'solargraph', group: :development
 gem "pagy", "~> 5.10"
 gem 'activerecord-postgis-adapter'
 gem 'httparty'
@@ -114,4 +114,4 @@ gem "pghero"
 gem 'whenever', require: false
 gem 'aws-sdk-textract', require: false
 gem 'marginalia'
-gem 'ox'
+gem 'ox', require: false
