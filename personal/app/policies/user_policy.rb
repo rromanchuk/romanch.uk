@@ -15,6 +15,10 @@ class UserPolicy < ApplicationPolicy
     me?
   end
 
+  def destroy?
+    me?
+  end
+
   # Scoping
   # See https://actionpolicy.evilmartians.io/#/scoping
   #

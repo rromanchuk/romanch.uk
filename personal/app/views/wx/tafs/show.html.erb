@@ -1,0 +1,28 @@
+<%= turbo_frame_tag taf do %>
+  <div class="col pb-3">
+    <table class="table table-borderless table-sm fluid">
+      <tbody class="">
+        <tr class="">
+          <%# <td class="w-25 fw-semibold">PIREP Text</td> %>
+          <td colspan="2" class="">
+            <span class=""><%= link_to taf.raw_text, wx_taf_path(taf), data: {turbo_frame: :_top} %><span>
+          </td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">From batch</td>
+          <td class=""><%= link_to taf.batch.key, wx_batch_path(taf.batch), data: {turbo_frame: :_top}  %></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Issued</td>
+          <td class=""><%= time_tag taf.issue_time %> <span class="text-muted">(<%= time_ago_in_words(taf.issue_time) %> ago)</span></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Forcast</td>
+          <td class="">
+            <%= render partial: "wx/tafs/forecast", collection: taf.forecast %> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

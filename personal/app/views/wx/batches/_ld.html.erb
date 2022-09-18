@@ -39,3 +39,13 @@
     }
   }
   </script>
+
+<select 
+   class="form-select w-25"
+   data-controller="select"
+   data-action="select#change">
+   <option value="<%= wx_batches_path %>">All</option>
+   <option value="<%= wx_batches_path(filter: 'pireps') %>">PIREPs</option>
+   <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
+   <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
+</select>

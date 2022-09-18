@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    authorize!
     user.destroy!
     redirect_to users_path, status: 303, notice: 'Post was successfully deleted.'
   end
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    # authorize!
+    authorize!
 
     if user.update(user_params)
       redirect_to user_url(user), notice: 'Raw report was successfully updated.'

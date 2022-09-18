@@ -11,18 +11,18 @@ module Wx
     end
 
     def debug
-      add_breadcrumb('TAFs', wx_tafs_url)
+      add_breadcrumb('Terminal Aerodrome Forecast (TAF)', wx_tafs_url)
       add_breadcrumb("#{taf.station_id}", wx_taf_url(taf))
       add_breadcrumb('Debug')
     end
 
     def index
-      add_breadcrumb('TAFs', wx_tafs_url)
+      add_breadcrumb('Terminal Aerodrome Forecast (TAF)', wx_tafs_url)
       render stream: true
     end
 
     def show
-      add_breadcrumb('TAFs', wx_tafs_url)
+      add_breadcrumb('Terminal Aerodrome Forecast (TAF)', wx_tafs_url)
       add_breadcrumb("#{taf.station_id}")
       render stream: true
     end
