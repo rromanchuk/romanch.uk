@@ -46,9 +46,10 @@
 			"*.erb": "erb"
 		},
 		"files.autoSave": "onWindowChange",
-		"vscode-erb-beautify.useBundler": true,
+		"vscode-erb-beautify.useBundler": false,
 		"ruby.useBundler": true,
 		"solargraph.formatting": true,
 		"solargraph.useBundler": true,
+		"vscode-erb-beautify.bundlerPath": "/Users/ryan/Developer/romanch.uk/personal/bin/bundle",
 	}
 }

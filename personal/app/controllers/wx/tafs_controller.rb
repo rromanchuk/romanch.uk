@@ -5,7 +5,7 @@ module Wx
     let(:taf) { Taf.find(params[:id]) }
     let(:tafs) do
       add_breadcrumb('All')
-      relation = apply_filter
+      relation = apply_filter.recent
       @dr_pagy, _tafs = pagy(relation, items: 50)
       _tafs
     end

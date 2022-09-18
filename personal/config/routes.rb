@@ -80,7 +80,9 @@ Rails.application.routes.draw do
       get :map, on: :member
       get :debug, on: :member
     end
-    resources :tafs, only: %i[index show]
+    resources :tafs, only: %i[index show] do
+      get :debug, on: :member
+    end
   end
 
   namespace :oauth do

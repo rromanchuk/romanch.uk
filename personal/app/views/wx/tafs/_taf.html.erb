@@ -5,7 +5,7 @@
         <tr class="">
           <%# <td class="w-25 fw-semibold">PIREP Text</td> %>
           <td colspan="2" class="">
-            <span class=""><%= link_to taf.raw_text, wx_taf_path(taf), data: {turbo_frame: :_top} %><span>
+            <span class=""><%= link_to format_first_line(taf.raw_text), wx_taf_path(taf), data: {turbo_frame: :_top} %><span>
           </td>
         </tr>
         <tr class=""> 
@@ -15,6 +15,10 @@
         <tr class=""> 
           <td class="w-25 fw-semibold">Issued</td>
           <td class=""><%= time_tag taf.issue_time %> <span class="text-muted">(<%= time_ago_in_words(taf.issue_time) %> ago)</span></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Forecasts</td>
+          <td class=""><%= format_raw_taf(taf.raw_text) %></td>
         </tr>
       </tbody>
     </table>

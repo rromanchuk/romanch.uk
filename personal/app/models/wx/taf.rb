@@ -2,7 +2,7 @@ module Wx
   class Taf < ApplicationRecord
     self.implicit_order_column = 'issue_time'
     belongs_to :batch, counter_cache: :metars_count
-
+    scope :recent, -> { order(issue_time: :desc) }
 
 
     # SELECT "wx_tafs".* FROM "wx_tafs" WHERE ST_Distance(ST_GeomFromText('POINT (35.17 -79.02 57.0)', 4326), "wx_tafs"."location") < 500
