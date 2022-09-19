@@ -64,7 +64,7 @@ Rails.application.routes.draw do
       get :debug, on: :member
     end
 
-    resources :metars, only: %i[index show] do
+    resources :metars, only: %i[index show destroy] do
       get :debug, on: :member
       get :points, on: :collection
     end

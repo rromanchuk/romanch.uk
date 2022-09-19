@@ -1,7 +1,21 @@
 <%= provide :page_title, 'Most recent METARs' %>
 
-<%= turbo_frame_tag :metars do %>
-  <%= render metars %>
-  <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
-  <%= render PagerComponent.new(dr_pagy, previous_path: wx_metars_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_metars_path(page: dr_pagy.next, filter: params[:filter])) %>
-<% end %>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <%= form_with(url: wx_metars_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'metars'}, class: 'd-flex') do |f| %>
+        <%= f.text_field(:station_id, class: "form-control", placeholder: "Location ID...", data: {action: 'input->search#submit', search_target: 'input'}) %>
+      <% end %>
+    </div>
+    <%= turbo_frame_tag :metars do %>
+      <div class="card-body">
+        <%= render metars %>
+      </div>
+      <div class="card-footer text-muted">
+        <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
+        <%= render PagerComponent.new(dr_pagy, previous_path: wx_metars_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_metars_path(page: dr_pagy.next, filter: params[:filter])) %>
+      </div>
+    <% end %>
+  </div>

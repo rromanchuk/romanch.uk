@@ -1,7 +1,12 @@
 class AttachmentsController < ApplicationController
   before_action :require_user!
+  let(:dr_pagy)
+  let(:attachments) do
+    relation = apply_filter
+    @dr_pagy, _attachments = pagy(relation, items: 25)
+    _attachments
+  end
 
-  let(:attachments) { Attachment.all }
   let(:attachment) { Attachment.find(params[:id]) }
 
   def new
@@ -26,6 +31,9 @@ class AttachmentsController < ApplicationController
   end
 
   private
+  def apply_filter(relation=Attachment.all)
+    relation.recent
+  end
 
   def attachment_params
     params.require(:attachment).permit(:name, :record_id, :record_type, :blob_id)

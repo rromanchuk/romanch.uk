@@ -13,8 +13,10 @@ module Wx
     after_create_commit -> { broadcast_prepend_later_to "pireps" }
     after_update_commit -> { broadcast_replace_later_to "pireps" }
     after_destroy_commit -> { broadcast_remove_to "pireps" }
+    before_create :set_aircraft_type_designator
 
     belongs_to :batch, counter_cache: :pireps_count
+    belongs_to :aircraft_type_designator, optional: true
 
     # store_accessor :data, :remarks, :sa_identifier
 
@@ -36,14 +38,18 @@ module Wx
 
     def remarks = %r{/RM\s(?<remarks>.+)}.match(raw_text)&.[](:remarks)
 
-    def set_geometry!
-      self.location = RGeo::Geographic.spherical_factory(srid: 4326, has_z_coordinate: true).point(longitude, latitude,
-                                                                                                   altitude_ft_msl)
-      save!
+    def set_aircraft_type_designator
+      self.aircraft_type_designator = AircraftTypeDesignator.find_by(icao_code: aircraft_ref)
     end
 
-    def urgent?
-      /[UA]{3}/.match?(raw_text)
-    end
+    # def set_geometry!
+    #   self.location = RGeo::Geographic.spherical_factory(srid: 4326, has_z_coordinate: true).point(longitude, latitude,
+    #                                                                                                altitude_ft_msl)
+    #   save!
+    # end
+
+    # def urgent?
+    #   /[UA]{3}/.match?(raw_text)
+    # end
   end
 end

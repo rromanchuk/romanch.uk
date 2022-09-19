@@ -20,7 +20,13 @@
         </tr>
         <tr class="">
           <td class="w-25 fw-semibold">Aircraft type:</td>
-          <td class=""><%= link_to pirep.aircraft_ref, aircraft_type_designators_path(q: pirep.aircraft_ref),  data: {turbo_frame: :_top}  %></td>
+          <td class="">
+            <% if pirep.aircraft_type_designator -%>
+              <%= link_to pirep.aircraft_ref, aircraft_type_designator_path(pirep.aircraft_type_designator),  data: {turbo_frame: :_top}  %>
+            <% else -%>
+              <%= link_to pirep.aircraft_ref, aircraft_type_designators_path(q: pirep.aircraft_ref),  data: {turbo_frame: :_top}  %>
+            <% end -%>
+          </td>
         </tr>
         <tr class="">
           <td class="w-25 fw-semibold">Location</td>
