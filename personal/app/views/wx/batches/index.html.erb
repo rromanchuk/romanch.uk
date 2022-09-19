@@ -44,6 +44,14 @@
   <div class="col">
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
+        <p class="card-title">TAFs</p>
+        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Taf.count) %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" style="width: 10rem;">
+      <div class="card-body text-center">
         <p class="card-title">Current Etags</p>
         <p class="card-text h6 text-success"><%= ar_etag%></p>
       </div>
@@ -63,23 +71,21 @@
   </div>
 </section>
 
-
-
 <%= turbo_stream_from :batches %>
 
-<%= turbo_frame_tag :batches do %>
-  <div class="card">
-    <div class="card-header">
-      <select 
+<div class="card">
+  <div class="card-header">
+    <select 
         class="form-select w-25"
         data-controller="select"
         data-action="select#change">
-        <option value="<%= wx_batches_path %>">All</option>
-        <option <%= params[:filter] == 'pireps' ? 'selected' : ''%> value="<%= wx_batches_path(filter: 'pireps') %>">PIREPs</option>
-        <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
-        <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
-      </select>
-    </div>
+      <option value="<%= wx_batches_path %>">All</option>
+      <option <%= params[:filter] == 'pireps' ? 'selected' : ''%> value="<%= wx_batches_path(filter: 'pireps') %>">PIREPs</option>
+      <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
+      <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
+    </select>
+  </div>
+  <%= turbo_frame_tag :batches do %>
     <div class="card-body">
       <%= render partial: "wx/batches/batch", collection: batches, cached: true %>
     </div>
@@ -87,10 +93,5 @@
       <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
       <%= render PagerComponent.new(dr_pagy, previous_path: wx_batches_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_batches_path(page: dr_pagy.next, filter: params[:filter])) %>
     </div>
-  </div>
-<% end %>
-
-
-
-
-
+  <% end %>
+</div>

@@ -5,7 +5,7 @@ module Wx
     let(:taf) { Taf.find(params[:id]) }
     let(:tafs) do
       add_breadcrumb('All')
-      relation = apply_filter.recent
+      relation = apply_filter
       @dr_pagy, _tafs = pagy(relation, items: 50)
       _tafs
     end
@@ -27,12 +27,12 @@ module Wx
       render stream: true
     end
 
-    def apply_filter(relation=Taf.all)
+    def apply_filter(relation = Taf.all)
       if params[:station_id]
-        relation.where(station_id: params[:station_id]) 
+        relation.where(station_id: params[:station_id])
       else
         relation
-      end
+      end.recent
     end
   end
 end

@@ -4,9 +4,8 @@ module Wx
     let(:redis) { RedisClient.new }
     let(:dr_pagy)
     let(:batches) do
-      relation = Batch.all
-      relation = apply_filter(relation)
-      relation = apply_sort(relation)
+      relation = apply_filter
+      # relation = apply_sort(relation)
 
       @dr_pagy, _batches = pagy(relation, items: 3)
       _batches
@@ -55,17 +54,17 @@ module Wx
 
     private
 
-    def apply_filter(relation)
+    def apply_filter(relation = Batch.all)
       case params[:filter]
       when 'metars'
-        relation.metars.recent
+        relation.metars
       when 'pireps'
-        relation.aircraftreports.recent
+        relation.aircraftreports
       when 'tafs'
-        relation.tafs.recent
+        relation.tafs
       else
         relation
-      end
+      end.recent
     end
 
     def apply_sort(relation)

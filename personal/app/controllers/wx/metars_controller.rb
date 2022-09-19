@@ -4,7 +4,6 @@ module Wx
     let(:dr_pagy)
     let(:metar) { Metar.find(params[:id]) }
     let(:metars) do
-      
       relation = apply_filter
       @dr_pagy, _metars = pagy(relation, items: 50)
       _metars
@@ -28,14 +27,15 @@ module Wx
     end
 
     private
-    def apply_filter(relation=Metar.all)
+
+    def apply_filter(relation = Metar.all)
       if params[:station_id]
         add_breadcrumb(params[:station_id], wx_metars_url(station_id: params[:station_id]))
-        relation.where(station_id: params[:station_id]) 
+        relation.where(station_id: params[:station_id])
       else
         add_breadcrumb('All')
         relation
-      end
+      end.recent
     end
   end
 end

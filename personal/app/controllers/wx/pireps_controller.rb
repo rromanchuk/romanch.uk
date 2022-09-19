@@ -5,7 +5,6 @@ module Wx
     let(:dr_pagy)
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
-      relation = Pirep.all
       relation = apply_filter(relation)
       @dr_pagy, _pireps = pagy(relation, items: 50)
       _pireps
@@ -34,7 +33,7 @@ module Wx
       add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
       add_breadcrumb('Location Map')
     end
-    
+
     def points; end
 
     # GET /pireps/raw_reports/new
@@ -52,11 +51,8 @@ module Wx
 
     private
 
-    def apply_filter(relation)
-      if params[:location]
-        puts params[:location]
-        relation = relation.near(params[:location], 100)
-      end
+    def apply_filter(relation = Pirep.all)
+      relation = relation.near(params[:location], 100) if params[:location]
 
       case params[:filter]
       when 'uua'
