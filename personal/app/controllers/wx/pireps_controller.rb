@@ -34,7 +34,7 @@ module Wx
       add_breadcrumb(pirep.raw_text, wx_pirep_url(pirep))
       add_breadcrumb('Location Map')
     end
-
+    
     def points; end
 
     # GET /pireps/raw_reports/new
@@ -53,6 +53,11 @@ module Wx
     private
 
     def apply_filter(relation)
+      if params[:location]
+        puts params[:location]
+        relation = relation.near(params[:location], 100)
+      end
+
       case params[:filter]
       when 'uua'
         add_breadcrumb('Urgent')

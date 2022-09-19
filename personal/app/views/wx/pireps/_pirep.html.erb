@@ -32,6 +32,7 @@
           <td class="w-25 fw-semibold">Location</td>
           <td class="">
             <%= link_to pirep.location.to_s, map_wx_pirep_path(pirep),  data: {turbo_action: :advance, turbo_frame: :modal}  %>
+            <%= link_to "Nearby", wx_pireps_path(location: pirep.location), data: {turbo_action: :advance, turbo_frame: :pireps} %>
           </td>
         </tr>
         <tr class="">

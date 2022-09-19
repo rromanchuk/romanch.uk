@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       get :map, on: :member
       get :points, on: :collection
     end
+    
     resources :aireps, only: %i[index show] do
       get :map, on: :member
       get :debug, on: :member
