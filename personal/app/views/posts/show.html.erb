@@ -3,7 +3,6 @@
 <%= provide(:page_keywords, post.tags.pluck(:name).join(',')) %>
 <%= provide(:canonical_url, post_url(post, host: 'romanch.uk')) %>
 
-
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 
 <% cache post do %>
@@ -18,10 +17,12 @@
           Posted on <%= time_tag  post.created_at, post.created_at.strftime("%B %d, %Y")%> by Ryan Romanchuk
         </div>
         <!-- Post categories-->
-        <%= render partial: 'posts/tag', collection: post.tags, cached: true %>
+        <ul class="list-unstyled list-inline mb-0">
+          <%= render partial: 'posts/tag', collection: post.tags, cached: true %>
+        </ul>
       </header>
 
-       <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
+      <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
       <%= render PostBodyComponent.new(post) %>
     </article>
   <% end %>
@@ -35,4 +36,3 @@
     <%= button_to "Destory", post_path(post), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
   </div>
 <% end %>
-

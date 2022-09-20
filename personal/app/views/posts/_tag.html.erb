@@ -1,1 +1,5 @@
-<%= link_to tag.name, tag_posts_path(tag_name: tag.name), class: 'badge bg-secondary text-decoration-none link-light', data: {turbo_action: 'replace', turbo_frame: "_top" } %>
+<li class="list-inline-item">
+
+  <%= link_to tag.name, tag_posts_path(tag_name: tag.name), class: 'badge bg-secondary text-decoration-none link-light', data: {turbo_action: 'replace', turbo_frame: "_top" } %>
+
+</li>

@@ -5,7 +5,7 @@ module Wx
     let(:dr_pagy)
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
-      relation = apply_filter(relation)
+      relation = apply_filter
       @dr_pagy, _pireps = pagy(relation, items: 50)
       _pireps
     end
@@ -52,7 +52,7 @@ module Wx
     private
 
     def apply_filter(relation = Pirep.all)
-      relation = relation.near(params[:location], 100) if params[:location]
+      relation = relation.near(params[:location], 100) if params[:location].present?
 
       case params[:filter]
       when 'uua'
@@ -64,7 +64,7 @@ module Wx
       else
         add_breadcrumb('All')
         relation
-      end.includes(:batch).recent
+      end.includes(:batch)
     end
 
     # Only allow a list of trusted parameters through.
