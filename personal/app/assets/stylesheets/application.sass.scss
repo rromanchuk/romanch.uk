@@ -1,4 +1,3 @@
-
 // $enable-grid-classes: false;
 // $enable-cssgrid: true;
 // $container-classes: true;
@@ -6,7 +5,7 @@ $enable-container-classes: true;
 $offcanvas-horizontal-width: 40vw;
 
 @import 'bootstrap/scss/bootstrap';
-@import 'custom/container'; 
+@import 'custom/container';
 @import 'highlight.js/scss/github-dark-dimmed';
 @import "simple_form-bootstrap/simple_form-bootstrap";
 @import "pdf_viewer/pdf_viewer";
@@ -14,10 +13,16 @@ $offcanvas-horizontal-width: 40vw;
 
 
 @keyframes fadeout {
-  0% { opacity:1; }
-  66% { opacity: 0.9; }
-  100% { 
-    opacity: 0.5; 
+  0% {
+    opacity: 1;
+  }
+
+  66% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.5;
     filter: blur(10px);
     -webkit-filter: blur(10px);
     -moz-filter: blur(10px);
@@ -27,9 +32,15 @@ $offcanvas-horizontal-width: 40vw;
 }
 
 @-webkit-keyframes fadeout {
-  0% { opacity:1; }
-  66% { opacity:0.9; }
-  100% { 
+  0% {
+    opacity: 1;
+  }
+
+  66% {
+    opacity: 0.9;
+  }
+
+  100% {
     opacity: 0.5;
     filter: blur(10px);
     -webkit-filter: blur(10px);
@@ -40,8 +51,8 @@ $offcanvas-horizontal-width: 40vw;
 }
 
 .loggedOut {
-  -webkit-animation: 10s ease 0s normal forwards 1 fadeout;
-  animation: 10s ease 0s normal forwards 1 fadeout;
+  -webkit-animation: 15s ease 0s normal forwards 1 fadeout;
+  animation: 15s ease 0s normal forwards 1 fadeout;
   // filter: blur(10px);
   // -webkit-filter: blur(10px);
   // -moz-filter: blur(10px);
