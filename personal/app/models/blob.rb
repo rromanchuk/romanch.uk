@@ -16,7 +16,7 @@ class Blob < ApplicationRecord
   scope :videos, -> { where(content_type: %w[video/mp4]) }
   scope :streams, -> { where(content_type: %w[application/vnd.apple.mpegurl]) }
   scope :unattached, -> { where.missing(:attachments) }
-  scope :flying, -> { where(slug: %w[l35 l35-departure ktoa kavx]) }
+  scope :flying, -> { where(slug: %w[l35 l35-departure ktoa kavx ksmo-santa-monica-airport-night-arrival]) }
 
   # Returns true if the content_type of this blob is in the image range, like image/png.
   def image?
