@@ -38,19 +38,19 @@
               <td class="w-25 fw-semibold">Flight level:</td>
               <td class=""><%= number_with_delimiter(pirep.altitude_ft_msl) %> MSL</td>
             </tr>
-            <% unless pirep.sky_condition.blank? %>
+            <% if pirep.sky_condition %>
               <tr class="">
                 <td class="w-25 fw-semibold">Sky Conditions</td>
                 <td class=""><%= pirep.sky_condition %></td>
               </tr>
             <% end %>
-            <% unless pirep.icing_condition.blank? %>
+            <% if pirep.icing_condition %>
               <tr class="">
                 <td class="w-25 fw-semibold">Icing Conditions</td>
                 <td class=""><%== pirep.icing_condition.to_json %></td>
               </tr>
             <% end %>
-            <% unless pirep.icing_condition.blank? %>
+            <% if pirep.icing_condition %>
               <tr class="">
                 <td class="w-25 fw-semibold">Turbulance Conditions</td>
                 <td class=""><%= pirep.turbulence_condition %></td>

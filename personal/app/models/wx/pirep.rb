@@ -10,20 +10,22 @@ module Wx
     WV = %r{/WV\s\d{3}\d{2,3}KT?}
 
     include Turbo::Broadcastable
-    after_create_commit -> { broadcast_prepend_later_to "pireps" }
-    after_update_commit -> { broadcast_replace_later_to "pireps" }
-    after_destroy_commit -> { broadcast_remove_to "pireps" }
+    after_create_commit -> { broadcast_prepend_later_to 'pireps' }
+    after_update_commit -> { broadcast_replace_later_to 'pireps' }
+    after_destroy_commit -> { broadcast_remove_to 'pireps' }
     before_create :set_aircraft_type_designator
 
     belongs_to :batch, counter_cache: :pireps_count
     belongs_to :aircraft_type_designator, optional: true
+
+    auto_strip_attributes :icing_condition, :turbulence_condition, :sky_condition
 
     # store_accessor :data, :remarks, :sa_identifier
 
     scope :uua, -> { where(urgent: true) }
     scope :ua, -> { where(urgent: false) }
     scope :recent, -> { order(observation_time: :desc) }
-    scope :near, -> (point, radius) {
+    scope :near, lambda { |point, radius|
       where(
         Arel.spatial(point)
           .st_distance(Pirep.arel_table[:location])
@@ -32,7 +34,7 @@ module Wx
     }
 
     # SELECT "wx_pireps".* FROM "wx_pireps" WHERE ST_Z(wx_pireps.location::geometry) > 5000;
-    scope :msl_above, -> (feet_msl) {
+    scope :msl_above, lambda { |feet_msl|
       where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
     }
 

@@ -1,6 +1,6 @@
 class BlobsController < ApplicationController
   before_action :set_breadcrumbs
-  
+
   let(:dr_pagy)
   let(:blobs) do
     relation = apply_filter
@@ -55,11 +55,11 @@ class BlobsController < ApplicationController
 
   private
 
-  def apply_filter(relation=Blob.all)
+  def apply_filter(relation = Blob.all)
     relation.recent
   end
 
   def blob_params
-    params.require(:blob).permit(:key, :title, :description, :tags_as_string, :slug, :content_type)
+    params.require(:blob).permit(:key, :title, :description, :tags_as_string, :slug, :content_type, :thumbnail_key)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_18_231901) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_21_060628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -287,9 +287,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_18_231901) do
     t.datetime "observation_time"
     t.text "aircraft_ref"
     t.integer "altitude_ft_msl"
-    t.jsonb "sky_condition", default: [], null: false
-    t.jsonb "turbulence_condition", default: [], null: false
-    t.jsonb "icing_condition", default: [], null: false
+    t.jsonb "sky_condition"
+    t.jsonb "turbulence_condition"
+    t.jsonb "icing_condition"
     t.integer "visibility_statute_mi"
     t.string "wx_string"
     t.float "temp_c"
