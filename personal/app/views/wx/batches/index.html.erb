@@ -60,8 +60,8 @@
   <div class="col">
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
-        <p class="card-title">Failed Redis Set</p>
-        <p class="card-text h5 text-danger"><%= failed_redis_set_size %></p>
+        <p class="card-title">Failed Processing</p>
+        <p class="card-text h5 text-danger"><%= tag.span number_with_delimiter(Wx::Batch.failed.count) %></p>
       </div>
     </div>
   </div>
@@ -83,6 +83,7 @@
       <option <%= params[:filter] == 'pireps' ? 'selected' : ''%> value="<%= wx_batches_path(filter: 'pireps') %>">PIREPs</option>
       <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
       <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
+      <option value="<%= wx_batches_path(filter: 'failed') %>">Failed</option>
     </select>
   </div>
   <%= turbo_frame_tag :batches do %>

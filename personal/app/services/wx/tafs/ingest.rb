@@ -8,6 +8,10 @@ module Wx
       def file_type
         'cache.xml'
       end
+
+      def content_type
+        'text/xml'
+      end
     end
   end
 end

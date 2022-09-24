@@ -45,6 +45,11 @@ module Wx
         end
         batch.update!(processed_at: Time.current, num_records_processed: toatal_records_processed)
         nil
+      rescue Ox::ParseError => e
+        Rails.logger.error e
+        Sentry.capture_exception(e)
+        batch.update!(failed_at: Time.current)
+        nil
       end
     end
   end

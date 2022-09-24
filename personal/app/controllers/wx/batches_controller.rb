@@ -62,6 +62,8 @@ module Wx
         relation.aircraftreports
       when 'tafs'
         relation.tafs
+      when 'failed'
+        relation.failed
       else
         relation
       end.recent

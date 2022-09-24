@@ -7,7 +7,8 @@ module Wx
     has_many :aireps
     has_many :metars
 
-    scope :pending, -> { where(processed_at: nil) }
+    scope :pending, -> { where(processed_at: nil, failed_at: nil) }
+    scope :failed, -> { where.not(failed_at: nil) }
     scope :complete, -> { where.not(processed_at: nil) }
     scope :aircraftreports, -> { where(report_type: :aircraftreports) }
     scope :metars, -> { where(report_type: :metars) }

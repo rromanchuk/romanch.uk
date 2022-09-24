@@ -51,7 +51,7 @@ module Wx
     end
 
     def upload!
-      object.put(body: response.body, storage_class: 'INTELLIGENT_TIERING')
+      object.put(body: response.body, storage_class: 'INTELLIGENT_TIERING', content_type: content_type)
       Rails.logger.info "Successfully uploaded to #{object.key}"
       batch.save!
       set_previous_keys!
@@ -68,6 +68,10 @@ module Wx
 
     def file_type
       'cache.csv.gz'
+    end
+
+    def content_type
+      'application/x-gzip'
     end
 
     def new_data?
