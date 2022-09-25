@@ -7,11 +7,15 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     
-    <%= render 'shared/gtm' %>
+    
     <%= yield :head %>
 
     <% if breadcrumbs? -%>
       <%= tag.script breadcrumb_json_ld(breadcrumbs).target!.html_safe, type: "application/ld+json" %>
+    <% end -%>
+
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
     <% end -%>
 
     <% if content_for?(:page_title) -%>
@@ -32,9 +36,7 @@
       <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
     <% end -%>
 
-    <% if content_for?(:canonical_url) -%>
-      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
-    <% end -%>
+    <%= render 'application/gtm' %>
   </head>
 
   <body>
@@ -45,6 +47,6 @@
     </nav>
     
     <%= yield %>
-    <%= render 'shared/honeypot' %>
+    <%= render 'application/honeypot' %>
   </body>
 </html>

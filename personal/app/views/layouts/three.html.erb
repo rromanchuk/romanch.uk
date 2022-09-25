@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render 'shared/meta' %>
-    <%= render 'shared/gtm' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
     <%= stylesheet_link_tag "three", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
+    <% end -%>
+
+    <% if content_for?(:page_title) -%>
+      <%= tag.title content_for(:page_title) %>
+      <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
+    <% end -%>
+
+    <% if content_for?(:page_description) -%>
+      <%= tag.meta name: 'description', content: content_for(:page_description) %>
+      <%= tag.meta property: 'og:description', content: content_for(:page_description) %>
+    <% end -%>
+
+    <%= render 'application/gtm' %>
+    <%= render 'application/favicon' %>
   </head>
 
   <body>

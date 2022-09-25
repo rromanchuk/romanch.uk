@@ -32,12 +32,12 @@
       <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
     <% end %>
 
-    <%= render 'shared/gtm' %>
+    <%= render 'application/gtm' %>
     <%= render 'application/favicon' %>
   </head>
 
   <body>
     <%= yield %>
-    <%= render 'shared/honeypot' %>
+    <%= render 'application/honeypot' %>
   </body>
 </html>

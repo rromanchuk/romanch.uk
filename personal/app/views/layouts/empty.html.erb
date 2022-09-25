@@ -11,6 +11,7 @@
     <%= javascript_importmap_tags %>
 
     <%= yield :head %>
+    
     <% if content_for?(:canonical_url) -%>
       <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
     <% end -%>
@@ -33,12 +34,12 @@
       <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
     <% end %>
 
-    <%= render 'shared/gtm' %>
+    <%= render 'application/gtm' %>
     <%= render 'application/favicon' %>
   </head>
 
   <body class="<%= yield :body_class %>">
     <%= yield %>
-    <%= render 'shared/honeypot' %>
+    <%= render 'application/honeypot' %>
   </body>
 </html>
