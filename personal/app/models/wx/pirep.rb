@@ -11,7 +11,7 @@ module Wx
 
     include Turbo::Broadcastable
     after_create_commit -> { broadcast_prepend_later_to 'pireps' }
-    after_update_commit -> { broadcast_replace_later_to 'pireps' }
+    #after_update_commit -> { broadcast_replace_later_to 'pireps' }
     after_destroy_commit -> { broadcast_remove_to 'pireps' }
     before_create :set_aircraft_type_designator
 
