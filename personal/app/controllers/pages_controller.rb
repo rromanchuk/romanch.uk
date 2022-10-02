@@ -8,11 +8,11 @@ class PagesController < ApplicationController
   # end
 
   def show
-    render(
-      template: current_page,
-      locals: { current_page: },
-      stream: true
-    )
+      render(
+        template: current_page,
+        locals: { current_page: },
+        stream: true
+      )
   end
 
   private
