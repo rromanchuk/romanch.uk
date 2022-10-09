@@ -33,7 +33,7 @@ module Utils
               cloud_base_ft_msl: row[16]&.to_i,
               cloud_top_ft_msl: row[17]&.to_i
             }.compact
-          ].compact_blank,
+          ].compact_blank.presence,
           turbulence_condition: [
             {
               turbulence_type: row[18],
@@ -49,7 +49,7 @@ module Utils
               turbulence_top_ft_msl: row[26]&.to_i,
               turbulence_freq: row[27]
             }.compact
-          ].compact_blank,
+          ].compact_blank.presence,
           icing_condition: [
             {
               icing_type: row[28],
@@ -63,7 +63,7 @@ module Utils
               icing_base_ft_msl: row[34]&.to_i,
               icing_top_ft_msl: row[35]&.to_i
             }.compact
-          ].compact_blank,
+          ].compact_blank.presence,
           visibility_statute_mi: row[36],
           wx_string: row[37],
           temp_c: row[38]&.to_f,
