@@ -2,4 +2,4 @@
 set -euxo pipefail;
 eval "$(bin/shdotenv)"
 
-aws sso login 
+aws sso login --profile ryan

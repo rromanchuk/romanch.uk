@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem 'grpc', '1.47.0'
+gem "anycable-rails"
+gem "anycable-rails-jwt"
 # Use postgresql as the database for Active Record
 gem "pg"
 
@@ -72,8 +75,9 @@ gem 'dynamoid'
 
 gem 'sidekiq'
 #gem 'sidekiq-cron', github: 'ondrejbartas/sidekiq-cron'
-gem "anycable-rails", "~> 1.1"
-gem "anycable-rails-jwt"
+#gem "grpc", "1.42.0"
+# gem "anycable-rails"
+# gem "anycable-rails-jwt"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
@@ -104,6 +108,7 @@ group :test do
   gem "webdrivers"
   gem "mocha"
 end
+
 
 
 gem 'solargraph', group: :development
