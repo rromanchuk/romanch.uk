@@ -43,19 +43,19 @@
             <% if pirep.sky_condition %>
               <tr class="">
                 <td class="w-25 fw-semibold">Sky Conditions</td>
-                <td class=""><%= pirep.sky_condition %></td>
+                <td class=""><%= sky_conditions(pirep.sky_condition) %></td>
               </tr>
             <% end %>
             <% if pirep.icing_condition %>
               <tr class="">
                 <td class="w-25 fw-semibold">Icing Conditions</td>
-                <td class=""><%== pirep.icing_condition.to_json %></td>
+                <td class=""><%= icing_conditions(pirep.icing_condition) %></td>
               </tr>
             <% end %>
-            <% if pirep.icing_condition %>
+            <% if pirep.turbulence_condition %>
               <tr class="">
                 <td class="w-25 fw-semibold">Turbulance Conditions</td>
-                <td class=""><%= pirep.turbulence_condition %></td>
+                <td class=""><%= turbulence_conditions(pirep.turbulence_condition) %></td>
               </tr>
             <% end %>
             <% if pirep.remarks -%>
