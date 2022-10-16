@@ -22,3 +22,5 @@ dump.sql
 personal/public/sitemap.xml
 personal/public/sitemaps/*
 personal/app/views/pages/fiddle.html.erb
+/ios
+personal/tafs.cache.xml
