@@ -24,13 +24,5 @@ hooks:
     - location: deploy_scripts/before_install.sh
       runas: ubuntu
   AfterInstall:
-    - location: deploy_scripts/bundle_install.sh
-      runas: ubuntu
-    - location: deploy_scripts/compile_assets.sh
-      runas: ubuntu
-    - location: deploy_scripts/migrate.sh
-      runas: ubuntu
-
-  ApplicationStart:
-    - location: deploy_scripts/application_start.sh
+    - location: deploy_scripts/after_install.sh
       runas: ubuntu
