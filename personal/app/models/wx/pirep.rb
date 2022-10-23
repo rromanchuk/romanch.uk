@@ -2,7 +2,7 @@ module Wx
   class Pirep < ApplicationRecord
     self.implicit_order_column = 'observation_time'
 
-    UAA = /[UA]{3}/
+    UAA = /UUA/
     STATION = /[\w]{3}/
     REMARKS = %r{/RM\s(?<remarks>.+)}
     OV = %r{/OV\s\w+}
