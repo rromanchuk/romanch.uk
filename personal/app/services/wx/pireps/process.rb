@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/MethodLength
 require 'utils/csv/aircraft_report_tools'
 module Wx
   module Pireps
@@ -18,8 +19,8 @@ module Wx
         report_type = normalized_row.delete(:report_type)
         case report_type
         when 'PIREP'
-          normalized_row[:urgent] = /[UA]{3}/.match?(normalized_row[:raw_text])
-          Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness).length
+          # Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness).length
+          Wx::Pirep.create(normalized_row, &:cleanup).valid? ? 1 : 0
         when 'AIREP'
           Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness).length
         else

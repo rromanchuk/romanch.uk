@@ -3,7 +3,7 @@ module Wx
     self.implicit_order_column = 'observation_time'
 
     UAA = /UUA/
-    STATION = /[\w]{3}/
+    STATION = /\w{3}/
     REMARKS = %r{/RM\s(?<remarks>.+)}
     OV = %r{/OV\s\w+}
     FL = %r{/FL(\d{3}|UNKN)}
@@ -11,12 +11,10 @@ module Wx
     SK = %r{/SK\s(\d{3}|UNKN)\s\w{3}\s\d{3}/(\d{3}|UNKN)\s\w{3}\s\d{3}}
     TA = %r{/TA\s-?\d{2}}
     WV = %r{/WV\s\d{3}\d{2,3}KT?}
-    
-    
 
     include Turbo::Broadcastable
     after_create_commit -> { broadcast_prepend_later_to 'pireps' }
-    #after_update_commit -> { broadcast_replace_later_to 'pireps' }
+    # after_update_commit -> { broadcast_replace_later_to 'pireps' }
     after_destroy_commit -> { broadcast_remove_to 'pireps' }
     before_create :set_aircraft_type_designator
 
@@ -25,7 +23,7 @@ module Wx
 
     auto_strip_attributes :icing_condition, :turbulence_condition, :sky_condition
 
-    #store_accessor :data, :remarks
+    # store_accessor :data, :remarks
 
     scope :uua, -> { where(urgent: true) }
     scope :ua, -> { where(urgent: false) }
@@ -43,19 +41,19 @@ module Wx
       where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
     }
 
-    def parsed_urgent? =  UUA.match?(raw_text)
+    def parsed_urgent? = Wx::Pirep::UAA.match?(raw_text)
     def parsed_remarks = REMARKS.match(raw_text)&.[](:remarks)
     def parsed_station = raw_text.match(STATION)[0]
+
     def set_aircraft_type_designator
       self.aircraft_type_designator = AircraftTypeDesignator.find_by(icao_code: aircraft_ref)
     end
 
     def cleanup
-      unless aircraft_type_designator
-        set_aircraft_type_designator
-      end
+      set_aircraft_type_designator unless aircraft_type_designator
       self.remarks = parsed_remarks
       self.station = parsed_station
+      self.urgent = parsed_urgent?
     end
   end
 end
