@@ -9,6 +9,107 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.wx_aireps DROP CONSTRAINT IF EXISTS fk_rails_e049bf6b2e;
+ALTER TABLE IF EXISTS ONLY public.wx_pireps DROP CONSTRAINT IF EXISTS fk_rails_ddee484427;
+ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
+ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
+DROP INDEX IF EXISTS public.unique_taggings;
+DROP INDEX IF EXISTS public.index_wx_tafs_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_tafs_on_location;
+DROP INDEX IF EXISTS public.index_wx_tafs_on_batch_id;
+DROP INDEX IF EXISTS public.index_wx_pireps_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_pireps_on_location;
+DROP INDEX IF EXISTS public.index_wx_pireps_on_batch_id;
+DROP INDEX IF EXISTS public.index_wx_pireps_on_aircraft_type_designator_id;
+DROP INDEX IF EXISTS public.index_wx_metars_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_metars_on_location;
+DROP INDEX IF EXISTS public.index_wx_metars_on_batch_id;
+DROP INDEX IF EXISTS public.index_wx_aireps_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_aireps_on_location;
+DROP INDEX IF EXISTS public.index_wx_aireps_on_batch_id;
+DROP INDEX IF EXISTS public.index_users_on_slug;
+DROP INDEX IF EXISTS public.index_romanchuk_open_tournaments_on_slug;
+DROP INDEX IF EXISTS public.index_romanchuk_open_players_on_slug;
+DROP INDEX IF EXISTS public.index_romanchuk_open_golfers_on_tournament_id;
+DROP INDEX IF EXISTS public.index_romanchuk_open_golfers_on_player_id;
+DROP INDEX IF EXISTS public.index_posts_on_slug;
+DROP INDEX IF EXISTS public.index_pghero_space_stats_on_database_and_captured_at;
+DROP INDEX IF EXISTS public.index_pghero_query_stats_on_database_and_captured_at;
+DROP INDEX IF EXISTS public.index_pg_search_documents_on_searchable;
+DROP INDEX IF EXISTS public.index_gutentag_tags_on_taggings_count;
+DROP INDEX IF EXISTS public.index_gutentag_tags_on_name;
+DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable_type_and_taggable_id;
+DROP INDEX IF EXISTS public.index_gutentag_taggings_on_tag_id;
+DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_sluggable_type_and_sluggable_id;
+DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope;
+DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_slug_and_sluggable_type;
+DROP INDEX IF EXISTS public.index_attachments_uniqueness;
+DROP INDEX IF EXISTS public.index_attachments_on_blob_id;
+DROP INDEX IF EXISTS public.index_active_storage_variant_records_uniqueness;
+DROP INDEX IF EXISTS public.index_active_storage_blobs_on_key;
+DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
+DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
+ALTER TABLE IF EXISTS ONLY public.wx_tafs DROP CONSTRAINT IF EXISTS wx_tafs_pkey;
+ALTER TABLE IF EXISTS ONLY public.wx_pireps DROP CONSTRAINT IF EXISTS wx_pireps_pkey;
+ALTER TABLE IF EXISTS ONLY public.wx_metars DROP CONSTRAINT IF EXISTS wx_metars_pkey;
+ALTER TABLE IF EXISTS ONLY public.wx_batches DROP CONSTRAINT IF EXISTS wx_batches_pkey;
+ALTER TABLE IF EXISTS ONLY public.wx_aireps DROP CONSTRAINT IF EXISTS wx_aireps_pkey;
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
+ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
+ALTER TABLE IF EXISTS ONLY public.romanchuk_open_tournaments DROP CONSTRAINT IF EXISTS romanchuk_open_tournaments_pkey;
+ALTER TABLE IF EXISTS ONLY public.romanchuk_open_players DROP CONSTRAINT IF EXISTS romanchuk_open_players_pkey;
+ALTER TABLE IF EXISTS ONLY public.romanchuk_open_golfers DROP CONSTRAINT IF EXISTS romanchuk_open_golfers_pkey;
+ALTER TABLE IF EXISTS ONLY public.posts DROP CONSTRAINT IF EXISTS posts_pkey;
+ALTER TABLE IF EXISTS ONLY public.pghero_space_stats DROP CONSTRAINT IF EXISTS pghero_space_stats_pkey;
+ALTER TABLE IF EXISTS ONLY public.pghero_query_stats DROP CONSTRAINT IF EXISTS pghero_query_stats_pkey;
+ALTER TABLE IF EXISTS ONLY public.pg_search_documents DROP CONSTRAINT IF EXISTS pg_search_documents_pkey;
+ALTER TABLE IF EXISTS ONLY public.gutentag_tags DROP CONSTRAINT IF EXISTS gutentag_tags_pkey;
+ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS gutentag_taggings_pkey;
+ALTER TABLE IF EXISTS ONLY public.friendly_id_slugs DROP CONSTRAINT IF EXISTS friendly_id_slugs_pkey;
+ALTER TABLE IF EXISTS ONLY public.blobs DROP CONSTRAINT IF EXISTS blobs_pkey;
+ALTER TABLE IF EXISTS ONLY public.attachments DROP CONSTRAINT IF EXISTS attachments_pkey;
+ALTER TABLE IF EXISTS ONLY public.ar_internal_metadata DROP CONSTRAINT IF EXISTS ar_internal_metadata_pkey;
+ALTER TABLE IF EXISTS ONLY public.aircraft_type_designators DROP CONSTRAINT IF EXISTS aircraft_type_designators_pkey;
+ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS active_storage_variant_records_pkey;
+ALTER TABLE IF EXISTS ONLY public.active_storage_blobs DROP CONSTRAINT IF EXISTS active_storage_blobs_pkey;
+ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS active_storage_attachments_pkey;
+ALTER TABLE IF EXISTS public.pghero_space_stats ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.pghero_query_stats ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.pg_search_documents ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.gutentag_tags ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.gutentag_taggings ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
+DROP TABLE IF EXISTS public.wx_tafs;
+DROP TABLE IF EXISTS public.wx_pireps;
+DROP TABLE IF EXISTS public.wx_metars;
+DROP TABLE IF EXISTS public.wx_batches;
+DROP TABLE IF EXISTS public.wx_aireps;
+DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.schema_migrations;
+DROP TABLE IF EXISTS public.romanchuk_open_tournaments;
+DROP TABLE IF EXISTS public.romanchuk_open_players;
+DROP TABLE IF EXISTS public.romanchuk_open_golfers;
+DROP TABLE IF EXISTS public.posts;
+DROP SEQUENCE IF EXISTS public.pghero_space_stats_id_seq;
+DROP TABLE IF EXISTS public.pghero_space_stats;
+DROP SEQUENCE IF EXISTS public.pghero_query_stats_id_seq;
+DROP TABLE IF EXISTS public.pghero_query_stats;
+DROP SEQUENCE IF EXISTS public.pg_search_documents_id_seq;
+DROP TABLE IF EXISTS public.pg_search_documents;
+DROP SEQUENCE IF EXISTS public.gutentag_tags_id_seq;
+DROP TABLE IF EXISTS public.gutentag_tags;
+DROP SEQUENCE IF EXISTS public.gutentag_taggings_id_seq;
+DROP TABLE IF EXISTS public.gutentag_taggings;
+DROP SEQUENCE IF EXISTS public.friendly_id_slugs_id_seq;
+DROP TABLE IF EXISTS public.friendly_id_slugs;
+DROP TABLE IF EXISTS public.blobs;
+DROP TABLE IF EXISTS public.attachments;
+DROP TABLE IF EXISTS public.ar_internal_metadata;
+DROP TABLE IF EXISTS public.aircraft_type_designators;
+DROP TABLE IF EXISTS public.active_storage_variant_records;
+DROP TABLE IF EXISTS public.active_storage_blobs;
+DROP TABLE IF EXISTS public.active_storage_attachments;
+DROP SCHEMA IF EXISTS public;
 --
 -- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
@@ -90,9 +191,9 @@ CREATE TABLE public.aircraft_type_designators (
     manufacturer text,
     model text,
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    slug text,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    slug text
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
