@@ -20,7 +20,11 @@ module Wx
         case report_type
         when 'PIREP'
           # Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness).length
-          Wx::Pirep.create(normalized_row, &:cleanup).valid? ? 1 : 0
+          begin
+            Wx::Pirep.create(normalized_row, &:cleanup).valid? ? 1 : 0
+          rescue ActiveRecord::RecordNotUnique => e
+            Rails.logger.error e
+          end
         when 'AIREP'
           Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness).length
         else
