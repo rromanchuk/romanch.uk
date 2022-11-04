@@ -47,14 +47,16 @@ module Wx
     # 35012G20KT - Wind three five zero at one two gust two zero knots
     # 00000KT - Wind calm VRB16G28KT - Wind variable at one six gust two eight knots
     def wind(forecast)
-      return "" unless forecast["wind_speed_kt"]
+      return '' unless forecast.is_a? Hash
+      return '' unless forecast["wind_speed_kt"]
+
       wind_dir = forecast["wind_dir_degrees"]&.to_i == 0 ? "VRB" : forecast["wind_dir_degrees"]
       
 
       if forecast["wind_gust_kt"]
-        return "#{wind_dir}#{forecast["wind_speed_kt"].rjust(2, '0')}G#{forecast["wind_gust_kt"]}KT"
+        "#{wind_dir}#{forecast["wind_speed_kt"].rjust(2, '0')}G#{forecast["wind_gust_kt"]}KT"
       else
-        return "#{wind_dir}#{forecast["wind_speed_kt"].rjust(2, '0')}KT"
+        "#{wind_dir}#{forecast["wind_speed_kt"].rjust(2, '0')}KT"
       end
     end
 
