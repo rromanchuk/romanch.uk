@@ -6,7 +6,7 @@ module Wx
       include Utils::Csv::AircraftReportTools
 
       def expression
-        "SELECT * FROM s3object s where s._43 = 'PIREP' or s._43 = 'AIREP'"
+        "SELECT * FROM s3object s where s._43 = 'PIREP' or s._43 = 'AIREP' or s._43 = 'Urgent PIREP'"
       end
 
       # @param [Hash] row
@@ -18,7 +18,7 @@ module Wx
         normalized_row[:batch_id] = batch.id
         report_type = normalized_row.delete(:report_type)
         case report_type
-        when 'PIREP'
+        when 'PIREP', 'Urgent PIREP'
           # Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness).length
           begin
             Wx::Pirep.create(normalized_row, &:cleanup).valid? ? 1 : 0
