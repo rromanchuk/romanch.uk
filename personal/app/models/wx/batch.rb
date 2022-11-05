@@ -21,11 +21,11 @@ module Wx
     def process_batch!
       case report_type
       when 'aircraftreports'
-        Wx::Pireps::Process.async_call(self)
+        Wx::Pireps::Process.async_call(id)
       when 'metars'
-        Wx::Metars::Process.async_call(self)
+        Wx::Metars::Process.async_call(id)
       when 'tafs'
-        Wx::Tafs::Process.async_call(self)
+        Wx::Tafs::Process.async_call(id)
       end
     end
   end

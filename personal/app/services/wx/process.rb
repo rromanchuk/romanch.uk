@@ -23,9 +23,9 @@ module Wx
       }
     end
 
-    def initialize(batch)
+    def initialize(batch_id)
       super()
-      @batch = batch
+      @batch = Batch.find batch_id
     end
 
     def call

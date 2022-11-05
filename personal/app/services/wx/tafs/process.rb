@@ -8,9 +8,9 @@ module Wx
       let(:xml) { Ox.load(resp.body.read, mode: :hash) }
       let(:resp) { client.get_object(bucket: :pireps, key: batch.key) }
 
-      def initialize(batch)
+      def initialize(batch_id)
         super()
-        @batch = batch
+        @batch = Batch.find batch_id
       end
 
       def call

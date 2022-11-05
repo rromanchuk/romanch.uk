@@ -4,4 +4,4 @@ set -euxo pipefail;
 eval "$(bin/shdotenv)"
 
 
-bin/aws-connect -a tunnel -o 5432 -f 5432 -n personal -p $AWS_PROFILE
+bin/aws-connect -a tunnel -o 5432 -f 5432 -n personal -p ryan
