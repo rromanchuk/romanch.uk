@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'sidekiq/web'
 
 class RomanchukOpenConstraint
@@ -57,35 +58,6 @@ Rails.application.routes.draw do
     resources :posts, only: [:index], on: :collection
   end
 
-  namespace :wx do
-    resources :batches, only: %i[index show] do
-      put :ingest, on: :collection
-      put :process_csv, on: :collection
-      get :debug, on: :member
-    end
-
-    resources :metars, only: %i[index show destroy] do
-      get :debug, on: :member
-      get :points, on: :collection
-    end
-
-    resources :pireps, only: %i[index show] do
-      get :uua, on: :collection
-      get :ua, on: :collection
-      get :debug, on: :member
-      get :map, on: :member
-      get :points, on: :collection
-    end
-    
-    resources :aireps, only: %i[index show] do
-      get :map, on: :member
-      get :debug, on: :member
-    end
-    resources :tafs, only: %i[index show] do
-      get :debug, on: :member
-    end
-  end
-
   namespace :oauth do
     get 'cognito/token', to: 'cognito#token'
     get 'cognito/authorize', to: 'cognito#authorize'
@@ -114,6 +86,35 @@ Rails.application.routes.draw do
   end
 
   constraints(PersonalConstraint.new) do
+    namespace :wx do
+      resources :batches, only: %i[index show] do
+        put :ingest, on: :collection
+        put :process_csv, on: :collection
+        get :debug, on: :member
+      end
+  
+      resources :metars, only: %i[index show destroy] do
+        get :debug, on: :member
+        get :points, on: :collection
+      end
+  
+      resources :pireps, only: %i[index show] do
+        get :uua, on: :collection
+        get :ua, on: :collection
+        get :debug, on: :member
+        get :map, on: :member
+        get :points, on: :collection
+      end
+      
+      resources :aireps, only: %i[index show] do
+        get :map, on: :member
+        get :debug, on: :member
+      end
+      resources :tafs, only: %i[index show] do
+        get :debug, on: :member
+      end
+    end
+
     get '/c/*attributed', to: 'pages#show', id: 'home'
     root to: 'pages#show', id: 'home'
   end

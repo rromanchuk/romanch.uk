@@ -29,6 +29,8 @@ module Wx
 
     def apply_filter(relation = Taf.all)
       if params[:station_id]
+        raise(ActionController::BadRequest, 'Invalid HTTP parameters.') if params[:station_id].length > 4
+        
         relation.where(station_id: params[:station_id])
       else
         relation
