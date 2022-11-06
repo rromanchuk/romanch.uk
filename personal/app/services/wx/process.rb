@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'csv'
 require 'aws-sdk-s3'
 module Wx
@@ -61,6 +62,11 @@ module Wx
           end
         end
       end # end of stream
+    rescue StandardError => e
+      Rails.logger.error e
+      Sentry.capture_exception(e)
+      batch.update!(failed_at: Time.current)
+      nil
     end # call
 
     def expression

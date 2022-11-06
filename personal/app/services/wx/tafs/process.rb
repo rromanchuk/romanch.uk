@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'ox'
 module Wx
   module Tafs
