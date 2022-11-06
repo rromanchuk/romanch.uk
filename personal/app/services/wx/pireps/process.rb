@@ -20,7 +20,7 @@ module Wx
         case report_type
         when 'PIREP', 'Urgent PIREP'
           records = Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
-
+          CleanupPirepJob.perform_async(records.last)
           records.length
         when 'AIREP'
           Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness).length
