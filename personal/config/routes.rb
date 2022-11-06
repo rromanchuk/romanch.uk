@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   constraints(PersonalConstraint.new) do
     namespace :wx do
       resources :batches, only: %i[index show] do
+        put :reprocess, on: :member
         put :ingest, on: :collection
         put :process_csv, on: :collection
         get :debug, on: :member

@@ -43,6 +43,15 @@ module Wx
       end
     end
 
+    def reprocess
+      if allowed_to?(:ingest?, current_user, with: BatchPolicy)
+        batch.process_batch!
+        redirect_to wx_batches_path, notice: 'Transforming data...'
+      else
+        redirect_to wx_batches_path, notice: 'Not authorized'
+      end
+    end
+
     def process_csv
       if allowed_to?(:ingest?, current_user, with: BatchPolicy)
         Batch.pending.first.process_batch!
