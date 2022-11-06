@@ -109,19 +109,27 @@ DROP TABLE IF EXISTS public.aircraft_type_designators;
 DROP TABLE IF EXISTS public.active_storage_variant_records;
 DROP TABLE IF EXISTS public.active_storage_blobs;
 DROP TABLE IF EXISTS public.active_storage_attachments;
-DROP SCHEMA IF EXISTS public;
+DROP EXTENSION IF EXISTS postgis;
+-- *not* dropping schema, since initdb creates it
 --
 -- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
-CREATE SCHEMA public;
+-- *not* creating schema, since initdb creates it
 
 
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
 
-COMMENT ON SCHEMA public IS 'standard public schema';
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
 
 
 SET default_tablespace = '';

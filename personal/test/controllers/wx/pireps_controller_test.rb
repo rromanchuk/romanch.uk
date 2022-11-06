@@ -2,6 +2,7 @@ require 'test_helper'
 
 class Wx::PirepsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    host! "personal.test"
     @pirep = wx_pireps(:ua)
     @urgent = wx_pireps(:uua)
   end

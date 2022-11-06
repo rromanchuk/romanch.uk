@@ -19,12 +19,9 @@ module Wx
         report_type = normalized_row.delete(:report_type)
         case report_type
         when 'PIREP', 'Urgent PIREP'
-          # Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness).length
-          begin
-            Wx::Pirep.create(normalized_row, &:cleanup).valid? ? 1 : 0
-          rescue ActiveRecord::RecordNotUnique => e
-            Rails.logger.error e
-          end
+          records = Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
+
+          records.length
         when 'AIREP'
           Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness).length
         else
