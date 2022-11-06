@@ -84,6 +84,7 @@
       <option value="<%= wx_batches_path(filter: 'metars') %>">METARs</option>
       <option value="<%= wx_batches_path(filter: 'tafs') %>">TAFs</option>
       <option value="<%= wx_batches_path(filter: 'failed') %>">Failed</option>
+      <option value="<%= wx_batches_path(filter: 'pending') %>">Pending</option>
     </select>
   </div>
   <%= turbo_frame_tag :batches do %>

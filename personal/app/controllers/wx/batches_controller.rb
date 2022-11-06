@@ -73,6 +73,8 @@ module Wx
         relation.tafs
       when 'failed'
         relation.failed
+      when 'pending'
+        relation.pending
       else
         relation
       end.recent
