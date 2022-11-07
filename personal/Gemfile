@@ -69,6 +69,7 @@ gem 'high_voltage'
 gem "action_policy"
 gem "sentry-ruby"
 gem "sentry-rails"
+gem 'airbrake'
 
 gem "redis-client"
 gem 'dynamoid'
