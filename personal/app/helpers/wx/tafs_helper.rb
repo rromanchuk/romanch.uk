@@ -12,9 +12,11 @@ module Wx
     end
 
     def wx(forecast)
-      return "" unless forecast["wx_string"]
+      return '' unless forecast.is_a? Hash
+      return '' unless forecast["wx_string"]
+      ''
     end
-    
+
     # The expected prevailing visibility is forecast in statute miles and
     # fractions of statute miles followed by SM to note the units of measure.
     # Statute miles followed by fractions of statute miles are separated with a
@@ -22,28 +24,30 @@ module Wx
     # miles is indicated by coding P6SM. Directional or variable visibility is
     # not forecasted and the visibility group is omitted if missing.
     def visibility(forecast)
-      return "" unless forecast["visibility_statute_mi"]
+      return '' unless forecast.is_a? Hash
+      return '' unless forecast["visibility_statute_mi"]
+
       sm = forecast["visibility_statute_mi"].to_f
       return "P6SM" if sm > 6.0
       return "#{forecast["visibility_statute_mi"]}SM" if sm.modulo(1) == 0
     end
-    
+
     # Wind: ie. (14008KT) The wind group includes forecast surface winds. The
     # surface wind is the expected wind direction (first three digits) and speed
     # (last two or three digits if 100 knots or greater). The contraction KT
     # follows to denote the units of wind speed in knots. Wind gusts are noted
     # by the letter G appended to the wind speed followed by the highest
-    # expected gust (two or three digits if 100 knots or greater). 
+    # expected gust (two or three digits if 100 knots or greater).
     #
-    # Calm winds (three knots or less) are encoded as 00000KT. 
+    # Calm winds (three knots or less) are encoded as 00000KT.
     #
     # Variable winds are encoded when it is impossible to forecast a wind
     # direction due to winds associated with convective activity or low wind
     #   speeds. A variable wind direction is noted by VRB where the three digit
-    # direction usually appears. 
+    # direction usually appears.
     #
-    # Examples: 
-    # 18010KT - Wind one eight zero at one zero knots 
+    # Examples:
+    # 18010KT - Wind one eight zero at one zero knots
     # 35012G20KT - Wind three five zero at one two gust two zero knots
     # 00000KT - Wind calm VRB16G28KT - Wind variable at one six gust two eight knots
     def wind(forecast)
@@ -51,7 +55,6 @@ module Wx
       return '' unless forecast["wind_speed_kt"]
 
       wind_dir = forecast["wind_dir_degrees"]&.to_i == 0 ? "VRB" : forecast["wind_dir_degrees"]
-      
 
       if forecast["wind_gust_kt"]
         "#{wind_dir}#{forecast["wind_speed_kt"].rjust(2, '0')}G#{forecast["wind_gust_kt"]}KT"
@@ -69,7 +72,9 @@ module Wx
     # lowest broken or overcast layer or vertical visibility into a complete
     # obscuration.
     def conditions(forecast)
-      return "" unless forecast["sky_condition"]
+      return '' unless forecast.is_a? Hash
+      return '' unless forecast["sky_condition"]
+
       forecast["sky_condition"]&.flatten&.map {|sky| sky.values.join("") }.join(" ")
     end
 
@@ -91,7 +96,7 @@ module Wx
     # groups when it is not significant to aviation. FM groups will not include
     # the contraction NSW.
     #
-    # BECOMING Group: ie. (BECMG 2224) 
+    # BECOMING Group: ie. (BECMG 2224)
     #
     # The BECMG group is used when a gradual change in conditions is expected
     # over a longer time period, usually two hours. The time period when the
@@ -100,11 +105,7 @@ module Wx
     # gradual change will occur at an unspecified time within this time period.
     # Only the conditions are carried over from the previous time group.
     def change_indicator(forecast)
-      Rails.logger.info "HELPER: #{forecast}"
-      Rails.logger.info  "type #{forecast.class}"
-      unless forecast.is_a?(Hash)
-        return ""
-      end
+      return '' unless forecast.is_a? Hash
 
       case forecast["change_indicator"]
       when 'FM'
