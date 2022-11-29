@@ -12,3 +12,17 @@ fork_worker
 activate_control_app 'unix:///home/ubuntu/tmp/sockets/pumactl.sock', { auth_token: 'romanch.uk' }
 
 persistent_timeout 75
+
+x = nil
+on_worker_boot do
+  x = Sidekiq.configure_embed do |config|
+    # config.logger.level = Logger::DEBUG
+    config.queues = %w[default]
+    config.concurrency = 2
+  end
+  x.run
+end
+
+on_worker_shutdown do
+  x&.stop
+end
