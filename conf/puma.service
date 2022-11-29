@@ -17,7 +17,7 @@ Group=ubuntu
 
 EnvironmentFile=/home/ubuntu/.env
 WorkingDirectory=/var/www/romanch.uk/current
-ExecStart=/var/www/romanch.uk/current/bin/puma -w 0 -t 1:10 -e production
+ExecStart=/var/www/romanch.uk/current/bin/puma -e production
 
 
 SyslogIdentifier=puma

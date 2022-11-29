@@ -28,7 +28,7 @@ cd /var/www/romanch.uk/current
 
 sudo systemctl start nginx
 sudo systemctl restart puma
-sudo systemctl restart sidekiq
+#sudo systemctl restart sidekiq
 sudo systemctl restart anycable-rpc
 
 #bundle exec whenever --update-crontab
