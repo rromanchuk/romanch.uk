@@ -22,7 +22,7 @@ class RomanchukOpen::Tournament < ApplicationRecord
   end
 
   def should_generate_new_friendly_id?
-    title_changed?
+    title_changed? || super
   end
 
 

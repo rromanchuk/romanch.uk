@@ -35,6 +35,6 @@ class Blob < ApplicationRecord
   def slug_candidates = %i[title description key]
 
   def should_generate_new_friendly_id?
-    title_changed?
+    title_changed? || super
   end
 end
