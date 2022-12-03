@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Wx
   class PirepsController < ApplicationController
     before_action :set_breadcrumbs
@@ -6,8 +8,8 @@ module Wx
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
       relation = apply_filter.recent
-      @dr_pagy, _pireps = pagy(relation, items: 50)
-      _pireps
+      @dr_pagy, records = pagy(relation, items: 50)
+      records
     end
 
     def index

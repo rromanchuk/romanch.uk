@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Wx
   class BatchesController < ApplicationController
     before_action :set_breadcrumbs
@@ -5,10 +7,8 @@ module Wx
     let(:dr_pagy)
     let(:batches) do
       relation = apply_filter
-      # relation = apply_sort(relation)
-
-      @dr_pagy, _batches = pagy(relation, items: 3)
-      _batches
+      @dr_pagy, records = pagy(relation, items: 3)
+      records
     end
     let(:batch) { Batch.find(params[:id]) }
     let(:ar_etag) { redis.call('GET', 'aircraftreports_previous_etag') }

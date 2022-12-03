@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Wx
   class AirepsController < ApplicationController
     before_action :set_breadcrumbs
@@ -5,8 +6,8 @@ module Wx
     let(:airep) { Airep.find(params[:id]) }
     let(:aireps) do
       relation = Airep.recent.includes(:batch)
-      @dr_pagy, _aireps = pagy(relation, items: 50)
-      _aireps
+      @dr_pagy, records = pagy(relation, items: 50)
+      records
     end
 
     def index

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Wx
   class MetarsController < ApplicationController
     before_action :set_breadcrumbs

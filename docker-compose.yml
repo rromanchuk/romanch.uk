@@ -2,8 +2,6 @@ version: '3'
 services:
   postgres:
     image: postgis/postgis:14-3.2
-    # volumes:
-    #   - romanchuk-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
@@ -19,9 +17,3 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-  # dynamodb-local:
-  #   image: amazon/dynamodb-local:latest
-  #   ports:
-  #     - 8000:8000
-volumes:
-  romanchuk-data:
