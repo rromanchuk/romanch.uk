@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def url_options
-    { host: Rails.configuration.general.romanchuk_host }.merge(super)
-  end
+  # def url_options
+  #   { host: Rails.configuration.general.romanchuk_host }.merge(super)
+  # end
 
   def breadcrumbs
     @breadcrumbs ||= []

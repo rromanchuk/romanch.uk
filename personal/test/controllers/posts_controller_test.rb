@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
-  include SignInHelper
+
   setup do
+    host! 'localhost'
     @post = posts(:one)
-    @me = users(:ryan)
-    # Rails.application.config.action_dispatch.show_exceptions = true
+    Rails.application.config.action_dispatch.show_exceptions = true
   end
   
   test 'index' do
@@ -16,7 +16,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'show unpublished post to me' do
-    sign_in_as(@me)
+    sign_in_as users(:ryan)
     unpublished = posts(:unpublished)
     get post_url(unpublished)
     assert_response :success
@@ -24,21 +24,22 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'hide unpublished post to guests' do
     unpublished = posts(:unpublished)
-
-    assert_raises(ActionController::RoutingError) do
-      get post_url(unpublished)
-    end
+    get post_url(unpublished)
+    assert_response :not_found
+    # assert_raises(ActionController::RoutingError) do
+    #   get post_url(unpublished)
+    # end
   end
 
   test 'should show post' do
-    sign_in_as(@me)
+    sign_in_as users(:ryan)
     get post_url(@post)
     assert_response :success
     assert_not_empty(@controller.breadcrumbs)
   end
 
   test 'should destroy post' do
-    sign_in_as(@me)
+    sign_in_as users(:ryan)
     assert_difference('Post.count', -1) do
       delete post_url(@post)
     end
@@ -47,8 +48,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update post' do
-    sign_in_as(@me)
-    patch post_url(@post), params: { post: { title: 'updated' } }
+    sign_in_as users(:ryan)
+    patch post_path(@post), params: { post: { title: 'updated' } }
+    assert_response :redirect
+    follow_redirect!
+    #puts session[:user_id]
 
     # Reload association to fetch updated data and assert that title is updated.
     @post.reload

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get 'account', to: 'sessions#account'
   get 'logout', to: 'sessions#logout'
   get 'login', to: 'sessions#login'
+  post 'sign_in', to: 'sessions#sign_in'
   get '/s/resume', to: 'resume#index'
   get '/s/resume/download', to: 'resume#download', as: :download_resume
   get '/pages/*id' => 'pages#show', as: :page, format: false

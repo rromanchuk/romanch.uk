@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
 
   def apple_signin; end
 
-  def client; end
+  def sign_in
+    find_by_alb
+    ap current_user
+  end
+
   def account; end
 
   # Virtual path for ALB cognito authentication on the ALB listener. The url
