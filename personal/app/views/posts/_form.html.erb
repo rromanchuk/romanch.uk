@@ -7,5 +7,5 @@
   <%= f.input :html_content, value: post.html_content, input_html: { rows: "5", data: {post_target: :html} } %>
   <%= f.input :tags_as_string, as: :string %>
   <%= f.input :published %>
-  <%= f.submit class: "btn-primary", data: {action: "post#save"}  %>
+  <%= f.button :submit, class: "btn-primary", data: {action: "post#save"}  %>
 <% end %>

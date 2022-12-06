@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/MethodLength
+# rubocop:disable all
 require 'utils/csv/aircraft_report_tools'
 module Wx
   module Pireps
@@ -17,10 +17,18 @@ module Wx
 
         normalized_row[:batch_id] = batch.id
         report_type = normalized_row.delete(:report_type)
+        Rails.logger.info "Inserting a record for report type #{report_type}"
         case report_type
-        when 'PIREP', 'Urgent PIREP'
+        when 'PIREP'
           records = Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
-          CleanupPirepJob.perform_async(records.last)
+          CleanupPirepJob.perform_async(records.last[:id])
+          records.length
+        when 'Urgent PIREP'
+          normalized_row[:urgent] = true
+          records = Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
+
+          Rails.logger.info "UUA record found #{records.last[:id]}"
+          CleanupPirepJob.perform_async(records.last[:id])
           records.length
         when 'AIREP'
           Wx::Airep.insert(normalized_row, unique_by: :index_wx_aireps_uniqueness).length

@@ -6,8 +6,8 @@ class PostsController < ApplicationController
 
   let(:posts) do
     relation = apply_filter
-    @dr_pagy, _posts = pagy(relation, items: 25)
-    _posts
+    @dr_pagy, records = pagy(relation, items: 25)
+    records
   end
 
   def show
