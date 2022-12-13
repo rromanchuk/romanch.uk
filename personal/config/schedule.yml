@@ -1,0 +1,29 @@
+space_stats_worker:
+  cron: "0 5 * * *"
+  class: "SpaceStatsWorker"
+  queue: "default"
+  description: "Capture space stats"
+
+query_stats_worker:
+  cron: "*/5 * * * *"
+  class: "QueryStatsWorker"
+  queue: "default"
+  description: "Capture query stats"
+
+metars:
+  cron: "*/30 * * * *"
+  class: "IngestMetarsWorker"
+  queue: "default"
+  description: "Metars pipeline"
+
+tafs:
+  cron: "*/30 * * * *"
+  class: "IngestTafssWorker"
+  queue: "default"
+  description: "Tafs pipeline"
+
+pireps:
+  cron: "*/15 * * * *"
+  class: "IngestPirepsWorker"
+  queue: "default"
+  description: "Pireps pipeline"

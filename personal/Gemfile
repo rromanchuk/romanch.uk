@@ -75,6 +75,8 @@ gem "redis-client"
 gem 'dynamoid'
 
 gem 'sidekiq'
+gem "sidekiq-cron"
+
 #gem 'sidekiq-cron', github: 'ondrejbartas/sidekiq-cron'
 #gem "grpc", "1.42.0"
 # gem "anycable-rails"
@@ -119,6 +121,7 @@ gem "pagy", "~> 5.10"
 gem 'activerecord-postgis-adapter'
 gem 'httparty'
 gem "pghero"
+gem "pg_query"
 gem 'whenever', require: false
 gem 'aws-sdk-textract', require: false
 gem 'marginalia'
