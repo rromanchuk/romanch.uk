@@ -36,7 +36,7 @@ gem "hiredis"
 gem "redis"
 gem "redis-client"
 gem 'sidekiq'
-gem "sidekiq-cron"
+gem "sidekiq-cron", github: 'rromanchuk/sidekiq-cron', branch: 'fix/embed_signature'
 gem "sd_notify"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
