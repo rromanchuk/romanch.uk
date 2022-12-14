@@ -99,10 +99,6 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     aes_key_wrap (1.1.0)
-    airbrake (13.0.3)
-      airbrake-ruby (~> 6.0)
-    airbrake-ruby (6.2.0)
-      rbtree3 (~> 0.5)
     anycable (1.2.5)
       anycable-core (= 1.2.5)
       grpc (~> 1.37)
@@ -344,7 +340,6 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    rbtree3 (0.7.0)
     redis (5.0.5)
       redis-client (>= 0.9.0)
     redis-client (0.11.2)
@@ -479,7 +474,6 @@ PLATFORMS
 DEPENDENCIES
   action_policy
   activerecord-postgis-adapter
-  airbrake
   anycable-rails
   anycable-rails-jwt
   auto_strip_attributes
@@ -516,7 +510,7 @@ DEPENDENCIES
   pg_search
   pghero
   puma!
-  rails (~> 7.0.2, >= 7.0.2.4)
+  rails (~> 7.0.4)
   rails_real_favicon
   redis
   rubocop
