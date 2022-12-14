@@ -514,6 +514,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rails_real_favicon
   redis
+  redis-client
   rubocop
   rubocop-rails
   sd_notify
