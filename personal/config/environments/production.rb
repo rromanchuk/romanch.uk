@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
@@ -107,9 +108,11 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.logger = CustomLogger.logger
-  config.log_formatter = Utils::Formatters::Json.new
-
+  # config.logger = CustomLogger.logger
+  # config.log_formatter = Utils::Formatters::Json.new
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
   config.lograge.enabled = true
   #config.colorize_logging = false
   config.lograge.ignore_actions = ['HomeController#status']

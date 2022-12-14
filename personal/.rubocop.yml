@@ -21,6 +21,7 @@ AllCops:
     - 'bin/**/*'
     - 'test/**/*'
     - 'vendor/bundle/**/*'
+    
 
 Style/StringLiterals:
   Enabled: false
