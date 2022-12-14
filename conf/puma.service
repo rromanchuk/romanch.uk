@@ -9,7 +9,7 @@ Requires=puma.socket
 # as of Puma 5.1 or later.
 # On earlier versions of Puma or JRuby, change this to `Type=simple` and remove
 # the `WatchdogSec` line.
-Type=simple
+Type=notify
 
 
 User=ubuntu
