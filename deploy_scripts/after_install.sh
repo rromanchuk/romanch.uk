@@ -31,7 +31,6 @@ sudo systemctl restart puma
 #sudo systemctl restart sidekiq
 sudo systemctl restart anycable-rpc
 
-#bundle exec whenever --update-crontab
 
 bin/rails sitemap:refresh:no_ping
 aws s3 sync public/sitemaps s3://personal-www/sitemaps --storage-class INTELLIGENT_TIERING 
