@@ -4,7 +4,6 @@
 workers 2
 threads 1, 3
 directory '/var/www/romanch.uk/current'
-
 bind 'unix:///home/ubuntu/tmp/sockets/puma.sock'
 
 preload_app!
@@ -15,15 +14,15 @@ on_worker_boot do
   puts "on_worker_boot"
   x = Sidekiq.configure_embed do |config|
     config.logger.level = Logger::DEBUG
-    config.queues = %w[default]
+    config.queues = %w[default low]
     config.concurrency = 2
-    config.on(:startup) do
-      puts "on startup"
-      schedule_file = "config/schedule.yml"
-      if File.exist?(schedule_file)
-        Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
-      end
-    end
+    # config.on(:startup) do
+    #   puts "on startup"
+    #   schedule_file = "config/schedule.yml"
+    #   if File.exist?(schedule_file)
+    #     Sidekiq::Cron::Job.load_from_hash YAML.properly_load_file(schedule_file)
+    #   end
+    # end
   end
   x.run
 end

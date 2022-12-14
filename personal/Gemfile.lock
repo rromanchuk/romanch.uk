@@ -383,6 +383,7 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sd_notify (0.1.1)
     selenium-webdriver (4.7.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -515,6 +516,7 @@ DEPENDENCIES
   redis
   rubocop
   rubocop-rails
+  sd_notify
   selenium-webdriver
   sentry-rails
   sentry-ruby
@@ -535,4 +537,4 @@ RUBY VERSION
    ruby 3.1.3p185
 
 BUNDLED WITH
-   2.3.13
+   2.3.26

@@ -36,6 +36,7 @@ gem "redis"
 gem "hiredis"
 gem 'sidekiq'
 gem "sidekiq-cron"
+gem "sd_notify"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
