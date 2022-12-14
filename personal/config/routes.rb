@@ -1,5 +1,6 @@
 # rubocop:disable all
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 class RomanchukOpenConstraint
   def matches?(request)
