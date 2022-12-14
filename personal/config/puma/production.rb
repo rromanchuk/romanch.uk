@@ -3,8 +3,8 @@
 # https://github.com/puma/puma#configuration-file
 workers 2
 
-# directory '/var/www/romanch.uk/current'
-# bind 'unix:///home/ubuntu/tmp/sockets/puma.sock'
+directory '/var/www/romanch.uk/current'
+bind 'unix:///home/ubuntu/tmp/sockets/puma.sock'
 
 preload_app!
 
@@ -21,13 +21,13 @@ on_worker_boot do
     config.logger.level = Logger::DEBUG
     config.queues = %w[default low]
     config.concurrency = 1
-    # config.on(:startup) do
-    #   puts "on startup"
-    #   schedule_file = "config/schedule.yml"
-    #   if File.exist?(schedule_file)
-    #     Sidekiq::Cron::Job.load_from_hash YAML.properly_load_file(schedule_file)
-    #   end
-    # end
+    config.on(:startup) do
+      puts "on startup"
+      schedule_file = "config/schedule.yml"
+      if File.exist?(schedule_file)
+        Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
+      end
+    end
   end
   x.run
 end
