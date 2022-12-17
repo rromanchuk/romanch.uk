@@ -18,13 +18,16 @@ DROP INDEX IF EXISTS public.index_wx_tafs_uniqueness;
 DROP INDEX IF EXISTS public.index_wx_tafs_on_location;
 DROP INDEX IF EXISTS public.index_wx_tafs_on_batch_id;
 DROP INDEX IF EXISTS public.index_wx_pireps_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_pireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_location;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_aircraft_type_designator_id;
 DROP INDEX IF EXISTS public.index_wx_metars_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_metars_on_observation_time;
 DROP INDEX IF EXISTS public.index_wx_metars_on_location;
 DROP INDEX IF EXISTS public.index_wx_metars_on_batch_id;
 DROP INDEX IF EXISTS public.index_wx_aireps_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_aireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_wx_aireps_on_location;
 DROP INDEX IF EXISTS public.index_wx_aireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_users_on_slug;
@@ -110,14 +113,6 @@ DROP TABLE IF EXISTS public.active_storage_variant_records;
 DROP TABLE IF EXISTS public.active_storage_blobs;
 DROP TABLE IF EXISTS public.active_storage_attachments;
 DROP EXTENSION IF EXISTS postgis;
--- *not* dropping schema, since initdb creates it
---
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
--- *not* creating schema, since initdb creates it
-
-
 --
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
@@ -1083,6 +1078,13 @@ CREATE INDEX index_wx_aireps_on_location ON public.wx_aireps USING gist (locatio
 
 
 --
+-- Name: index_wx_aireps_on_observation_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wx_aireps_on_observation_time ON public.wx_aireps USING btree (observation_time);
+
+
+--
 -- Name: index_wx_aireps_uniqueness; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1101,6 +1103,13 @@ CREATE INDEX index_wx_metars_on_batch_id ON public.wx_metars USING btree (batch_
 --
 
 CREATE INDEX index_wx_metars_on_location ON public.wx_metars USING gist (location);
+
+
+--
+-- Name: index_wx_metars_on_observation_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wx_metars_on_observation_time ON public.wx_metars USING btree (observation_time);
 
 
 --
@@ -1129,6 +1138,13 @@ CREATE INDEX index_wx_pireps_on_batch_id ON public.wx_pireps USING btree (batch_
 --
 
 CREATE INDEX index_wx_pireps_on_location ON public.wx_pireps USING gist (location);
+
+
+--
+-- Name: index_wx_pireps_on_observation_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wx_pireps_on_observation_time ON public.wx_pireps USING btree (observation_time);
 
 
 --
@@ -1272,6 +1288,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220918231901'),
 ('20220921060628'),
 ('20220924080503'),
-('20221016052037');
+('20221016052037'),
+('20221217055523');
 
 
