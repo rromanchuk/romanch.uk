@@ -27,7 +27,6 @@ module Wx
 
     scope :uua, -> { where(urgent: true) }
     scope :ua, -> { where(urgent: false) }
-    scope :recent, -> { order(observation_time: :desc) }
     scope :near, lambda { |point, radius|
       where(
         Arel.spatial(point)

@@ -15,7 +15,7 @@
       </div>
       <div class="card-footer text-muted">
         <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
-        <%= render PagerComponent.new(dr_pagy, previous_path: wx_metars_path(page: dr_pagy.prev, filter: params[:filter]), next_path: wx_metars_path(page: dr_pagy.next, filter: params[:filter])) %>
+        <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
       </div>
     <% end %>
   </div>
