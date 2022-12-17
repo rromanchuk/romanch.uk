@@ -7,8 +7,8 @@ module Wx
     let(:metar) { Metar.find(params[:id]) }
     let(:metars) do
       relation = apply_filter
-      @dr_pagy, _metars = pagy(relation, items: 50)
-      _metars
+      @dr_pagy, records = pagy(relation, items: 25)
+      records
     end
 
     def debug
@@ -37,7 +37,7 @@ module Wx
       else
         add_breadcrumb('All')
         relation
-      end.recent
+      end.recent(:observation_time)
     end
   end
 end

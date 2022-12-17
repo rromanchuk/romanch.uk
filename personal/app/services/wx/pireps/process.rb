@@ -21,11 +21,14 @@ module Wx
         case report_type
         when 'PIREP'
           records = Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
+          return 0 if records.empty?
+          
           CleanupPirepJob.perform_async(records.last[:id])
           records.length
         when 'Urgent PIREP'
           normalized_row[:urgent] = true
           records = Wx::Pirep.insert(normalized_row, unique_by: :index_wx_pireps_uniqueness)
+          return 0 if records.empty?
 
           Rails.logger.info "UUA record found #{records.last[:id]}"
           CleanupPirepJob.perform_async(records.last[:id])
