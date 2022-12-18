@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'csv'
 module Utils
   module Csv
@@ -49,7 +50,7 @@ module Utils
               sky_cover: row[28],
               cloud_base_ft_agl: row[29]&.to_i
             }.compact
-          ].compact_blank,
+          ].compact_blank.presence,
 
           flight_category: row[30],
           three_hr_pressure_tendency_mb: row[31]&.to_f,

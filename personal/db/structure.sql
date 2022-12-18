@@ -16,6 +16,7 @@ ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT
 DROP INDEX IF EXISTS public.unique_taggings;
 DROP INDEX IF EXISTS public.index_wx_tafs_uniqueness;
 DROP INDEX IF EXISTS public.index_wx_tafs_on_location;
+DROP INDEX IF EXISTS public.index_wx_tafs_on_issue_time;
 DROP INDEX IF EXISTS public.index_wx_tafs_on_batch_id;
 DROP INDEX IF EXISTS public.index_wx_pireps_uniqueness;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_observation_time;
@@ -1162,6 +1163,13 @@ CREATE INDEX index_wx_tafs_on_batch_id ON public.wx_tafs USING btree (batch_id);
 
 
 --
+-- Name: index_wx_tafs_on_issue_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wx_tafs_on_issue_time ON public.wx_tafs USING btree (issue_time);
+
+
+--
 -- Name: index_wx_tafs_on_location; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1289,6 +1297,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220921060628'),
 ('20220924080503'),
 ('20221016052037'),
-('20221217055523');
+('20221217055523'),
+('20221218192908');
 
 

@@ -1,3 +1,5 @@
+# rubocop:disable all
+
 require 'csv'
 module Utils
   module Csv

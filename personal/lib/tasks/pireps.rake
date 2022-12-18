@@ -13,4 +13,12 @@ namespace :pireps do
     end
     puts csv
   end
+
+  desc 'calculate dirived fields'
+  task cleanup: :environment do
+    Wx::Pirep.find_each do |pirep|
+      pirep.cleanup
+      pirep.save!
+    end
+  end
 end

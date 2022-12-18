@@ -62,6 +62,7 @@ module Wx
       self.remarks = parsed_remarks
       self.station = parsed_station
       self.urgent = parsed_urgent?
+      self.altitude_ft_msl = nil if altitude_ft_msl&.zero?
     end
   end
 end
