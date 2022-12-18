@@ -8,7 +8,7 @@ module Wx
     let(:tafs) do
       add_breadcrumb('All')
       relation = apply_filter
-      @dr_pagy, records = pagy(relation, items: 50)
+      @dr_pagy, records = pagy(relation, items: 25)
       records
     end
 
@@ -30,6 +30,8 @@ module Wx
     end
 
     def apply_filter(relation = Taf.all)
+      relation = relation.search(params[:q]) if params[:q].present?
+
       if params[:station_id]
         raise(ActionController::BadRequest, 'Invalid HTTP parameters.') if params[:station_id].length > 4
         

@@ -6,7 +6,7 @@
 
 <%= turbo_stream_from :pireps %>
 
-<%= turbo_frame_tag :pireps do %>
+<%= turbo_frame_tag :index do %>
   <div class="card">
     <div class="card-header">
       <nav class="nav nav-pills nav-fill mt-3">
@@ -14,15 +14,17 @@
         <%= link_to "URGENT", wx_pireps_path(filter: 'uua'), class: "nav-link #{params[:filter] == 'uua' ? 'active' : ''}", data: {turbo_action: :replace} %>
         <%= link_to "ROUTINE", wx_pireps_path(filter: 'ua'), class: "nav-link #{params[:filter] == 'ua' ? 'active' : ''}", data: {turbo_action: :replace} %>
         <%= form_with(url: wx_pireps_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'pireps'}, class: 'd-flex') do |f| %>
-          <%= f.text_field(:aircraft_ref, class: "form-control", placeholder: "Location ID...", data: {action: 'input->search#submit', search_target: 'input'}) %>
+          <%= f.text_field(:q, class: "form-control", placeholder: "Search...", data: {action: 'input->search#submit', search_target: 'input'}) %>
         <% end %>
       </nav>
     </div>
-    <div class="card-body">
-      <%= render partial: 'wx/pireps/pirep', collection: pireps, cached: true %>
-    </div>
-    <div class="card-footer text-muted">
-      <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
-    </div>
+    <%= turbo_frame_tag :pireps do %>
+      <div class="card-body">
+        <%= render partial: 'wx/pireps/pirep', collection: pireps, cached: true %>
+      </div>
+      <div class="card-footer text-muted">
+        <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
+      </div>
+    <% end %>
   </div>
 <% end %>

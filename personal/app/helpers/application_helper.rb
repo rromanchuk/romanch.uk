@@ -11,7 +11,19 @@ module ApplicationHelper
   def active_class(path)
     'active' if current_page?(path)
   end
-
+  
+  def tei_replace(str)
+    return unless str
+    
+    result = str.dup
+  
+    Wx::Constants::TEI_DICTIONARY.each do |key, value|
+      result.gsub!(/\b#{Regexp.quote(key)}\b/, value)
+    end
+  
+    result
+  end
+  
   def breadcrumb_json_ld(crumbs)
     Jbuilder.new do |json|
       json.ignore_nil!
@@ -64,37 +76,3 @@ module ApplicationHelper
     ]
   end
 end
-
-# WATl.glb
-# BaronPilot.glb
-# Blu.glb
-# Bose.glb
-# BoseWhite.glb
-# Bro.glb
-# BrunoBlack.glb
-# BrunoWhite.glb
-# ChasinTailwinds.glb
-# Chops.glb
-# EAA.glb
-# Emily.glb
-# FlightOutfitters.glb
-# FlyingEyes.glb
-# FlyingEyesBlack.glb
-# FlyingMidwest.glb
-# FSA.glb
-# Gleim.glb
-# HCA.glb
-# JustPlaneSilly.glb
-# King.glb
-# NAFI.glb
-# NAVl.glb
-# OpposingBases.glb
-# Pivot.glb
-# PivotBlack.glb
-# RSG.glb
-# Sportys.glb
-# SQKR.glb
-# SQKRWhite.glb
-# TFP.glb
-# TFPWhite.glb
-# ThrustMaster.glb

@@ -55,6 +55,7 @@ module Wx
 
     def apply_filter(relation = Pirep.all)
       relation = relation.near(params[:location], 100) if params[:location].present?
+      relation = relation.search(params[:q]) if params[:q].present?
 
       case params[:filter]
       when 'uua'

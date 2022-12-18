@@ -1,6 +1,9 @@
 module Wx
   class Pirep < ApplicationRecord
+    include Turbo::Broadcastable
+    include Searchable
     self.implicit_order_column = 'observation_time'
+    SEARCH_AGAINST = %i[raw_text]
 
     UAA = /UUA/
     STATION = /\w{3}/
@@ -12,7 +15,7 @@ module Wx
     TA = %r{/TA\s-?\d{2}}
     WV = %r{/WV\s\d{3}\d{2,3}KT?}
 
-    include Turbo::Broadcastable
+    
     after_create_commit -> { broadcast_prepend_later_to 'pireps' }
     # after_update_commit -> { broadcast_replace_later_to 'pireps' }
     after_destroy_commit -> { broadcast_remove_to 'pireps' }
@@ -38,6 +41,12 @@ module Wx
     # SELECT "wx_pireps".* FROM "wx_pireps" WHERE ST_Z(wx_pireps.location::geometry) > 5000;
     scope :msl_above, lambda { |feet_msl|
       where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
+    }
+    pg_search_scope :search, against: %i[raw_text]
+    scope :search_for, lambda { |term|
+      joins(:pg_search_document).merge(
+        PgSearch.multisearch(term).where(searchable_type: klass.to_s)
+      )
     }
 
     def parsed_urgent? = Wx::Pirep::UAA.match?(raw_text)
