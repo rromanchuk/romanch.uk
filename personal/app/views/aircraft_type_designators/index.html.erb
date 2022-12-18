@@ -26,5 +26,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= render 'pager' %>
+  <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
 <% end %>

@@ -13,4 +13,4 @@
   </tbody>
 </table>
 
-<%= render PagerComponent.new(dr_pagy, previous_path: blobs_path(page: dr_pagy.prev, filter: params[:filter]), next_path: blobs_path(page: dr_pagy.next, filter: params[:filter])) %>
+<%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
