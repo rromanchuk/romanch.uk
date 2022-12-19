@@ -1,8 +1,6 @@
-namespace :pireps do
-  desc 'TODO'
-  task ingest: :environment do
-  end
+# frozen_string_literal: true
 
+namespace :pireps do
   desc 'csv'
   task ingest: :environment do
     csv = CSV.generate(headers: true) do |csv|

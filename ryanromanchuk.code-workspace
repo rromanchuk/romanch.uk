@@ -45,7 +45,7 @@
 		"files.associations": {
 			"*.erb": "erb"
 		},
-		"files.autoSave": "onWindowChange",
+		"files.autoSave": "onFocusChange",
 		"vscode-erb-beautify.useBundler": false,
 		"ruby.useBundler": true,
 		"solargraph.formatting": true,

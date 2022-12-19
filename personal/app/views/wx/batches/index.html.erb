@@ -1,5 +1,4 @@
 <%= provide(:page_title, 'Most recent batch files') %>
-
 <section class="row row-cols-2 row-cols-md-4 g-4">
   <div class="col">
     <div class="card" style="width: 10rem;">
@@ -70,9 +69,7 @@
     <%= button_to "2. Process", process_csv_wx_batches_path, method: :put, class: "btn btn-sm btn-primary", data: {turbo_method: :put} %>
   </div>
 </section>
-
 <%= turbo_stream_from :batches %>
-
 <div class="card">
   <div class="card-header">
     <select 

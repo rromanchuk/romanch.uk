@@ -1,11 +1,14 @@
+# rubocop:disable Metrics/BlockLength
+# frozen_string_literal: true
+
 namespace :icaos do
   desc 'Load ICAO type codes'
   task ingest: :environment do
     require 'csv'
-    ROOT = File.expand_path('../../', __dir__)
-    CSV_FILE = File.join(ROOT, 'ICAO_AircraftType.csv')
+    root_dir = File.expand_path('../../', __dir__)
+    csv_file = File.join(root_dir, 'ICAO_AircraftType.csv')
 
-    CSV.foreach(CSV_FILE) do |row|
+    CSV.foreach(csv_file) do |row|
       ap row
       next unless row[0]
 

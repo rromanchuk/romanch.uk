@@ -1,11 +1,6 @@
-
 <% content_for(:page_title) { 'All recent AIREPs' } %>
-
-
 <%= turbo_stream_from :aireps %>
-
 <%= turbo_frame_tag :aireps do %>
   <%= render aireps %>
-  <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
   <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
 <% end %>

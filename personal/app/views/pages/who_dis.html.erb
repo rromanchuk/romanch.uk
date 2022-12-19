@@ -23,11 +23,8 @@
     .form-signin .form-floating:focus-within {
       z-index: 2;
     }
-
   </style>
 <% end %>
-
-
 <main class="form-signin w-100 m-auto">
   <img class="mb-4" src="/static/whodis.png" alt="New phone, who dis?" width="200" height="200" />
   <%= link_to oauth_cognito_authorize_apple_path, data: { turbo: false } do %>

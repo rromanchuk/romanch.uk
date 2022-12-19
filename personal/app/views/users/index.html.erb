@@ -5,14 +5,14 @@
         <th><%= header %></th>
       <% end %>
     </tr>
-  <thead>
-  <tbody>
-    <% users.each do |user| %>
-      <tr>
-        <% User.attribute_names.each do |header| %>
-          <td class="text-break "><%= user.send(header) %></td>
+    <thead>
+      <tbody>
+        <% users.each do |user| %>
+          <tr>
+            <% User.attribute_names.each do |header| %>
+              <td class="text-break "><%= user.send(header) %></td>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>

@@ -4,6 +4,7 @@ module Wx
     renders_one :dd
     
     def initialize(should_render = true)
+      super()
       @should_render = should_render
     end
     

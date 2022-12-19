@@ -1,22 +1,14 @@
 <%# turbo_frame_tag "new_post", target: "_top" %>
-
 <%= provide(:page_title, 'All snippets') %>
-
 <p>Personal pastebin-like snippets for myself, and because it's more fun than sending myself slack messages.</p>
-
 <hr />
-
 <%= turbo_stream_from :posts %>
 <%= turbo_frame_tag :posts, autoscroll: "true" do %>
-  
   <div class="archive">
     <%= render partial: 'posts/post', collection: posts, cached: true %>
-
   </div>
-
   <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
 <% end %>
-
 <% if current_user&.me? %>
   <%= link_to "New post", new_post_path, data: { turbo_action: :replace } %>
 <% end %>

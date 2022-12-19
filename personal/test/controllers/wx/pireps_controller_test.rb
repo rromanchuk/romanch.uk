@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Wx::PirepsControllerTest < ActionDispatch::IntegrationTest
@@ -27,10 +29,8 @@ class Wx::PirepsControllerTest < ActionDispatch::IntegrationTest
     assert_not_empty(@controller.breadcrumbs)
   end
 
-
   test 'should show pireps_raw_report' do
     get wx_pirep_url(@pirep)
     assert_response :success
   end
-
 end
