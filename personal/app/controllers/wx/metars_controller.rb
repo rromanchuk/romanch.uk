@@ -31,6 +31,8 @@ module Wx
     private
 
     def apply_filter(relation = Metar.all)
+      relation = relation.search(params[:q]) if params[:q].present?
+      
       if params[:station_id]
         add_breadcrumb(params[:station_id], wx_metars_url(station_id: params[:station_id]))
         relation.where(station_id: params[:station_id])

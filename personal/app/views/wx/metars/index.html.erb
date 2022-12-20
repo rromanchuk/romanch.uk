@@ -2,7 +2,7 @@
 <div class="card">
   <div class="card-header">
     <%= form_with(url: wx_metars_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'metars'}, class: 'd-flex') do |f| %>
-      <%= f.text_field(:station_id, class: "form-control", placeholder: "Location ID...", data: {action: 'input->search#submit', search_target: 'input'}) %>
+      <%= f.text_field(:q, class: "form-control", placeholder: "Search...", data: {action: 'input->search#submit', search_target: 'input'}) %>
     <% end %>
   </div>
   <%= turbo_frame_tag :metars do %>
