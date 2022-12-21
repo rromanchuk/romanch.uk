@@ -7,7 +7,7 @@ module Wx
     let(:metar) { Metar.find(params[:id]) }
     let(:metars) do
       relation = apply_filter
-      @dr_pagy, records = pagy(relation, items: 25)
+      @dr_pagy, records = pagy_countless(relation, items: 25)
       records
     end
 
