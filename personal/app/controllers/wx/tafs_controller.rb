@@ -8,7 +8,7 @@ module Wx
     let(:tafs) do
       add_breadcrumb('All')
       relation = apply_filter
-      @dr_pagy, records = pagy(relation, items: 25)
+      @dr_pagy, records = pagy_countless(relation, items: 25)
       records
     end
 

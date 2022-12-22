@@ -6,7 +6,7 @@ module Wx
     let(:airep) { Airep.find(params[:id]) }
     let(:aireps) do
       relation = Airep.recent.includes(:batch)
-      @dr_pagy, records = pagy(relation, items: 50)
+      @dr_pagy, records = pagy_countless(relation, items: 50)
       records
     end
 

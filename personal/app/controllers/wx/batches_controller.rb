@@ -7,7 +7,7 @@ module Wx
     let(:dr_pagy)
     let(:batches) do
       relation = apply_filter
-      @dr_pagy, records = pagy(relation, items: 3)
+      @dr_pagy, records = pagy_countless(relation, items: 3)
       records
     end
     let(:batch) { Batch.find(params[:id]) }

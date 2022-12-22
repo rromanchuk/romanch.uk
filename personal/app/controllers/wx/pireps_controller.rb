@@ -8,7 +8,7 @@ module Wx
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
       relation = apply_filter.recent(:observation_time)
-      @dr_pagy, records = pagy(relation, items: 50)
+      @dr_pagy, records = pagy_countless(relation, items: 50)
       records
     end
 
