@@ -17,6 +17,12 @@ module Wx
     }
     pg_search_scope :search, against: %i[raw_text]
 
+    def self.cached_count
+      Rails.cache.fetch("Wx::Taf.count", expires_in: 24.hours) do
+        Wx::Taf.count
+      end
+    end
+
     def self.process!(batch)
       batch.update!(processed_at: Time.now)
     end

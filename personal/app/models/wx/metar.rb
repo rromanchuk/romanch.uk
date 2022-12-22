@@ -18,6 +18,12 @@ module Wx
           tsvector_column: 'searchable_tsearch'
         }
       }
+    
+    def self.cached_count
+      Rails.cache.fetch("Wx::Metar.count", expires_in: 24.hours) do
+        Wx::Metar.count
+      end
+    end
 
     def cleanup
       self.sky_condition = sky_condition.presence

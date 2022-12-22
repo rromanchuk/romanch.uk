@@ -62,6 +62,12 @@ module Wx
         PgSearch.multisearch(term).where(searchable_type: klass.to_s)
       )
     }
+    
+    def self.cached_count
+      Rails.cache.fetch("Wx::Pirep.count", expires_in: 24.hours) do
+        Wx::Pirep.count
+      end
+    end
 
     def parsed_urgent? = Wx::Pirep::UAA.match?(raw_text)
     def parsed_remarks = REMARKS.match(raw_text)&.[](:remarks)

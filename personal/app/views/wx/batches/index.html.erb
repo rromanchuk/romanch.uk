@@ -20,7 +20,7 @@
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
         <p class="card-title">PIREPs</p>
-        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Pirep.count) %></p>
+        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Pirep.cached_count) %></p>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
         <p class="card-title">METARs</p>
-        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Metar.count) %></p>
+        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Metar.cached_count) %></p>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
         <p class="card-title">TAFs</p>
-        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Taf.count) %></p>
+        <p class="card-text h5 text-success"><%= tag.span number_with_delimiter(Wx::Taf.cached_count) %></p>
       </div>
     </div>
   </div>
