@@ -42,7 +42,21 @@ module Wx
     scope :msl_above, lambda { |feet_msl|
       where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
     }
-    pg_search_scope :search, against: %i[raw_text]
+    
+    pg_search_scope :search, against: {
+        station: 'A',
+        aircraft_ref: 'B',
+        remarks: 'C',
+        raw_text: 'D'
+      },
+      using: {
+        trigram: {},
+        tsearch: { 
+          dictionary: "simple",
+          tsvector_column: 'searchable_tsearch'
+        }
+      }
+
     scope :search_for, lambda { |term|
       joins(:pg_search_document).merge(
         PgSearch.multisearch(term).where(searchable_type: klass.to_s)

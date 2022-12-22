@@ -19,6 +19,7 @@ DROP INDEX IF EXISTS public.index_wx_tafs_on_location;
 DROP INDEX IF EXISTS public.index_wx_tafs_on_issue_time;
 DROP INDEX IF EXISTS public.index_wx_tafs_on_batch_id;
 DROP INDEX IF EXISTS public.index_wx_pireps_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_pireps_on_searchable_tsearch;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_location;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_batch_id;
@@ -114,6 +115,21 @@ DROP TABLE IF EXISTS public.active_storage_variant_records;
 DROP TABLE IF EXISTS public.active_storage_blobs;
 DROP TABLE IF EXISTS public.active_storage_attachments;
 DROP EXTENSION IF EXISTS postgis;
+DROP EXTENSION IF EXISTS pg_trgm;
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 --
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
@@ -651,7 +667,9 @@ CREATE TABLE public.wx_pireps (
     urgent boolean DEFAULT false,
     aircraft_type_designator_id uuid,
     remarks text,
-    station text
+    station text,
+    tsvector_remarks_tsearch tsvector GENERATED ALWAYS AS (setweight(to_tsvector('english'::regconfig, COALESCE(remarks, ''::text)), 'C'::"char")) STORED,
+    searchable_tsearch tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, COALESCE(station, ''::text)), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, COALESCE(aircraft_ref, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(remarks, ''::text)), 'C'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(raw_text, ''::text)), 'D'::"char"))) STORED
 );
 
 
@@ -1149,6 +1167,13 @@ CREATE INDEX index_wx_pireps_on_observation_time ON public.wx_pireps USING btree
 
 
 --
+-- Name: index_wx_pireps_on_searchable_tsearch; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wx_pireps_on_searchable_tsearch ON public.wx_pireps USING gin (searchable_tsearch);
+
+
+--
 -- Name: index_wx_pireps_uniqueness; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1298,6 +1323,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220924080503'),
 ('20221016052037'),
 ('20221217055523'),
-('20221218192908');
+('20221218192908'),
+('20221222074333'),
+('20221222080407'),
+('20221222081525'),
+('20221222081620');
 
 
