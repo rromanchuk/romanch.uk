@@ -57,6 +57,11 @@ module Wx
       relation = relation.near(params[:location], 100) if params[:location].present?
       relation = relation.search(params[:q]) if params[:q].present?
 
+      if params[:station_id]
+        add_breadcrumb(params[:station_id], wx_pireps_url(station_id: params[:station_id]))
+        relation = relation.where(station: params[:station_id])
+      end
+
       case params[:filter]
       when 'uua'
         add_breadcrumb('Urgent')

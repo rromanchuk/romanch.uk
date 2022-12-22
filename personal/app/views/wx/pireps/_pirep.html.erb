@@ -71,7 +71,15 @@
           <% end %>
           <% c.dd do %>
             <%= pirep.remarks %>
-            <span class="d-none"><%= tei_replace(pirep.remarks) %></span>
+            <span class="readable d-none"><%= tei_replace(pirep.remarks) %></span>
+          <% end %>
+        <% end %>
+        <%= render Wx::DefinitionRowComponent.new(pirep.station) do |c| %>
+          <% c.dt do %>
+            Station
+          <% end %>
+          <% c.dd do %>
+            <%= link_to pirep.station, wx_pireps_path(station_id: pirep.station), data: {turbo_action: :advance, turbo_frame: :pireps} %>
           <% end %>
         <% end %>
       </tbody>

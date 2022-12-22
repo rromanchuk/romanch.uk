@@ -25,6 +25,7 @@ DROP INDEX IF EXISTS public.index_wx_pireps_on_location;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_wx_pireps_on_aircraft_type_designator_id;
 DROP INDEX IF EXISTS public.index_wx_metars_uniqueness;
+DROP INDEX IF EXISTS public.index_wx_metars_on_searchable_tsearch;
 DROP INDEX IF EXISTS public.index_wx_metars_on_observation_time;
 DROP INDEX IF EXISTS public.index_wx_metars_on_location;
 DROP INDEX IF EXISTS public.index_wx_metars_on_batch_id;
@@ -635,7 +636,8 @@ CREATE TABLE public.wx_metars (
     data jsonb,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    batch_id uuid
+    batch_id uuid,
+    searchable_tsearch tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, COALESCE(station_id, ''::text)), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, COALESCE(wx_string, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(flight_category, ''::text)), 'C'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(raw_text, ''::text)), 'D'::"char"))) STORED
 );
 
 
@@ -1132,6 +1134,13 @@ CREATE INDEX index_wx_metars_on_observation_time ON public.wx_metars USING btree
 
 
 --
+-- Name: index_wx_metars_on_searchable_tsearch; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wx_metars_on_searchable_tsearch ON public.wx_metars USING gin (searchable_tsearch);
+
+
+--
 -- Name: index_wx_metars_uniqueness; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1327,6 +1336,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20221222074333'),
 ('20221222080407'),
 ('20221222081525'),
-('20221222081620');
+('20221222081620'),
+('20221222083453'),
+('20221222083614');
 
 
