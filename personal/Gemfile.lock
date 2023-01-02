@@ -270,7 +270,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.1)
-    minitest (5.16.3)
+    minitest (5.17.0)
     mocha (2.0.2)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.6.0)
@@ -298,8 +298,7 @@ GEM
       version_gem (~> 1.1)
     oj (3.13.23)
     ox (2.14.12)
-    pagy (5.10.1)
-      activesupport
+    pagy (6.0.0)
     parallel (1.22.1)
     parser (3.1.3.0)
       ast (~> 2.4.1)
@@ -513,7 +512,7 @@ DEPENDENCIES
   oauth2
   oj
   ox
-  pagy (~> 5.10)
+  pagy (~> 6.0)
   pg
   pg_query
   pg_search
