@@ -19,7 +19,7 @@ class PagesController < ApplicationController
 
   def layout_for_page
     case params[:id].to_sym
-    when :potree, :model_viewer, :c177
+    when :potree, :model_viewer, :c177, :travis
       'nostyle'
     when :three, :pe
       'three'

@@ -5,19 +5,27 @@ module Wx
     include Searchable
 
     belongs_to :batch, counter_cache: :metars_count
-    pg_search_scope :search, against: {
-        station_id: 'A',
-        wx_string: 'B',
-        flight_category: 'C',
-        raw_text: 'D'
-      },
-      using: {
-        trigram: {},
-        tsearch: { 
-          dictionary: "simple",
-          tsvector_column: 'searchable_tsearch'
+    # pg_search_scope :search, against: {
+    #     station_id: 'A',
+    #     wx_string: 'B',
+    #     flight_category: 'C',
+    #     raw_text: 'D'
+    #   },
+    #   using: {
+    #     trigram: {},
+    #     tsearch: { 
+    #       dictionary: "simple",
+    #       tsvector_column: 'searchable_tsearch'
+    #     }
+    #   }
+
+      pg_search_scope :search, against: :raw_text,
+        using: {
+          tsearch: { 
+            dictionary: "simple",
+            tsvector_column: 'searchable_tsearch'
+          }
         }
-      }
     
     def self.cached_count
       Rails.cache.fetch("Wx::Metar.count", expires_in: 24.hours) do

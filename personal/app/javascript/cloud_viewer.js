@@ -20,8 +20,8 @@ export class CloudViewer {
     this.load = this.load.bind(this);
   }
 
-  load() {
-    Potree.loadPointCloud("https://romanch.uk/static/pointclouds/USGS_LPC_WI_Winnebago_TL_2014_LAS_2019/ept.json", "USGS_LPC_WI_Winnebago_TL_2014_LAS_2019", (e) => {
+  load(url) {
+    Potree.loadPointCloud(url, "USGS_LPC_WI_Winnebago_TL_2014_LAS_2019", (e) => {
 			
 
 			let material = e.pointcloud.material;
