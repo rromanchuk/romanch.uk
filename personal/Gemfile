@@ -9,7 +9,7 @@ gem "rails", "~> 7.0.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-gem 'grpc', '1.47.0'
+gem 'grpc', '1.50.0'
 gem "anycable-rails"
 gem "anycable-rails-jwt"
 # Use postgresql as the database for Active Record
