@@ -302,8 +302,7 @@ GEM
       version_gem (~> 1.1)
     oj (3.13.23)
     ox (2.14.12)
-    pagy (5.10.1)
-      activesupport
+    pagy (6.0.1)
     parallel (1.22.1)
     parser (3.2.0.0)
       ast (~> 2.4.1)
@@ -517,7 +516,7 @@ DEPENDENCIES
   oauth2
   oj
   ox
-  pagy (~> 5.10)
+  pagy (~> 6.0)
   pg
   pg_query
   pg_search
