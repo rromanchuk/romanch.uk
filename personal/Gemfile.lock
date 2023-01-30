@@ -203,8 +203,8 @@ GEM
     google-protobuf (3.21.12)
     googleapis-common-protos-types (1.5.0)
       google-protobuf (~> 3.14)
-    grpc (1.47.0)
-      google-protobuf (~> 3.19)
+    grpc (1.51.0)
+      google-protobuf (~> 3.21)
       googleapis-common-protos-types (~> 1.0)
     gutentag (2.6.2)
       activerecord (>= 3.2.0)
@@ -502,7 +502,7 @@ DEPENDENCIES
   debug
   down
   friendly_id
-  grpc (= 1.47.0)
+  grpc (= 1.51.0)
   gutentag
   high_voltage
   hiredis
