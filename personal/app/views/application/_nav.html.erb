@@ -37,6 +37,9 @@
             </ul>
           </li>
         <% end %>
+        <li class="nav-item">
+          <%= link_to "WX Station", "https://wx.romanch.uk", class: "nav-link", data: { turbo: false} %>
+        </li>
         <% if current_user&.me? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="">
