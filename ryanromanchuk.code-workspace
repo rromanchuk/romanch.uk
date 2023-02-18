@@ -4,30 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "../xptools"
-		},
-		{
-			"path": "../X-Publish"
-		},
-		{
-			"path": "../potree"
-		},
-		{
-			"path": "../../../../Volumes/HD2/ssd/O4XP"
-		},
-		{
-			"path": "../cognito_token_verifier"
-		},
-		{
-			"path": "../../X-Plane 11/Custom Scenery/SponsoredCanopies"
-		},
-		{
-			"path": "../appcheck-lambda"
-		},
-		{
-			"path": "../high_voltage"
-		},
-		{
 			"path": "../Spina"
 		}
 	],
