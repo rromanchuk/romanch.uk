@@ -16,6 +16,7 @@ end
 
 Rails.application.routes.draw do
   get :healthcheck, to: 'pages#show', id: 'status'
+  post '/data/report', to: 'data#report'
   
   resources :posts do
     resources :tags, shallow: true

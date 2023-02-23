@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../Spina"
+		},
+		{
+			"path": "../weewx-wdc"
 		}
 	],
 	"extensions": {
