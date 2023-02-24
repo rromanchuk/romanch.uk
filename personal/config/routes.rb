@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :videos
   resources :blobs
   resources :attachments
-  resources :projects, only: %i[index show]
+  #resources :projects, only: %i[index show]
 
   scope 'romanchuk_open' do
     resources :tournaments, only: [] do
@@ -48,8 +48,8 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#logout'
   get 'login', to: 'sessions#login'
   post 'sign_in', to: 'sessions#sign_in'
-  get '/s/resume', to: 'resume#index'
-  get '/s/resume/download', to: 'resume#download', as: :download_resume
+  #get '/s/resume', to: 'resume#index'
+  #get '/s/resume/download', to: 'resume#download', as: :download_resume
   get '/pages/*id' => 'pages#show', as: :page, format: false
 
   namespace :serve, path: '/serve' do

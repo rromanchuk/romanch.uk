@@ -1,0 +1,2 @@
+class WxStationObservation < WxRecord
+end
