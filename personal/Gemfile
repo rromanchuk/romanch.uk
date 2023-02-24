@@ -73,7 +73,7 @@ gem 'high_voltage'
 gem "action_policy"
 gem "sentry-ruby"
 gem "sentry-rails"
-gem 'aws-sdk-secretsmanager'
+
 #gem 'airbrake'
 
 
