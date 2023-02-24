@@ -17,3 +17,4 @@ def get_secret
   ENV['DATABASE_PASSWORD'] = secret_hash['password']
 end
 
+get_secret
