@@ -51,7 +51,32 @@ CREATE TABLE public.wx_station_observations (
     windgustmph double precision,
     maxdailygust double precision,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    solarradiation double precision,
+    uv integer,
+    rainratein double precision,
+    eventrainin double precision,
+    hourlyrainin double precision,
+    dailyrainin double precision,
+    weeklyrainin double precision,
+    monthlyrainin double precision,
+    yearlyrainin double precision,
+    totalrainin double precision,
+    rrain_piezo double precision,
+    erain_piezo double precision,
+    hrain_piezo double precision,
+    drain_piezo double precision,
+    wrain_piezo double precision,
+    mrain_piezo double precision,
+    yrain_piezo double precision,
+    ws90cap_volt double precision,
+    ws90_ver integer,
+    wh68batt double precision,
+    wh40batt double precision,
+    wh90batt double precision,
+    freq character varying,
+    model character varying,
+    "interval" integer
 );
 
 
@@ -86,6 +111,7 @@ ALTER TABLE ONLY public.wx_station_observations
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230224052502');
+('20230224052502'),
+('20230225040548');
 
 
