@@ -175,6 +175,8 @@ GEM
       railties (>= 6.0.0)
     date (3.3.3)
     debug (1.7.1)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -224,6 +226,9 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    io-console (0.6.0)
+    irb (1.6.2)
+      reline (>= 0.3.0)
     jaro_winkler (1.5.4)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -298,8 +303,7 @@ GEM
       version_gem (~> 1.1)
     oj (3.14.2)
     ox (2.14.14)
-    pagy (5.10.1)
-      activesupport
+    pagy (6.0.2)
     parallel (1.22.1)
     parser (3.2.1.0)
       ast (~> 2.4.1)
@@ -354,6 +358,8 @@ GEM
     redis-client (0.12.2)
       connection_pool
     regexp_parser (2.7.0)
+    reline (0.3.2)
+      io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
     rest-client (2.1.0)
@@ -511,7 +517,7 @@ DEPENDENCIES
   oauth2
   oj
   ox
-  pagy (~> 5.10)
+  pagy (~> 6.0)
   pg
   pg_query
   pg_search
