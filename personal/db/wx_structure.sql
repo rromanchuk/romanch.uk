@@ -77,7 +77,12 @@ CREATE TABLE public.wx_station_observations (
     freq character varying,
     model character varying,
     "interval" integer,
-    tempinf double precision
+    tempinf double precision,
+    humidityin integer,
+    baromrelin double precision,
+    baromabsin double precision,
+    tempf double precision,
+    humidity integer
 );
 
 
@@ -114,6 +119,7 @@ SET search_path TO public, postgis;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230224052502'),
 ('20230225040548'),
-('20230225042930');
+('20230225042930'),
+('20230225043320');
 
 
