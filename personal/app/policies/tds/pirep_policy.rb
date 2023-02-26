@@ -1,4 +1,4 @@
-module Wx
+module Tds
   class PirepPolicy < ApplicationPolicy
     def create?
       me?
