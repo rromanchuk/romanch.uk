@@ -22,7 +22,7 @@
             </tr>
             <tr class="">
               <td class="w-25 fw-semibold">Location:</td>
-              <td class=""><%= link_to airep.location.to_s, map_tds_airep_path(airep), data: {turbo_action: :advance} %></td>
+              <td class=""><%= link_to "#{airep.latitude}, #{airep.longitude}", map_tds_airep_path(airep), data: {turbo_action: :advance} %></td>
             </tr>
             <tr class="">
               <td class="w-25 fw-semibold">Flight level:</td>

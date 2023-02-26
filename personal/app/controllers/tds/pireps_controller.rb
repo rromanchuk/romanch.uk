@@ -11,6 +11,7 @@ module Tds
       @dr_pagy, records = pagy_countless(relation, items: 50)
       records
     end
+    let(station) { Station.find(params[:station_id]) }
 
     def index
       add_breadcrumb('Pilot Reports', tds_pireps_url)
@@ -58,8 +59,8 @@ module Tds
       #relation = relation.search(params[:q]) if params[:q].present?
 
       if params[:station_id]
-        add_breadcrumb(params[:station_id], tds_pireps_url(station_id: params[:station_id]))
-        relation = relation.where(station: params[:station_id])
+        add_breadcrumb(station.code, tds_station_pireps_url(station))
+        relation = station.pireps
       end
 
       case params[:filter]

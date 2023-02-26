@@ -79,7 +79,7 @@
             Station
           <% end %>
           <% c.dd do %>
-            <%= link_to pirep.station, tds_pireps_path(station_id: pirep.station), data: {turbo_action: :advance, turbo_frame: :pireps} %>
+            <%= link_to pirep.station.code, tds_station_pireps_url_path(pirep.station), data: {turbo_action: :advance, turbo_frame: :pireps} %>
           <% end %>
         <% end %>
       </tbody>

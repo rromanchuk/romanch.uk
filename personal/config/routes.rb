@@ -94,6 +94,10 @@ Rails.application.routes.draw do
         get :search, on: :collection
       end
 
+      resources :stations do 
+        resources :pireps, only: %i[index show]
+      end
+
       resources :batches, only: %i[index show] do
         put :reprocess, on: :member
         put :ingest, on: :collection
