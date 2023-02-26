@@ -1,0 +1,13 @@
+<%# https://www.aviationweather.gov/taf/decoder %>
+<div class="card>">
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= change_indicator(forecast) %>
+      <%= wind(forecast) %>
+      <%= visibility(forecast) %>
+      <%= wx(forecast) %>
+      <%= conditions(forecast) %>
+    </h5>
+    <p class="card-text"><%= debug(forecast) %></p>
+  </div>
+</div>

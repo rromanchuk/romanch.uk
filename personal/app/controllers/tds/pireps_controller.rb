@@ -1,0 +1,83 @@
+# frozen_string_literal: true
+
+module Wx
+  class PirepsController < ApplicationController
+    before_action :set_breadcrumbs
+
+    let(:dr_pagy)
+    let(:pirep) { Pirep.find(params[:id]) }
+    let(:pireps) do
+      relation = apply_filter.recent(:observation_time)
+      @dr_pagy, records = pagy_countless(relation, items: 50)
+      records
+    end
+
+    def index
+      add_breadcrumb('Pilot Reports', tds_pireps_url)
+      render stream: true
+    end
+
+    def show
+      add_breadcrumb('Pilot Reports', tds_pireps_url)
+      add_breadcrumb(pirep.raw_text)
+      render stream: true
+    end
+
+    def debug
+      add_breadcrumb('Pilot Reports', tds_pireps_url)
+      add_breadcrumb(pirep.raw_text, tds_pirep_url(pirep))
+      add_breadcrumb('Debug')
+      render stream: true
+    end
+
+    def map
+      add_breadcrumb('Pilot Reports', tds_pireps_url)
+      add_breadcrumb(pirep.raw_text, tds_pirep_url(pirep))
+      add_breadcrumb('Location Map')
+    end
+
+    def points; end
+
+    # GET /pireps/raw_reports/new
+    def new
+      @pirep = Pirep.new
+    end
+
+    # DELETE /pireps/raw_reports/1
+    def destroy
+      authorize! pirep
+
+      raw_report.destroy
+      redirect_to tds_pirep_url, notice: 'Raw report was successfully destroyed.'
+    end
+
+    private
+
+    def apply_filter(relation = Pirep.all)
+      #relation = relation.near(params[:location], 100) if params[:location].present?
+      #relation = relation.search(params[:q]) if params[:q].present?
+
+      if params[:station_id]
+        add_breadcrumb(params[:station_id], tds_pireps_url(station_id: params[:station_id]))
+        relation = relation.where(station: params[:station_id])
+      end
+
+      case params[:filter]
+      when 'uua'
+        add_breadcrumb('Urgent')
+        relation.uua
+      when 'ua'
+        add_breadcrumb('Routine')
+        relation.ua
+      else
+        add_breadcrumb('All')
+        relation
+      end.includes(:batch)
+    end
+
+    # Only allow a list of trusted parameters through.
+    def pireps_params
+      params.fetch(:wx_pirep, {})
+    end
+  end
+end

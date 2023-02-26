@@ -1,0 +1,16 @@
+<%= provide :page_title, 'Most recent METARs' %>
+<div class="card">
+  <div class="card-header">
+    <%= form_with(url: tds_metars_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'metars'}, class: 'd-flex') do |f| %>
+      <%= f.text_field(:q, class: "form-control", placeholder: "Search...", data: {action: 'input->search#submit', search_target: 'input'}) %>
+    <% end %>
+  </div>
+  <%= turbo_frame_tag :metars do %>
+    <div class="card-body">
+      <%= render metars %>
+    </div>
+    <div class="card-footer text-muted">
+      <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
+    </div>
+  <% end %>
+</div>
