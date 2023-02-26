@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Wx
+module Tds
   class PirepsController < ApplicationController
     before_action :set_breadcrumbs
 

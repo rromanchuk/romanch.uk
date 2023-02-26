@@ -1,0 +1,5 @@
+<%= turbo_frame_tag airep do %>
+  <div data-controller="maps" data-maps-geo-json-value="<%= map_tds_airep_path(airep, format: :json) %>">
+    <div id="map" style="width:100%; height:400px"> </div>
+  </div>
+<% end %>

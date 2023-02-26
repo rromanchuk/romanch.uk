@@ -1,0 +1,27 @@
+<%= provide(:page_title, 'All recent aircraft reports' ) %>
+<div data-controller="maps" data-maps-geo-json-value="<%= points_tds_pireps_path(format: :json, filter: params[:filter]) %>">
+  <div id="map" style="width:100%; height:400px"> </div>
+</div>
+<%= turbo_stream_from :pireps %>
+<%= turbo_frame_tag :index do %>
+  <div class="card">
+    <div class="card-header">
+      <nav class="nav nav-pills nav-fill mt-3">
+        <%= link_to "All", wx_pireps_path, class: "nav-link #{params[:filter].blank? ? 'active' : ''}", data: {turbo_action: :replace} %>
+        <%= link_to "URGENT", tds_pireps_path(filter: 'uua'), class: "nav-link #{params[:filter] == 'uua' ? 'active' : ''}", data: {turbo_action: :replace} %>
+        <%= link_to "ROUTINE", tds_pireps_path(filter: 'ua'), class: "nav-link #{params[:filter] == 'ua' ? 'active' : ''}", data: {turbo_action: :replace} %>
+        <%= form_with(url: tds_pireps_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'pireps'}, class: 'd-flex') do |f| %>
+          <%= f.text_field(:q, class: "form-control", placeholder: "Search...", data: {action: 'input->search#submit', search_target: 'input'}) %>
+        <% end %>
+      </nav>
+    </div>
+    <%= turbo_frame_tag :pireps do %>
+      <div class="card-body">
+        <%= render partial: 'tds/pireps/pirep', collection: pireps, cached: true %>
+      </div>
+      <div class="card-footer text-muted">
+        <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
