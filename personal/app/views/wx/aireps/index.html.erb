@@ -1,6 +1,0 @@
-<% content_for(:page_title) { 'All recent AIREPs' } %>
-<%= turbo_stream_from :aireps %>
-<%= turbo_frame_tag :aireps do %>
-  <%= render aireps %>
-  <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
-<% end %>
