@@ -1,5 +1,6 @@
 class WxStationObservation < WxRecord
-
+  after_create_commit :windy_report
+  
   def windy_report
     HTTParty.get("https://stations.windy.com/pws/update/#{Credentials[:windy_api_key]}?winddir=#{winddir}&windspeedmph=#{windspeedmph}&windgustmph=#{windgustmph}&tempf=#{tempf}&rainin=#{hrain_piezo}&baromin=#{baromrelin}&humidity=#{humidity}&uv=#{uv}")
   end
