@@ -11,7 +11,7 @@ module Tds
       @dr_pagy, records = pagy_countless(relation, items: 50)
       records
     end
-    let(station) { Station.find(params[:station_id]) }
+    let(:station) { Station.find(params[:station_id]) }
 
     def index
       add_breadcrumb('Pilot Reports', tds_pireps_url)
