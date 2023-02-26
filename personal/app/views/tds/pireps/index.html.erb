@@ -7,7 +7,7 @@
   <div class="card">
     <div class="card-header">
       <nav class="nav nav-pills nav-fill mt-3">
-        <%= link_to "All", wx_pireps_path, class: "nav-link #{params[:filter].blank? ? 'active' : ''}", data: {turbo_action: :replace} %>
+        <%= link_to "All", tds_pireps_path, class: "nav-link #{params[:filter].blank? ? 'active' : ''}", data: {turbo_action: :replace} %>
         <%= link_to "URGENT", tds_pireps_path(filter: 'uua'), class: "nav-link #{params[:filter] == 'uua' ? 'active' : ''}", data: {turbo_action: :replace} %>
         <%= link_to "ROUTINE", tds_pireps_path(filter: 'ua'), class: "nav-link #{params[:filter] == 'ua' ? 'active' : ''}", data: {turbo_action: :replace} %>
         <%= form_with(url: tds_pireps_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'pireps'}, class: 'd-flex') do |f| %>
