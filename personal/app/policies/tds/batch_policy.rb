@@ -1,4 +1,4 @@
-module Wx
+module Tds
   class BatchPolicy < ApplicationPolicy
     def ingest?
       me?
