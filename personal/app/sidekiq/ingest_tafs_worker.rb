@@ -4,6 +4,6 @@ class IngestTafsWorker < ApplicationWorker
   sidekiq_options retry: false, queue: :low
 
   def perform
-    Wx::Tafs::Ingest.call
+    Tds::Tafs::Ingest.call
   end
 end
