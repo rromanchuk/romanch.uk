@@ -3,5 +3,5 @@
 set -euxo pipefail;
 eval "$(bin/shdotenv)"
 
-
-bin/aws-connect -a tunnel -f 5432 -n personal -p ryan #-o 5432 
+#sudo socat TCP-LISTEN:5432,reuseaddr,fork TCP4:db.csk3baxbq9se.us-east-1.rds.amazonaws.com:5432
+bin/aws-connect -a tunnel -f 5433 -n personal -p ryan #-o 5432 

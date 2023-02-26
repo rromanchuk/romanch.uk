@@ -6,8 +6,8 @@
           <%# <td class="w-25 fw-semibold">PIREP Text</td> %>
           <td colspan="2" class="<%= pirep.urgent? ? 'text-bg-warning' : 'text-bg-light' %>">
             <div class="d-flex justify-content-between">
-              <span class=""><%= link_to pirep.raw_text, wx_pirep_path(pirep), data: {turbo_frame: :_top} %></span>
-              <span class=""><%= link_to 'debug', debug_wx_pirep_path(pirep), data: {turbo_frame: :_top}, class: "fs-6 text-muted fw-lighter text-decoration-none" %></span>
+              <span class=""><%= link_to pirep.raw_text, tds_pirep_path(pirep), data: {turbo_frame: :_top} %></span>
+              <span class=""><%= link_to 'debug', debug_tds_pirep_path(pirep), data: {turbo_frame: :_top}, class: "fs-6 text-muted fw-lighter text-decoration-none" %></span>
             </div>
           </td>
         </tr>
@@ -16,7 +16,7 @@
             From batch
           <% end %>
           <% c.dd do %>
-            <%= link_to pirep.batch.key, wx_batch_path(pirep.batch), data: {turbo_frame: :_top} %>
+            <%= link_to pirep.batch.key, tds_batch_path(pirep.batch), data: {turbo_frame: :_top} %>
           <% end %>
         <% end %>
         <%= render Wx::DefinitionRowComponent.new do |c| %>
@@ -31,9 +31,9 @@
           <td class="w-25 fw-semibold">Aircraft type:</td>
           <td class="">
             <% if pirep.aircraft_type_designator -%>
-              <%= link_to pirep.aircraft_ref, aircraft_type_designator_path(pirep.aircraft_type_designator),  data: {turbo_frame: :_top}  %>
+              <%= link_to pirep.aircraft_ref, tds_aircraft_type_designator_path(pirep.aircraft_type_designator),  data: {turbo_frame: :_top}  %>
             <% else -%>
-              <%= link_to pirep.aircraft_ref, aircraft_type_designators_path(q: pirep.aircraft_ref),  data: {turbo_frame: :_top}  %>
+              <%= link_to pirep.aircraft_ref, tds_aircraft_type_designators_path(q: pirep.aircraft_ref),  data: {turbo_frame: :_top}  %>
             <% end -%>
           </td>
         </tr>
@@ -41,7 +41,7 @@
           <td class="w-25 fw-semibold">Location</td>
           <td class="">
             <%# link_to pirep.location.to_s, map_wx_pirep_path(pirep),  data: {turbo_action: :advance, turbo_frame: :modal}  %>
-            <%= link_to pirep.location.to_s, tds_pireps_path(location: pirep.location), data: {turbo_action: :advance, turbo_frame: :pireps} %>
+            <%# link_to pirep.location.to_s, tds_pireps_path(location: pirep.location), data: {turbo_action: :advance, turbo_frame: :pireps} %>
           </td>
         </tr>
         <%= render Wx::DefinitionRowComponent.new(flight_level?(pirep.altitude_ft_msl)) do |c| %>

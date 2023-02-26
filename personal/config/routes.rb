@@ -90,6 +90,10 @@ Rails.application.routes.draw do
 
   constraints(PersonalConstraint.new) do
     namespace :tds do
+      resources :aircraft_type_designators, only: %i[index show] do
+        get :search, on: :collection
+      end
+      
       resources :batches, only: %i[index show] do
         put :reprocess, on: :member
         put :ingest, on: :collection

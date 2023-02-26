@@ -1,0 +1,30 @@
+<%= provide(:page_title, 'DOC 8643 - Aircraft Type Designators') %>
+
+
+<%= render 'disclaimer' %>
+
+<%= form_with(url: tds_aircraft_type_designators_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'aircraft_type_designators'}, class: 'd-flex') do |f| %>
+  <%= f.text_field(:q, class: "form-control", placeholder: "Cessna Cardinal", data: {action: 'input->search#submit', search_target: 'input'}) %>
+<% end %>
+
+<%= turbo_frame_tag :aircraft_type_designators do %>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+          <th>Type</th>
+          <th>Manufacturer</th>
+          <th>Models</th>
+      </tr>
+    <thead>
+    <tbody>
+      <% icao_types.each do |icao_type| %>
+        <tr>
+          <td><%= link_to icao_type.icao_code, tds_aircraft_type_designator_path(icao_type.slug || icao_type),  data: {turbo_action: :advance, turbo_frame: :_top} %></td>
+          <td><%= icao_type.manufacturer %> </td>
+          <td><%= icao_type.model %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
+<% end %>

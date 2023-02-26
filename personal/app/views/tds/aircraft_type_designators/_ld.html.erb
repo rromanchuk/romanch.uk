@@ -1,0 +1,32 @@
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org/",
+    "@type":"Dataset",
+    "name":"Aircraft Type Designators",
+    "description":"Hourly collection of compressed, raw csv aircraft reports from the TDS system.",
+    "url":"https://catalog.data.gov/dataset/ncdc-storm-events-database",
+    "sameAs":"https://www.icao.int/publications/DOC8643/Pages/Search.aspx",
+    "identifier": ["<%= batch.id %>"],
+    "keywords":[
+       "Aircraft Type Designators",
+       "ICAO",
+       "FAA",
+    ],
+    "isAccessibleForFree" : true,
+    "isPartOf" : "https://www.icao.int/publications/DOC8643/Pages/Search.aspx",
+    "creator":{
+       "@type":"Organization",
+       "sameAs": "https://ror.org/04jebr251",
+       "name":"International Civil Aviation Organization",
+    },
+    "distribution":[
+       {
+          "@type":"DataDownload",
+          "encodingFormat":"CSV",
+          "contentUrl":"<%= batch.public_url %>",
+          "contentSize":"<%= number_to_human_size(batch.content_length) %>",
+          "uploadDate":"<%= batch.created_at %>",
+       },
+    ],
+  }
+  </script>

@@ -1,0 +1,72 @@
+
+
+
+<%= turbo_frame_tag icao_type do %>
+  <div class="col pb-3">
+    <table class="table table-borderless table-sm fluid">
+      <tbody class="">
+
+        <tr class=""> 
+          <td class="w-25 fw-semibold">ICAO Type Code</td>
+          <td class=""><%= icao_type.icao_code %></td>
+        </tr>
+        <tr class=""> 
+          <td class="w-25 fw-semibold">Class</td>
+          <td class=""><%= icao_type.aircraft_class %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Num Engines</td>
+          <td class=""><%= icao_type.number_of_engines %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Engine Type</td>
+          <td class=""><%= icao_type.engine_type  %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Weight Class</td>
+          <td class=""><%= icao_type.weight_class %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">ICAO Weight WTC</td>
+          <td class=""><%= icao_type.icao_wtc %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">RECAT 1.5</td>
+          <td class=""><%= icao_type.recat %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">RECAT A</td>
+          <td class=""><%= icao_type.recat_wtc_a %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">RECAT b</td>
+          <td class=""><%= icao_type.recat_wtc_b %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">CWT</td>
+          <td class=""><%= icao_type.cwtc %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">SRS</td>
+          <td class=""><%= icao_type.srs %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">LAHSO</td>
+          <td class=""><%= icao_type.lahso %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">MANUFACTURER</td>
+          <td class=""><%= icao_type.manufacturer %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">Model</td>
+          <td class=""><%= icao_type.model %></td>
+        </tr>
+        <tr class="">
+          <td class="w-25 fw-semibold">AKA</td>
+          <td class=""><%= icao_type.other_models.join(" ") %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
