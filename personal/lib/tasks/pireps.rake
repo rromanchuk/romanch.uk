@@ -23,7 +23,8 @@ namespace :pireps do
   desc 'migrate'
   task migrate: :environment do
     Wx::Batch.aircraftreports.complete.find_each do |batch|
-      ap Tds::Batch.find_or_create_by!(id: batch.id, key: batch.key, report_type: batch.report_type, source_url: batch.source_url)
+      ap Tds::Batch.create_with(id: batch.id, key: batch.key, report_type: batch.report_type, source_url: batch.source_url, content_length: batch.content_length).find_or_create_by!(key: batch.key)
+      ap batch.destroy
       # unless tds_batch.processed_at
       #   Tds::Pireps::Process.call(tds_batch.id)
       # end
