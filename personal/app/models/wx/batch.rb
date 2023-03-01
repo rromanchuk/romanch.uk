@@ -3,9 +3,9 @@ module Wx
     after_create_commit :process_batch!
     store_accessor :data, :s3_select_expression
 
-    has_many :pireps
-    has_many :aireps
-    has_many :metars
+    has_many :pireps, dependent: :destroy
+    has_many :aireps, dependent: :destroy
+    has_many :metars, dependent: :destroy
 
     scope :pending, -> { where(processed_at: nil, failed_at: nil) }
     scope :failed, -> { where.not(failed_at: nil) }
@@ -19,14 +19,14 @@ module Wx
     end
 
     def process_batch!
-      case report_type
-      when 'aircraftreports'
-        Wx::Pireps::Process.async_call(id)
-      when 'metars'
-        Wx::Metars::Process.async_call(id)
-      when 'tafs'
-        Wx::Tafs::Process.async_call(id)
-      end
+      # case report_type
+      # when 'aircraftreports'
+      #   Wx::Pireps::Process.async_call(id)
+      # when 'metars'
+      #   Wx::Metars::Process.async_call(id)
+      # when 'tafs'
+      #   Wx::Tafs::Process.async_call(id)
+      # end
     end
   end
 end
