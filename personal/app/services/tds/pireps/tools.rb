@@ -8,6 +8,10 @@ module Tds
       def report_type(row)
         row[42]
       end
+
+      def parsed_remarks(raw_text)
+        Tds::Pirep::REMARKS.match(raw_text)&.[](:remarks)
+      end
       
       def transform_pirep(row)
         {
@@ -24,6 +28,7 @@ module Tds
           aircraft_ref: row[8],
           aircraft_type_designator_id: Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: row[8])&.id,
           station_id: Tds::Station.find_or_create_by!(code: row[43].squish.match(/\w{3}/)[0])&.id,
+          remarks: parsed_remarks(row[43].squish),
           latitude: row[9]&.to_f,
           longitude: row[10]&.to_f,
           altitude_ft_msl: row[11]&.to_i,

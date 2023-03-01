@@ -23,7 +23,7 @@ module Tds
           records = Tds::Pirep.insert(normalized_row, unique_by: :index_tds_pireps_uniqueness)
           return 0 if records.empty?
           
-          CleanupPirepJob.perform_async(records.last[:id])
+          #CleanupPirepJob.perform_async(records.last[:id])
           records.length
         when 'Urgent PIREP'
           normalized_row = transform_pirep(row)
@@ -33,7 +33,7 @@ module Tds
           return 0 if records.empty?
 
           Rails.logger.info "UUA record found #{records.last[:id]}"
-          CleanupPirepJob.perform_async(records.last[:id])
+          #CleanupPirepJob.perform_async(records.last[:id])
           records.length
         when 'AIREP'
           normalized_row = transform_airep(row)
