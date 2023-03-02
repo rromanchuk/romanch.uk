@@ -21,14 +21,14 @@ module Tds
     def process_batch!
       return if processed_at.present?
       
-      # case report_type
-      # when 'aircraftreports'
-      #   Tds::Pireps::Process.async_call(id)
-      # when 'metars'
-      #   Tds::Metars::Process.async_call(id)
-      # when 'tafs'
-      #   Tds::Tafs::Process.async_call(id)
-      # end
+      case report_type
+      when 'aircraftreports'
+        Tds::Pireps::Process.async_call(id)
+      when 'metars'
+        Tds::Metars::Process.async_call(id)
+      when 'tafs'
+        Tds::Tafs::Process.async_call(id)
+      end
     end
   end
 end

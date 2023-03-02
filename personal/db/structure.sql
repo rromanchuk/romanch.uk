@@ -9,30 +9,9 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE IF EXISTS ONLY public.wx_aireps DROP CONSTRAINT IF EXISTS fk_rails_e049bf6b2e;
-ALTER TABLE IF EXISTS ONLY public.wx_pireps DROP CONSTRAINT IF EXISTS fk_rails_ddee484427;
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
 DROP INDEX IF EXISTS public.unique_taggings;
-DROP INDEX IF EXISTS public.index_wx_tafs_uniqueness;
-DROP INDEX IF EXISTS public.index_wx_tafs_on_location;
-DROP INDEX IF EXISTS public.index_wx_tafs_on_issue_time;
-DROP INDEX IF EXISTS public.index_wx_tafs_on_batch_id;
-DROP INDEX IF EXISTS public.index_wx_pireps_uniqueness;
-DROP INDEX IF EXISTS public.index_wx_pireps_on_searchable_tsearch;
-DROP INDEX IF EXISTS public.index_wx_pireps_on_observation_time;
-DROP INDEX IF EXISTS public.index_wx_pireps_on_location;
-DROP INDEX IF EXISTS public.index_wx_pireps_on_batch_id;
-DROP INDEX IF EXISTS public.index_wx_pireps_on_aircraft_type_designator_id;
-DROP INDEX IF EXISTS public.index_wx_metars_uniqueness;
-DROP INDEX IF EXISTS public.index_wx_metars_on_searchable_tsearch;
-DROP INDEX IF EXISTS public.index_wx_metars_on_observation_time;
-DROP INDEX IF EXISTS public.index_wx_metars_on_location;
-DROP INDEX IF EXISTS public.index_wx_metars_on_batch_id;
-DROP INDEX IF EXISTS public.index_wx_aireps_uniqueness;
-DROP INDEX IF EXISTS public.index_wx_aireps_on_observation_time;
-DROP INDEX IF EXISTS public.index_wx_aireps_on_location;
-DROP INDEX IF EXISTS public.index_wx_aireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_users_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_tournaments_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_players_on_slug;
@@ -55,11 +34,6 @@ DROP INDEX IF EXISTS public.index_active_storage_variant_records_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_blobs_on_key;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
-ALTER TABLE IF EXISTS ONLY public.wx_tafs DROP CONSTRAINT IF EXISTS wx_tafs_pkey;
-ALTER TABLE IF EXISTS ONLY public.wx_pireps DROP CONSTRAINT IF EXISTS wx_pireps_pkey;
-ALTER TABLE IF EXISTS ONLY public.wx_metars DROP CONSTRAINT IF EXISTS wx_metars_pkey;
-ALTER TABLE IF EXISTS ONLY public.wx_batches DROP CONSTRAINT IF EXISTS wx_batches_pkey;
-ALTER TABLE IF EXISTS ONLY public.wx_aireps DROP CONSTRAINT IF EXISTS wx_aireps_pkey;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.romanchuk_open_tournaments DROP CONSTRAINT IF EXISTS romanchuk_open_tournaments_pkey;
@@ -75,7 +49,6 @@ ALTER TABLE IF EXISTS ONLY public.friendly_id_slugs DROP CONSTRAINT IF EXISTS fr
 ALTER TABLE IF EXISTS ONLY public.blobs DROP CONSTRAINT IF EXISTS blobs_pkey;
 ALTER TABLE IF EXISTS ONLY public.attachments DROP CONSTRAINT IF EXISTS attachments_pkey;
 ALTER TABLE IF EXISTS ONLY public.ar_internal_metadata DROP CONSTRAINT IF EXISTS ar_internal_metadata_pkey;
-ALTER TABLE IF EXISTS ONLY public.aircraft_type_designators DROP CONSTRAINT IF EXISTS aircraft_type_designators_pkey;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS active_storage_variant_records_pkey;
 ALTER TABLE IF EXISTS ONLY public.active_storage_blobs DROP CONSTRAINT IF EXISTS active_storage_blobs_pkey;
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS active_storage_attachments_pkey;
@@ -85,11 +58,6 @@ ALTER TABLE IF EXISTS public.pg_search_documents ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.gutentag_tags ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.gutentag_taggings ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
-DROP TABLE IF EXISTS public.wx_tafs;
-DROP TABLE IF EXISTS public.wx_pireps;
-DROP TABLE IF EXISTS public.wx_metars;
-DROP TABLE IF EXISTS public.wx_batches;
-DROP TABLE IF EXISTS public.wx_aireps;
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.romanchuk_open_tournaments;
@@ -111,7 +79,6 @@ DROP TABLE IF EXISTS public.friendly_id_slugs;
 DROP TABLE IF EXISTS public.blobs;
 DROP TABLE IF EXISTS public.attachments;
 DROP TABLE IF EXISTS public.ar_internal_metadata;
-DROP TABLE IF EXISTS public.aircraft_type_designators;
 DROP TABLE IF EXISTS public.active_storage_variant_records;
 DROP TABLE IF EXISTS public.active_storage_blobs;
 DROP TABLE IF EXISTS public.active_storage_attachments;
@@ -188,33 +155,6 @@ CREATE TABLE public.active_storage_variant_records (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     blob_id uuid NOT NULL,
     variation_digest character varying NOT NULL
-);
-
-
---
--- Name: aircraft_type_designators; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.aircraft_type_designators (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    icao_code text NOT NULL,
-    aircraft_class text,
-    number_of_engines integer,
-    engine_type text,
-    weight_class text,
-    icao_wtc text,
-    recat text,
-    recat_wtc_a text,
-    recat_wtc_b text,
-    cwtc text,
-    srs text,
-    lahso text,
-    manufacturer text,
-    model text,
-    data jsonb DEFAULT '{}'::jsonb NOT NULL,
-    slug text,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -548,155 +488,6 @@ CREATE TABLE public.users (
 
 
 --
--- Name: wx_aireps; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.wx_aireps (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    batch_id uuid NOT NULL,
-    raw_text text NOT NULL,
-    receipt_time timestamp(6) without time zone NOT NULL,
-    observation_time timestamp(6) without time zone,
-    aircraft_ref text,
-    altitude_ft_msl integer,
-    sky_condition jsonb DEFAULT '[]'::jsonb NOT NULL,
-    turbulence_condition jsonb DEFAULT '[]'::jsonb NOT NULL,
-    icing_condition jsonb DEFAULT '[]'::jsonb NOT NULL,
-    visibility_statute_mi integer,
-    wx_string character varying,
-    temp_c double precision,
-    wind_dir_degrees integer,
-    wind_speed_kt integer,
-    vert_gust_kt integer,
-    location public.geography(PointZ,4326),
-    data jsonb DEFAULT '{}'::jsonb NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: wx_batches; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.wx_batches (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    key character varying NOT NULL,
-    report_type text NOT NULL,
-    source_url text,
-    num_records_processed integer DEFAULT 0 NOT NULL,
-    content_length integer DEFAULT 0 NOT NULL,
-    data jsonb DEFAULT '{}'::jsonb NOT NULL,
-    start_time timestamp(6) without time zone,
-    end_time timestamp(6) without time zone,
-    processed_at timestamp(6) without time zone,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    pireps_count integer DEFAULT 0,
-    aireps_count integer DEFAULT 0,
-    metars_count integer DEFAULT 0,
-    tafs_count integer DEFAULT 0,
-    failed_at timestamp(6) without time zone
-);
-
-
---
--- Name: wx_metars; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.wx_metars (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    raw_text text NOT NULL,
-    station_id text NOT NULL,
-    observation_time timestamp(6) without time zone NOT NULL,
-    location public.geography(PointZ,4326),
-    temp_c double precision,
-    dewpoint_c double precision,
-    wind_dir_degrees integer,
-    wind_speed_kt integer,
-    wind_gust_kt integer,
-    visibility_statute_mi double precision,
-    altim_in_hg double precision,
-    sea_level_pressure_mb double precision,
-    wx_string text,
-    sky_condition jsonb,
-    flight_category text,
-    three_hr_pressure_tendency_mb double precision,
-    "maxT_c" double precision,
-    "minT_c" double precision,
-    "maxT24hr_c" double precision,
-    "minT24hr_c" double precision,
-    precip_in double precision,
-    pcp3hr_in double precision,
-    pcp6hr_in double precision,
-    pcp24hr_in double precision,
-    snow_in double precision,
-    vert_vis_ft integer,
-    metar_type text,
-    data jsonb,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    batch_id uuid,
-    searchable_tsearch tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, COALESCE(station_id, ''::text)), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, COALESCE(wx_string, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(flight_category, ''::text)), 'C'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(raw_text, ''::text)), 'D'::"char"))) STORED
-);
-
-
---
--- Name: wx_pireps; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.wx_pireps (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    batch_id uuid NOT NULL,
-    raw_text text NOT NULL,
-    receipt_time timestamp(6) without time zone,
-    observation_time timestamp(6) without time zone,
-    aircraft_ref text,
-    altitude_ft_msl integer,
-    sky_condition jsonb,
-    turbulence_condition jsonb,
-    icing_condition jsonb,
-    visibility_statute_mi integer,
-    wx_string character varying,
-    temp_c double precision,
-    wind_dir_degrees integer,
-    wind_speed_kt integer,
-    vert_gust_kt integer,
-    location public.geography(PointZ,4326),
-    data jsonb DEFAULT '{}'::jsonb NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    urgent boolean DEFAULT false,
-    aircraft_type_designator_id uuid,
-    remarks text,
-    station text,
-    tsvector_remarks_tsearch tsvector GENERATED ALWAYS AS (setweight(to_tsvector('english'::regconfig, COALESCE(remarks, ''::text)), 'C'::"char")) STORED,
-    searchable_tsearch tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, COALESCE(station, ''::text)), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, COALESCE(aircraft_ref, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(remarks, ''::text)), 'C'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(raw_text, ''::text)), 'D'::"char"))) STORED
-);
-
-
---
--- Name: wx_tafs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.wx_tafs (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    raw_text text,
-    station_id text NOT NULL,
-    issue_time timestamp(6) without time zone NOT NULL,
-    bulletin_time timestamp(6) without time zone,
-    valid_time_from timestamp(6) without time zone,
-    valid_time_to timestamp(6) without time zone,
-    remarks text,
-    location public.geography(PointZ,4326),
-    forecast jsonb,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    batch_id uuid
-);
-
-
---
 -- Name: friendly_id_slugs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -760,14 +551,6 @@ ALTER TABLE ONLY public.active_storage_blobs
 
 ALTER TABLE ONLY public.active_storage_variant_records
     ADD CONSTRAINT active_storage_variant_records_pkey PRIMARY KEY (id);
-
-
---
--- Name: aircraft_type_designators aircraft_type_designators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.aircraft_type_designators
-    ADD CONSTRAINT aircraft_type_designators_pkey PRIMARY KEY (id);
 
 
 --
@@ -888,46 +671,6 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: wx_aireps wx_aireps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_aireps
-    ADD CONSTRAINT wx_aireps_pkey PRIMARY KEY (id);
-
-
---
--- Name: wx_batches wx_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_batches
-    ADD CONSTRAINT wx_batches_pkey PRIMARY KEY (id);
-
-
---
--- Name: wx_metars wx_metars_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_metars
-    ADD CONSTRAINT wx_metars_pkey PRIMARY KEY (id);
-
-
---
--- Name: wx_pireps wx_pireps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_pireps
-    ADD CONSTRAINT wx_pireps_pkey PRIMARY KEY (id);
-
-
---
--- Name: wx_tafs wx_tafs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_tafs
-    ADD CONSTRAINT wx_tafs_pkey PRIMARY KEY (id);
 
 
 --
@@ -1085,139 +828,6 @@ CREATE UNIQUE INDEX index_users_on_slug ON public.users USING btree (slug);
 
 
 --
--- Name: index_wx_aireps_on_batch_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_aireps_on_batch_id ON public.wx_aireps USING btree (batch_id);
-
-
---
--- Name: index_wx_aireps_on_location; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_aireps_on_location ON public.wx_aireps USING gist (location);
-
-
---
--- Name: index_wx_aireps_on_observation_time; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_aireps_on_observation_time ON public.wx_aireps USING btree (observation_time);
-
-
---
--- Name: index_wx_aireps_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_wx_aireps_uniqueness ON public.wx_aireps USING btree (raw_text, observation_time);
-
-
---
--- Name: index_wx_metars_on_batch_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_metars_on_batch_id ON public.wx_metars USING btree (batch_id);
-
-
---
--- Name: index_wx_metars_on_location; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_metars_on_location ON public.wx_metars USING gist (location);
-
-
---
--- Name: index_wx_metars_on_observation_time; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_metars_on_observation_time ON public.wx_metars USING btree (observation_time);
-
-
---
--- Name: index_wx_metars_on_searchable_tsearch; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_metars_on_searchable_tsearch ON public.wx_metars USING gin (searchable_tsearch);
-
-
---
--- Name: index_wx_metars_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_wx_metars_uniqueness ON public.wx_metars USING btree (station_id, observation_time);
-
-
---
--- Name: index_wx_pireps_on_aircraft_type_designator_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_pireps_on_aircraft_type_designator_id ON public.wx_pireps USING btree (aircraft_type_designator_id);
-
-
---
--- Name: index_wx_pireps_on_batch_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_pireps_on_batch_id ON public.wx_pireps USING btree (batch_id);
-
-
---
--- Name: index_wx_pireps_on_location; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_pireps_on_location ON public.wx_pireps USING gist (location);
-
-
---
--- Name: index_wx_pireps_on_observation_time; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_pireps_on_observation_time ON public.wx_pireps USING btree (observation_time);
-
-
---
--- Name: index_wx_pireps_on_searchable_tsearch; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_pireps_on_searchable_tsearch ON public.wx_pireps USING gin (searchable_tsearch);
-
-
---
--- Name: index_wx_pireps_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_wx_pireps_uniqueness ON public.wx_pireps USING btree (raw_text, observation_time);
-
-
---
--- Name: index_wx_tafs_on_batch_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_tafs_on_batch_id ON public.wx_tafs USING btree (batch_id);
-
-
---
--- Name: index_wx_tafs_on_issue_time; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_tafs_on_issue_time ON public.wx_tafs USING btree (issue_time);
-
-
---
--- Name: index_wx_tafs_on_location; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wx_tafs_on_location ON public.wx_tafs USING gist (location);
-
-
---
--- Name: index_wx_tafs_uniqueness; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_wx_tafs_uniqueness ON public.wx_tafs USING btree (station_id, issue_time);
-
-
---
 -- Name: unique_taggings; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1238,22 +848,6 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 ALTER TABLE ONLY public.active_storage_attachments
     ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
-
-
---
--- Name: wx_pireps fk_rails_ddee484427; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_pireps
-    ADD CONSTRAINT fk_rails_ddee484427 FOREIGN KEY (batch_id) REFERENCES public.wx_batches(id);
-
-
---
--- Name: wx_aireps fk_rails_e049bf6b2e; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wx_aireps
-    ADD CONSTRAINT fk_rails_e049bf6b2e FOREIGN KEY (batch_id) REFERENCES public.wx_batches(id);
 
 
 --
@@ -1338,6 +932,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20221222081525'),
 ('20221222081620'),
 ('20221222083453'),
-('20221222083614');
+('20221222083614'),
+('20230302171017');
 
 

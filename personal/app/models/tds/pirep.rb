@@ -1,9 +1,9 @@
 module Tds
   class Pirep < ApplicationRecord
     # include Turbo::Broadcastable
-    # include Searchable
+    include Searchable
     self.implicit_order_column = 'observation_time'
-    #SEARCH_AGAINST = %i[raw_text]
+    SEARCH_AGAINST = %i[raw_text]
 
     UAA = /UUA/
     STATION = /\w{3}/

@@ -124,35 +124,6 @@ Rails.application.routes.draw do
         get :debug, on: :member
       end
     end
-    # namespace :wx do
-    #   resources :batches, only: %i[index show] do
-    #     put :reprocess, on: :member
-    #     put :ingest, on: :collection
-    #     put :process_csv, on: :collection
-    #     get :debug, on: :member
-    #   end
-  
-    #   resources :metars, only: %i[index show destroy] do
-    #     get :debug, on: :member
-    #     get :points, on: :collection
-    #   end
-  
-    #   resources :pireps, only: %i[index show] do
-    #     get :uua, on: :collection
-    #     get :ua, on: :collection
-    #     get :debug, on: :member
-    #     get :map, on: :member
-    #     get :points, on: :collection
-    #   end
-      
-    #   resources :aireps, only: %i[index show] do
-    #     get :map, on: :member
-    #     get :debug, on: :member
-    #   end
-    #   resources :tafs, only: %i[index show] do
-    #     get :debug, on: :member
-    #   end
-    # end
 
     get '/c/*attributed', to: 'pages#show', id: 'home'
     root to: 'pages#show', id: 'home'
