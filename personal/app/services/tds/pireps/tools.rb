@@ -26,7 +26,7 @@ module Tds
             bad_location: row[7]
           }.compact,
           aircraft_ref: row[8],
-          aircraft_type_designator_id: Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: row[8])&.id,
+          aircraft_type_designator_id: Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: row[8].force_encoding('UTF-8'))&.id,
           station_id: Tds::Station.find_or_create_by!(code: row[43].squish.match(/\w{3}/)[0])&.id,
           remarks: parsed_remarks(row[43].squish),
           latitude: row[9]&.to_f,
