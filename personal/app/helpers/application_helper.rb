@@ -17,7 +17,7 @@ module ApplicationHelper
     
     result = str.dup
   
-    Wx::Constants::TEI_DICTIONARY.each do |key, value|
+    Tds::Constants::TEI_DICTIONARY.each do |key, value|
       result.gsub!(/\b#{Regexp.quote(key)}\b/, value)
     end
   
