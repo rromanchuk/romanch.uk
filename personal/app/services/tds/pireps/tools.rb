@@ -15,7 +15,7 @@ module Tds
 
       def aircraft_type_designator_id(aircraft_ref)
         return nil if aircraft_ref.blank?
-        safe_aircraft_ref = aircraft_ref.force_encoding('UTF-8').id
+        safe_aircraft_ref = aircraft_ref.force_encoding('UTF-8')
         begin
           Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: safe_aircraft_ref)&.id
         rescue StandardError => e
