@@ -27,3 +27,9 @@ pireps:
   class: "IngestPirepsWorker"
   queue: "default"
   description: "Pireps pipeline"
+
+process:
+  cron: "*/5 * * * *"
+  class: "ProcessWorker"
+  queue: "default"
+  description: "Process pending"
