@@ -17,7 +17,7 @@ end
 Rails.application.routes.draw do
   get :healthcheck, to: 'pages#show', id: 'status'
   post '/data/report', to: 'data#report'
-  
+  resources :wx_station_observations, only: %i[index]
   resources :posts do
     resources :tags, shallow: true
     get :recently_updated, on: :collection
