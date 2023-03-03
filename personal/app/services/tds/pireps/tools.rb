@@ -12,6 +12,18 @@ module Tds
       def parsed_remarks(raw_text)
         Tds::Pirep::REMARKS.match(raw_text)&.[](:remarks)
       end
+
+      def aircraft_type_designator_id(aircraft_ref)
+        return nil if aircraft_ref.blank?
+        safe_aircraft_ref = aircraft_ref.force_encoding('UTF-8').id
+        begin
+          Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: safe_aircraft_ref)&.id
+        rescue StandardError => e
+          Rails.logoger.error(e)
+          Sentry.capture_exception(e)
+          nil
+        end
+      end
       
       def transform_pirep(row)
         {
@@ -26,7 +38,7 @@ module Tds
             bad_location: row[7]
           }.compact,
           aircraft_ref: row[8],
-          aircraft_type_designator_id: Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: row[8].force_encoding('UTF-8'))&.id,
+          aircraft_type_designator_id: aircraft_type_designator_id(row[8]),
           station_id: Tds::Station.find_or_create_by!(code: row[43].squish.match(/\w{3}/)[0])&.id,
           remarks: parsed_remarks(row[43].squish),
           latitude: row[9]&.to_f,
