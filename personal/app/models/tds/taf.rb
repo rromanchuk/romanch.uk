@@ -20,7 +20,7 @@ module Tds
 
     def self.cached_count
       Rails.cache.fetch("Tds::Taf.count", expires_in: 24.hours) do
-        Wx::Taf.count
+        Tds::Taf.count
       end
     end
 

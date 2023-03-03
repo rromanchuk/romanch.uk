@@ -25,9 +25,6 @@ Rails.application.routes.draw do
   resources :users do
     get :me, on: :collection
   end
-  resources :aircraft_type_designators, only: %i[index show] do
-    get :search, on: :collection
-  end
   resources :videos
   resources :blobs
   resources :attachments

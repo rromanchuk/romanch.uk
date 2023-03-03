@@ -4,7 +4,7 @@ module Tds
     include Searchable
     SEARCH_AGAINST = %i[raw_text]
     belongs_to :batch, counter_cache: :metars_count
-    
+
     # pg_search_scope :search, against: {
     #     station_id: 'A',
     #     wx_string: 'B',
@@ -29,7 +29,7 @@ module Tds
     
     def self.cached_count
       Rails.cache.fetch("Tds::Metar.count", expires_in: 24.hours) do
-        Wx::Metar.count
+        Tds::Metar.count
       end
     end
 

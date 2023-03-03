@@ -66,7 +66,7 @@ module Tds
     
     def self.cached_count
       Rails.cache.fetch("Tds::Pirep.count", expires_in: 24.hours) do
-        Wx::Pirep.count
+        Tds::Pirep.count
       end
     end
 

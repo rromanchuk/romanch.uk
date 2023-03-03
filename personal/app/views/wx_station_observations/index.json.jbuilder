@@ -1,1 +1,1 @@
-json.array! wx_station_observations, partial: 'wx_station_observations/wx_station_observation', as: :wx_station_observation
+json.array! wx_station_observations, partial: 'wx_station_observation', as: :wx_station_observation
