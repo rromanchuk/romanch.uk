@@ -1,7 +1,7 @@
 class DataController < ActionController::API
   def report
     WxStationObservation.create!(winddir: params[:winddir],
-      windspeedmph: params[:windspeed],
+      windspeedmph: params[:windspeedmph],
       windgustmph: params[:windgustmph],
       maxdailygust: params[:maxdailygust],
       tempinf: params[:tempinf],
