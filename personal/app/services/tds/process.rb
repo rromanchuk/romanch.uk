@@ -31,6 +31,7 @@ module Tds
 
     def call
       return nil unless batch
+      return nil unless batch.pending?
 
       client.select_object_content(params) do |stream|
         stream.on_error_event do |event|

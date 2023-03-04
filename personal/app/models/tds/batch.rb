@@ -18,6 +18,10 @@ module Tds
       "https://romanch.uk/#{key}"
     end
 
+    def pending? 
+      processed_at.nil? && failed_at.nil?
+    end
+
     def process_batch!
       return if processed_at.present?
       
