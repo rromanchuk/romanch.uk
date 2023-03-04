@@ -15,7 +15,7 @@ module Tds
 
        
         report_type = report_type(row)
-        Rails.logger.info "Inserting a record for report type #{report_type}"
+        #Rails.logger.info "Inserting a record for report type #{report_type}"
         case report_type
         when 'PIREP'
           normalized_row = transform_pirep(row)
