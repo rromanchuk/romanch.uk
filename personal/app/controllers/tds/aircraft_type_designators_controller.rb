@@ -17,7 +17,7 @@ module Tds
     end
 
     def show
-      add_breadcrumb(title, aircraft_type_designators_url)
+      add_breadcrumb(title, tds_aircraft_type_designator_url)
       add_breadcrumb("#{icao_type.icao_code} #{icao_type.manufacturer} \"#{icao_type.model}\"")
       render stream: true
     end

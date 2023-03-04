@@ -15,6 +15,7 @@ module Tds
         return 0 unless row.count == 44
 
         normalized_row[:batch_id] = batch.id
+        Rails.logger.info "Inserting a record for report type METAR"
         Tds::Metar.insert(normalized_row, unique_by: :index_tds_metars_uniqueness).length
       end
     end
