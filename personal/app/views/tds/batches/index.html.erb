@@ -51,14 +51,6 @@
   <div class="col">
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
-        <p class="card-title">Current Etags</p>
-        <p class="card-text h6 text-success"><%= ar_etag%></p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card" style="width: 10rem;">
-      <div class="card-body text-center">
         <p class="card-title">Failed Processing</p>
         <p class="card-text h5 text-danger"><%= tag.span number_with_delimiter(Tds::Batch.failed.count) %></p>
       </div>

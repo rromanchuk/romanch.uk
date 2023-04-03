@@ -27,13 +27,16 @@ DROP INDEX IF EXISTS public.index_tds_tafs_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_pireps_uniqueness;
 DROP INDEX IF EXISTS public.index_tds_pireps_on_urgent;
 DROP INDEX IF EXISTS public.index_tds_pireps_on_station_id;
+DROP INDEX IF EXISTS public.index_tds_pireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_pireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_pireps_on_aircraft_type_designator_id;
 DROP INDEX IF EXISTS public.index_tds_metars_uniqueness;
 DROP INDEX IF EXISTS public.index_tds_metars_on_station_id;
+DROP INDEX IF EXISTS public.index_tds_metars_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_metars_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_batches_on_report_type;
 DROP INDEX IF EXISTS public.index_tds_aireps_uniqueness;
+DROP INDEX IF EXISTS public.index_tds_aireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_aircraft_type_designators_on_slug;
 DROP INDEX IF EXISTS public.index_pghero_space_stats_on_database_and_captured_at;
@@ -529,6 +532,13 @@ CREATE INDEX index_tds_aireps_on_batch_id ON public.tds_aireps USING btree (batc
 
 
 --
+-- Name: index_tds_aireps_on_observation_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tds_aireps_on_observation_time ON public.tds_aireps USING btree (observation_time);
+
+
+--
 -- Name: index_tds_aireps_uniqueness; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -547,6 +557,13 @@ CREATE INDEX index_tds_batches_on_report_type ON public.tds_batches USING btree 
 --
 
 CREATE INDEX index_tds_metars_on_batch_id ON public.tds_metars USING btree (batch_id);
+
+
+--
+-- Name: index_tds_metars_on_observation_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tds_metars_on_observation_time ON public.tds_metars USING btree (observation_time);
 
 
 --
@@ -575,6 +592,13 @@ CREATE INDEX index_tds_pireps_on_aircraft_type_designator_id ON public.tds_pirep
 --
 
 CREATE INDEX index_tds_pireps_on_batch_id ON public.tds_pireps USING btree (batch_id);
+
+
+--
+-- Name: index_tds_pireps_on_observation_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tds_pireps_on_observation_time ON public.tds_pireps USING btree (observation_time);
 
 
 --
@@ -724,6 +748,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230225043320'),
 ('20230225215152'),
 ('20230227043115'),
-('20230301150937');
+('20230301150937'),
+('20230403001620');
 
 
