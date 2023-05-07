@@ -75,6 +75,7 @@ production:
     host: <%= ENV['DATABASE_HOST'] %>
     migrations_paths: db/ryan_romanchuk
   ro:
+    <<: *default
     database: ro_production
     username: <%= ENV["DATABASE_USERNAME"] %>
     password: <%= ENV["DATABASE_PASSWORD"] %>
