@@ -3,13 +3,13 @@
 # This migration comes from gutentag (originally 2)
 class GutentagCacheCounter < ActiveRecord::Migration[7.0]
   def up
-    add_column :gutentag_tags, :taggings_count, :integer, :default => 0
-    add_index  :gutentag_tags, :taggings_count
+    # add_column :gutentag_tags, :taggings_count, :integer, :default => 0
+    # add_index  :gutentag_tags, :taggings_count
 
-    Gutentag::Tag.reset_column_information
-    Gutentag::Tag.pluck(:id).each do |tag_id|
-      Gutentag::Tag.reset_counters tag_id, :taggings
-    end
+    # Gutentag::Tag.reset_column_information
+    # Gutentag::Tag.pluck(:id).each do |tag_id|
+    #   Gutentag::Tag.reset_counters tag_id, :taggings
+    # end
   end
 
   def down

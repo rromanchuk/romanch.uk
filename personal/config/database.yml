@@ -18,6 +18,16 @@ development:
     database: wx_development
     host: localhost
     migrations_paths: db/wx
+  ryan_romanchuk:
+    <<: *default
+    database: ryan_romanchuk_development
+    host: localhost
+    migrations_paths: db/ryan_romanchuk
+  ro:
+    <<: *default
+    database: ro_development
+    host: localhost
+    migrations_paths: db/ro
 
 test:
   primary:
@@ -31,6 +41,18 @@ test:
     username: postgres
     host: localhost
     migrations_paths: db/wx
+  ryan_romanchuk:
+    <<: *default
+    database: ryan_romanchuk_test
+    username: postgres
+    host: localhost
+    migrations_paths: db/ryan_romanchuk
+  ro:
+    <<: *default
+    database: ro_test
+    username: postgres
+    host: localhost
+    migrations_paths: db/ro
 
 production:
   primary:
@@ -45,3 +67,16 @@ production:
     password: <%= ENV["DATABASE_PASSWORD"] %>
     host: <%= ENV['DATABASE_HOST'] %>
     migrations_paths: db/wx
+  ryan_romanchuk:
+    <<: *default
+    database: ryan_romanchuk_production
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    migrations_paths: db/ryan_romanchuk
+  ro:
+    database: ro_production
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    migrations_paths: db/ro

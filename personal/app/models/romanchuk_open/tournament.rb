@@ -9,6 +9,7 @@ class RomanchukOpen::Tournament < ApplicationRecord
                                   }, as: :record, class_name: 'Attachment', inverse_of: :record, dependent: :destroy
   has_many :ro_photo_blobs, through: :ro_photo_attachments, class_name: 'Blob', source: :blob
   accepts_nested_attributes_for :ro_photo_blobs, reject_if: :all_blank
+  has_many_attached :images
   store_accessor :data, :location, :newsletter
 
   def slug_candidates = %i[title ocurred_on]
@@ -25,15 +26,4 @@ class RomanchukOpen::Tournament < ApplicationRecord
     title_changed? || super
   end
 
-
-  #private
-  def seed_photos!
-    start_num = ro_photo_attachments.count
-
-    (start_num..start_num + 10).each do |i|
-      blob = ro_photo_blobs.build
-      blob.attributes = {title: "#{title} - #{i + 1}", key: "/static/romanchuk_open/#{year}_#{i + 1}.jpg", content_type: 'image/jpeg', tags_as_string: "#{year}"}
-      blob.save!
-    end
-  end
 end
