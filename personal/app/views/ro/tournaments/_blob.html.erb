@@ -1,0 +1,10 @@
+<div class="col">
+  <div class="card shadow-sm">
+    <%= link_to romanchuk_open_tournament_blob_path(tournament, blob) do %>
+      <%= image_tag blob.key, class: 'card-img-top' %>
+    <% end %>
+    <div class="card-body">
+      <%= link_to 'Edit', edit_blob_path(blob), class: 'card-link' %>
+    </div>
+  </div>
+</div>

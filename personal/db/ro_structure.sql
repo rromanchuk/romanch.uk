@@ -87,7 +87,8 @@ CREATE TABLE public.tournaments (
     ocurred_on date,
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -159,6 +160,7 @@ CREATE INDEX index_players_on_slug ON public.players USING btree (slug);
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230403190051');
+('20230403190051'),
+('20230508010552');
 
 

@@ -6,7 +6,6 @@ class Post < ApplicationRecord
   include Sluggable
   include Searchable
   include Taggable
-  include Turbo::Broadcastable
 
   pg_search_scope :search, against: %i[title markdown_content]
   validates_presence_of :title

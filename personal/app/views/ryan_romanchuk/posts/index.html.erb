@@ -5,7 +5,7 @@
 <%= turbo_stream_from :posts %>
 <%= turbo_frame_tag :posts, autoscroll: "true" do %>
   <div class="archive">
-    <%= render partial: 'posts/post', collection: posts, cached: true %>
+    <%= render partial: 'post', collection: posts, cached: true %>
   </div>
   <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
 <% end %>

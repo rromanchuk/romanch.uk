@@ -1,0 +1,20 @@
+<% content_for(:page_title) { 'Edit post' } %>
+<%= turbo_frame_tag "edit_post" do %>
+  <%= tag.div class: 'row justify-content-center' do %>
+    <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
+      <h1>Edit post</h1>
+      <%= turbo_frame_tag post do %>
+        <%= simple_form_for post, url: post_path(post), html: { data: { turbo_frame: :_top} } do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :title %>
+          <%= f.input :description, as: :text %>
+          <%= f.input :markdown_content, value: post.markdown_content, input_html: { rows: "15", data: {post_target: :markdown} } %>
+          <%= f.input :html_content, value: post.html_content, input_html: { rows: "5", data: {post_target: :html} } %>
+          <%= f.input :tags_as_string, as: :string %>
+          <%= f.input :published %>
+          <%= f.button :submit, class: "btn-primary", data: {action: "post#save"}  %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

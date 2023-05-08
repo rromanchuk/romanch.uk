@@ -1,0 +1,15 @@
+<div class="col">
+  <div class="card">
+    <%= link_to romanchuk_open_tournament_path(tournament) do %>
+      <%= image_tag "#{tournament.poster_image}", class: 'card-img' %>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= "#{tournament.title} #{tournament.ocurred_on&.year}" %></h5>
+      <p class="card-text"><%= tournament.city %></p>
+      <% if tournament.newsletter %>
+        <%= link_to "Newsletter", newsletter_romanchuk_open_tournament_path(tournament), class: 'card-link' %>
+      <% end %>
+      <%# link_to "Participants", players_romanchuk_open_tournament_path(t), class: 'card-link' %>
+    </div>
+  </div>
+</div>

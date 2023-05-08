@@ -22,6 +22,7 @@ DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_slug_and_sluggable_type;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.posts DROP CONSTRAINT IF EXISTS posts_pkey;
+ALTER TABLE IF EXISTS ONLY public.pg_search_documents DROP CONSTRAINT IF EXISTS pg_search_documents_pkey;
 ALTER TABLE IF EXISTS ONLY public.gutentag_tags DROP CONSTRAINT IF EXISTS gutentag_tags_pkey;
 ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS gutentag_taggings_pkey;
 ALTER TABLE IF EXISTS ONLY public.friendly_id_slugs DROP CONSTRAINT IF EXISTS friendly_id_slugs_pkey;
@@ -32,6 +33,7 @@ ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.posts;
+DROP TABLE IF EXISTS public.pg_search_documents;
 DROP SEQUENCE IF EXISTS public.gutentag_tags_id_seq;
 DROP TABLE IF EXISTS public.gutentag_tags;
 DROP SEQUENCE IF EXISTS public.gutentag_taggings_id_seq;
@@ -154,6 +156,17 @@ ALTER SEQUENCE public.gutentag_tags_id_seq OWNED BY public.gutentag_tags.id;
 
 
 --
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pg_search_documents (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: posts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -245,6 +258,14 @@ ALTER TABLE ONLY public.gutentag_taggings
 
 ALTER TABLE ONLY public.gutentag_tags
     ADD CONSTRAINT gutentag_tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
 
 
 --
@@ -348,6 +369,7 @@ CREATE UNIQUE INDEX unique_taggings ON public.gutentag_taggings USING btree (tag
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230403124303');
+('20230403124303'),
+('20230508013707');
 
 

@@ -18,17 +18,24 @@ Rails.application.routes.draw do
   get :healthcheck, to: 'pages#show', id: 'status'
   post '/data/report', to: 'data#report'
   resources :wx_station_observations, only: %i[index]
-  resources :posts do
-    resources :tags, shallow: true
-    get :recently_updated, on: :collection
+  
+  scope module: :ryan_romanchuk do 
+    resources :posts do
+      resources :tags, shallow: true
+      get :recently_updated, on: :collection
+    end
+    resources :users do
+      get :me, on: :collection
+    end
+    resources :tags, param: :name, only: [:index] do
+      resources :posts, only: [:index], on: :collection
+    end
   end
-  resources :users do
-    get :me, on: :collection
-  end
+  
+  
   resources :videos
   resources :blobs
   resources :attachments
-  #resources :projects, only: %i[index show]
 
   scope 'romanchuk_open' do
     resources :tournaments, only: [] do
@@ -45,8 +52,6 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#logout'
   get 'login', to: 'sessions#login'
   post 'sign_in', to: 'sessions#sign_in'
-  #get '/s/resume', to: 'resume#index'
-  #get '/s/resume/download', to: 'resume#download', as: :download_resume
   get '/pages/*id' => 'pages#show', as: :page, format: false
 
   namespace :serve, path: '/serve' do
@@ -54,9 +59,7 @@ Rails.application.routes.draw do
     resources :videos, only: [:show]
   end
 
-  resources :tags, param: :name, only: [:index] do
-    resources :posts, only: [:index], on: :collection
-  end
+  
 
   namespace :oauth do
     get 'cognito/token', to: 'cognito#token'
@@ -66,6 +69,19 @@ Rails.application.routes.draw do
   end
 
   namespace :romanchuk_open do
+    resources :golfers
+    resources :players do
+      resources :golfers, only: [:new]
+    end
+    resources :tournaments do
+      resources :blobs, only: [:show]
+      resources :golfers, only: [:index]
+      get :newsletter, on: :member
+    end
+    get '/pages/*id' => 'pages#show', as: :page, format: false
+  end
+
+  namespace :ro do
     resources :golfers
     resources :players do
       resources :golfers, only: [:new]

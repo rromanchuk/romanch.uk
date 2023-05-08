@@ -29,7 +29,7 @@ module Sessionable
   def find_by_session
     return nil unless session[:user_id]
 
-    User.find_by(id: session[:user_id])&.tap do |user|
+    RyanRomanchuk::User.find_by(id: session[:user_id])&.tap do |user|
       set_current_user(user)
     end
   end
@@ -38,7 +38,7 @@ module Sessionable
     return nil unless amzn_oidc_identity
     return nil unless ValidateUserClaims.call(amzn_oidc_data)
 
-    User.create_with({}).find_or_create_by!(cognito_id: amzn_oidc_identity).tap do |user|
+    RyanRomanchuk::User.create_with({}).find_or_create_by!(cognito_id: amzn_oidc_identity).tap do |user|
       set_current_user(user)
     end
   end
