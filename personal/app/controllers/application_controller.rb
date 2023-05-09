@@ -6,15 +6,15 @@ class ApplicationController < ActionController::Base
   helper_method :amzn_oidc_data, :amzn_oidc_identity, :breadcrumbs, :breadcrumbs?
   before_action :set_sentry_context
 
-  rescue_from ActionPolicy::Unauthorized do |ex|
-    ap ex.result.all_details
-    ap ex.result
-    if ex.result.all_details[:not_found]
-      raise ActionController::RoutingError, 'Not Found'
-    else
-      not_authorized_error
-    end
-  end
+  # rescue_from ActionPolicy::Unauthorized do |ex|
+  #   ap ex.result.all_details
+  #   ap ex.result
+  #   if ex.result.all_details[:not_found]
+  #     raise ActionController::RoutingError, 'Not Found'
+  #   else
+  #     not_authorized_error
+  #   end
+  # end
 
   # def url_options
   #   { host: Rails.configuration.general.romanchuk_host }.merge(super)
