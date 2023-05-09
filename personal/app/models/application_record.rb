@@ -6,5 +6,4 @@ class ApplicationRecord < ActiveRecord::Base
   scope :recent, ->(column = implicit_order_column) { order(column => :desc) }
   scope :random, -> { order(Arel.sql('RANDOM()')) }
 
-  connects_to database: { writing: :ryan_romanchuk }
 end
