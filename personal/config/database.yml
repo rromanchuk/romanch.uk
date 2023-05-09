@@ -8,7 +8,12 @@ default: &default
 
 
 development:
-  primary:
+  ryan_romanchuk:
+    <<: *default
+    database: ryan_romanchuk_development
+    host: localhost
+    migrations_paths: db/ryan_romanchuk
+  legacy:
     <<: *default
     database: personal_development
     #username: postgres
@@ -18,11 +23,6 @@ development:
     database: wx_development
     host: localhost
     migrations_paths: db/wx
-  ryan_romanchuk:
-    <<: *default
-    database: ryan_romanchuk_development
-    host: localhost
-    migrations_paths: db/ryan_romanchuk
   ro:
     <<: *default
     database: ro_development
@@ -30,7 +30,13 @@ development:
     migrations_paths: db/ro
 
 test:
-  primary:
+  ryan_romanchuk:
+    <<: *default
+    database: ryan_romanchuk_test
+    username: postgres
+    host: localhost
+    migrations_paths: db/ryan_romanchuk
+  legacy:
     <<: *default
     database: personal_test
     username: postgres
@@ -41,12 +47,6 @@ test:
     username: postgres
     host: localhost
     migrations_paths: db/wx
-  ryan_romanchuk:
-    <<: *default
-    database: ryan_romanchuk_test
-    username: postgres
-    host: localhost
-    migrations_paths: db/ryan_romanchuk
   ro:
     <<: *default
     database: ro_test
@@ -55,7 +55,14 @@ test:
     migrations_paths: db/ro
 
 production:
-  primary:
+  ryan_romanchuk:
+    <<: *default
+    database: ryan_romanchuk_production
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    migrations_paths: db/ryan_romanchuk
+  legacy:
     <<: *default
     database: personal_production
     username: personal
@@ -67,13 +74,6 @@ production:
     password: <%= ENV["DATABASE_PASSWORD"] %>
     host: <%= ENV['DATABASE_HOST'] %>
     migrations_paths: db/wx
-  ryan_romanchuk:
-    <<: *default
-    database: ryan_romanchuk_production
-    username: <%= ENV["DATABASE_USERNAME"] %>
-    password: <%= ENV["DATABASE_PASSWORD"] %>
-    host: <%= ENV['DATABASE_HOST'] %>
-    migrations_paths: db/ryan_romanchuk
   ro:
     <<: *default
     database: ro_production

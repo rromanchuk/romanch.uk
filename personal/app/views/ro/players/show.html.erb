@@ -1,5 +1,5 @@
 
-<%= provide(:canonical_url, romanchuk_open_player_url(player, host: 'romanchukopen.com')) %>
+<%= provide(:canonical_url, ro_player_url(player, host: 'romanchukopen.com')) %>
 
 <section>
   <div class="row py-lg-5 py-5 text-center container">
@@ -16,7 +16,7 @@
 
 <% if current_user %>
   <div class="hstack gap-2 justify-content-center">
-    <%= link_to "Edit", edit_romanchuk_open_player_path(player), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
-    <%= button_to "Destory", romanchuk_open_player_path(player), method: :delete, class: 'btn btn-sm btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
+    <%= link_to "Edit", edit_ro_player_path(player), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
+    <%= button_to "Destory", ro_player_path(player), method: :delete, class: 'btn btn-sm btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
   </div>
 <% end %>

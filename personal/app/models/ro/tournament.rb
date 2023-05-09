@@ -10,6 +10,7 @@ module Ro
     #                                 }, as: :record, class_name: 'Attachment', inverse_of: :record, dependent: :destroy
     # has_many :ro_photo_blobs, through: :ro_photo_attachments, class_name: 'Blob', source: :blob
     # accepts_nested_attributes_for :ro_photo_blobs, reject_if: :all_blank
+    has_one_attached :poster
     has_many_attached :images
     store_accessor :data, :location, :newsletter
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Post < ApplicationRecord
+class Post < LegacyRecord
   SEARCH_AGAINST = %i[title description markdown_content]
 
   include Sluggable

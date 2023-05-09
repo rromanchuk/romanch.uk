@@ -46,7 +46,7 @@ module Ro
     end
 
     def player_params
-      params.require(:ro_player).permit(:name)
+      params.require(:ro_player).permit(:name, :slug, :avatar)
     end
 
   end

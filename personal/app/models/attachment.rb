@@ -1,4 +1,4 @@
-class Attachment < ApplicationRecord
+class Attachment < LegacyRecord
   belongs_to :record, polymorphic: true, touch: true
   belongs_to :blob, autosave: true
 

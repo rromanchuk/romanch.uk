@@ -12,7 +12,7 @@ module Ro
 
     def edit
       require_me!
-      tournament.ro_photo_blobs.build
+      
     end
 
     def create

@@ -1,4 +1,4 @@
-class RomanchukOpen::Player < ApplicationRecord
+class RomanchukOpen::Player < LegacyRecord
   include Sluggable
 
   has_many :golfers, dependent: :destroy

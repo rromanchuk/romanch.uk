@@ -1,4 +1,4 @@
-class RomanchukOpen::Tournament < ApplicationRecord
+class RomanchukOpen::Tournament < LegacyRecord
   self.implicit_order_column = :ocurred_on
   include Sluggable
   has_many :golfers, dependent: :destroy
