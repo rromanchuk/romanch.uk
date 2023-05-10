@@ -4,14 +4,9 @@ module Ro
     include Sluggable
     has_many :golfers, dependent: :destroy
     has_many :players, through: :golfers
+    has_many :images, dependent: :destroy
 
-    # has_many :ro_photo_attachments, lambda {
-    #                                   where(name: :ro_photo)
-    #                                 }, as: :record, class_name: 'Attachment', inverse_of: :record, dependent: :destroy
-    # has_many :ro_photo_blobs, through: :ro_photo_attachments, class_name: 'Blob', source: :blob
-    # accepts_nested_attributes_for :ro_photo_blobs, reject_if: :all_blank
     has_one_attached :poster
-    has_many_attached :images
     store_accessor :data, :location, :newsletter
 
     def slug_candidates = %i[title ocurred_on]

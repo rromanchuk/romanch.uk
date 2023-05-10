@@ -100,7 +100,7 @@ Rails.application.routes.draw do
       resources :golfers, only: [:new]
     end
     resources :tournaments do
-      resources :blobs, only: [:show]
+      resources :images, only: [:show]
       resources :golfers, only: [:index]
       get :newsletter, on: :member
     end
@@ -124,7 +124,7 @@ Rails.application.routes.draw do
   mount PgHero::Engine, at: '/pghero'
 
   constraints(RomanchukOpenConstraint.new) do
-    root 'romanchuk_open/tournaments#index', as: :romanchuk_open
+    root 'ro/tournaments#index', as: :ro
   end
 
   constraints(PersonalConstraint.new) do
