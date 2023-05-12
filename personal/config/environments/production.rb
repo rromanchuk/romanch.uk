@@ -3,12 +3,12 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Specify AnyCable WebSocket server URL to use by JS client
-  config.after_initialize do
-    if AnyCable::Rails.enabled?
-      config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL',
-                                                                          '/cable')
-    end
-  end
+  # config.after_initialize do
+  #   if AnyCable::Rails.enabled?
+  #     config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL',
+  #                                                                         '/cable')
+  #   end
+  # end
   config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
   # Settings specified here will take precedence over those in config/application.rb.
 

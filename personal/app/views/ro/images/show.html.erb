@@ -1,0 +1,13 @@
+
+<div class="container">
+  <div class="card bg-dark text-white">
+    <img src="<%= blob.key %>" class="card-img" alt="...">
+    <div class="card-img-overlay">
+      <h5 class="card-title"><%= blob.title %></h5>
+      <p class="card-text"><%= blob.description %></p>
+      <% blob.tag_names.each do |name| %>
+        <%= tag.span name, class: 'badge bg-secondary text-decoration-none link-light' %>
+      <% end %>
+    </div>
+  </div>
+</div>
