@@ -11,11 +11,11 @@ Rails.application.configure do
   end
 
   # Specify AnyCable WebSocket server URL to use by JS client
-  config.after_initialize do
-    if true
-      config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL', '//anycable.personal.test/cable')
-    end # AnyCable::Rails.enabled?
-  end
+  # config.after_initialize do
+  #   if true
+  #     config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL', '//anycable.personal.test/cable')
+  #   end # AnyCable::Rails.enabled?
+  # end
   config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
   # Settings specified here will take precedence over those in config/application.rb.
   config.hosts << 'personal.test'

@@ -2,7 +2,6 @@
 <div data-controller="maps" data-maps-geo-json-value="<%= points_tds_pireps_path(format: :json, filter: params[:filter]) %>">
   <div id="map" style="width:100%; height:400px"> </div>
 </div>
-<%= turbo_stream_from :pireps %>
 <%= turbo_frame_tag :index do %>
   <div class="card">
     <div class="card-header">

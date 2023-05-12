@@ -11,22 +11,22 @@
             </div>
           </td>
         </tr>
-        <%= render Wx::DefinitionRowComponent.new do |c| %>
-          <% c.dt do %>
+         <tr>
+          <td class="w-25 fw-semibold">
             From batch
-          <% end %>
-          <% c.dd do %>
-            <%= link_to pirep.batch.key, tds_batch_path(pirep.batch), data: {turbo_frame: :_top} %>
-          <% end %>
-        <% end %>
-        <%= render Wx::DefinitionRowComponent.new do |c| %>
-          <% c.dt do %>
+          </td>
+          <td>
+           <%= link_to pirep.batch.key, tds_batch_path(pirep.batch), data: {turbo_frame: :_top} %>
+          </td>
+        </tr>
+         <tr>
+          <td class="w-25 fw-semibold">
             Observed at
-          <% end %>
-          <% c.dd do %>
-            <%= time_tag pirep.observation_time %> <span class="text-muted">(<%= time_ago_in_words(pirep.observation_time) %> ago)</span>
-          <% end %>
-        <% end %>
+          </td>
+          <td>
+           <%= time_tag pirep.observation_time %> <span class="text-muted">(<%= time_ago_in_words(pirep.observation_time) %> ago)</span>
+          </td>
+        </tr>
         <tr class="">
           <td class="w-25 fw-semibold">Aircraft type:</td>
           <td class="">
@@ -44,44 +44,50 @@
             <%# link_to pirep.location.to_s, tds_pireps_path(location: pirep.location), data: {turbo_action: :advance, turbo_frame: :pireps} %>
           </td>
         </tr>
-        <%= render Wx::DefinitionRowComponent.new(flight_level?(pirep.altitude_ft_msl)) do |c| %>
-          <% c.dt do %>
+        <tr>
+          <td class="w-25 fw-semibold">
             Flight level:
-          <% end %>
-          <% c.dd do %>
+          </td>
+          <td>
             <%= flight_level(pirep.altitude_ft_msl) %>
-          <% end %>
-        <% end %>
+          </td>
+        </tr>
         <% if pirep.sky_condition %>
           <tr class="">
             <td class="w-25 fw-semibold">Sky Conditions</td>
             <td class=""><%= sky_conditions(pirep.sky_condition) %></td>
           </tr>
         <% end %>
-        <%= render partial: "icing_conditions", locals: {conditions: pirep.icing_condition} %>
+        <tr>
+          <td class="w-25 fw-semibold">
+            Icing
+          </td>
+          <td>
+            <%= icing_conditions(pirep.icing_condition) %>
+          </td>
+        </tr>
         <% if pirep.turbulence_condition %>
           <tr class="">
             <td class="w-25 fw-semibold">Turbulance Conditions</td>
             <td class=""><%= turbulence_conditions(pirep.turbulence_condition) %></td>
           </tr>
         <% end %>
-        <%= render Wx::DefinitionRowComponent.new(pirep.remarks) do |c| %>
-          <% c.dt do %>
+        <tr>
+          <td class="w-25 fw-semibold">
             Remarks
-          <% end %>
-          <% c.dd do %>
-            <%= pirep.remarks %>
-            <span class="readable d-none"><%= tei_replace(pirep.remarks) %></span>
-          <% end %>
-        <% end %>
-        <%= render Wx::DefinitionRowComponent.new(pirep.station) do |c| %>
-          <% c.dt do %>
+          </td>
+          <td>
+            <%= tei_replace(pirep.remarks) %>
+          </td>
+        </tr>
+        <tr>
+          <td class="w-25 fw-semibold">
             Station
-          <% end %>
-          <% c.dd do %>
+          </td>
+          <td>
             <%= link_to pirep.station.code, tds_station_pireps_path(pirep.station), data: {turbo_action: :advance, turbo_frame: :pireps} %>
-          <% end %>
-        <% end %>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
