@@ -16,7 +16,7 @@
   <% turbo_frame_tag "modal" do %>
     <%# ModalComponent Updated: Sep 14, 2022 at 4pm %>
     <%= render ModalComponent.new(title: image.title, size: 'modal-lg') do |component| %>
-      <% component.body do %>
+      <% component.with_body do %>
         <figure class="figure">
           <%= image_tag image.key, class: 'img-fluid' %>
           <figcaption class="figure-caption text-end"><%= image.description %></figcaption>
