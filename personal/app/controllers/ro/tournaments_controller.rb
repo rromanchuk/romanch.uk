@@ -58,7 +58,7 @@ module Ro
 
     def tournament_params
       params.require(:ro_tournament).permit(:title, :ocurred_on, :city, :country, :location,
-                                                        :poste, :newsletter)
+                                                        :poster, :newsletter, image_ids: [], player_ids: [])
     end
 
     
