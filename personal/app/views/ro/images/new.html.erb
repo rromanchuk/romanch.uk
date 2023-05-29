@@ -1,5 +1,5 @@
 <div class="container">
-  <%= simple_form_for image, method: :post,  html: { data: {turbo_method: :post, turbo_frame: :_top} } do |f| %>
+  <%= simple_form_for image, url: ro_images_path, method: :post,  html: { data: {turbo_method: :post, turbo_frame: :_top} } do |f| %>
     <%= f.error_notification %>
     <%= f.input :title, as: :string %>
     <%= f.input :caption, as: :text %>

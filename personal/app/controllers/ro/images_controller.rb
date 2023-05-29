@@ -21,7 +21,8 @@ module Ro
       image.update!(image_params)
       redirect_to request.referer, status: :see_other
     end
-
+    
+    private
     def image_params
       params.require(:ro_image).permit(:file, :tournament_id, :title, :caption, :tags_as_string, :slug)
     end
