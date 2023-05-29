@@ -6,7 +6,10 @@ module Ro
     has_many :players, through: :golfers
     has_many :images, dependent: :destroy
 
-    has_one_attached :poster
+    has_one_attached :poster do |attachable|
+      attachable.variant :thumb, resize_to_limit: [300, 300]
+    end
+
     has_one_attached :newsletter
 
     store_accessor :data, :location
@@ -15,10 +18,6 @@ module Ro
 
     def year
       ocurred_on.year
-    end
-
-    def poster_image
-      ro_photo_blobs.first&.key || 'https://via.placeholder.com/200'
     end
 
     def should_generate_new_friendly_id?
