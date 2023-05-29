@@ -9,7 +9,7 @@ Rails.application.configure do
   #                                                                         '/cable')
   #   end
   # end
-  config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
+  # config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

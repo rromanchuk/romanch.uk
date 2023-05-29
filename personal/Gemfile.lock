@@ -108,21 +108,6 @@ GEM
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     aes_key_wrap (1.1.0)
-    anycable (1.3.1)
-      anycable-core (= 1.3.1)
-      grpc (~> 1.37)
-    anycable-core (1.3.1)
-      anyway_config (~> 2.2)
-      google-protobuf (>= 3.13)
-    anycable-rails (1.3.7)
-      actioncable (>= 6.0)
-      anycable (~> 1.3.0)
-      globalid
-    anycable-rails-jwt (0.1.0)
-      anycable-rails (~> 1.1)
-      jwt (~> 2.2)
-    anyway_config (2.4.1)
-      ruby-next-core (>= 0.14.0)
     ast (2.4.2)
     auto_strip_attributes (2.6.0)
       activerecord (>= 4.0)
@@ -203,11 +188,6 @@ GEM
     google-protobuf (3.23.2)
     google-protobuf (3.23.2-aarch64-linux)
     google-protobuf (3.23.2-arm64-darwin)
-    googleapis-common-protos-types (1.6.0)
-      google-protobuf (~> 3.14)
-    grpc (1.55.0)
-      google-protobuf (~> 3.23)
-      googleapis-common-protos-types (~> 1.0)
     gutentag (2.6.2)
       activerecord (>= 3.2.0)
     hashie (5.0.0)
@@ -489,8 +469,6 @@ PLATFORMS
 DEPENDENCIES
   action_policy
   activerecord-postgis-adapter
-  anycable-rails
-  anycable-rails-jwt
   auto_strip_attributes
   awesome_print
   aws-sdk-cognitoidentityprovider
@@ -504,7 +482,6 @@ DEPENDENCIES
   debug
   down
   friendly_id
-  grpc
   gutentag
   high_voltage
   hiredis
