@@ -1,3 +1,6 @@
+<% if tournament.poster.attached? %>
+  <%= image_tag cdn_image_path(tournament.poster), class: 'img-fluid', width: 300 %>
+<% end %>
 <%= simple_form_for tournament, html: { data: {turbo_frame: :_top} } do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
