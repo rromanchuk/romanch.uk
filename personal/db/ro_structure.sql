@@ -9,7 +9,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE IF EXISTS ONLY public.images DROP CONSTRAINT IF EXISTS fk_rails_ed6813a817;
 DROP INDEX IF EXISTS public.index_players_on_slug;
 DROP INDEX IF EXISTS public.index_images_on_tournament_id;
 DROP INDEX IF EXISTS public.index_golfers_on_tournament_id;
@@ -62,7 +61,8 @@ CREATE TABLE public.golfers (
 
 CREATE TABLE public.images (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    tournament_id uuid NOT NULL,
+    tournament_id uuid,
+    meta jsonb,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -185,14 +185,6 @@ CREATE INDEX index_players_on_slug ON public.players USING btree (slug);
 
 
 --
--- Name: images fk_rails_ed6813a817; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.images
-    ADD CONSTRAINT fk_rails_ed6813a817 FOREIGN KEY (tournament_id) REFERENCES public.tournaments(id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -201,6 +193,7 @@ SET search_path TO public, postgis;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230403190051'),
 ('20230508010552'),
-('20230521071142');
+('20230521071142'),
+('20230529154437');
 
 

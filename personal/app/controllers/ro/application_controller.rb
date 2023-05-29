@@ -7,7 +7,7 @@ module Ro
     # end
 
     def set_breadcrumbs
-      add_breadcrumb('Home', romanchuk_open_tournaments_url)
+      add_breadcrumb('Home', ro_tournaments_url)
     end
   end
 end

@@ -94,19 +94,19 @@ Rails.application.routes.draw do
     get 'cognito/logout', to: 'cognito#logout'
   end
 
-  namespace :romanchuk_open do
+  # namespace :romanchuk_open do
     
-    resources :golfers
-    resources :players do
-      resources :golfers, only: [:new]
-    end
-    resources :tournaments do
-      resources :images, only: [:show]
-      resources :golfers, only: [:index]
-      get :newsletter, on: :member
-    end
-    get '/pages/*id' => 'pages#show', as: :page, format: false
-  end
+  #   resources :golfers
+  #   resources :players do
+  #     resources :golfers, only: [:new]
+  #   end
+  #   resources :tournaments do
+  #     resources :images, only: [:show]
+  #     resources :golfers, only: [:index]
+  #     get :newsletter, on: :member
+  #   end
+  #   get '/pages/*id' => 'pages#show', as: :page, format: false
+  # end
 
   namespace :ro do
     resources :images
@@ -115,7 +115,7 @@ Rails.application.routes.draw do
       resources :golfers, only: [:new]
     end
     resources :tournaments do
-      resources :blobs, only: [:show]
+      resources :images, only: [:show]
       resources :golfers, only: [:index]
       get :newsletter, on: :member
     end

@@ -1,0 +1,9 @@
+
+<div class="container">
+  <%= simple_form_for image, html: { data: {turbo_frame: :_top} } do |f| %>
+    <%= f.error_notification %>
+    <%= f.association :tournament %>
+    <%= f.file_field :file %>
+    <%= f.submit class: "btn" %>
+  <% end %>
+</div>
