@@ -34,7 +34,6 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "hiredis"
 gem "redis"
-gem "redis-client"
 gem 'sidekiq'
 gem "sidekiq-cron", github: 'rromanchuk/sidekiq-cron', branch: 'fix/embed_signature'
 gem "sd_notify"
