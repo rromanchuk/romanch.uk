@@ -2,7 +2,7 @@
   <div class="card">
     <%= link_to ro_tournament_path(tournament) do %>
       <% if tournament.poster.attached? %>
-        <%= image_tag cdn_imag_url(tournament.poster), class: 'card-img' %>
+        <%= image_tag cdn_image_path(tournament.poster), class: 'card-img' %>
       <% end %>
     <% end %>
     <div class="card-body">

@@ -9,17 +9,21 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.images DROP CONSTRAINT IF EXISTS fk_rails_ed6813a817;
 DROP INDEX IF EXISTS public.index_players_on_slug;
+DROP INDEX IF EXISTS public.index_images_on_tournament_id;
 DROP INDEX IF EXISTS public.index_golfers_on_tournament_id;
 DROP INDEX IF EXISTS public.index_golfers_on_player_id;
 ALTER TABLE IF EXISTS ONLY public.tournaments DROP CONSTRAINT IF EXISTS tournaments_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.players DROP CONSTRAINT IF EXISTS players_pkey;
+ALTER TABLE IF EXISTS ONLY public.images DROP CONSTRAINT IF EXISTS images_pkey;
 ALTER TABLE IF EXISTS ONLY public.golfers DROP CONSTRAINT IF EXISTS golfers_pkey;
 ALTER TABLE IF EXISTS ONLY public.ar_internal_metadata DROP CONSTRAINT IF EXISTS ar_internal_metadata_pkey;
 DROP TABLE IF EXISTS public.tournaments;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.players;
+DROP TABLE IF EXISTS public.images;
 DROP TABLE IF EXISTS public.golfers;
 DROP TABLE IF EXISTS public.ar_internal_metadata;
 SET default_tablespace = '';
@@ -47,6 +51,18 @@ CREATE TABLE public.golfers (
     player_id uuid,
     tournament_id uuid,
     data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: images; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.images (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tournament_id uuid NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -109,6 +125,14 @@ ALTER TABLE ONLY public.golfers
 
 
 --
+-- Name: images images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.images
+    ADD CONSTRAINT images_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: players players_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -147,10 +171,25 @@ CREATE INDEX index_golfers_on_tournament_id ON public.golfers USING btree (tourn
 
 
 --
+-- Name: index_images_on_tournament_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_images_on_tournament_id ON public.images USING btree (tournament_id);
+
+
+--
 -- Name: index_players_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_players_on_slug ON public.players USING btree (slug);
+
+
+--
+-- Name: images fk_rails_ed6813a817; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.images
+    ADD CONSTRAINT fk_rails_ed6813a817 FOREIGN KEY (tournament_id) REFERENCES public.tournaments(id);
 
 
 --
@@ -161,6 +200,7 @@ SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230403190051'),
-('20230508010552');
+('20230508010552'),
+('20230521071142');
 
 

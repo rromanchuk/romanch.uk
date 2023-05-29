@@ -1,0 +1,6 @@
+<%= simple_form_for ro_images_path(image), html: { data: {turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%# f.association :ro_tournament %>
+  <%= f.file_field :file %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>

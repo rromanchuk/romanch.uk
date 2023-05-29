@@ -95,6 +95,7 @@ Rails.application.routes.draw do
   end
 
   namespace :romanchuk_open do
+    
     resources :golfers
     resources :players do
       resources :golfers, only: [:new]
@@ -108,6 +109,7 @@ Rails.application.routes.draw do
   end
 
   namespace :ro do
+    resources :images
     resources :golfers
     resources :players do
       resources :golfers, only: [:new]

@@ -5,6 +5,9 @@
   <%= f.input :newsletter %>
   <%= f.input :location %>
   <%= f.input :city %>
+  <%= f.association :images %>
+  <%= f.association :players%>
   <%= f.file_field :poster %>
+  
   <%= f.submit class: "btn-primary" %>
 <% end %>

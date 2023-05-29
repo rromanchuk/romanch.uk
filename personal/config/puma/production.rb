@@ -20,7 +20,7 @@ on_worker_boot do
   x = Sidekiq.configure_embed do |config|
     config.logger.level = Logger::DEBUG
     config.queues = %w[default low]
-    config.concurrency = 1
+    config.concurrency = 2
     config.on(:startup) do
       puts "on startup"
       schedule_file = "config/schedule.yml"
