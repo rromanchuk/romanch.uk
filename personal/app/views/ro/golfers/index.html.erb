@@ -15,7 +15,7 @@
         <p class="lead text-muted"><%= "#{tournament.ocurred_on&.strftime("%B, %Y")}, #{tournament.location}" %></p>
         <p>
           <%= link_to "Photos", romanchuk_open_tournament_path(tournament) %>
-          <% if tournament.newsletter %>
+          <% if tournament.newsletter.attached? %>
             <%# link_to "Newsletter", players_romanchuk_open_tournament_path(tournament) %>
           <% end %>
         </p>

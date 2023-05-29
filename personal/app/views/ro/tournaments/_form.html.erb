@@ -2,12 +2,12 @@
   <%= f.error_notification %>
   <%= f.input :title %>
   <%= f.input :ocurred_on, as: :date, html5: true %>
-  <%= f.input :newsletter %>
   <%= f.input :location %>
   <%= f.input :city %>
   <%= f.association :images %>
   <%= f.association :players%>
   <%= f.file_field :poster %>
+  <%= f.file_field :newsletter %>
   
   <%= f.submit class: "btn-primary" %>
 <% end %>

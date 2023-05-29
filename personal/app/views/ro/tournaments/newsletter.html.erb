@@ -1,9 +1,11 @@
 <% content_for :head do %>
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/build/pdf.min.js" data-turbo-track="reload"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.13.216/web/pdf_viewer.js" data-turbo-track="reload"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.15.349/build/pdf.min.js" data-turbo-track="reload"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.15.349/web/pdf_viewer.js" data-turbo-track="reload"></script>
 <% end %>
 
-<div class="position-relative d-flex justify-content-center" data-controller="pdf-viewer" data-pdf-viewer-url-value="<%= tournament.newsletter %>">
+
+
+<div class="position-relative d-flex justify-content-center" data-controller="pdf-viewer" data-pdf-viewer-url-value="<%= cdn_image_url(tournament.newsletter) %>">
   <div id="viewerContainer" class="position-absolute img-fluid">
     <div id="viewer" class="pdfViewer"></div>
   </div>

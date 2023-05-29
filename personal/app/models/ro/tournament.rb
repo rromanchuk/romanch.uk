@@ -7,7 +7,9 @@ module Ro
     has_many :images, dependent: :destroy
 
     has_one_attached :poster
-    store_accessor :data, :location, :newsletter
+    has_one_attached :newsletter
+
+    store_accessor :data, :location
 
     def slug_candidates = %i[title ocurred_on]
 

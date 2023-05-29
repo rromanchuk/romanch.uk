@@ -50,15 +50,15 @@ module Ro
     # end
 
     def newsletter
-      add_breadcrumb(tournament.title, romanchuk_open_tournament_url(tournament))
+      add_breadcrumb(tournament.title, ro_tournament_url(tournament))
       add_breadcrumb('Newsletter')
     end
 
     private
 
     def tournament_params
-      params.require(:ro_tournament).permit(:title, :ocurred_on, :city, :country, :location, :newsletter,
-                                                        :poster)
+      params.require(:ro_tournament).permit(:title, :ocurred_on, :city, :country, :location,
+                                                        :poste, :newsletter)
     end
 
     
