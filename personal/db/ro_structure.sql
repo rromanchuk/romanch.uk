@@ -64,7 +64,8 @@ CREATE TABLE public.images (
     tournament_id uuid,
     meta jsonb,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -194,6 +195,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230403190051'),
 ('20230508010552'),
 ('20230521071142'),
-('20230529154437');
+('20230529154437'),
+('20230529180823');
 
 

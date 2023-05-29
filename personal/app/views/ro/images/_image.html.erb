@@ -9,6 +9,7 @@
       <%= link_to image.tournament.title, ro_tournament_path(image.tournament) %>
     <% end %>
   </td>
+  <td><%= image.file.filename %></td>
   <td>
     <%= link_to "Edit", edit_ro_image_path(image) %>
   </td>

@@ -1,7 +1,7 @@
 module Ro
   class ImagesController < ApplicationController
     let(:dr_pagy)
-    let(:image) { Image.find params[:id] }
+    let(:image) { Image.friendly.find params[:id] }
     let(:images) do 
       relation = Image.recent
       @dr_pagy, records = pagy(relation, items: 25)
@@ -23,7 +23,7 @@ module Ro
     end
 
     def image_params
-      params.require(:ro_image).permit(:file, :tournament_id)
+      params.require(:ro_image).permit(:file, :tournament_id, :title, :caption, :tags_as_string, :slug)
     end
     
   end
