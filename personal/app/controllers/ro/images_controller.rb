@@ -19,8 +19,12 @@ module Ro
 
     def create
       require_me!
-      @image = Image.create!(image_params)
-      redirect_to request.referer, status: :see_other
+      @image = Image.new(image_params)
+      if image.save
+        redirect_to request.referer, status: :see_other
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
 
     def update
