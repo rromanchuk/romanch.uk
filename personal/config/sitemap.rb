@@ -27,11 +27,11 @@ SitemapGenerator::Sitemap.create(default_host: 'https://romanch.uk', sitemaps_pa
   end
 end
 
-SitemapGenerator::Sitemap.create(default_host: 'https://romanchukopen.com', sitemaps_path: 'sitemaps/romanchukopen') do
-  RomanchukOpen::Tournament.find_each do |tournament|
-    add(romanchuk_open_tournament_path(tournament), images: tournament.ro_photo_blobs.map do |blob|
-                                                              { loc: blob.key }
-                                                            end, lastmod: tournament.updated_at,
-                                                    changefreq: :monthly, priority: 0.7)
-  end
-end
+# SitemapGenerator::Sitemap.create(default_host: 'https://romanchukopen.com', sitemaps_path: 'sitemaps/romanchukopen') do
+#   RomanchukOpen::Tournament.find_each do |tournament|
+#     add(romanchuk_open_tournament_path(tournament), images: tournament.ro_photo_blobs.map do |blob|
+#                                                               { loc: blob.key }
+#                                                             end, lastmod: tournament.updated_at,
+#                                                     changefreq: :monthly, priority: 0.7)
+#   end
+# end
