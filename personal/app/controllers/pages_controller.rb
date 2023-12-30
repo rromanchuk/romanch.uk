@@ -7,13 +7,7 @@ class PagesController < ApplicationController
   #   super.merge({ stream: true })
   # end
 
-  def show
-      render(
-        template: current_page,
-        locals: { current_page: },
-        stream: true
-      )
-  end
+
 
   private
 

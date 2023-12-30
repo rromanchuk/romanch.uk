@@ -1,8 +1,8 @@
-<%= provide(:page_title, image.title ) %>
-<%= provide(:page_description, image.description) %>
-<%- provide(:page_keywords, image.tags_as_string ) %>
-<%= provide(:share_image, image.key ) %>
-<%= provide(:canonical_url, serve_image_url(id: image.slug)) %>
+<% content_for(:page_title, image.title ) %>
+<% content_for(:page_description, image.description) %>
+<% content_for(:page_keywords, image.tags_as_string ) %>
+<% content_for(:share_image, image.key ) %>
+<% content_for(:canonical_url, serve_image_url(id: image.slug)) %>
 <% cache image do %>
   <div class="card bg-dark text-white">
     <img src="<%= image.key %>" class="card-img" alt="...">

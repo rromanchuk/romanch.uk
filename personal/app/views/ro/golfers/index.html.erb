@@ -1,9 +1,9 @@
-<%= provide(:page_title, "All golfers") %>
+<% content_for(:page_title, "All golfers") %>
 
 <% if params[:tournament_id] -%>
-  <%= provide(:canonical_url, ro_tournament_golfers_url(tournament)) %>
+  <%=content_for(:canonical_url, ro_tournament_golfers_url(tournament)) %>
 <% else %>
-  <%= provide(:canonical_url, ro_golfers_url) %>
+  <% content_for(:canonical_url, ro_golfers_url) %>
 <% end -%>
 
 

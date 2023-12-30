@@ -7,7 +7,6 @@ module Serve
     def show
       add_breadcrumb("Flying Videos", page_url("flying"))
       add_breadcrumb(video.title)
-      render stream: true
     end
 
     private

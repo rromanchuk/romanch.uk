@@ -1,7 +1,7 @@
-<%= provide(:page_title, post.title)  %>
-<%= provide(:page_description, post.description) %>
-<%= provide(:page_keywords, post.tags.pluck(:name).join(',')) %>
-<%= provide(:canonical_url, post_url(post, host: 'romanch.uk')) %>
+<% content_for(:page_title, post.title)  %>
+<% content_for(:page_description, post.description) %>
+<% content_for(:page_keywords, post.tags.pluck(:name).join(',')) %>
+<% content_for(:canonical_url, post_url(post, host: 'romanch.uk')) %>
 <%= turbo_frame_tag "edit_post", target: "_top" %>
 <% cache post do %>
   <%= turbo_frame_tag post do %>

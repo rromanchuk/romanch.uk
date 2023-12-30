@@ -19,13 +19,11 @@ module Tds
 
     def index
       add_breadcrumb('METARs', tds_metars_url)
-      render stream: true
     end
 
     def show
       add_breadcrumb('METARs', tds_metars_url)
       add_breadcrumb(metar.raw_text)
-      render stream: true
     end
 
     private

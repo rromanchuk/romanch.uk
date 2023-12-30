@@ -1,4 +1,4 @@
-<%= provide(:page_title, Breadcrumb.title_string(breadcrumbs) ) %>
+<% content_for(:page_title, Breadcrumb.title_string(breadcrumbs) ) %>
 <% cache batch do -%>
   <div class="card">
     <div class="card-header">

@@ -1,5 +1,5 @@
 <%# turbo_frame_tag "new_post", target: "_top" %>
-<%= provide(:page_title, 'All snippets') %>
+<% content_for(:page_title, 'All snippets') %>
 <p>Personal pastebin-like snippets for myself, and because it's more fun than sending myself slack messages.</p>
 <hr />
 <%= turbo_stream_from :posts %>

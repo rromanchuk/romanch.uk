@@ -1,5 +1,5 @@
-<%= provide(:page_title, 'Flying') %>
-<%= provide(:canonical_url, page_url("flying")) %>
+<% content_for(:page_title, 'Flying') %>
+<% content_for(:canonical_url, page_url("flying")) %>
 <% cache 'v1' do %>
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <% flying_videos.each do |blob| %>

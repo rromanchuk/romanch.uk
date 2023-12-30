@@ -1,8 +1,8 @@
 
-<%= provide(:page_title, video.title) %>
-<%= provide(:page_keywords, video.tags_as_string) %>
-<%= provide(:share_image, video.thumbnail_key) %>
-<%= provide(:canonical_url, serve_video_url(id: video.slug)) %>
+<% content_for(:page_title, video.title) %>
+<% content_for(:page_keywords, video.tags_as_string) %>
+<% content_for(:share_image, video.thumbnail_key) %>
+<% content_for(:canonical_url, serve_video_url(id: video.slug)) %>
 
 
 <% cache video do %>

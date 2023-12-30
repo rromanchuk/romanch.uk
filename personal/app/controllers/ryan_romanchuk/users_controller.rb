@@ -7,12 +7,10 @@ module RyanRomanchuk
     def show
       add_breadcrumb('Users', users_url)
       add_breadcrumb(user.name)
-      render stream: true
     end
     
     def index
       add_breadcrumb('Users')
-      render stream: true
     end
 
     def destroy

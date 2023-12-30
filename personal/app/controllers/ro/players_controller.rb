@@ -7,12 +7,10 @@ module Ro
     def show
       add_breadcrumb('Players', ro_players_url)
       add_breadcrumb(player.name)
-      render stream: true
     end
 
     def index
       add_breadcrumb('Players')
-      render stream: true
     end
 
     def new

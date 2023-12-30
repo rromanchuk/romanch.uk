@@ -15,20 +15,17 @@ module Tds
 
     def index
       add_breadcrumb('Pilot Reports', tds_pireps_url)
-      render stream: true
     end
 
     def show
       add_breadcrumb('Pilot Reports', tds_pireps_url)
       add_breadcrumb(pirep.raw_text)
-      render stream: true
     end
 
     def debug
       add_breadcrumb('Pilot Reports', tds_pireps_url)
       add_breadcrumb(pirep.raw_text, tds_pirep_url(pirep))
       add_breadcrumb('Debug')
-      render stream: true
     end
 
     def map
