@@ -483,10 +483,9 @@ ALTER TABLE ONLY public.gutentag_taggings
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230403124303'),
-('20230508013707'),
-('20230508015328'),
+('20230509001859'),
 ('20230509001025'),
-('20230509001859');
-
+('20230508015328'),
+('20230508013707'),
+('20230403124303');
 

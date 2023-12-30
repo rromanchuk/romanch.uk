@@ -192,10 +192,9 @@ CREATE INDEX index_players_on_slug ON public.players USING btree (slug);
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230403190051'),
-('20230508010552'),
-('20230521071142'),
+('20230529180823'),
 ('20230529154437'),
-('20230529180823');
-
+('20230521071142'),
+('20230508010552'),
+('20230403190051');
 
