@@ -85,7 +85,9 @@
             Station
           </td>
           <td>
-            <%= link_to pirep.station.code, tds_station_pireps_path(pirep.station), data: {turbo_action: :advance, turbo_frame: :pireps} %>
+            <% if pirep.station %>
+              <%= link_to pirep.station&.code, tds_station_pireps_path(pirep.station), data: {turbo_action: :advance, turbo_frame: :pireps} %>
+            <% end %>
           </td>
         </tr>
       </tbody>

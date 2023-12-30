@@ -31,9 +31,9 @@ module Tds
 
     def ingest
       if allowed_to?(:ingest?, current_user, with: BatchPolicy)
-        Pireps::Ingest.async_call
-        Metars::Ingest.async_call
-        Tafs::Ingest.async_call
+        Pireps::Ingest.call
+        Metars::Ingest.call
+        Tafs::Ingest.call
         redirect_to tds_batches_path, notice: 'Ingesting data...'
       else
         redirect_to tds_batches_path, notice: 'Not authorized'

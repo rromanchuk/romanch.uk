@@ -27,11 +27,11 @@ module Tds
       
       case report_type
       when 'aircraftreports'
-        Tds::Pireps::Process.async_call(id)
+        Tds::Pireps::Process.call(id)
       when 'metars'
-        Tds::Metars::Process.async_call(id)
+        Tds::Metars::Process.call(id)
       when 'tafs'
-        Tds::Tafs::Process.async_call(id)
+        Tds::Tafs::Process.call(id)
       end
     end
   end

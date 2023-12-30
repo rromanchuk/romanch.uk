@@ -10,17 +10,17 @@ query_stats_worker:
   queue: "default"
   description: "Capture query stats"
 
-# metars:
-#   cron: "*/30 * * * *"
-#   class: "IngestMetarsWorker"
-#   queue: "default"
-#   description: "Metars pipeline"
+metars:
+  cron: "*/30 * * * *"
+  class: "IngestMetarsWorker"
+  queue: "default"
+  description: "Metars pipeline"
 
-# tafs:
-#   cron: "*/30 * * * *"
-#   class: "IngestTafsWorker"
-#   queue: "default"
-#   description: "Tafs pipeline"
+tafs:
+  cron: "*/30 * * * *"
+  class: "IngestTafsWorker"
+  queue: "default"
+  description: "Tafs pipeline"
 
 pireps:
   cron: "*/15 * * * *"

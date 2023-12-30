@@ -6,11 +6,7 @@ module Tds
       end
 
       def file_type
-        'cache.xml'
-      end
-
-      def content_type
-        'text/xml'
+        'cache.xml.gz'
       end
     end
   end
