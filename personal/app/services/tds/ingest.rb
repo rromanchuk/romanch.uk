@@ -9,7 +9,7 @@ module Tds
                           region: 'us-east-1')
     end
 
-    let(:endpoint) { "https://www.aviationweather.gov/adds/dataserver_current/current/#{report_type}.#{file_type}" }
+    let(:endpoint) { "https://www.aviationweather.gov/data/cache/#{report_type}.#{file_type}" }
     let(:response) do
       HTTParty.get(endpoint,
                    headers: { "User-Agent": 'romanch.uk/1.0 (Ryan Romanchuk/Private Pilot; Personal Project; github.com/rromanchuk/romanch.uk)' })
@@ -81,3 +81,5 @@ module Tds
     end
   end
 end
+
+
