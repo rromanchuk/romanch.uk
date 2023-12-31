@@ -26,7 +26,7 @@ module RyanRomanchuk
     end
 
     def index
-      authorize!
+      authorize! with: RyanRomanchuk::PostPolicy
     end
 
     def edit

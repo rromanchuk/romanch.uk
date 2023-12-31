@@ -54,7 +54,7 @@ module Tds
     def apply_filter
       relation = Pirep.recent(:observation_time)
       #relation = relation.near(params[:location], 100) if params[:location].present?
-      #relation = relation.search(params[:q]) if params[:q].present?
+      relation = relation.search(params[:q]) if params[:q].present?
 
       if params[:station_id]
         add_breadcrumb(station.code, tds_station_pireps_url(station))

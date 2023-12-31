@@ -4,7 +4,8 @@ module Tds
     include Searchable
     SEARCH_AGAINST = %i[raw_text]
     belongs_to :batch, counter_cache: :metars_count
-
+    pg_search_scope :search, against: SEARCH_AGAINST
+    
     # pg_search_scope :search, against: {
     #     station_id: 'A',
     #     wx_string: 'B',

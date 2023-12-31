@@ -43,7 +43,7 @@ module Tds
     # scope :msl_above, lambda { |feet_msl|
     #   where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
     # }
-    
+    pg_search_scope :search, against: SEARCH_AGAINST
     # pg_search_scope :search, against: {
     #     station: 'A',
     #     aircraft_ref: 'B',

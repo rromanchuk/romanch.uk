@@ -28,8 +28,8 @@ module Tds
 
     private
 
-    def apply_filter(relation = Metar.recent(:observation_time))
-      
+    def apply_filter
+      relation = Metar.recent(:observation_time)
       relation = relation.search(params[:q]) if params[:q].present?
       
       if params[:station_id]
