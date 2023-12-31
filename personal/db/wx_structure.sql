@@ -643,6 +643,7 @@ ALTER TABLE ONLY public.tds_tafs
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231231175136'),
 ('20231231074449'),
 ('20231231040823'),
 ('20231231005753'),
