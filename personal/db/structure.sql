@@ -9,9 +9,9 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS fk_rails_cb73a18b77;
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
-DROP INDEX IF EXISTS public.unique_taggings;
 DROP INDEX IF EXISTS public.index_users_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_tournaments_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_players_on_slug;
@@ -22,7 +22,7 @@ DROP INDEX IF EXISTS public.index_pghero_space_stats_on_database_and_captured_at
 DROP INDEX IF EXISTS public.index_pghero_query_stats_on_database_and_captured_at;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_taggings_count;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_name;
-DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable_type_and_taggable_id;
+DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable;
 DROP INDEX IF EXISTS public.index_gutentag_taggings_on_tag_id;
 DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_sluggable_type_and_sluggable_id;
 DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope;
@@ -33,6 +33,7 @@ DROP INDEX IF EXISTS public.index_active_storage_variant_records_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_blobs_on_key;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
+DROP INDEX IF EXISTS public.gutentag_taggings_uniqueness;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.romanchuk_open_tournaments DROP CONSTRAINT IF EXISTS romanchuk_open_tournaments_pkey;
@@ -52,8 +53,6 @@ ALTER TABLE IF EXISTS ONLY public.active_storage_blobs DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS active_storage_attachments_pkey;
 ALTER TABLE IF EXISTS public.pghero_space_stats ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.pghero_query_stats ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.gutentag_tags ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.gutentag_taggings ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.schema_migrations;
@@ -65,9 +64,7 @@ DROP SEQUENCE IF EXISTS public.pghero_space_stats_id_seq;
 DROP TABLE IF EXISTS public.pghero_space_stats;
 DROP SEQUENCE IF EXISTS public.pghero_query_stats_id_seq;
 DROP TABLE IF EXISTS public.pghero_query_stats;
-DROP SEQUENCE IF EXISTS public.gutentag_tags_id_seq;
 DROP TABLE IF EXISTS public.gutentag_tags;
-DROP SEQUENCE IF EXISTS public.gutentag_taggings_id_seq;
 DROP TABLE IF EXISTS public.gutentag_taggings;
 DROP SEQUENCE IF EXISTS public.friendly_id_slugs_id_seq;
 DROP TABLE IF EXISTS public.friendly_id_slugs;
@@ -250,32 +247,13 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 --
 
 CREATE TABLE public.gutentag_taggings (
-    id bigint NOT NULL,
-    tag_id integer NOT NULL,
-    taggable_id uuid NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tag_id uuid NOT NULL,
     taggable_type character varying NOT NULL,
+    taggable_id uuid NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
-
-
---
--- Name: gutentag_taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.gutentag_taggings_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: gutentag_taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.gutentag_taggings_id_seq OWNED BY public.gutentag_taggings.id;
 
 
 --
@@ -283,31 +261,12 @@ ALTER SEQUENCE public.gutentag_taggings_id_seq OWNED BY public.gutentag_taggings
 --
 
 CREATE TABLE public.gutentag_tags (
-    id bigint NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     name character varying NOT NULL,
+    taggings_count bigint DEFAULT 0 NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    taggings_count integer DEFAULT 0
+    updated_at timestamp(6) without time zone NOT NULL
 );
-
-
---
--- Name: gutentag_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.gutentag_tags_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: gutentag_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.gutentag_tags_id_seq OWNED BY public.gutentag_tags.id;
 
 
 --
@@ -472,20 +431,6 @@ ALTER TABLE ONLY public.friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
--- Name: gutentag_taggings id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.gutentag_taggings ALTER COLUMN id SET DEFAULT nextval('public.gutentag_taggings_id_seq'::regclass);
-
-
---
--- Name: gutentag_tags id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.gutentag_tags ALTER COLUMN id SET DEFAULT nextval('public.gutentag_tags_id_seq'::regclass);
-
-
---
 -- Name: pghero_query_stats id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -636,6 +581,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: gutentag_taggings_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX gutentag_taggings_uniqueness ON public.gutentag_taggings USING btree (taggable_type, taggable_id, tag_id);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -706,10 +658,10 @@ CREATE INDEX index_gutentag_taggings_on_tag_id ON public.gutentag_taggings USING
 
 
 --
--- Name: index_gutentag_taggings_on_taggable_type_and_taggable_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_gutentag_taggings_on_taggable; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_gutentag_taggings_on_taggable_type_and_taggable_id ON public.gutentag_taggings USING btree (taggable_type, taggable_id);
+CREATE INDEX index_gutentag_taggings_on_taggable ON public.gutentag_taggings USING btree (taggable_type, taggable_id);
 
 
 --
@@ -783,13 +735,6 @@ CREATE UNIQUE INDEX index_users_on_slug ON public.users USING btree (slug);
 
 
 --
--- Name: unique_taggings; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_taggings ON public.gutentag_taggings USING btree (taggable_type, taggable_id, tag_id);
-
-
---
 -- Name: active_storage_variant_records fk_rails_993965df05; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -806,12 +751,21 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
+-- Name: gutentag_taggings fk_rails_cb73a18b77; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.gutentag_taggings
+    ADD CONSTRAINT fk_rails_cb73a18b77 FOREIGN KEY (tag_id) REFERENCES public.gutentag_tags(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231231182200'),
 ('20231231065715'),
 ('20231231005449'),
 ('20231231003521'),
