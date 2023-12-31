@@ -35,6 +35,7 @@ DROP INDEX IF EXISTS public.index_tds_metars_on_station_id;
 DROP INDEX IF EXISTS public.index_tds_metars_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_metars_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_batches_on_report_type;
+DROP INDEX IF EXISTS public.index_tds_batches_on_processed_at;
 DROP INDEX IF EXISTS public.index_tds_aireps_uniqueness;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_batch_id;
@@ -439,6 +440,13 @@ CREATE UNIQUE INDEX index_tds_aireps_uniqueness ON public.tds_aireps USING btree
 
 
 --
+-- Name: index_tds_batches_on_processed_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tds_batches_on_processed_at ON public.tds_batches USING btree (processed_at);
+
+
+--
 -- Name: index_tds_batches_on_report_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -635,6 +643,7 @@ ALTER TABLE ONLY public.tds_tafs
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231231040823'),
 ('20231231005753'),
 ('20231231003005'),
 ('20230403001620'),
