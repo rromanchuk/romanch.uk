@@ -8,16 +8,16 @@ default: &default
 
 
 development:
+  primary:
+    <<: *default
+    database: personal_development
+    #username: postgres
+    host: localhost
   ryan_romanchuk:
     <<: *default
     database: ryan_romanchuk_development
     host: localhost
     migrations_paths: db/ryan_romanchuk
-  legacy:
-    <<: *default
-    database: personal_development
-    #username: postgres
-    host: localhost
   wx:
     <<: *default
     database: wx_development
@@ -30,17 +30,17 @@ development:
     migrations_paths: db/ro
 
 test:
+  primary:
+    <<: *default
+    database: personal_test
+    username: postgres
+    host: localhost
   ryan_romanchuk:
     <<: *default
     database: ryan_romanchuk_test
     username: postgres
     host: localhost
     migrations_paths: db/ryan_romanchuk
-  legacy:
-    <<: *default
-    database: personal_test
-    username: postgres
-    host: localhost
   wx:
     <<: *default
     database: wx_test
@@ -55,6 +55,11 @@ test:
     migrations_paths: db/ro
 
 production:
+  primary:
+    <<: *default
+    database: personal_production
+    username: personal
+    #password: <%= ENV["PERSONAL_DATABASE_PASSWORD"] %>
   ryan_romanchuk:
     <<: *default
     database: ryan_romanchuk_production
@@ -62,11 +67,6 @@ production:
     password: <%= ENV["DATABASE_PASSWORD"] %>
     host: <%= ENV['DATABASE_HOST'] %>
     migrations_paths: db/ryan_romanchuk
-  legacy:
-    <<: *default
-    database: personal_production
-    username: personal
-    #password: <%= ENV["PERSONAL_DATABASE_PASSWORD"] %>
   wx:
     <<: *default
     database: wx_production

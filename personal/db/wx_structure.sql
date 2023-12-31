@@ -39,8 +39,6 @@ DROP INDEX IF EXISTS public.index_tds_aireps_uniqueness;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_aircraft_type_designators_on_slug;
-DROP INDEX IF EXISTS public.index_pghero_space_stats_on_database_and_captured_at;
-DROP INDEX IF EXISTS public.index_pghero_query_stats_on_database_and_captured_at;
 ALTER TABLE IF EXISTS ONLY public.wx_station_observations DROP CONSTRAINT IF EXISTS wx_station_observations_pkey;
 ALTER TABLE IF EXISTS ONLY public.tds_tafs DROP CONSTRAINT IF EXISTS tds_tafs_pkey;
 ALTER TABLE IF EXISTS ONLY public.tds_stations DROP CONSTRAINT IF EXISTS tds_stations_pkey;
@@ -50,11 +48,7 @@ ALTER TABLE IF EXISTS ONLY public.tds_batches DROP CONSTRAINT IF EXISTS tds_batc
 ALTER TABLE IF EXISTS ONLY public.tds_aireps DROP CONSTRAINT IF EXISTS tds_aireps_pkey;
 ALTER TABLE IF EXISTS ONLY public.tds_aircraft_type_designators DROP CONSTRAINT IF EXISTS tds_aircraft_type_designators_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
-ALTER TABLE IF EXISTS ONLY public.pghero_space_stats DROP CONSTRAINT IF EXISTS pghero_space_stats_pkey;
-ALTER TABLE IF EXISTS ONLY public.pghero_query_stats DROP CONSTRAINT IF EXISTS pghero_query_stats_pkey;
 ALTER TABLE IF EXISTS ONLY public.ar_internal_metadata DROP CONSTRAINT IF EXISTS ar_internal_metadata_pkey;
-ALTER TABLE IF EXISTS public.pghero_space_stats ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.pghero_query_stats ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.wx_station_observations;
 DROP TABLE IF EXISTS public.tds_tafs;
 DROP TABLE IF EXISTS public.tds_stations;
@@ -64,11 +58,22 @@ DROP TABLE IF EXISTS public.tds_batches;
 DROP TABLE IF EXISTS public.tds_aireps;
 DROP TABLE IF EXISTS public.tds_aircraft_type_designators;
 DROP TABLE IF EXISTS public.schema_migrations;
-DROP SEQUENCE IF EXISTS public.pghero_space_stats_id_seq;
-DROP TABLE IF EXISTS public.pghero_space_stats;
-DROP SEQUENCE IF EXISTS public.pghero_query_stats_id_seq;
-DROP TABLE IF EXISTS public.pghero_query_stats;
 DROP TABLE IF EXISTS public.ar_internal_metadata;
+DROP EXTENSION IF EXISTS pg_stat_statements;
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -83,74 +88,6 @@ CREATE TABLE public.ar_internal_metadata (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
-
-
---
--- Name: pghero_query_stats; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.pghero_query_stats (
-    id bigint NOT NULL,
-    database text,
-    "user" text,
-    query text,
-    query_hash bigint,
-    total_time double precision,
-    calls bigint,
-    captured_at timestamp without time zone
-);
-
-
---
--- Name: pghero_query_stats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.pghero_query_stats_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pghero_query_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.pghero_query_stats_id_seq OWNED BY public.pghero_query_stats.id;
-
-
---
--- Name: pghero_space_stats; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.pghero_space_stats (
-    id bigint NOT NULL,
-    database text,
-    schema text,
-    relation text,
-    size bigint,
-    captured_at timestamp without time zone
-);
-
-
---
--- Name: pghero_space_stats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.pghero_space_stats_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pghero_space_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.pghero_space_stats_id_seq OWNED BY public.pghero_space_stats.id;
 
 
 --
@@ -394,41 +331,11 @@ CREATE TABLE public.wx_station_observations (
 
 
 --
--- Name: pghero_query_stats id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pghero_query_stats ALTER COLUMN id SET DEFAULT nextval('public.pghero_query_stats_id_seq'::regclass);
-
-
---
--- Name: pghero_space_stats id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pghero_space_stats ALTER COLUMN id SET DEFAULT nextval('public.pghero_space_stats_id_seq'::regclass);
-
-
---
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
-
-
---
--- Name: pghero_query_stats pghero_query_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pghero_query_stats
-    ADD CONSTRAINT pghero_query_stats_pkey PRIMARY KEY (id);
-
-
---
--- Name: pghero_space_stats pghero_space_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pghero_space_stats
-    ADD CONSTRAINT pghero_space_stats_pkey PRIMARY KEY (id);
 
 
 --
@@ -501,20 +408,6 @@ ALTER TABLE ONLY public.tds_tafs
 
 ALTER TABLE ONLY public.wx_station_observations
     ADD CONSTRAINT wx_station_observations_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_pghero_query_stats_on_database_and_captured_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_pghero_query_stats_on_database_and_captured_at ON public.pghero_query_stats USING btree (database, captured_at);
-
-
---
--- Name: index_pghero_space_stats_on_database_and_captured_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_pghero_space_stats_on_database_and_captured_at ON public.pghero_space_stats USING btree (database, captured_at);
 
 
 --
@@ -742,6 +635,8 @@ ALTER TABLE ONLY public.tds_tafs
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231231005753'),
+('20231231003005'),
 ('20230403001620'),
 ('20230301150937'),
 ('20230227043115'),

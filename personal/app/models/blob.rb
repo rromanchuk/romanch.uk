@@ -1,4 +1,4 @@
-class Blob < LegacyRecord
+class Blob < ApplicationRecord
   include Taggable
   include Searchable
   include Sluggable

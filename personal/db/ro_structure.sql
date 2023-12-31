@@ -25,6 +25,21 @@ DROP TABLE IF EXISTS public.players;
 DROP TABLE IF EXISTS public.images;
 DROP TABLE IF EXISTS public.golfers;
 DROP TABLE IF EXISTS public.ar_internal_metadata;
+DROP EXTENSION IF EXISTS pg_stat_statements;
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -192,6 +207,8 @@ CREATE INDEX index_players_on_slug ON public.players USING btree (slug);
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231231010416'),
+('20231231005823'),
 ('20230529180823'),
 ('20230529154437'),
 ('20230521071142'),

@@ -60,21 +60,23 @@ module Tds
 
     private
 
-    def apply_filter(relation = Batch.all)
+    def apply_filter
+      relation = Batch.recent
+      
       case params[:filter]
       when 'metars'
-        relation.metars
+        relation = relation.metars
       when 'pireps'
-        relation.aircraftreports
+        relation = relation.aircraftreports
       when 'tafs'
-        relation.tafs
+        relation = relation.tafs
       when 'failed'
-        relation.failed
+        relation = relation.failed
       when 'pending'
-        relation.pending
-      else
-        relation
-      end.recent
+        relation = relation.pending
+      end
+
+      relation
     end
 
     def apply_sort(relation)

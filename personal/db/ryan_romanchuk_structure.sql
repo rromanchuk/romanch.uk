@@ -9,14 +9,15 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS fk_rails_cb73a18b77;
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
-DROP INDEX IF EXISTS public.unique_taggings;
 DROP INDEX IF EXISTS public.index_users_on_slug;
 DROP INDEX IF EXISTS public.index_posts_on_slug;
+DROP INDEX IF EXISTS public.index_pg_search_documents_on_searchable;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_taggings_count;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_name;
-DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable_type_and_taggable_id;
+DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable;
 DROP INDEX IF EXISTS public.index_gutentag_taggings_on_tag_id;
 DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_sluggable_type_and_sluggable_id;
 DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope;
@@ -25,6 +26,7 @@ DROP INDEX IF EXISTS public.index_active_storage_variant_records_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_blobs_on_key;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
+DROP INDEX IF EXISTS public.gutentag_taggings_uniqueness;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.posts DROP CONSTRAINT IF EXISTS posts_pkey;
@@ -36,16 +38,14 @@ ALTER TABLE IF EXISTS ONLY public.ar_internal_metadata DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS active_storage_variant_records_pkey;
 ALTER TABLE IF EXISTS ONLY public.active_storage_blobs DROP CONSTRAINT IF EXISTS active_storage_blobs_pkey;
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS active_storage_attachments_pkey;
-ALTER TABLE IF EXISTS public.gutentag_tags ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.gutentag_taggings ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.pg_search_documents ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.posts;
+DROP SEQUENCE IF EXISTS public.pg_search_documents_id_seq;
 DROP TABLE IF EXISTS public.pg_search_documents;
-DROP SEQUENCE IF EXISTS public.gutentag_tags_id_seq;
 DROP TABLE IF EXISTS public.gutentag_tags;
-DROP SEQUENCE IF EXISTS public.gutentag_taggings_id_seq;
 DROP TABLE IF EXISTS public.gutentag_taggings;
 DROP SEQUENCE IF EXISTS public.friendly_id_slugs_id_seq;
 DROP TABLE IF EXISTS public.friendly_id_slugs;
@@ -53,6 +53,21 @@ DROP TABLE IF EXISTS public.ar_internal_metadata;
 DROP TABLE IF EXISTS public.active_storage_variant_records;
 DROP TABLE IF EXISTS public.active_storage_blobs;
 DROP TABLE IF EXISTS public.active_storage_attachments;
+DROP EXTENSION IF EXISTS pg_stat_statements;
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -149,32 +164,13 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 --
 
 CREATE TABLE public.gutentag_taggings (
-    id bigint NOT NULL,
-    tag_id integer NOT NULL,
-    taggable_id integer NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tag_id uuid NOT NULL,
     taggable_type character varying NOT NULL,
+    taggable_id uuid NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
-
-
---
--- Name: gutentag_taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.gutentag_taggings_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: gutentag_taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.gutentag_taggings_id_seq OWNED BY public.gutentag_taggings.id;
 
 
 --
@@ -182,19 +178,33 @@ ALTER SEQUENCE public.gutentag_taggings_id_seq OWNED BY public.gutentag_taggings
 --
 
 CREATE TABLE public.gutentag_tags (
-    id bigint NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     name character varying NOT NULL,
+    taggings_count bigint DEFAULT 0 NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    taggings_count integer DEFAULT 0 NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
 --
--- Name: gutentag_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.gutentag_tags_id_seq
+CREATE TABLE public.pg_search_documents (
+    id bigint NOT NULL,
+    content text,
+    searchable_type character varying,
+    searchable_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pg_search_documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pg_search_documents_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -203,21 +213,10 @@ CREATE SEQUENCE public.gutentag_tags_id_seq
 
 
 --
--- Name: gutentag_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: pg_search_documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.gutentag_tags_id_seq OWNED BY public.gutentag_tags.id;
-
-
---
--- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.pg_search_documents (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
+ALTER SEQUENCE public.pg_search_documents_id_seq OWNED BY public.pg_search_documents.id;
 
 
 --
@@ -269,17 +268,10 @@ ALTER TABLE ONLY public.friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
--- Name: gutentag_taggings id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: pg_search_documents id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.gutentag_taggings ALTER COLUMN id SET DEFAULT nextval('public.gutentag_taggings_id_seq'::regclass);
-
-
---
--- Name: gutentag_tags id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.gutentag_tags ALTER COLUMN id SET DEFAULT nextval('public.gutentag_tags_id_seq'::regclass);
+ALTER TABLE ONLY public.pg_search_documents ALTER COLUMN id SET DEFAULT nextval('public.pg_search_documents_id_seq'::regclass);
 
 
 --
@@ -371,6 +363,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: gutentag_taggings_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX gutentag_taggings_uniqueness ON public.gutentag_taggings USING btree (taggable_type, taggable_id, tag_id);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -427,10 +426,10 @@ CREATE INDEX index_gutentag_taggings_on_tag_id ON public.gutentag_taggings USING
 
 
 --
--- Name: index_gutentag_taggings_on_taggable_type_and_taggable_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_gutentag_taggings_on_taggable; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_gutentag_taggings_on_taggable_type_and_taggable_id ON public.gutentag_taggings USING btree (taggable_type, taggable_id);
+CREATE INDEX index_gutentag_taggings_on_taggable ON public.gutentag_taggings USING btree (taggable_type, taggable_id);
 
 
 --
@@ -448,6 +447,13 @@ CREATE INDEX index_gutentag_tags_on_taggings_count ON public.gutentag_tags USING
 
 
 --
+-- Name: index_pg_search_documents_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_searchable ON public.pg_search_documents USING btree (searchable_type, searchable_id);
+
+
+--
 -- Name: index_posts_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -459,13 +465,6 @@ CREATE INDEX index_posts_on_slug ON public.posts USING btree (slug);
 --
 
 CREATE INDEX index_users_on_slug ON public.users USING btree (slug);
-
-
---
--- Name: unique_taggings; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_taggings ON public.gutentag_taggings USING btree (taggable_type, taggable_id, tag_id);
 
 
 --
@@ -485,14 +484,24 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
+-- Name: gutentag_taggings fk_rails_cb73a18b77; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.gutentag_taggings
+    ADD CONSTRAINT fk_rails_cb73a18b77 FOREIGN KEY (tag_id) REFERENCES public.gutentag_tags(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO public, postgis;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230403124303'),
+('20231231005814'),
+('20230509001859'),
+('20230509001025'),
+('20230508015328'),
 ('20230508013707'),
-('20230508015328');
-
+('20230403124303');
 
