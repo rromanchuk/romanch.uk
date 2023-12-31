@@ -16,7 +16,7 @@
     </div>
     <%= turbo_frame_tag :pireps do %>
       <div class="card-body">
-        <%= render partial: 'tds/pireps/pirep', collection: pireps, cached: true %>
+        <%= render pireps %>
       </div>
       <div class="card-footer text-muted">
         <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>

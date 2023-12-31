@@ -7,7 +7,7 @@ module Tds
     let(:dr_pagy)
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
-      relation = apply_filter.recent(:observation_time)
+      relation = apply_filter
       @dr_pagy, records = pagy_countless(relation, items: 50)
       records
     end
@@ -51,7 +51,8 @@ module Tds
 
     private
 
-    def apply_filter(relation = Pirep.all)
+    def apply_filter
+      relation = Pirep.recent(:observation_time)
       #relation = relation.near(params[:location], 100) if params[:location].present?
       #relation = relation.search(params[:q]) if params[:q].present?
 
@@ -63,14 +64,15 @@ module Tds
       case params[:filter]
       when 'uua'
         add_breadcrumb('Urgent')
-        relation.uua
+        relation = relation.uua
       when 'ua'
         add_breadcrumb('Routine')
-        relation.ua
+        relation = relation.ua
       else
         add_breadcrumb('All')
-        relation
-      end.includes(:batch)
+      end
+      
+      relation.includes(:batch)
     end
 
     # Only allow a list of trusted parameters through.
