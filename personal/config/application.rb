@@ -14,7 +14,7 @@ module Personal
     require "custom_logger"
     ActiveRecord::Tasks::DatabaseTasks.structure_dump_flags = ['--clean', '--if-exists']
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     config.active_record.schema_format = :sql
     config.active_record.dump_schemas = :all
 
