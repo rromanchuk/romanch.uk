@@ -60,6 +60,7 @@ DROP TABLE IF EXISTS public.tds_aireps;
 DROP TABLE IF EXISTS public.tds_aircraft_type_designators;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.ar_internal_metadata;
+DROP EXTENSION IF EXISTS postgis;
 DROP EXTENSION IF EXISTS pg_stat_statements;
 --
 -- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
@@ -73,6 +74,20 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
 --
 
 COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
 
 
 SET default_tablespace = '';
@@ -640,9 +655,10 @@ ALTER TABLE ONLY public.tds_tafs
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, postgis;
+SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20240102002232'),
 ('20231231175136'),
 ('20231231074449'),
 ('20231231040823'),

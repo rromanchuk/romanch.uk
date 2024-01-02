@@ -762,7 +762,7 @@ ALTER TABLE ONLY public.gutentag_taggings
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, postgis;
+SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20231231182200'),

@@ -1,6 +1,5 @@
 default: &default
-  adapter: postgis
-  schema_search_path: public, postgis
+  adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -76,6 +75,8 @@ production:
     password: <%= ENV["DATABASE_PASSWORD"] %>
     host: <%= ENV['DATABASE_HOST'] %>
     migrations_paths: db/wx
+    adapter: postgis
+    schema_search_path: public, postgis
   ro:
     <<: *default
     database: ro_production
