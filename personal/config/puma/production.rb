@@ -2,7 +2,7 @@
 # Set global defaults, and handle someone running bin/puma outside the context of systemd
 # https://github.com/puma/puma#configuration-file
 workers 2
-threads_count 5
+# threads_count 5
 threads 5, 5
 
 directory '/var/www/romanch.uk/current'
