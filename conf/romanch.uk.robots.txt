@@ -6,6 +6,7 @@ Disallow: /
 User-Agent: *
 Disallow: /*/edit$
 Disallow: /*/new$
+Disallow: /wx/batches/
 Allow: /
 
 Sitemap: https://romanch.uk/sitemaps/romanchuk/sitemap.xml
