@@ -1,11 +1,12 @@
 module Tds
   class Metar < ApplicationRecord
     self.implicit_order_column = 'observation_time'
-    include Searchable
+    #include Searchable
+    include PgSearch::Model
     SEARCH_AGAINST = %i[raw_text]
     belongs_to :batch, counter_cache: :metars_count
     pg_search_scope :search, against: SEARCH_AGAINST
-    
+
     # pg_search_scope :search, against: {
     #     station_id: 'A',
     #     wx_string: 'B',

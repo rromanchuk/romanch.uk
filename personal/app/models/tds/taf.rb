@@ -1,6 +1,6 @@
 module Tds
   class Taf < ApplicationRecord
-    include Searchable
+    include PgSearch::Model
     self.implicit_order_column = 'issue_time'
     SEARCH_AGAINST = %i[raw_text]
     
@@ -16,7 +16,7 @@ module Tds
     #       .lt(radius)
     #   )
     # }
-    # pg_search_scope :search, against: %i[raw_text]
+    pg_search_scope :search, against: %i[raw_text]
 
     def self.cached_count
       Rails.cache.fetch("Tds::Taf.count", expires_in: 24.hours) do
