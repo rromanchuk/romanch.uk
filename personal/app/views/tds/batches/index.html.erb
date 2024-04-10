@@ -4,7 +4,7 @@
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
         <p class="card-title">Pending batches</p>
-        <p class="card-text h5 text-warning"><%= number_with_delimiter(Tds::Batch.pending.count) %></p>
+        <p class="card-text h5 text-warning"><%= number_with_delimiter(Tds::Batch.pending_count) %></p>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
     <div class="card" style="width: 10rem;">
       <div class="card-body text-center">
         <p class="card-title">Completed</p>
-        <p class="card-text h5 text-success"><%= number_with_delimiter(Tds::Batch.complete.count) %></p>
+        <p class="card-text h5 text-success"><%= number_with_delimiter(Tds::Batch.complete_count) %></p>
       </div>
     </div>
   </div>

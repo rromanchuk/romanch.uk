@@ -22,6 +22,24 @@ module Tds
       processed_at.nil? && failed_at.nil?
     end
 
+    def self.pending_count
+      Rails.cache.fetch("batch-pending-count", expires_in: 1.hour) do
+        Tds::Batch.pending.count
+      end
+    end
+
+    def self.complete_count
+      Rails.cache.fetch("batch-complete-count", expires_in: 6.hours) do
+        Tds::Batch.complete.count
+      end
+    end
+
+    def self.failed_count
+      Rails.cache.fetch("batch-failed-count", expires_in: 1.hour) do
+        Tds::Batch.failed.count
+      end
+    end
+
     def process_batch!
       return if processed_at.present?
       

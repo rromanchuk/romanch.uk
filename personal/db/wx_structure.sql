@@ -36,6 +36,8 @@ DROP INDEX IF EXISTS public.index_tds_metars_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_metars_on_batch_id;
 DROP INDEX IF EXISTS public.index_tds_batches_on_report_type;
 DROP INDEX IF EXISTS public.index_tds_batches_on_processed_at;
+DROP INDEX IF EXISTS public.index_tds_batches_on_failed_at;
+DROP INDEX IF EXISTS public.index_tds_batches_on_created_at;
 DROP INDEX IF EXISTS public.index_tds_aireps_uniqueness;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_observation_time;
 DROP INDEX IF EXISTS public.index_tds_aireps_on_batch_id;
@@ -455,6 +457,20 @@ CREATE UNIQUE INDEX index_tds_aireps_uniqueness ON public.tds_aireps USING btree
 
 
 --
+-- Name: index_tds_batches_on_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tds_batches_on_created_at ON public.tds_batches USING btree (created_at);
+
+
+--
+-- Name: index_tds_batches_on_failed_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tds_batches_on_failed_at ON public.tds_batches USING btree (failed_at);
+
+
+--
 -- Name: index_tds_batches_on_processed_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -658,6 +674,7 @@ ALTER TABLE ONLY public.tds_tafs
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20240410023029'),
 ('20240102002232'),
 ('20231231175136'),
 ('20231231074449'),
