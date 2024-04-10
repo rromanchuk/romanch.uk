@@ -34,7 +34,7 @@ module RyanRomanchuk
 
     def update
       if streaming_video.update(streaming_video_params)
-        redirect_to streaming_video_url(blob), notice: 'Streaming video was successfully updated.'
+        redirect_to streaming_video_url(streaming_video), notice: 'Streaming video was successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end

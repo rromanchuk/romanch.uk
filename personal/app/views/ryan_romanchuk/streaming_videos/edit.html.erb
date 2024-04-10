@@ -7,7 +7,9 @@
         <%= button_to "Destory", streaming_video_path(streaming_video), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
       </div>
       <div class="card shadow-sm">
-        <%= image_tag streaming_video.thumbnail_key || streaming_video.key, class: 'card-img-top' %>
+        <% if streaming_video.thumbnail_key %>
+          <%= image_tag streaming_video.thumbnail_key, class: 'card-img-top' %>
+        <% end %>
       </div>
       <%= turbo_frame_tag streaming_video do %>
         <%= render 'form' %>
