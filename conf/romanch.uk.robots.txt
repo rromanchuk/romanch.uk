@@ -1,12 +1,17 @@
 User-agent: MJ12bot
 User-agent: PetalBot
 User-agent: SemrushBot
-Disallow: /
+User-agent: Amazonbot
+User-agent: ZoominfoBot
+Disallow: /wx/batches/
+Disallow: /wx/batches/
+Disallow: /wx/metars/
+Disallow: /wx/tafs/
+Disallow: /wx/pireps/
 
 User-Agent: *
 Disallow: /*/edit$
 Disallow: /*/new$
-Disallow: /wx/batches/
 Allow: /
 
 Sitemap: https://romanch.uk/sitemaps/romanchuk/sitemap.xml
