@@ -1,7 +1,8 @@
 module Tds
   class Pirep < ApplicationRecord
     # include Turbo::Broadcastable
-    include Searchable
+    include PgSearch::Model
+
     self.implicit_order_column = 'observation_time'
     SEARCH_AGAINST = %i[raw_text]
 
@@ -16,9 +17,6 @@ module Tds
     WV = %r{/WV\s\d{3}\d{2,3}KT?}
 
     
-    # after_create_commit -> { broadcast_prepend_later_to 'pireps' }
-    # # after_update_commit -> { broadcast_replace_later_to 'pireps' }
-    # after_destroy_commit -> { broadcast_remove_to 'pireps' }
     before_create :set_aircraft_type_designator
 
     belongs_to :batch, counter_cache: :pireps_count
@@ -43,7 +41,7 @@ module Tds
     # scope :msl_above, lambda { |feet_msl|
     #   where("ST_Z(wx_pireps.location::geometry) > #{feet_msl}")
     # }
-    
+    pg_search_scope :search, against: SEARCH_AGAINST
     # pg_search_scope :search, against: {
     #     station: 'A',
     #     aircraft_ref: 'B',
@@ -86,5 +84,6 @@ module Tds
       self.urgent = parsed_urgent?
       self.altitude_ft_msl = nil if altitude_ft_msl&.zero?
     end
+
   end
 end

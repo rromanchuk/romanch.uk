@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "apple_signin" do %>
   <%= render ModalComponent.new(title: nil, size: "", close_footer: false) do |component| %>
-    <% component.body do %>
+    <% component.with_body do %>
       <div class="d-flex justify-content-center text-center">
         <main class="form-signin w-100 m-auto">
           <img class="mb-4" src="/static/whodis.png" alt="New phone, who dis?" width="200" height="200" />

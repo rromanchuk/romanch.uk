@@ -3,13 +3,13 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Specify AnyCable WebSocket server URL to use by JS client
-  config.after_initialize do
-    if AnyCable::Rails.enabled?
-      config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL',
-                                                                          '/cable')
-    end
-  end
-  config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
+  # config.after_initialize do
+  #   if AnyCable::Rails.enabled?
+  #     config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL',
+  #                                                                         '/cable')
+  #   end
+  # end
+  # config.turbo.signed_stream_verifier_key = Credentials[:signed_stream_verifier_key]
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -66,7 +66,7 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/0' }
+  config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/0', expires_in: 1.day }
 
 
   # Use a real queuing backend for Active Job (and separate queues per environment).

@@ -9,10 +9,11 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS fk_rails_cb73a18b77;
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
-DROP INDEX IF EXISTS public.unique_taggings;
 DROP INDEX IF EXISTS public.index_users_on_slug;
+DROP INDEX IF EXISTS public.index_streaming_videos_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_tournaments_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_players_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_golfers_on_tournament_id;
@@ -20,10 +21,9 @@ DROP INDEX IF EXISTS public.index_romanchuk_open_golfers_on_player_id;
 DROP INDEX IF EXISTS public.index_posts_on_slug;
 DROP INDEX IF EXISTS public.index_pghero_space_stats_on_database_and_captured_at;
 DROP INDEX IF EXISTS public.index_pghero_query_stats_on_database_and_captured_at;
-DROP INDEX IF EXISTS public.index_pg_search_documents_on_searchable;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_taggings_count;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_name;
-DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable_type_and_taggable_id;
+DROP INDEX IF EXISTS public.index_gutentag_taggings_on_taggable;
 DROP INDEX IF EXISTS public.index_gutentag_taggings_on_tag_id;
 DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_sluggable_type_and_sluggable_id;
 DROP INDEX IF EXISTS public.index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope;
@@ -34,7 +34,9 @@ DROP INDEX IF EXISTS public.index_active_storage_variant_records_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_blobs_on_key;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
+DROP INDEX IF EXISTS public.gutentag_taggings_uniqueness;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
+ALTER TABLE IF EXISTS ONLY public.streaming_videos DROP CONSTRAINT IF EXISTS streaming_videos_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.romanchuk_open_tournaments DROP CONSTRAINT IF EXISTS romanchuk_open_tournaments_pkey;
 ALTER TABLE IF EXISTS ONLY public.romanchuk_open_players DROP CONSTRAINT IF EXISTS romanchuk_open_players_pkey;
@@ -42,7 +44,6 @@ ALTER TABLE IF EXISTS ONLY public.romanchuk_open_golfers DROP CONSTRAINT IF EXIS
 ALTER TABLE IF EXISTS ONLY public.posts DROP CONSTRAINT IF EXISTS posts_pkey;
 ALTER TABLE IF EXISTS ONLY public.pghero_space_stats DROP CONSTRAINT IF EXISTS pghero_space_stats_pkey;
 ALTER TABLE IF EXISTS ONLY public.pghero_query_stats DROP CONSTRAINT IF EXISTS pghero_query_stats_pkey;
-ALTER TABLE IF EXISTS ONLY public.pg_search_documents DROP CONSTRAINT IF EXISTS pg_search_documents_pkey;
 ALTER TABLE IF EXISTS ONLY public.gutentag_tags DROP CONSTRAINT IF EXISTS gutentag_tags_pkey;
 ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS gutentag_taggings_pkey;
 ALTER TABLE IF EXISTS ONLY public.friendly_id_slugs DROP CONSTRAINT IF EXISTS friendly_id_slugs_pkey;
@@ -54,11 +55,9 @@ ALTER TABLE IF EXISTS ONLY public.active_storage_blobs DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS active_storage_attachments_pkey;
 ALTER TABLE IF EXISTS public.pghero_space_stats ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.pghero_query_stats ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.pg_search_documents ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.gutentag_tags ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.gutentag_taggings ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.streaming_videos;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.romanchuk_open_tournaments;
 DROP TABLE IF EXISTS public.romanchuk_open_players;
@@ -68,11 +67,7 @@ DROP SEQUENCE IF EXISTS public.pghero_space_stats_id_seq;
 DROP TABLE IF EXISTS public.pghero_space_stats;
 DROP SEQUENCE IF EXISTS public.pghero_query_stats_id_seq;
 DROP TABLE IF EXISTS public.pghero_query_stats;
-DROP SEQUENCE IF EXISTS public.pg_search_documents_id_seq;
-DROP TABLE IF EXISTS public.pg_search_documents;
-DROP SEQUENCE IF EXISTS public.gutentag_tags_id_seq;
 DROP TABLE IF EXISTS public.gutentag_tags;
-DROP SEQUENCE IF EXISTS public.gutentag_taggings_id_seq;
 DROP TABLE IF EXISTS public.gutentag_taggings;
 DROP SEQUENCE IF EXISTS public.friendly_id_slugs_id_seq;
 DROP TABLE IF EXISTS public.friendly_id_slugs;
@@ -84,6 +79,21 @@ DROP TABLE IF EXISTS public.active_storage_blobs;
 DROP TABLE IF EXISTS public.active_storage_attachments;
 DROP EXTENSION IF EXISTS postgis;
 DROP EXTENSION IF EXISTS pg_trgm;
+DROP EXTENSION IF EXISTS pg_stat_statements;
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
 --
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
 --
@@ -240,32 +250,13 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 --
 
 CREATE TABLE public.gutentag_taggings (
-    id bigint NOT NULL,
-    tag_id integer NOT NULL,
-    taggable_id uuid NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tag_id uuid NOT NULL,
     taggable_type character varying NOT NULL,
+    taggable_id uuid NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
-
-
---
--- Name: gutentag_taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.gutentag_taggings_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: gutentag_taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.gutentag_taggings_id_seq OWNED BY public.gutentag_taggings.id;
 
 
 --
@@ -273,64 +264,12 @@ ALTER SEQUENCE public.gutentag_taggings_id_seq OWNED BY public.gutentag_taggings
 --
 
 CREATE TABLE public.gutentag_tags (
-    id bigint NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     name character varying NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    taggings_count integer DEFAULT 0
-);
-
-
---
--- Name: gutentag_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.gutentag_tags_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: gutentag_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.gutentag_tags_id_seq OWNED BY public.gutentag_tags.id;
-
-
---
--- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.pg_search_documents (
-    id bigint NOT NULL,
-    content text,
-    searchable_type character varying,
-    searchable_id bigint,
+    taggings_count bigint DEFAULT 0 NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
-
-
---
--- Name: pg_search_documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.pg_search_documents_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pg_search_documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.pg_search_documents_id_seq OWNED BY public.pg_search_documents.id;
 
 
 --
@@ -473,6 +412,23 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: streaming_videos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.streaming_videos (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    key character varying NOT NULL,
+    content_type character varying,
+    title character varying,
+    description character varying,
+    slug character varying,
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -492,27 +448,6 @@ CREATE TABLE public.users (
 --
 
 ALTER TABLE ONLY public.friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('public.friendly_id_slugs_id_seq'::regclass);
-
-
---
--- Name: gutentag_taggings id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.gutentag_taggings ALTER COLUMN id SET DEFAULT nextval('public.gutentag_taggings_id_seq'::regclass);
-
-
---
--- Name: gutentag_tags id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.gutentag_tags ALTER COLUMN id SET DEFAULT nextval('public.gutentag_tags_id_seq'::regclass);
-
-
---
--- Name: pg_search_documents id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pg_search_documents ALTER COLUMN id SET DEFAULT nextval('public.pg_search_documents_id_seq'::regclass);
 
 
 --
@@ -602,14 +537,6 @@ ALTER TABLE ONLY public.gutentag_tags
 
 
 --
--- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pg_search_documents
-    ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
-
-
---
 -- Name: pghero_query_stats pghero_query_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -666,11 +593,26 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: streaming_videos streaming_videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.streaming_videos
+    ADD CONSTRAINT streaming_videos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gutentag_taggings_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX gutentag_taggings_uniqueness ON public.gutentag_taggings USING btree (taggable_type, taggable_id, tag_id);
 
 
 --
@@ -744,10 +686,10 @@ CREATE INDEX index_gutentag_taggings_on_tag_id ON public.gutentag_taggings USING
 
 
 --
--- Name: index_gutentag_taggings_on_taggable_type_and_taggable_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_gutentag_taggings_on_taggable; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_gutentag_taggings_on_taggable_type_and_taggable_id ON public.gutentag_taggings USING btree (taggable_type, taggable_id);
+CREATE INDEX index_gutentag_taggings_on_taggable ON public.gutentag_taggings USING btree (taggable_type, taggable_id);
 
 
 --
@@ -762,13 +704,6 @@ CREATE UNIQUE INDEX index_gutentag_tags_on_name ON public.gutentag_tags USING bt
 --
 
 CREATE INDEX index_gutentag_tags_on_taggings_count ON public.gutentag_tags USING btree (taggings_count);
-
-
---
--- Name: index_pg_search_documents_on_searchable; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_pg_search_documents_on_searchable ON public.pg_search_documents USING btree (searchable_type, searchable_id);
 
 
 --
@@ -821,17 +756,17 @@ CREATE UNIQUE INDEX index_romanchuk_open_tournaments_on_slug ON public.romanchuk
 
 
 --
+-- Name: index_streaming_videos_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_streaming_videos_on_slug ON public.streaming_videos USING btree (slug);
+
+
+--
 -- Name: index_users_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_slug ON public.users USING btree (slug);
-
-
---
--- Name: unique_taggings; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_taggings ON public.gutentag_taggings USING btree (taggable_type, taggable_id, tag_id);
 
 
 --
@@ -851,88 +786,107 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
+-- Name: gutentag_taggings fk_rails_cb73a18b77; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.gutentag_taggings
+    ADD CONSTRAINT fk_rails_cb73a18b77 FOREIGN KEY (tag_id) REFERENCES public.gutentag_tags(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, postgis;
+SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20220416005025'),
-('20220416012142'),
-('20220416012143'),
-('20220416012144'),
-('20220417222217'),
-('20220419065022'),
-('20220419065040'),
-('20220419065117'),
-('20220420221740'),
-('20220421233045'),
-('20220422094735'),
-('20220422095242'),
-('20220422185122'),
-('20220423051330'),
-('20220428074500'),
-('20220428075543'),
-('20220428093506'),
-('20220428093737'),
-('20220428191854'),
-('20220430012521'),
-('20220516065126'),
-('20220518024243'),
-('20220521025558'),
-('20220521030922'),
-('20220521051700'),
-('20220521071225'),
-('20220521080055'),
-('20220820234256'),
-('20220821012755'),
-('20220829035749'),
-('20220829054151'),
-('20220829165251'),
-('20220830200808'),
-('20220831094855'),
-('20220831102142'),
-('20220901053421'),
-('20220901182250'),
-('20220902173200'),
-('20220902213500'),
-('20220903083551'),
-('20220903195645'),
-('20220903210615'),
-('20220904211826'),
-('20220907061153'),
-('20220907063711'),
-('20220907201002'),
-('20220907202226'),
-('20220908030103'),
-('20220908030135'),
-('20220909141241'),
-('20220909190019'),
-('20220909194615'),
-('20220909202215'),
-('20220909215538'),
-('20220909221031'),
-('20220910200350'),
-('20220910222737'),
-('20220911031445'),
-('20220912023844'),
-('20220912032106'),
-('20220912160222'),
-('20220912170518'),
-('20220915095311'),
-('20220915172449'),
-('20220918231901'),
-('20220921060628'),
-('20220924080503'),
-('20221016052037'),
-('20221217055523'),
-('20221218192908'),
-('20221222074333'),
-('20221222080407'),
-('20221222081525'),
-('20221222081620'),
-('20221222083453'),
+('20240410050202'),
+('20231231182200'),
+('20231231065715'),
+('20231231005449'),
+('20231231003521'),
+('20231231003512'),
+('20231229222242'),
+('20231229222241'),
+('20231229222240'),
+('20230509000927'),
+('20230509000327'),
+('20230508230531'),
+('20230302171017'),
 ('20221222083614'),
-('20230302171017');
-
+('20221222083453'),
+('20221222081620'),
+('20221222081525'),
+('20221222080407'),
+('20221222074333'),
+('20221218192908'),
+('20221217055523'),
+('20221016052037'),
+('20220924080503'),
+('20220921060628'),
+('20220918231901'),
+('20220915172449'),
+('20220915095311'),
+('20220912170518'),
+('20220912160222'),
+('20220912032106'),
+('20220912023844'),
+('20220911031445'),
+('20220910222737'),
+('20220910200350'),
+('20220909221031'),
+('20220909215538'),
+('20220909202215'),
+('20220909194615'),
+('20220909190019'),
+('20220909141241'),
+('20220908030135'),
+('20220908030103'),
+('20220907202226'),
+('20220907201002'),
+('20220907063711'),
+('20220907061153'),
+('20220904211826'),
+('20220903210615'),
+('20220903195645'),
+('20220903083551'),
+('20220902213500'),
+('20220902173200'),
+('20220901182250'),
+('20220901053421'),
+('20220831102142'),
+('20220831094855'),
+('20220830200808'),
+('20220829165251'),
+('20220829054151'),
+('20220829035749'),
+('20220821012755'),
+('20220820234256'),
+('20220521080055'),
+('20220521071225'),
+('20220521051700'),
+('20220521030922'),
+('20220521025558'),
+('20220518024243'),
+('20220516065126'),
+('20220430012521'),
+('20220428191854'),
+('20220428093737'),
+('20220428093506'),
+('20220428075543'),
+('20220428074500'),
+('20220423051330'),
+('20220422185122'),
+('20220422095242'),
+('20220422094735'),
+('20220421233045'),
+('20220420221740'),
+('20220419065117'),
+('20220419065040'),
+('20220419065022'),
+('20220417222217'),
+('20220416012144'),
+('20220416012143'),
+('20220416012142'),
+('20220416005025');
 

@@ -1,5 +1,5 @@
-<%= provide(:canonical_url, tds_aircraft_type_designator_url(icao_type.slug, host: 'romanch.uk')) %>
-<%= provide(:page_title, "#{icao_type.icao_code} #{icao_type.manufacturer} #{icao_type.model}") %>
+<% content_for(:canonical_url, tds_aircraft_type_designator_url(icao_type.slug, host: 'romanch.uk')) %>
+<% content_for(:page_title, "#{icao_type.icao_code} #{icao_type.manufacturer} #{icao_type.model}") %>
 
 <% cache icao_type do %>
   <%= render 'disclaimer' %>

@@ -7,7 +7,7 @@ module Tds
     let(:dr_pagy)
     let(:pirep) { Pirep.find(params[:id]) }
     let(:pireps) do
-      relation = apply_filter.recent(:observation_time)
+      relation = apply_filter
       @dr_pagy, records = pagy_countless(relation, items: 50)
       records
     end
@@ -15,20 +15,17 @@ module Tds
 
     def index
       add_breadcrumb('Pilot Reports', tds_pireps_url)
-      render stream: true
     end
 
     def show
       add_breadcrumb('Pilot Reports', tds_pireps_url)
       add_breadcrumb(pirep.raw_text)
-      render stream: true
     end
 
     def debug
       add_breadcrumb('Pilot Reports', tds_pireps_url)
       add_breadcrumb(pirep.raw_text, tds_pirep_url(pirep))
       add_breadcrumb('Debug')
-      render stream: true
     end
 
     def map
@@ -54,9 +51,10 @@ module Tds
 
     private
 
-    def apply_filter(relation = Pirep.all)
+    def apply_filter
+      relation = Pirep.recent(:observation_time)
       #relation = relation.near(params[:location], 100) if params[:location].present?
-      #relation = relation.search(params[:q]) if params[:q].present?
+      relation = relation.search(params[:q]) if params[:q].present?
 
       if params[:station_id]
         add_breadcrumb(station.code, tds_station_pireps_url(station))
@@ -66,14 +64,15 @@ module Tds
       case params[:filter]
       when 'uua'
         add_breadcrumb('Urgent')
-        relation.uua
+        relation = relation.uua
       when 'ua'
         add_breadcrumb('Routine')
-        relation.ua
+        relation = relation.ua
       else
         add_breadcrumb('All')
-        relation
-      end.includes(:batch)
+      end
+      
+      relation.includes(:batch)
     end
 
     # Only allow a list of trusted parameters through.

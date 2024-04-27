@@ -1,0 +1,12 @@
+<tr>
+  <td><%= streaming_video.slug %></td>
+  <td><%= streaming_video.content_type %></td>
+  <td>
+    <%= link_to "Edit", edit_streaming_video_path(streaming_video) %>
+    <% if streaming_video.image? -%>
+      <%= link_to 'Serve', serve_image_path(id: streaming_video.slug || streaming_video.id) %>
+    <% else -%>
+      <%= link_to 'Serve', serve_video_path(id: streaming_video.slug || streaming_video.id) %>
+    <% end -%>
+  </td>
+</tr>

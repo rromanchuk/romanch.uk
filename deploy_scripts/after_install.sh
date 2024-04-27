@@ -12,7 +12,7 @@ ln -s /home/ubuntu/node_modules node_modules
 ln -s /home/ubuntu/master.key config/master.key -f
 
 bundle install
-bundle clean
+#bundle clean
 
 bin/rails assets:precompile
 aws s3 sync public/assets s3://personal-www/assets --storage-class INTELLIGENT_TIERING --cache-control max-age=31536000
@@ -29,7 +29,7 @@ cd /var/www/romanch.uk/current
 sudo systemctl start nginx
 sudo systemctl restart puma
 #sudo systemctl restart sidekiq
-sudo systemctl restart anycable-rpc
+#sudo systemctl restart anycable-rpc
 
 
 bin/rails sitemap:refresh:no_ping

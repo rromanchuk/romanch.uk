@@ -1,17 +1,17 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.1"
+ruby "3.3.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.4"
+gem "rails", "~> 7.1.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-gem 'grpc'
-gem "anycable-rails"
-gem "anycable-rails-jwt"
+#gem 'grpc'
+#gem "anycable-rails"
+#gem "anycable-rails-jwt"
 # Use postgresql as the database for Active Record
 gem "pg"
 
@@ -34,9 +34,8 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "hiredis"
 gem "redis"
-gem "redis-client"
 gem 'sidekiq'
-gem "sidekiq-cron", github: 'rromanchuk/sidekiq-cron', branch: 'fix/embed_signature'
+gem "sidekiq-cron"
 gem "sd_notify"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
@@ -113,7 +112,7 @@ end
 
 
 gem 'solargraph', group: :development
-gem "pagy", "~> 5.10"
+gem "pagy", "~> 6.0.4"
 gem 'activerecord-postgis-adapter'
 gem 'httparty'
 gem "pghero"

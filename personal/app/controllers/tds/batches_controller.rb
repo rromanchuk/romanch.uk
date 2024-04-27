@@ -16,27 +16,24 @@ module Tds
 
     def index
       add_breadcrumb('Batches')
-      render stream: true
     end
 
     def show
       add_breadcrumb('Batches', tds_batches_url)
       add_breadcrumb("#{batch.id}")
-      render stream: true
     end
 
     def debug
       add_breadcrumb('Batches', tds_batches_url)
       add_breadcrumb("#{batch.id}", tds_batch_url(batch))
       add_breadcrumb('Debug')
-      render stream: true
     end
 
     def ingest
       if allowed_to?(:ingest?, current_user, with: BatchPolicy)
-        Pireps::Ingest.async_call
-        Metars::Ingest.async_call
-        Tafs::Ingest.async_call
+        Pireps::Ingest.call
+        Metars::Ingest.call
+        Tafs::Ingest.call
         redirect_to tds_batches_path, notice: 'Ingesting data...'
       else
         redirect_to tds_batches_path, notice: 'Not authorized'
@@ -63,21 +60,23 @@ module Tds
 
     private
 
-    def apply_filter(relation = Batch.all)
+    def apply_filter
+      relation = Batch.recent
+      
       case params[:filter]
       when 'metars'
-        relation.metars
+        relation = relation.metars
       when 'pireps'
-        relation.aircraftreports
+        relation = relation.aircraftreports
       when 'tafs'
-        relation.tafs
+        relation = relation.tafs
       when 'failed'
-        relation.failed
+        relation = relation.failed
       when 'pending'
-        relation.pending
-      else
-        relation
-      end.recent
+        relation = relation.pending
+      end
+
+      relation
     end
 
     def apply_sort(relation)

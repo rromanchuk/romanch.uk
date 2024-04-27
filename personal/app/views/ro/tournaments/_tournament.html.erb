@@ -1,0 +1,17 @@
+<div class="col">
+  <div class="card">
+    <%= link_to ro_tournament_path(tournament) do %>
+      <% if tournament.poster.attached? %>
+        <%= image_tag cdn_image_path(tournament.poster), class: 'card-img' %>
+      <% end %>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to "#{tournament.title} #{tournament.ocurred_on&.year}", ro_tournament_path(tournament) %></h5>
+      <p class="card-text"><%= tournament.city %></p>
+      <% if tournament.newsletter.attached? %>
+        <%= link_to "Newsletter", newsletter_ro_tournament_path(tournament), class: 'card-link' %>
+      <% end %>
+      <%# link_to "Participants", players_romanchuk_open_tournament_path(t), class: 'card-link' %>
+    </div>
+  </div>
+</div>

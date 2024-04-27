@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <% if image.file.attached? %>
+      <%= image_tag cdn_image_url(image.file), class: "img-fluid img-thumb", width: 200 %>
+    <% end %>
+  </td>
+  <td>
+    <% if image.tournament %>
+      <%= link_to image.tournament.title, ro_tournament_path(image.tournament) %>
+    <% end %>
+  </td>
+  <td><%= image.file.filename %></td>
+  <td>
+    <%= link_to "Edit", edit_ro_image_path(image) %>
+    <%= button_to "Delete", ro_image_path(image), method: :delete,  data: {turbo_method: :delete, turbo_frame: :_top}%>
+  </td>
+</tr>

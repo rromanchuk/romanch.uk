@@ -1,0 +1,10 @@
+<%= simple_form_for post, html: { data: {module: :ryan_romanchuk, controller: :post, turbo_frame: :_top} } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :markdown_content, value: post.markdown_content, input_html: { rows: "15", data: {post_target: :markdown} } %>
+  <%= f.input :html_content, value: post.html_content, input_html: { rows: "5", data: {post_target: :html} } %>
+  <%= f.input :tags_as_string, as: :string %>
+  <%= f.input :published %>
+  <%= f.button :submit, class: "btn-primary", data: {action: "post#save"}  %>
+<% end %>

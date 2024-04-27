@@ -1,0 +1,17 @@
+
+<div class="container">
+  <% if image.file.attached? %>
+    <%= image_tag cdn_image_path(image.file), class: 'img-fluid', width: 300 %>
+  <% end %>
+  <%= simple_form_for image, data: { turbo_frame: :_top} do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= f.input :title, as: :string %>
+    <%= f.input :caption, as: :text %>
+    <%= f.input :tags_as_string, as: :string %>
+    <%= f.input :slug %>
+    <%= f.association :tournament %>
+    <%= f.file_field :file %>
+    <%= f.submit class: "btn" %>
+  <% end %>
+</div>

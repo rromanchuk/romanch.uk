@@ -6,8 +6,9 @@ module Tds
       attr_reader :batch
 
       let(:client) { Aws::S3::Client.new(region: 'us-east-1') }
-      let(:xml) { Ox.load(resp.body.read, mode: :hash) }
+      let(:xml) { Ox.load(gzip.read, mode: :hash) }
       let(:resp) { client.get_object(bucket: :pireps, key: batch.key) }
+      let(:gzip) { Zlib::GzipReader.new(resp.body)  }
 
       def initialize(batch_id)
         super()

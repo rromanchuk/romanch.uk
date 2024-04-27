@@ -12,13 +12,11 @@ module Tds
 
     def index
       add_breadcrumb('Aircraft Reports')
-      render stream: true
     end
 
     def show
       add_breadcrumb('Aircraft Reports', tds_aireps_url)
       add_breadcrumb(airep.raw_text)
-      render stream: true
     end
 
     def map

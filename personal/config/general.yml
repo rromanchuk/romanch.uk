@@ -9,13 +9,14 @@ production:
   <<: *default
   romanchukopen_host: romanchukopen.com
   romanchuk_host: romanch.uk
-
+  active_storage_cdn: https://romanch.uk
 development:
   <<: *default
   apex_url: https://personal.test
   cognito_redirect: https://personal.test/oauth2/idpresponse
   romanchukopen_host: romanchukopen.test
   romanchuk_host: personal.test
+  active_storage_cdn: https://personal.test
 
 
 test:

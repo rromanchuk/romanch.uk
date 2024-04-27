@@ -2,6 +2,8 @@
 # Set global defaults, and handle someone running bin/puma outside the context of systemd
 # https://github.com/puma/puma#configuration-file
 workers 2
+# threads_count 5
+threads 5, 5
 
 directory '/var/www/romanch.uk/current'
 bind 'unix:///home/ubuntu/tmp/sockets/puma.sock'
@@ -20,7 +22,7 @@ on_worker_boot do
   x = Sidekiq.configure_embed do |config|
     config.logger.level = Logger::DEBUG
     config.queues = %w[default low]
-    config.concurrency = 1
+    config.concurrency = 2
     config.on(:startup) do
       puts "on startup"
       schedule_file = "config/schedule.yml"

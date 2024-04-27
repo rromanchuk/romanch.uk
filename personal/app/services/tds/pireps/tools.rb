@@ -19,7 +19,7 @@ module Tds
         begin
           Tds::AircraftTypeDesignator.find_or_create_by!(icao_code: safe_aircraft_ref)&.id
         rescue StandardError => e
-          Rails.logoger.error(e)
+          Rails.logger.error(e)
           Sentry.capture_exception(e)
           nil
         end

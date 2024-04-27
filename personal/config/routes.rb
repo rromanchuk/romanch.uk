@@ -18,17 +18,52 @@ Rails.application.routes.draw do
   get :healthcheck, to: 'pages#show', id: 'status'
   post '/data/report', to: 'data#report'
   resources :wx_station_observations, only: %i[index]
-  resources :posts do
-    resources :tags, shallow: true
-    get :recently_updated, on: :collection
+
+  # config/routes.rb
+  direct :cdn_image do |model, options|
+    expires_in = options.delete(:expires_in) { ActiveStorage.urls_expire_in }
+
+    if model.respond_to?(:signed_id)
+      route_for(
+        :rails_service_blob_proxy,
+        model.signed_id(expires_in: expires_in),
+        model.filename,
+        options.merge(host: Rails.configuration.general.active_storage_cdn)
+      )
+    else
+      signed_blob_id = model.blob.signed_id(expires_in: expires_in)
+      variation_key  = model.variation.key
+      filename       = model.blob.filename
+
+      route_for(
+        :rails_blob_representation_proxy,
+        signed_blob_id,
+        variation_key,
+        filename,
+        options.merge(host: Rails.configuration.general.active_storage_cdn)
+      )
+    end
   end
-  resources :users do
-    get :me, on: :collection
+  
+  scope module: :ryan_romanchuk do
+    resources :streaming_videos
+    resources :posts do
+      resources :tags, shallow: true
+      get :recently_updated, on: :collection
+    end
+    resources :users do
+      get :me, on: :collection
+    end
+    resources :tags, param: :name, only: [:index] do
+      resources :posts, only: [:index], on: :collection
+    end
   end
+  
+  
   resources :videos
   resources :blobs
+  
   resources :attachments
-  #resources :projects, only: %i[index show]
 
   scope 'romanchuk_open' do
     resources :tournaments, only: [] do
@@ -45,8 +80,6 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#logout'
   get 'login', to: 'sessions#login'
   post 'sign_in', to: 'sessions#sign_in'
-  #get '/s/resume', to: 'resume#index'
-  #get '/s/resume/download', to: 'resume#download', as: :download_resume
   get '/pages/*id' => 'pages#show', as: :page, format: false
 
   namespace :serve, path: '/serve' do
@@ -54,9 +87,7 @@ Rails.application.routes.draw do
     resources :videos, only: [:show]
   end
 
-  resources :tags, param: :name, only: [:index] do
-    resources :posts, only: [:index], on: :collection
-  end
+  
 
   namespace :oauth do
     get 'cognito/token', to: 'cognito#token'
@@ -65,13 +96,28 @@ Rails.application.routes.draw do
     get 'cognito/logout', to: 'cognito#logout'
   end
 
-  namespace :romanchuk_open do
+  # namespace :romanchuk_open do
+    
+  #   resources :golfers
+  #   resources :players do
+  #     resources :golfers, only: [:new]
+  #   end
+  #   resources :tournaments do
+  #     resources :images, only: [:show]
+  #     resources :golfers, only: [:index]
+  #     get :newsletter, on: :member
+  #   end
+  #   get '/pages/*id' => 'pages#show', as: :page, format: false
+  # end
+
+  namespace :ro do
+    resources :images
     resources :golfers
     resources :players do
       resources :golfers, only: [:new]
     end
     resources :tournaments do
-      resources :blobs, only: [:show]
+      resources :images, only: [:show]
       resources :golfers, only: [:index]
       get :newsletter, on: :member
     end
@@ -82,7 +128,7 @@ Rails.application.routes.draw do
   mount PgHero::Engine, at: '/pghero'
 
   constraints(RomanchukOpenConstraint.new) do
-    root 'romanchuk_open/tournaments#index', as: :romanchuk_open
+    root 'ro/tournaments#index', as: :ro
   end
 
   constraints(PersonalConstraint.new) do

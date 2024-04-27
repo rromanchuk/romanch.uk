@@ -1,19 +1,13 @@
 class PagesController < ApplicationController
   include HighVoltage::StaticPage
-  let(:flying_videos) { Blob.flying }
+  let(:flying_videos) { RyanRomanchuk::StreamingVideo.flying }
   layout :layout_for_page
 
   # def with_defaults(defaults)
   #   super.merge({ stream: true })
   # end
 
-  def show
-      render(
-        template: current_page,
-        locals: { current_page: },
-        stream: true
-      )
-  end
+
 
   private
 

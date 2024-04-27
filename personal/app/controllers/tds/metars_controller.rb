@@ -19,19 +19,17 @@ module Tds
 
     def index
       add_breadcrumb('METARs', tds_metars_url)
-      render stream: true
     end
 
     def show
       add_breadcrumb('METARs', tds_metars_url)
       add_breadcrumb(metar.raw_text)
-      render stream: true
     end
 
     private
 
-    def apply_filter(relation = Metar.recent(:observation_time))
-      
+    def apply_filter
+      relation = Metar.recent(:observation_time)
       relation = relation.search(params[:q]) if params[:q].present?
       
       if params[:station_id]

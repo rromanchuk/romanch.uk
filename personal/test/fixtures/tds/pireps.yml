@@ -4,7 +4,6 @@ ua:
   receipt_time: "Fri, 02 Sep 2022 01:39:04 +0000"
   observation_time: "Fri, 02 Sep 2022 01:39:04 +0000"
   aircraft_ref: BE9L
-  location: "POINT(-122 47 20000)"
   urgent: false
 
 uua:
@@ -13,5 +12,4 @@ uua:
   receipt_time: "Fri, 02 Sep 2022 01:35:04 +0000"
   observation_time: "Fri, 02 Sep 2022 01:35:04 +0000"
   aircraft_ref: BE9L
-  location: "POINT(-122 47 20000)"
   urgent: true

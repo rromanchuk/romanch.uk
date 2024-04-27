@@ -1,0 +1,10 @@
+<%= turbo_frame_tag player do %>
+  <tr>
+    <td><%= link_to player.name, ro_player_path(player) %></td>
+    <td>
+      <% player.tournaments.each do |tournament|  %>
+        <%= link_to tournament.year, ro_tournament_path(tournament) %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

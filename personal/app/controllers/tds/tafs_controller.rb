@@ -20,13 +20,11 @@ module Tds
 
     def index
       add_breadcrumb('Terminal Aerodrome Forecast (TAF)', tds_tafs_url)
-      render stream: true
     end
 
     def show
       add_breadcrumb('Terminal Aerodrome Forecast (TAF)', tds_tafs_url)
       add_breadcrumb("#{taf.station_id}")
-      render stream: true
     end
 
     def apply_filter(relation = Taf.all)

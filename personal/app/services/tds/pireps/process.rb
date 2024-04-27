@@ -11,15 +11,18 @@ module Tds
       # @param [Hash] row
       # @return [Integer] num records saved
       def transform!(row)
-        return 0 unless row.count == 45
+        puts "Row count: #{row.count}"
+        return 0 unless row.count == 44
 
        
         report_type = report_type(row)
+        puts "Report type: #{report_type}"
         #Rails.logger.info "Inserting a record for report type #{report_type}"
         case report_type
         when 'PIREP'
           normalized_row = transform_pirep(row)
           normalized_row[:batch_id] = batch.id
+          puts normalized_row
           records = Tds::Pirep.insert(normalized_row, unique_by: :index_tds_pireps_uniqueness)
           return 0 if records.empty?
           

@@ -13,13 +13,11 @@ module Tds
 
     def index
       add_breadcrumb(title)
-      render stream: true
     end
 
     def show
       add_breadcrumb(title, tds_aircraft_type_designator_url)
       add_breadcrumb("#{icao_type.icao_code} #{icao_type.manufacturer} \"#{icao_type.model}\"")
-      render stream: true
     end
 
     def search; end

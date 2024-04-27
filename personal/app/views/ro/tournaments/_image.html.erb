@@ -1,0 +1,12 @@
+<div class="col">
+  <div class="card shadow-sm">
+    <%= link_to ro_tournament_image_path(tournament, image) do %>
+      <% if image.file.attached? %>
+        <%= image_tag cdn_image_url(image.file), class: 'card-img-top' %>
+      <% end %>
+    <% end %>
+    <div class="card-body">
+      <%= link_to 'Edit', edit_ro_image_path(image), class: 'card-link' %>
+    </div>
+  </div>
+</div>

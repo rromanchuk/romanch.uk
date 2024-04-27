@@ -4,9 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "../Spina"
-		},
-		{
 			"path": "../weewx-wdc"
 		}
 	],
