@@ -1,0 +1,16 @@
+<% content_for(:page_title) { 'All Streaming Videos' } %>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Slug</th>
+      <th>Content Type</th>
+      <th>Actions</th>
+    </tr>
+  <thead>
+  <tbody>
+    <%= render streaming_videos %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>

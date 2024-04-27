@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "edit_streaming_video" do %>
+  <%= tag.div class: 'row justify-content-center' do %>
+    <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
+      <h1>Edit Video</h1>
+      <h6><%= streaming_video.id %></h6>
+      <div class="d-flex">
+        <%= button_to "Destory", streaming_video_path(streaming_video), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
+      </div>
+      <div class="card shadow-sm">
+        <% if streaming_video.thumbnail_key %>
+          <%= image_tag streaming_video.thumbnail_key, class: 'card-img-top' %>
+        <% end %>
+      </div>
+      <%= turbo_frame_tag streaming_video do %>
+        <%= render 'form' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

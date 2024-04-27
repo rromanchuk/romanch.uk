@@ -13,6 +13,7 @@ ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS fk
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
 DROP INDEX IF EXISTS public.index_users_on_slug;
+DROP INDEX IF EXISTS public.index_streaming_videos_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_tournaments_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_players_on_slug;
 DROP INDEX IF EXISTS public.index_romanchuk_open_golfers_on_tournament_id;
@@ -35,6 +36,7 @@ DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
 DROP INDEX IF EXISTS public.gutentag_taggings_uniqueness;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
+ALTER TABLE IF EXISTS ONLY public.streaming_videos DROP CONSTRAINT IF EXISTS streaming_videos_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.romanchuk_open_tournaments DROP CONSTRAINT IF EXISTS romanchuk_open_tournaments_pkey;
 ALTER TABLE IF EXISTS ONLY public.romanchuk_open_players DROP CONSTRAINT IF EXISTS romanchuk_open_players_pkey;
@@ -55,6 +57,7 @@ ALTER TABLE IF EXISTS public.pghero_space_stats ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.pghero_query_stats ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.streaming_videos;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.romanchuk_open_tournaments;
 DROP TABLE IF EXISTS public.romanchuk_open_players;
@@ -409,6 +412,23 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: streaming_videos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.streaming_videos (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    key character varying NOT NULL,
+    content_type character varying,
+    title character varying,
+    description character varying,
+    slug character varying,
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -573,6 +593,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: streaming_videos streaming_videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.streaming_videos
+    ADD CONSTRAINT streaming_videos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -728,6 +756,13 @@ CREATE UNIQUE INDEX index_romanchuk_open_tournaments_on_slug ON public.romanchuk
 
 
 --
+-- Name: index_streaming_videos_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_streaming_videos_on_slug ON public.streaming_videos USING btree (slug);
+
+
+--
 -- Name: index_users_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -765,6 +800,7 @@ ALTER TABLE ONLY public.gutentag_taggings
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20240410050202'),
 ('20231231182200'),
 ('20231231065715'),
 ('20231231005449'),

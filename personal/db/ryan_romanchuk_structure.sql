@@ -13,6 +13,7 @@ ALTER TABLE IF EXISTS ONLY public.gutentag_taggings DROP CONSTRAINT IF EXISTS fk
 ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF EXISTS fk_rails_c3b3935057;
 ALTER TABLE IF EXISTS ONLY public.active_storage_variant_records DROP CONSTRAINT IF EXISTS fk_rails_993965df05;
 DROP INDEX IF EXISTS public.index_users_on_slug;
+DROP INDEX IF EXISTS public.index_streaming_videos_on_slug;
 DROP INDEX IF EXISTS public.index_posts_on_slug;
 DROP INDEX IF EXISTS public.index_pg_search_documents_on_searchable;
 DROP INDEX IF EXISTS public.index_gutentag_tags_on_taggings_count;
@@ -28,6 +29,7 @@ DROP INDEX IF EXISTS public.index_active_storage_attachments_uniqueness;
 DROP INDEX IF EXISTS public.index_active_storage_attachments_on_blob_id;
 DROP INDEX IF EXISTS public.gutentag_taggings_uniqueness;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
+ALTER TABLE IF EXISTS ONLY public.streaming_videos DROP CONSTRAINT IF EXISTS streaming_videos_pkey;
 ALTER TABLE IF EXISTS ONLY public.schema_migrations DROP CONSTRAINT IF EXISTS schema_migrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.posts DROP CONSTRAINT IF EXISTS posts_pkey;
 ALTER TABLE IF EXISTS ONLY public.pg_search_documents DROP CONSTRAINT IF EXISTS pg_search_documents_pkey;
@@ -41,6 +43,7 @@ ALTER TABLE IF EXISTS ONLY public.active_storage_attachments DROP CONSTRAINT IF 
 ALTER TABLE IF EXISTS public.pg_search_documents ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.friendly_id_slugs ALTER COLUMN id DROP DEFAULT;
 DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.streaming_videos;
 DROP TABLE IF EXISTS public.schema_migrations;
 DROP TABLE IF EXISTS public.posts;
 DROP SEQUENCE IF EXISTS public.pg_search_documents_id_seq;
@@ -194,7 +197,7 @@ CREATE TABLE public.pg_search_documents (
     id bigint NOT NULL,
     content text,
     searchable_type character varying,
-    searchable_id bigint,
+    searchable_id uuid,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -242,6 +245,23 @@ CREATE TABLE public.posts (
 
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
+);
+
+
+--
+-- Name: streaming_videos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.streaming_videos (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    key character varying NOT NULL,
+    content_type character varying,
+    title character varying,
+    description character varying,
+    slug character varying,
+    data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -355,6 +375,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: streaming_videos streaming_videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.streaming_videos
+    ADD CONSTRAINT streaming_videos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -461,6 +489,13 @@ CREATE INDEX index_posts_on_slug ON public.posts USING btree (slug);
 
 
 --
+-- Name: index_streaming_videos_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_streaming_videos_on_slug ON public.streaming_videos USING btree (slug);
+
+
+--
 -- Name: index_users_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -498,6 +533,8 @@ ALTER TABLE ONLY public.gutentag_taggings
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20240410055524'),
+('20240410052724'),
 ('20231231005814'),
 ('20230509001859'),
 ('20230509001025'),

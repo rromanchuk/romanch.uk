@@ -45,7 +45,8 @@ Rails.application.routes.draw do
     end
   end
   
-  scope module: :ryan_romanchuk do 
+  scope module: :ryan_romanchuk do
+    resources :streaming_videos
     resources :posts do
       resources :tags, shallow: true
       get :recently_updated, on: :collection
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
   
   resources :videos
   resources :blobs
+  
   resources :attachments
 
   scope 'romanchuk_open' do
