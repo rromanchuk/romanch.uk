@@ -112,7 +112,7 @@ end
 
 
 gem 'solargraph', group: :development
-gem "pagy", "~> 6.0.4"
+gem "pagy", "~> 8.4.0"
 gem 'activerecord-postgis-adapter'
 gem 'httparty'
 gem "pghero"
