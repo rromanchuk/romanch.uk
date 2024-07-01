@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/puma/puma.git
-  revision: 3169cf607ae3978eabf22c325f02eaefc8ca5c45
+  revision: a7e3d944fa66bbba355abb9efed8ce53048c7e7c
   specs:
     puma (6.4.2)
       nio4r (~> 2.0)
@@ -189,9 +189,9 @@ GEM
       activesupport (>= 6.1)
     google-protobuf (4.26.1)
       rake (>= 13)
-    google-protobuf (4.26.1-aarch64-linux)
-      rake (>= 13)
     google-protobuf (4.26.1-arm64-darwin)
+      rake (>= 13)
+    google-protobuf (4.26.1-x86_64-linux)
       rake (>= 13)
     gutentag (2.6.2)
       activerecord (>= 3.2.0)
@@ -280,13 +280,13 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     netrc (0.11.0)
-    nio4r (2.7.1)
+    nio4r (2.7.3)
     nokogiri (1.16.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.16.4-aarch64-linux)
-      racc (~> 1.4)
     nokogiri (1.16.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -495,9 +495,9 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin-22
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   action_policy
