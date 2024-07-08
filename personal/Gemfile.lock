@@ -189,9 +189,9 @@ GEM
       activesupport (>= 6.1)
     google-protobuf (4.26.1)
       rake (>= 13)
-    google-protobuf (4.26.1-aarch64-linux)
-      rake (>= 13)
     google-protobuf (4.26.1-arm64-darwin)
+      rake (>= 13)
+    google-protobuf (4.26.1-x86_64-linux)
       rake (>= 13)
     gutentag (2.6.2)
       activerecord (>= 3.2.0)
@@ -284,9 +284,9 @@ GEM
     nokogiri (1.16.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.16.4-aarch64-linux)
-      racc (~> 1.4)
     nokogiri (1.16.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -298,7 +298,7 @@ GEM
     oj (3.16.3)
       bigdecimal (>= 3.0)
     ox (2.14.18)
-    pagy (6.0.4)
+    pagy (8.6.3)
     parallel (1.24.0)
     parser (3.3.1.0)
       ast (~> 2.4.1)
@@ -495,9 +495,9 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin-22
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   action_policy
@@ -529,7 +529,7 @@ DEPENDENCIES
   oauth2
   oj
   ox
-  pagy (~> 6.0.4)
+  pagy (~> 8.6.3)
   pg
   pg_query
   pg_search
