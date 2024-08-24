@@ -3,7 +3,6 @@
 module Tds
   class BatchesController < ApplicationController
     before_action :set_breadcrumbs
-    let(:redis) { RedisClient.new }
     let(:dr_pagy)
     let(:batches) do
       relation = apply_filter
@@ -11,8 +10,17 @@ module Tds
       records
     end
     let(:batch) { Batch.find(params[:id]) }
-    let(:ar_etag) { redis.call('GET', 'aircraftreports_previous_etag') }
-    let(:failed_redis_set_size) { redis.call('LLEN', 'failed_pireps') }
+    let(:ar_etag) do
+      Personal.redis.with do |redis|
+        edis.call('GET', 'aircraftreports_previous_etag')
+      end
+    end
+    
+    let(:failed_redis_set_size) do 
+      Personal.redis.with do |redis|
+        redis.call('LLEN', 'failed_pireps')   
+      end  
+    end
 
     def index
       add_breadcrumb('Batches')
