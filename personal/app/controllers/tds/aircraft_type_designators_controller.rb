@@ -20,6 +20,11 @@ module Tds
       add_breadcrumb("#{icao_type.icao_code} #{icao_type.manufacturer} \"#{icao_type.model}\"")
     end
 
+    def new
+      add_breadcrumb(title, tds_aircraft_type_designators_url)
+      add_breadcrumb('New')
+    end
+
     def search; end
 
     private

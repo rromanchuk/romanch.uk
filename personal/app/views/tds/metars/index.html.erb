@@ -1,4 +1,9 @@
-<% content_for :page_title, 'Most recent METARs' %>
+<% content_for(:page_title, Breadcrumb.title_string(breadcrumbs) ) %>
+
+<% content_for :head do %>
+  <meta name="robots" content="noindex">
+<% end %>
+
 <div class="card">
   <div class="card-header">
     <%= form_with(url: tds_metars_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: 'metars'}, class: 'd-flex') do |f| %>

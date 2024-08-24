@@ -23,12 +23,16 @@ module Tds
 
     let(:previous_etag) do
       Personal.redis.with do |redis|
-        redis.call('GET', "#{report_type}_previous_etag")
+        redis.get("#{report_type}_previous_etag")
       end
     end
     
+    let(:previous_last_modified) do
+      Personal.redis.with do |redis|
+        redis.get("#{report_type}_previous_last_modified")
+      end
+    end
     
-    let(:previous_last_modified) { redis.call('GET', "#{report_type}_previous_last_modified") }
     let(:batch) { Batch.new }
 
     # Time
@@ -65,8 +69,8 @@ module Tds
 
     def set_previous_keys!
       Personal.redis.with do |redis|
-        redis.call('SET', "#{report_type}_previous_etag", etag)
-        redis.call('SET', "#{report_type}_previous_last_modified", end_time_s)
+        redis.set("#{report_type}_previous_etag", etag)
+        redis.set("#{report_type}_previous_last_modified", end_time_s)
       end
     end
 

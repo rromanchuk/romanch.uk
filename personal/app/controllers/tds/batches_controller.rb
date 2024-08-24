@@ -12,13 +12,13 @@ module Tds
     let(:batch) { Batch.find(params[:id]) }
     let(:ar_etag) do
       Personal.redis.with do |redis|
-        edis.call('GET', 'aircraftreports_previous_etag')
+        redis.get('aircraftreports_previous_etag')
       end
     end
     
     let(:failed_redis_set_size) do 
       Personal.redis.with do |redis|
-        redis.call('LLEN', 'failed_pireps')   
+        redis.llen('failed_pireps')   
       end  
     end
 

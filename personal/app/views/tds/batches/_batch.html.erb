@@ -6,7 +6,7 @@
           <td class="w-25 fw-semibold">id</td>
           <td class="">
             <%= link_to batch.id, tds_batch_path(batch), data: {turbo_frame: :_top} %>
-            <%= link_to 'debug', debug_tds_batch_path(batch), data: {turbo_frame: :_top}, class: "fs-6 text-muted fw-lighter text-decoration-none" %>
+            <%= link_to 'debug', debug_tds_batch_path(batch), data: {turbo_frame: :_top}, class: "fs-6 text-muted fw-lighter text-decoration-none", rel: "nofollow" %>
           </td>
         </tr>
         <tr class="">

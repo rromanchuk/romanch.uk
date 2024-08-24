@@ -5,6 +5,7 @@ User-agent: Amazonbot
 User-agent: ZoominfoBot
 User-agent: Googlebot
 User-agent: Bingbot
+User-Agent: *
 Disallow: /wx/batches/
 Disallow: /wx/batches/
 Disallow: /wx/metars/
