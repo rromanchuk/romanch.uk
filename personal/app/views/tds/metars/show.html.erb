@@ -8,7 +8,7 @@
 <%= turbo_frame_tag metar do %>
   <div class="card">
     <div class="card-header">
-      <%= link_to "Debug", debug_tds_metar_path(metar), class: " btn btn-secondary btn-sm", data: {turbo_action: :advance} %>
+      <%= link_to "Debug", debug_tds_metar_path(metar), class: " btn btn-secondary btn-sm", rel: "nofollow", data: {turbo_action: :advance} %>
     </div>
     <div class="card-body">
       <%= render metar %>

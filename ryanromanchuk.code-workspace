@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../weewx-s3"
+		},
+		{
+			"path": "../passkeys-rails"
 		}
 	],
 	"extensions": {

@@ -1,11 +1,12 @@
 User-agent: MJ12bot
 User-agent: PetalBot
 User-agent: SemrushBot
-User-agent: Amazonbot
 User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Amazonbot
 User-agent: Googlebot
 User-agent: Bingbot
-User-Agent: *
 Disallow: /wx/batches/
 Disallow: /wx/batches/
 Disallow: /wx/metars/
