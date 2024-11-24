@@ -120,3 +120,5 @@ gem "pg_query"
 gem 'aws-sdk-textract', require: false
 gem 'marginalia'
 gem 'ox', require: false
+
+gem "solid_cache", "~> 1.0"
