@@ -3,6 +3,7 @@ set -euxo pipefail
 eval "$(shdotenv -e ${HOME}/.env)"
 
 cd /var/www/romanch.uk/codedeploy
+sudo rm -rf storage
 ln -s /home/ubuntu/assets public/assets
 
 ln -s /home/ubuntu/storage storage
