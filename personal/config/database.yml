@@ -28,6 +28,10 @@ development:
     database: ro_development
     host: localhost
     migrations_paths: db/ro
+  cache:
+    adapter: sqlite3
+    database: storage/development_cache.sqlite3
+    migrations_paths: db/cache
 
 test:
   primary:
@@ -84,3 +88,7 @@ production:
     password: <%= ENV["DATABASE_PASSWORD"] %>
     host: <%= ENV['DATABASE_HOST'] %>
     migrations_paths: db/ro
+  cache:
+    adapter: sqlite3
+    database: storage/production_cache.sqlite3
+    migrations_paths: db/cache

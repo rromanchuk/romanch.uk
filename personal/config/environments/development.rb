@@ -42,20 +42,21 @@ Rails.application.configure do
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
+    config.cache_store = :solid_cache_store
 
-    config.cache_store = :redis_cache_store, { url: "redis://localhost:6379/0",
+    # config.cache_store = :redis_cache_store, { url: "redis://localhost:6379/0",
 
-      connect_timeout:    30,  # Defaults to 20 seconds
-      read_timeout:       0.2, # Defaults to 1 second
-      write_timeout:      0.2, # Defaults to 1 second
-      reconnect_attempts: 1,   # Defaults to 0
-      expires_in: 3.months,
-      error_handler: -> (method:, returning:, exception:) {
+    #   connect_timeout:    30,  # Defaults to 20 seconds
+    #   read_timeout:       0.2, # Defaults to 1 second
+    #   write_timeout:      0.2, # Defaults to 1 second
+    #   reconnect_attempts: 1,   # Defaults to 0
+    #   expires_in: 3.months,
+    #   error_handler: -> (method:, returning:, exception:) {
        
-        Sentry.capture_exception exception, level: 'warning',
-          tags: { method: method, returning: returning }
-      }
-    }
+    #     Sentry.capture_exception exception, level: 'warning',
+    #       tags: { method: method, returning: returning }
+    #   }
+    # }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }

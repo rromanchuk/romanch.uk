@@ -122,3 +122,5 @@ gem 'marginalia'
 gem 'ox', require: false
 
 gem "solid_cache", "~> 1.0"
+
+gem "sqlite3", "~> 2.3"
