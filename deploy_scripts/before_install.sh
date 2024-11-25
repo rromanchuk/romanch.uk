@@ -14,6 +14,7 @@ mkdir -p /home/ubuntu/shared_bundle
 mkdir -p /home/ubuntu/assets
 mkdir -p /home/ubuntu/node_modules
 mkdir -p /home/ubuntu/log
+mkdir -p /home/ubuntu/storage
 mkdir -p /home/ubuntu/tmp/sockets
 sudo chown -R ubuntu:ubuntu /home/ubuntu/tmp/
 
