@@ -81,6 +81,9 @@ GEM
       activemodel (= 7.2.2)
       activesupport (= 7.2.2)
       timeout (>= 0.4.0)
+    activerecord-postgis-adapter (10.0.1)
+      activerecord (~> 7.2.0)
+      rgeo-activerecord (~> 8.0.0)
     activestorage (7.2.2)
       actionpack (= 7.2.2)
       activejob (= 7.2.2)
@@ -385,6 +388,10 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.3.9)
+    rgeo (3.0.1)
+    rgeo-activerecord (8.0.0)
+      activerecord (>= 7.0)
+      rgeo (>= 3.0)
     rubocop (1.68.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -509,6 +516,7 @@ PLATFORMS
 
 DEPENDENCIES
   action_policy
+  activerecord-postgis-adapter
   auto_strip_attributes
   awesome_print
   aws-sdk-cognitoidentityprovider
@@ -570,4 +578,4 @@ RUBY VERSION
    ruby 3.3.6p108
 
 BUNDLED WITH
-   2.5.17
+   2.5.23
