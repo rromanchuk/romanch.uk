@@ -47,7 +47,7 @@ module Utils
               },
               {
                 sky_cover: row[30], #ad
-                cloud_base_ft_agl: row[31]&.to_i,],
+                cloud_base_ft_agl: row[31]&.to_i,
                 cloud_type: row[32],
               },
               {
@@ -73,19 +73,12 @@ module Utils
                 max_or_min_temp_c: row[44],
               }
             ],
-           
-
-            
-            
-            
-            
-            
-            valid_time:
-            sfc_temp_c:	
-            max_or_min_temp_c:
-            valid_time:	,
-            sfc_temp_c: ,	
-            max_or_min_temp_c: ,
+            # valid_time:
+            # sfc_temp_c:	
+            # max_or_min_temp_c:
+            # valid_time:	,
+            # sfc_temp_c: ,	
+            # max_or_min_temp_c: ,
           }]
         }.compact
 
