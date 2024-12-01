@@ -31,25 +31,25 @@ pin 'utils', to: 'utils.js'
 
 pin 'buffer' # @6.0.3
 
-pin 'highlight', to: 'highlight.min.js', preload: true # @9.12.0
-pin 'ruby.js', to: 'languages/ruby.min.js'
-pin 'markdown.js', to: 'languages/markdown.min.js'
-pin 'javascript.js', to: 'languages/javascript.min.js'
-pin 'bash.js', to: 'languages/bash.min.js'
-pin 'swift.js', to: 'languages/swift.min.js'
-pin 'erb.js', to: 'languages/erb.min.js'
-pin 'latex.js', to: 'languages/latex.min.js'
-pin 'python.js', to: 'languages/python.min.js'
-pin 'json.js', to: 'languages/json.min.js'
-pin 'xml.js', to: 'languages/xml.min.js'
-pin 'css.js', to: 'languages/css.min.js'
-pin 'scss.js', to: 'languages/scss.min.js'
-pin 'plaintext.js', to: 'languages/plaintext.min.js'
-pin 'sql.js', to: 'languages/sql.min.js'
-pin 'pgsql.js', to: 'languages/pgsql.min.js'
-pin 'json.js', to: 'languages/json.min.js'
-pin 'objectivec.js', to: 'languages/objectivec.min.js'
-pin 'yaml.js', to: 'languages/yaml.min.js'
+pin 'highlight', to: 'highlight.min.js' # @9.12.0
+pin 'ruby.js', to: 'languages/ruby.min.js', preload: false
+pin 'markdown.js', to: 'languages/markdown.min.js', preload: false
+pin 'javascript.js', to: 'languages/javascript.min.js', preload: false
+pin 'bash.js', to: 'languages/bash.min.js', preload: false
+pin 'swift.js', to: 'languages/swift.min.js', preload: false
+pin 'erb.js', to: 'languages/erb.min.js', preload: false
+pin 'latex.js', to: 'languages/latex.min.js', preload: false
+pin 'python.js', to: 'languages/python.min.js', preload: false
+pin 'json.js', to: 'languages/json.min.js', preload: false
+pin 'xml.js', to: 'languages/xml.min.js', preload: false
+pin 'css.js', to: 'languages/css.min.js', preload: false
+pin 'scss.js', to: 'languages/scss.min.js', preload: false
+pin 'plaintext.js', to: 'languages/plaintext.min.js', preload: false
+pin 'sql.js', to: 'languages/sql.min.js', preload: false
+pin 'pgsql.js', to: 'languages/pgsql.min.js', preload: false
+pin 'json.js', to: 'languages/json.min.js', preload: false
+pin 'objectivec.js', to: 'languages/objectivec.min.js', preload: false
+pin 'yaml.js', to: 'languages/yaml.min.js', preload: false
 #pin 'markdown-it', to: 'https://cdn.jsdelivr.net/npm/markdown-it/+esm'
 # pin 'video.js', to: 'https://cdn.jsdelivr.net/npm/video.js/+esm'
 pin 'dat.gui', to: 'https://ga.jspm.io/npm:dat.gui@0.7.9/build/dat.gui.module.js'
