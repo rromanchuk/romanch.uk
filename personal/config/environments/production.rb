@@ -117,4 +117,7 @@ Rails.application.configure do
       params: event.payload[:params]
     }
   end
+
+  # Only use :id for inspections in production.
+  config.active_record.attributes_for_inspect = [ :id ]
 end

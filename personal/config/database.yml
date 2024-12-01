@@ -32,6 +32,10 @@ development:
     adapter: sqlite3
     database: storage/development_cache.sqlite3
     migrations_paths: db/cache
+  cable:
+    adapter: sqlite3
+    database: storage/development_cable.sqlite3
+    migrations_paths: db/cable
 
 test:
   primary:
@@ -92,3 +96,7 @@ production:
     adapter: sqlite3
     database: storage/production_cache.sqlite3
     migrations_paths: db/cache
+  cable:
+    adapter: sqlite3
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable

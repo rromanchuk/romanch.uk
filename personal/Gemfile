@@ -124,3 +124,5 @@ gem 'ox', require: false
 gem "solid_cache", "~> 1.0"
 
 gem "sqlite3", "~> 2.3"
+
+gem "solid_cable", "~> 3.0"
