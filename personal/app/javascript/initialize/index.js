@@ -2,6 +2,8 @@ import { fontAwesomeInit } from 'initialize/fa';
 import { highlightInit } from 'initialize/highlight';
 
 import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+import { getMessaging, isSupported } from "firebase/messaging";
 
 
 highlightInit();
@@ -19,6 +21,17 @@ const firebaseConfig = {
 
 const firebaseInit = () => {
   const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  isSupported().then((supported) => {
+    if (supported) {
+      const messaging = getMessaging(app);
+      navigator.serviceWorker.register("/firebase-messaging-sw.js").then(swReg2 => {
+        console.log("Worker is registered", swReg2);
+      })
+    } else {
+      console.log("Messaging is not supported")
+    }
+  })
   return app;
 }
 
