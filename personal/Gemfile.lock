@@ -15,6 +15,15 @@ GIT
       nio4r (~> 2.0)
 
 GIT
+  remote: https://github.com/rgeo/activerecord-postgis-adapter.git
+  revision: db513fffe8954f0e523d8a691c9eecedcbfae618
+  branch: rails8
+  specs:
+    activerecord-postgis-adapter (10.0.0)
+      activerecord (~> 8.0.0)
+      rgeo-activerecord (~> 8.0.0)
+
+GIT
   remote: https://github.com/rromanchuk/cognito_token_verifier.git
   revision: 4b0c8301bc41fe970fe031b898ca4dddd8fb56db
   specs:
@@ -80,9 +89,6 @@ GEM
       activemodel (= 8.0.1)
       activesupport (= 8.0.1)
       timeout (>= 0.4.0)
-    activerecord-postgis-adapter (3.1.2)
-      activerecord (>= 4.2.0)
-      rgeo-activerecord (>= 4.0.4)
     activestorage (8.0.1)
       actionpack (= 8.0.1)
       activejob (= 8.0.1)
@@ -526,7 +532,7 @@ PLATFORMS
 
 DEPENDENCIES
   action_policy
-  activerecord-postgis-adapter
+  activerecord-postgis-adapter!
   auto_strip_attributes
   awesome_print
   aws-sdk-cognitoidentityprovider
