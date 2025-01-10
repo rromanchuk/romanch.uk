@@ -4,6 +4,7 @@ pin 'application'
 pin '@hotwired/turbo-rails', to: 'turbo.min.js'
 pin '@hotwired/stimulus', to: 'stimulus.min.js'
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js'
+pin "@rails/actioncable", to: "@rails--actioncable.js" # @8.0.100
 pin_all_from 'app/javascript/controllers', under: 'controllers', preload: false
 pin_all_from 'app/javascript/initialize', under: 'initialize'
 pin_all_from 'app/javascript/aws', under: 'aws'
@@ -29,9 +30,9 @@ pin 'cloud_viewer', preload: false
 
 pin 'utils', to: 'utils.js'
 
-pin 'buffer' # @6.0.3
+pin 'buffer', preload: false # @6.0.3
 
-pin 'highlight', to: 'highlight.min.js' # @9.12.0
+pin 'highlight', to: 'highlight.min.js', preload: false # @9.12.0
 pin 'ruby.js', to: 'languages/ruby.min.js', preload: false
 pin 'markdown.js', to: 'languages/markdown.min.js', preload: false
 pin 'javascript.js', to: 'languages/javascript.min.js', preload: false
@@ -59,9 +60,9 @@ pin 'markdown-it-footnote' # @3.0.3
 pin "@googlemaps/js-api-loader", to: "@googlemaps--js-api-loader.js", preload: false # @1.14.3
 #pin "@simplewebauthn/browser", to: "@simplewebauthn--browser.js" # @10.0.0
 pin "@github/webauthn-json", to: "@github--webauthn-json.js", preload: false # @2.1.1
-pin "markdown-it" # @14.1.0
-pin "entities" # @4.5.0
-pin "linkify-it" # @5.0.0
+pin "markdown-it", preload: false # @14.1.0
+pin "entities", preload: false # @4.5.0
+pin "linkify-it", preload: false # @5.0.0
 pin "mdurl" # @2.0.0
 pin "punycode.js" # @2.3.1
 pin "uc.micro" # @2.1.0
@@ -76,3 +77,4 @@ pin 'three-vignette.js', to: 'three-vignette.js', preload: false
 pin 'three-vignette.vert.js', to: 'three-vignette.vert.js', preload: false
 pin 'three-vignette.frag.js', to: 'three-vignette.frag.js', preload: false
 pin "fs" # @2.1.0
+
