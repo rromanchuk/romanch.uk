@@ -7,7 +7,6 @@ pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js'
 pin "@rails/actioncable", to: "@rails--actioncable.js" # @8.0.100
 pin_all_from 'app/javascript/controllers', under: 'controllers', preload: false
 pin_all_from 'app/javascript/initialize', under: 'initialize'
-pin_all_from 'app/javascript/aws', under: 'aws'
 pin_all_from "app/javascript/channels", under: "channels"
 
 pin 'firebase/app', to: 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js'
@@ -52,13 +51,12 @@ pin 'pgsql.js', to: 'languages/pgsql.min.js', preload: false
 pin 'json.js', to: 'languages/json.min.js', preload: false
 pin 'objectivec.js', to: 'languages/objectivec.min.js', preload: false
 pin 'yaml.js', to: 'languages/yaml.min.js', preload: false
-#pin 'markdown-it', to: 'https://cdn.jsdelivr.net/npm/markdown-it/+esm'
-# pin 'video.js', to: 'https://cdn.jsdelivr.net/npm/video.js/+esm'
+
 pin 'dat.gui', to: 'https://ga.jspm.io/npm:dat.gui@0.7.9/build/dat.gui.module.js'
 pin 'base64-js' # @1.5.1
 pin 'ieee754' # @1.2.1
 pin 'markdown-it-footnote' # @3.0.3
-pin "@googlemaps/js-api-loader", to: "@googlemaps--js-api-loader.js", preload: false # @1.14.3
+pin "@googlemaps/js-api-loader", to: "@googlemaps--js-api-loader.js", preload: false # @1.16.8
 #pin "@simplewebauthn/browser", to: "@simplewebauthn--browser.js" # @10.0.0
 pin "@github/webauthn-json", to: "@github--webauthn-json.js", preload: false # @2.1.1
 pin "markdown-it", preload: false # @14.1.0
