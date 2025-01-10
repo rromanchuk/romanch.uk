@@ -8,6 +8,7 @@ pin "@rails/actioncable", to: "@rails--actioncable.js" # @8.0.100
 pin_all_from 'app/javascript/controllers', under: 'controllers', preload: false
 pin_all_from 'app/javascript/initialize', under: 'initialize'
 pin_all_from 'app/javascript/aws', under: 'aws'
+pin_all_from "app/javascript/channels", under: "channels"
 
 pin 'firebase/app', to: 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js'
 pin 'firebase/installations', to: 'https://www.gstatic.com/firebasejs/10.14.0/firebase-installations.js'
