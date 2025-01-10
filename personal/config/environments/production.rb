@@ -79,11 +79,34 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
+  config.hosts = [
+    "romanch.uk",
+    /.*\.romanch\.uk/,
+    "ryanromanchuk.com",
+    /.*\.ryanromanchuk\.com/,
+    "romanchukopen.com",
+    /.*\.romanchukopen\.com/,
+  ]
+  
   # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.host_authorization = { exclude: ->(request) { request.path == "/healthcheck" } }
+  
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  config.lograge.enabled = true
+  #config.colorize_logging = false
+  config.lograge.ignore_actions = ['HomeController#status']
+  #config.lograge.formatter = Utils::Formatters::Lograge.new
+  config.lograge.custom_options = lambda do |event|
+    {
+      url: event.payload[:url],
+      ua: event.payload[:ua],
+      host: event.payload[:host],
+      user_id: event.payload[:user_id] || event.payload[:amzn_oidc_identity],
+      host: event.payload[:host],
+      ip: event.payload[:remote_ip],
+      params: event.payload[:params]
+    }
+  end
 end
