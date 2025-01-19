@@ -4,9 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "../weewx-wdc"
-		},
-		{
 			"path": "../weewx-s3"
 		},
 		{
