@@ -17,8 +17,12 @@
               <td class=""><%= time_tag metar.observation_time %> <span class="text-muted">(<%= time_ago_in_words(metar.observation_time) %> ago)</span></td>
             </tr>
             <tr class="">
-              <td class="w-25 fw-semibold">Identifier</td>
-              <td class=""><%= link_to metar.station_id, tds_metars_path(station_id: metar.station_id), data: {turbo_action: :advance, turbo_frame: :metars} %></td>
+              <td class="w-25 fw-semibold">Station</td>
+              <td class="">
+              <% if metar.station %>
+                <%= link_to metar.station&.code, tds_station_metars_path(metar.station), data: {turbo_action: :advance, turbo_frame: :metars} %>
+              <% end %>
+              </td>
             </tr>
           </tbody>
         </table>

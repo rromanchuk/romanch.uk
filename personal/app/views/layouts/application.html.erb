@@ -7,7 +7,7 @@
     <meta content="ua0bOK-G5Ddcx6e_Dz-Sl6J3lym5fRFPd3m5Z1ljLGU" name="google-site-verification" />
 
     
-    <%# action_cable_meta_tag %>
+    <%= action_cable_meta_tag %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -87,5 +87,6 @@
     <% if Rails.env.development? -%>
       <%# console %>
     <% end -%>
+    <script src="/static/videojs/video.min.js"></script>
   </body>
 </html>

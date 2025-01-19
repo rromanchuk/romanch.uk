@@ -5,6 +5,12 @@ import "controllers"
 import * as bootstrap from 'bootstrap';
 import { fontAwesomeInit, firebaseInit } from "initialize";
 
+import * as ActionCable from '@rails/actioncable'
+
+ActionCable.logger.enabled = true
+
+import "channels/appearance_channel"
+
 
 fontAwesomeInit()
 const firebase = firebaseInit()

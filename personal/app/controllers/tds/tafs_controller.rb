@@ -11,6 +11,7 @@ module Tds
       @dr_pagy, records = pagy_countless(relation, items: 25)
       records
     end
+    let(:station) { Station.find(params[:station_id]) }
 
     def debug
       add_breadcrumb('Terminal Aerodrome Forecast (TAF)', tds_tafs_url)

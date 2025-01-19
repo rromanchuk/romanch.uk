@@ -36,21 +36,21 @@
               <td class="w-25 fw-semibold">Temp:</td>
               <td class=""><%= airep.temp_c %>C</td>
             </tr>
-            <% unless airep.sky_condition.blank? %>
+            <%# unless airep.sky_condition.blank? %>
               <tr class="">
                 <td class="w-25 fw-semibold">Sky Conditions</td>
-                <td class=""><%= airep.sky_condition %></td>
+                <td class=""><%# airep.sky_condition %></td>
               </tr>
-            <% end %>
+            <%# end %>
             <% unless airep.icing_condition.blank? %>
               <tr class="">
                 <td class="w-25 fw-semibold">Icing Conditions</td>
                 <td class=""><%== airep.icing_condition.to_json %></td>
               </tr>
             <% end %>
-            <% unless airep.icing_condition.blank? %>
+            <% unless airep.turbulence_condition.blank? %>
               <tr class="">
-                <td class="w-25 fw-semibold">Turbulance Conditions</td>
+                <td class="w-25 fw-semibold">Turbulence Conditions</td>
                 <td class=""><%= airep.turbulence_condition %></td>
               </tr>
             <% end %>

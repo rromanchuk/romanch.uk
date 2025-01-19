@@ -1,4 +1,5 @@
 <tr>
+  <%= tag.td image.id %>
   <td>
     <% if image.file.attached? %>
       <%= image_tag cdn_image_url(image.file), class: "img-fluid img-thumb", width: 200 %>

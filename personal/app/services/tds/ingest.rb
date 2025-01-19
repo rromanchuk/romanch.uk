@@ -2,7 +2,7 @@ require 'aws-sdk-s3'
 module Tds
   class Ingest < Service
     # CLIENTS
-    let(:redis) { RedisClient.new }
+
     let(:object) do
       Aws::S3::Object.new(bucket_name: 'pireps',
                           key: "tds/#{report_type}/#{Rails.env}/#{year}/#{month}/#{day}/#{prefix}_#{report_type}.#{file_type}",
@@ -21,8 +21,18 @@ module Tds
     let(:last_modified) { Time.parse(headers['last-modified']) } # N/A, not passed when using filters
     let(:etag) { headers['etag'] } # N/A, not passed when using filters
 
-    let(:previous_etag) { redis.call('GET', "#{report_type}_previous_etag") }
-    let(:previous_last_modified) { redis.call('GET', "#{report_type}_previous_last_modified") }
+    let(:previous_etag) do
+      Personal.redis.with do |redis|
+        redis.get("#{report_type}_previous_etag")
+      end
+    end
+    
+    let(:previous_last_modified) do
+      Personal.redis.with do |redis|
+        redis.get("#{report_type}_previous_last_modified")
+      end
+    end
+    
     let(:batch) { Batch.new }
 
     # Time
@@ -58,8 +68,10 @@ module Tds
     end
 
     def set_previous_keys!
-      redis.call('SET', "#{report_type}_previous_etag", etag)
-      redis.call('SET', "#{report_type}_previous_last_modified", end_time_s)
+      Personal.redis.with do |redis|
+        redis.set("#{report_type}_previous_etag", etag)
+        redis.set("#{report_type}_previous_last_modified", end_time_s)
+      end
     end
 
     def report_type

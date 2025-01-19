@@ -1,7 +1,7 @@
 class Tags < ActiveRecord::Migration[7.0]
   def change
-    execute "DROP TABLE #{:gutentag_tags} CASCADE"
-    execute "DROP TABLE #{:gutentag_taggings} CASCADE"
+    # execute "DROP TABLE #{:gutentag_tags} CASCADE"
+    # execute "DROP TABLE #{:gutentag_taggings} CASCADE"
 
 
     create_table :gutentag_tags, id: :uuid do |t|

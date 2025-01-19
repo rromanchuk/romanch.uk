@@ -139,6 +139,8 @@ Rails.application.routes.draw do
 
       resources :stations do 
         resources :pireps, only: %i[index show]
+        resources :metars, only: %i[index show]
+        resources :tafs, only: %i[index show]
       end
 
       resources :batches, only: %i[index show] do
@@ -168,6 +170,7 @@ Rails.application.routes.draw do
       end
     end
 
+    mount ActionCable.server => "/cable" 
     get '/c/*attributed', to: 'pages#show', id: 'home'
     root to: 'pages#show', id: 'home'
   end

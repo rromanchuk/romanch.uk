@@ -1,6 +1,6 @@
 
 import { Controller } from "@hotwired/stimulus"
-import videojs from "video.js"
+
 //import { gtagInit } from "../initialize"
 
 export default class extends Controller {
@@ -17,7 +17,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("video reporting for duty")
     console.log(this.posterValue)
     if (!this.player) {
       const options ={
@@ -31,7 +30,7 @@ export default class extends Controller {
         poster: this.posterValue,
       }
 
-      this.player = videojs('video-player', options, () => {
+      this.player = window.videojs('video-player', options, () => {
         gtag('event', 'video_start', { 'video_url': this.player.currentSrc(), 'video_current_time': this.player.currentTime(), 'video_duration': this.player.duration() })
       });
 
