@@ -25,12 +25,6 @@ Rails.application.routes.draw do
   post '/data/report', to: 'data#report'
   resources :wx_station_observations, only: %i[index]
 
-  constraints(DomainParkingConstraint.new) do
-    match '/(*path)' => redirect { |params, req|
-      "https://romanch.uk#{req.fullpath}"
-    }, via: [:get, :head]
-  end
-
   # config/routes.rb
   direct :cdn_image do |model, options|
     expires_in = options.delete(:expires_in) { ActiveStorage.urls_expire_in }

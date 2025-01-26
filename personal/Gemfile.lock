@@ -336,6 +336,11 @@ GEM
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
+    propshaft (1.1.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.2.3)
       date
       stringio
@@ -469,13 +474,6 @@ GEM
       activejob (>= 7.2)
       activerecord (>= 7.2)
       railties (>= 7.2)
-    sprockets (4.2.1)
-      concurrent-ruby (~> 1.0)
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sqlite3 (2.5.0)
       mini_portile2 (~> 2.8.0)
     sqlite3 (2.5.0-aarch64-linux-gnu)
@@ -573,6 +571,7 @@ DEPENDENCIES
   pg_query
   pg_search
   pghero
+  propshaft
   puma!
   rails (~> 8.0.0)
   rails_real_favicon
@@ -589,7 +588,6 @@ DEPENDENCIES
   sitemap_generator
   solid_cable (~> 3.0)
   solid_cache (~> 1.0)
-  sprockets-rails
   sqlite3
   stimulus-rails
   turbo-rails
