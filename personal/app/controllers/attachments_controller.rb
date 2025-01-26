@@ -1,5 +1,4 @@
 class AttachmentsController < ApplicationController
-  before_action :require_user!
   let(:dr_pagy)
   let(:attachments) do
     relation = apply_filter

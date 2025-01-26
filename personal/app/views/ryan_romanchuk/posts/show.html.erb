@@ -26,7 +26,7 @@
   <% end %>
   <%= tag.script post_json_ld(post).target!.html_safe, type: "application/ld+json" %>
 <% end %>
-<% if current_user %>
+<% if authenticated? %>
   <div class="d-flex">
     <%= link_to "Edit", edit_post_path(post), class: 'btn btn-link btn-sm', data: { turbo_action: "replace" } %>
     <%= button_to "Destory", post_path(post), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>

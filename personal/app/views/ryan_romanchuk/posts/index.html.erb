@@ -9,6 +9,7 @@
   </div>
   <%== pagy_bootstrap_nav(dr_pagy, link_extra: "data-turbo-action='advance'") %>
 <% end %>
-<% if current_user&.me? %>
+
+<% if authenticated? %>
   <%= link_to "New post", new_post_path, data: { turbo_action: :replace } %>
 <% end %>

@@ -15,7 +15,7 @@ class PersonalConstraint
 end
 
 Rails.application.routes.draw do
-  get :healthcheck, to: 'pages#show', id: 'status'
+  get :healthcheck, to: 'ryan_romanchuk/pages#show', id: 'status'
   post '/data/report', to: 'data#report'
   resources :wx_station_observations, only: %i[index]
 
@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   end
   
   scope module: :ryan_romanchuk do
+    resource :session
+    resources :passwords, param: :token
     resources :streaming_videos
     resources :posts do
       resources :tags, shallow: true
@@ -57,6 +59,8 @@ Rails.application.routes.draw do
     resources :tags, param: :name, only: [:index] do
       resources :posts, only: [:index], on: :collection
     end
+    get '/pages/*id' => 'pages#show', as: :page, format: false
+    #root "pages#show", id: 'home'
   end
   
   
@@ -71,16 +75,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :sessions, only: [] do
-    get :apple_signin
-    post :client
-  end
+  # resource :sessions, only: [] do
+  #   get :apple_signin
+  #   post :client
+  # end
 
-  get 'account', to: 'sessions#account'
-  get 'logout', to: 'sessions#logout'
-  get 'login', to: 'sessions#login'
-  post 'sign_in', to: 'sessions#sign_in'
-  get '/pages/*id' => 'pages#show', as: :page, format: false
+  # get 'account', to: 'sessions#account'
+  # get 'logout', to: 'sessions#logout'
+  # get 'login', to: 'sessions#login'
+  # post 'sign_in', to: 'sessions#sign_in'
+  
 
   namespace :serve, path: '/serve' do
     resources :images, only: [:show]
@@ -121,11 +125,11 @@ Rails.application.routes.draw do
       resources :golfers, only: [:index]
       get :newsletter, on: :member
     end
-    get '/pages/*id' => 'pages#show', as: :page, format: false
+    #get '/pages/*id' => 'pages#show', as: :page, format: false
   end
 
-  mount Sidekiq::Web, at: '/sidekiq' # mount Sidekiq::Web in your Rails app
-  mount PgHero::Engine, at: '/pghero'
+  mount Sidekiq::Web, at: '/sidekiq', constraints: AdminConstraint.new # mount Sidekiq::Web in your Rails app
+  mount PgHero::Engine, at: '/pghero', constraints: AdminConstraint.new
 
   constraints(RomanchukOpenConstraint.new) do
     root 'ro/tournaments#index', as: :ro
@@ -171,7 +175,8 @@ Rails.application.routes.draw do
     end
 
     mount ActionCable.server => "/cable" 
-    get '/c/*attributed', to: 'pages#show', id: 'home'
-    root to: 'pages#show', id: 'home'
+    #get '/c/*attributed', to: 'pages#show', id: 'home'
+    root to: "ryan_romanchuk/pages#show", id: "home"
+    
   end
 end

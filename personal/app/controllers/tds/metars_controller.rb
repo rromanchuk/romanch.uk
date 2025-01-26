@@ -2,6 +2,7 @@
 
 module Tds
   class MetarsController < ApplicationController
+    allow_unauthenticated_access
     before_action :set_breadcrumbs
     let(:dr_pagy)
     let(:metar) { Metar.find(params[:id]) }

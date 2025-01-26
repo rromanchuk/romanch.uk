@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_04_10_055524) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -41,6 +41,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_04_10_055524) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "alb_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "cognito_id"
+    t.string "slug"
+    t.string "username"
+    t.jsonb "data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_alb_users_on_slug"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -95,6 +105,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_04_10_055524) do
     t.index ["slug"], name: "index_posts_on_slug"
   end
 
+  create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "streaming_videos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "content_type"
@@ -108,16 +127,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_04_10_055524) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "cognito_id"
-    t.string "slug"
-    t.string "username"
-    t.jsonb "data", default: {}, null: false
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_users_on_slug"
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "gutentag_taggings", "gutentag_tags", column: "tag_id"
+  add_foreign_key "sessions", "users"
 end

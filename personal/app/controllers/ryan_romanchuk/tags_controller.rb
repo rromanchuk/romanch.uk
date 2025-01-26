@@ -1,6 +1,8 @@
 
 module RyanRomanchuk
   class TagsController < ApplicationController
+    allow_unauthenticated_access
+    
     let(:post) { Post.friendly.find(params[:post_id]) }
     let(:post_tags) do
       if params[:post_id]

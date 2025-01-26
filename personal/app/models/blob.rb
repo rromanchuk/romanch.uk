@@ -1,8 +1,8 @@
 class Blob < ApplicationRecord
   include Taggable
-  include Searchable
+  # include Searchable
   include Sluggable
-  SEARCH_AGAINST = %i[title description key]
+  # SEARCH_AGAINST = %i[title description key]
 
   store_accessor :data, :thumbnail_key, :aspect, :geo_location
   auto_strip_attributes :title

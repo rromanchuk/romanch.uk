@@ -1,5 +1,6 @@
 module Ro
   class TournamentsController < ApplicationController
+    allow_unauthenticated_access only: %i[ show index ]
     before_action :set_breadcrumbs
 
     let(:tournament) { Tournament.friendly.find params[:id] }

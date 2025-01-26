@@ -2,6 +2,6 @@
 
 module Tds
   class StationsController < ApplicationController
-
+    allow_unauthenticated_access
   end
 end

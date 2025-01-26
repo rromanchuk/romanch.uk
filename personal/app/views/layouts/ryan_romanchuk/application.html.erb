@@ -41,8 +41,8 @@
       <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
     <% end %>
 
-    <%= render 'application/gtm' %>
-    <%= render 'application/favicon' %>
+    <%# render 'gtm' %>
+    <%#% render 'application/favicon' %>
     
     <meta
       name="theme-color"
@@ -80,10 +80,10 @@
         <% end %>
       </div>
     </div>
-    <%= render 'ryan_romanchuk/application/current_user' %>
+    <%# render 'application/current_user' %>
     <%= render 'ryan_romanchuk/application/footer' %>
-    <%= turbo_frame_tag "apple_signin" %>
-    <%= turbo_frame_tag "search_results" %>
+    <%= turbo_frame_tag "ryan_romanchuk/application/apple_signin" %>
+    <%= turbo_frame_tag "ryan_romanchuk/application/search_results" %>
     <% if Rails.env.development? -%>
       <%# console %>
     <% end -%>

@@ -1,6 +1,7 @@
 module Serve
   class VideosController < ApplicationController
     before_action :set_breadcrumbs
+    allow_unauthenticated_access
 
     let(:video) { RyanRomanchuk::StreamingVideo.friendly.find(params[:id]) }
 

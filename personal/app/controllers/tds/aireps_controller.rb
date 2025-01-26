@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 module Tds
   class AirepsController < ApplicationController
+    allow_unauthenticated_access
     before_action :set_breadcrumbs
     let(:dr_pagy)
     let(:airep) { Airep.find(params[:id]) }

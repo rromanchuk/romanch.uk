@@ -2,6 +2,7 @@
 
 module Tds
   class PirepsController < ApplicationController
+    allow_unauthenticated_access
     before_action :set_breadcrumbs
 
     let(:dr_pagy)

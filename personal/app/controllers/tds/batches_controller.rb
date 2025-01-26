@@ -38,7 +38,7 @@ module Tds
     end
 
     def ingest
-      if allowed_to?(:ingest?, current_user, with: BatchPolicy)
+      if allowed_to?(:ingest?, Current.user, with: BatchPolicy)
         Pireps::Ingest.call
         Metars::Ingest.call
         Tafs::Ingest.call
@@ -49,7 +49,7 @@ module Tds
     end
 
     def reprocess
-      if allowed_to?(:ingest?, current_user, with: BatchPolicy)
+      if allowed_to?(:ingest?, Current.user, with: BatchPolicy)
         batch.process_batch!
         redirect_to tds_batches_path, notice: 'Transforming data...'
       else
@@ -58,7 +58,7 @@ module Tds
     end
 
     def process_csv
-      if allowed_to?(:ingest?, current_user, with: BatchPolicy)
+      if allowed_to?(:ingest?, Current.user, with: BatchPolicy)
         Batch.pending.first.process_batch!
         redirect_to tds_batches_path, notice: 'Transforming data...'
       else

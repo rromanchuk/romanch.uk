@@ -1,5 +1,6 @@
 module Ro
   class PlayersController < ApplicationController
+    allow_unauthenticated_access only: %i[ index show ]
     before_action :set_breadcrumbs
     let(:player) { Player.friendly.find params[:id] }
     let(:players) { Player.all }

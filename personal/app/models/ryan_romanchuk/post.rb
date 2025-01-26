@@ -3,10 +3,12 @@ module RyanRomanchuk
     SEARCH_AGAINST = %i[title description markdown_content]
   
     include Sluggable
-    include Searchable
     include Taggable
-  
-    pg_search_scope :search, against: %i[title markdown_content]
+
+    # include PgSearch::Model
+    # multisearchable against: %i[title markdown_content]
+    # pg_search_scope :search, against: %i[title markdown_content]
+
     validates_presence_of :title
     auto_strip_attributes :description, :title
   

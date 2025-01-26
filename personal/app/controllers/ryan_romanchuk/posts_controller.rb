@@ -1,5 +1,6 @@
 module RyanRomanchuk
   class PostsController < ApplicationController
+    allow_unauthenticated_access only: %i[ show index recently_updated ]
     before_action :set_breadcrumbs
 
     let(:dr_pagy)

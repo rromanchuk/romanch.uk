@@ -1,5 +1,6 @@
 module Ro
   class GolfersController < ApplicationController
+    allow_unauthenticated_access only: %i[ index show ]
     let(:tournament) { Tournament.friendly.find params[:tournament_id] }
     let(:golfers) do
       if params[:tournament_id]

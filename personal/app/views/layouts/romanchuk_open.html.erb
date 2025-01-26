@@ -36,7 +36,7 @@
       <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
     <% end -%>
 
-    <%= render 'application/gtm' %>
+    <%= render 'ryan_romanchuk/application/gtm' %>
   </head>
 
   <body>
@@ -47,6 +47,6 @@
     </nav>
     
     <%= yield %>
-    <%= render 'application/honeypot' %>
+    <%= render 'ryan_romanchuk/application/honeypot' %>
   </body>
 </html>
