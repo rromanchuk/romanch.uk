@@ -14,10 +14,22 @@ class PersonalConstraint
   end
 end
 
+class DomainParkingConstraint
+  def matches?(request)
+    ['wwww.ryanromanchuk.com', 'ryanromanchuk.com'].include?(request.domain)
+  end
+end
+
 Rails.application.routes.draw do
   get :healthcheck, to: 'ryan_romanchuk/pages#show', id: 'status'
   post '/data/report', to: 'data#report'
   resources :wx_station_observations, only: %i[index]
+
+  constraints(DomainParkingConstraint.new) do
+    match '/(*path)' => redirect { |params, req|
+      "https://romanch.uk#{req.fullpath}"
+    }, via: [:get, :head]
+  end
 
   # config/routes.rb
   direct :cdn_image do |model, options|
