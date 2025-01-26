@@ -24,7 +24,7 @@ module RyanRomanchuk
     def layout_for_page
       case params[:id].to_sym
       when :potree, :model_viewer, :c177, :travis
-        'ryan_romanchuk/layouts/nostyle'
+        'ryan_romanchuk/nostyle'
       when :three, :pe
         'ryan_romanchuk/three'
       when :who_dis
