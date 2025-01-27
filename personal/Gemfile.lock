@@ -169,8 +169,6 @@ GEM
     cronex (0.15.0)
       tzinfo
       unicode (>= 0.4.4.5)
-    cssbundling-rails (1.4.1)
-      railties (>= 6.0.0)
     csv (3.3.2)
     date (3.4.1)
     debug (1.10.0)
@@ -548,7 +546,6 @@ DEPENDENCIES
   bullet
   capybara
   cognito_token_verifier!
-  cssbundling-rails
   debug
   down
   friendly_id
