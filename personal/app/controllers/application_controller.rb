@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   def set_breadcrumbs
     add_breadcrumb('Home', root_url)
   end
+  
   def current_user
     RyanRomanchuk::Current.user
   end

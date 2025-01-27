@@ -2,37 +2,35 @@
 <% content_for(:canonical_url, ro_tournament_url(tournament)) %>
 
 
-<% cache_unless current_user, tournament do %>
-  <section>
-    <div class="row py-lg-5 py-5 text-center container">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light"><%= tournament.title %></h1>
-        <p class="lead text-muted"><%= "#{tournament.ocurred_on&.strftime("%B, %Y")}, #{tournament.location}" %></p>
-        <p>
-          <%# link_to "New Photo", new_tournament_image_path(tournament) %>
-          <%= link_to "Golfers", ro_tournament_golfers_path(tournament) %>
-          <% if tournament.newsletter %>
-            <%# link_to "Newsletter", players_romanchuk_open_tournament_path(tournament) %>
-          <% end %>
-        </p>
-        <% if current_user %>
-          <div class="hstack gap-2 justify-content-center">
-            <%= link_to "Edit", edit_ro_tournament_path(tournament), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
-            <%= button_to "Destory", ro_tournament_path(tournament), method: :delete, class: 'btn btn-sm btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
-          </div>
+<section>
+  <div class="row py-lg-5 py-5 text-center container">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light"><%= tournament.title %></h1>
+      <p class="lead text-muted"><%= "#{tournament.ocurred_on&.strftime("%B, %Y")}, #{tournament.location}" %></p>
+      <p>
+        <%# link_to "New Photo", new_tournament_image_path(tournament) %>
+        <%= link_to "Golfers", ro_tournament_golfers_path(tournament) %>
+        <% if tournament.newsletter %>
+          <%# link_to "Newsletter", players_romanchuk_open_tournament_path(tournament) %>
         <% end %>
-      </div>
+      </p>
+      <% if authenticated? %>
+        <div class="hstack gap-2 justify-content-center">
+          <%= link_to "Edit", edit_ro_tournament_path(tournament), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
+          <%= button_to "Destory", ro_tournament_path(tournament), method: :delete, class: 'btn btn-sm btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
+        </div>
+      <% end %>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="album py-5 bg-light">
+<section class="album py-5 bg-light">
+  
+  <div class="container">
     
-    <div class="container">
-      
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <%= render partial: 'image', collection: tournament.images, cached: true %>
-      </div>
-      
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <%= render partial: 'image', collection: tournament.images, cached: true %>
     </div>
-  </section>
-<% end %>
+    
+  </div>
+</section>

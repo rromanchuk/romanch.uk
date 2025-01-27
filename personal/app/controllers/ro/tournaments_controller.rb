@@ -1,23 +1,21 @@
 module Ro
   class TournamentsController < ApplicationController
-    allow_unauthenticated_access only: %i[ show index ]
+    allow_unauthenticated_access only: %i[ show index newsletter ]
     before_action :set_breadcrumbs
 
     let(:tournament) { Tournament.friendly.find params[:id] }
     let(:tournaments) { Tournament.oldest(:ocurred_on) }
+    
     def new
-      require_me!
       @tournament = Tournament.new
       authorize! tournament
     end
 
     def edit
-      require_me!
       
     end
 
     def create
-      require_me!
       @tournament = Tournament.new(tournament_params)
       authorize! tournament
       if tournament.save
@@ -28,7 +26,6 @@ module Ro
     end
 
     def destroy
-      require_me!
       authorize! tournament
       tournament.destroy
       redirect_to request.referer, status: :see_other

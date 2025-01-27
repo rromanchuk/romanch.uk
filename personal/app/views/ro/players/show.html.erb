@@ -15,7 +15,7 @@
 </section>
 
 
-<% if current_user %>
+<% if authenticated? %>
   <div class="hstack gap-2 justify-content-center">
     <%= link_to "Edit", edit_ro_player_path(player), class: 'btn btn-sm my-2', data: { turbo_action: "replace" } %>
     <%= button_to "Destory", ro_player_path(player), method: :delete, class: 'btn btn-sm btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
