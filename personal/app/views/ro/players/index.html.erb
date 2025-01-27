@@ -1,23 +1,25 @@
 <% content_for(:page_title, "All players") %>
 <% content_for(:canonical_url, ro_players_url) %>
 
-<section>
-  <div class="row py-lg-5 py-5 text-center container">
+
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">All participants</h1>
-      <p class="lead text-muted">1985-2021</p>
+      <p class="lead text-body-secondary">1985-2025</p>
       <p>
+        <%= link_to "All players", ro_players_path, class: "btn btn-primary my-2" %>
         <% if authenticated? %>
-          <%= link_to "New player", new_ro_player_path, data: { turbo_frame: 'player_modal'  } %>
+          <%= link_to "New player", new_ro_player_path, class: "btn btn-secondary my-2",  data: { turbo_frame: 'player_modal'  } %>
         <% end %>
-        <!--<a href="#" class="btn btn-primary my-2">Main call to action</a> -->
-        <!--<a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+        <%# <a href="#" class="btn btn-secondary my-2">Secondary action</a> %>
       </p>
     </div>
   </div>
 </section>
 
-<section class="album py-5 bg-light">
+<div class="album py-5 bg-body-tertiary">
   <div class="container">
     <table class="table table-striped">
       <thead>
@@ -31,6 +33,7 @@
       </tbody>
     </table>
   </div>
-</section>
+</div>
+
 
 <%= turbo_frame_tag "player_modal" %>
