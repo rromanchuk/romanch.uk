@@ -1,6 +1,6 @@
 env ../bin/shdotenv 
 #sidekiq: bin/bundle exec sidekiq
-css: yarn build:css --watch
+#css: yarn build:css --watch
 devlog: tail -f log/development.log
 pumalog: tail -f ~/Library/Logs/puma-dev.log
 #anycable: bundle exec anycable

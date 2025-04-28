@@ -1,7 +1,6 @@
 
 import { Controller } from "@hotwired/stimulus"
 
-//import { gtagInit } from "../initialize"
 
 export default class extends Controller {
   static targets = [ "video" ]

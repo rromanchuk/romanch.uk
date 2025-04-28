@@ -4,7 +4,7 @@
     <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
       <h1>Edit post</h1>
       <%= turbo_frame_tag post do %>
-        <%= simple_form_for post, url: post_path(post), html: { data: { turbo_frame: :_top} } do |f| %>
+        <%= simple_form_for post, url: post_path(post), html: { data: { controller: :post, turbo_frame: :_top} } do |f| %>
           <%= f.error_notification %>
           <%= f.input :title %>
           <%= f.input :description, as: :text %>

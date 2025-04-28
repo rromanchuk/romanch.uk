@@ -22,8 +22,6 @@ module RyanRomanchuk
       add_breadcrumb('Posts', posts_url)
       add_breadcrumb('New')
       @new_post = Post.new
-      authorize! @new_post
-      
     end
 
     def index
@@ -33,12 +31,10 @@ module RyanRomanchuk
     def edit
       add_breadcrumb(post.title, post_url(post))
       add_breadcrumb('Edit')
-      authorize! post
     end
 
     def create
       @new_post = Post.new(post_params)
-      authorize! @new_post
       if @new_post.save
         redirect_to request.referer, status: :see_other
       else
@@ -47,13 +43,11 @@ module RyanRomanchuk
     end
 
     def update
-      authorize! post
       post.update!(post_params)
       redirect_to request.referer, status: :see_other
     end
 
     def destroy
-      authorize! post
       post.destroy
       redirect_to request.referer, status: :see_other
     end

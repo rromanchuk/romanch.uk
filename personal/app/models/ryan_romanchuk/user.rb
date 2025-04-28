@@ -7,8 +7,7 @@ module RyanRomanchuk
 
     def me?
       return true if Rails.env.development?
-      # %w[54467d4a-f7bc-457d-aa72-55842106b02e f6fc595b-394c-4b56-8991-ded80c12d285].include?(cognito_id)
-      false
+      id == "248b84ea-063a-48b8-93d2-895069be56d1"
     end
   end
 end

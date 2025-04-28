@@ -3,7 +3,7 @@
   <%= tag.div class: 'col-12 col-md-10 col-lg-8' do %>
     <h1>New Post</h1>
     <%= turbo_frame_tag @new_post do %>
-      <%= simple_form_for @new_post, url: posts_path,  html: { data: { turbo_frame: :_top} } do |f| %>
+      <%= simple_form_for @new_post, url: posts_path,  html: { data: { controller: :post, turbo_frame: :_top} } do |f| %>
         <%= f.error_notification %>
         <%= f.input :title %>
         <%= f.input :description, as: :text %>
@@ -13,7 +13,6 @@
         <%= f.input :published %>
         <%= f.button :submit, class: "btn-primary", data: {action: "post#save"}  %>
       <% end %>
-
     <% end %>
   <% end %>
 <% end %>
