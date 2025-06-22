@@ -26,7 +26,6 @@ pin 'bootstrap' # @5.2.0
 
 pin 'buffer', preload: false # @6.0.3
 pin "@googlemaps/js-api-loader", to: "@googlemaps--js-api-loader.js", preload: false # @1.16.8
-#pin "@simplewebauthn/browser", to: "@simplewebauthn--browser.js" # @10.0.0
 pin "@github/webauthn-json", to: "@github--webauthn-json.js", preload: false # @2.1.1
 
 
