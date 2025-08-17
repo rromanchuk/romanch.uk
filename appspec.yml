@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: /app
+    destination: /home/ubuntu/codedeploy/app
+
+file_exists_behavior: OVERWRITE
+permissions:
+  - object: /var/www/romanch.uk/codedeploy
+    owner: ubuntu
+    group: ubuntu
+    pattern: "**"
+    mode: 775
+    type:
+      - file
+      - directory
+hooks:
+  AfterInstall:
+    - location: /var/home/ubuntu/codedeploy/deploy_scripts/after_install.sh
+      runas: ubuntu
