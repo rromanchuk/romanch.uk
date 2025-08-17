@@ -29,7 +29,7 @@ files:
     destination: /home/ubuntu/codedeploy/romanch.uk/deploy_scripts
 file_exists_behavior: OVERWRITE
 permissions:
-  - object: /var/www/ubuntu/codedeploy
+  - object: /var/www/ubuntu/codedeploy/romanch.uk
     owner: ubuntu
     group: ubuntu
     pattern: "**"
