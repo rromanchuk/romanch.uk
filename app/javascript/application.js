@@ -4,13 +4,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import * as bootstrap from 'bootstrap';
 import { fontAwesomeInit, firebaseInit } from "initialize";
-//import { firebaseInit } from "initialize";
-import * as ActionCable from '@rails/actioncable'
-
-ActionCable.logger.enabled = true
-
-import "channels/appearance_channel"
-
 import * as ActionCable from '@rails/actioncable'
 
 ActionCable.logger.enabled = true
