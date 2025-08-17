@@ -1,7 +1,0 @@
-brew 'puma/puma/puma-dev'
-brew 'overmind'
-brew 'rbenv'
-brew 'ruby-build'
-brew 'tmux'
-brew 'jq'
-brew 'yarn'

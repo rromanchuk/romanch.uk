@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+  <head>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "bootstrap.css", data: {turbo_track: :reload} %>
+    <%= stylesheet_link_tag "application", data: {turbo_track: :reload} %>
+    
+    <%= javascript_importmap_tags %>
+    
+    
+    <%= yield :head %>
+
+    <% if breadcrumbs? -%>
+      <%= tag.script breadcrumb_json_ld(breadcrumbs).target!.html_safe, type: "application/ld+json" %>
+    <% end -%>
+
+    <% if content_for?(:canonical_url) -%>
+      <%= tag.link href: content_for(:canonical_url), rel: 'canonical' %>
+    <% end -%>
+
+    <% if content_for?(:page_title) -%>
+      <%= tag.title content_for(:page_title) %>
+      <%= tag.meta property: 'og:title', content: content_for(:page_title) %>
+    <% end -%>
+
+    <% if content_for?(:page_description) -%>
+      <%= tag.meta name: 'description', content: content_for(:page_description) %>
+      <%= tag.meta property: 'og:description', content: content_for(:page_description) %>
+    <% end -%>
+
+    <% if content_for?(:page_keywords) -%>
+      <%= tag.meta name: 'keywords', content: content_for(:page_keywords) %>
+    <% end -%>
+
+    <% if content_for?(:share_image) -%>
+      <%= tag.meta property: 'og:image', content: content_for(:share_image) %>
+    <% end -%>
+
+    <%= render 'ryan_romanchuk/application/gtm' %>
+  </head>
+
+  <body>
+    <header data-bs-theme="dark">
+      <div class="collapse text-bg-dark" id="navbarHeader">
+        <div class="container">
+          <%# <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4>About</h4>
+              <p class="text-body-secondary">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4>Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div> %>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>The Romanchuk Open</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container my-5">
+      <%= render BreadcrumbComponent.new(breadcrumbs) %>
+    </div>
+
+    
+    <main>
+      <%= yield %>
+    </main>
+    <%= render 'ryan_romanchuk/application/honeypot' %>
+    <footer class="text-body-secondary py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <%# <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p> %>
+      </div>
+    </footer>
+  </body>
+</html>

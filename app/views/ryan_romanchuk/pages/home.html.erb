@@ -1,0 +1,46 @@
+<% content_for :page_title, 'Ryan Romanchuk' %>
+<% content_for :page_description, 'Full-stack developer in the consumer mobile space.' %>
+<% content_for :share_image, 'https://romanch.uk/static/easter-eggs/ryan_romanchuk.jpg' %>
+<% content_for :right_col do %>
+  <div class="card mb-4">
+    <div class="card-header">Recently updated</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <%= turbo_frame_tag :recently_updated, src: recently_updated_posts_path, lazy: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= turbo_frame_tag :landing do %>
+  <header>
+    <h1>Ryan Romanchuk</h1>
+  </header>
+  <main>
+    <section class="mb-3">
+      <p class="h5 text-muted lead">Full-stack developer in the <%= link_to "chicken", "https://coop.farm", data: {turbo_frame: :_top}  %> space.</p>
+    </section>
+    <section class="">
+      <span>Find me on the World Wide Web</span>
+      <ul class="fa-ul">
+        <li>
+          <span class="fa-li"><i class="fa-brands fa-github"></i></span><a href="https://github.com/rromanchuk">github</a>
+        </li>
+        <li>
+          <span class="fa-li"><i class="fa-brands fa-stack-overflow"></i></span><a href="https://stackoverflow.com/users/775762/ryan-romanchuk">stackoverflow</a>
+        </li>
+        <li>
+          <span class="fa-li"><i class="fa-brands fa-linkedin"></i></span><a href="https://www.linkedin.com/in/rromanchuk/">linkedin</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <%= render 'ryan_romanchuk/application/me' %>
+<% end %>
+<section class="row">
+  <hr class="col-3 col-md-2 mt-5">
+  <%# turbo_frame_tag :posts, src: posts_path, loading: :lazy do %>
+    <section class="row d-none"> </section>
+    <%# end %>
+  </section>

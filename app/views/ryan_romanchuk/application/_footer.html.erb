@@ -1,0 +1,18 @@
+<footer class="footer mt-auto py-3">
+  <div class="container footer-container">
+
+    <span>
+      <i class="fa-solid fa-code"></i>
+      <%= link_to "src", "https://github.com/rromanchuk/romanch.uk" %>
+    </span>
+    <span class="mx-2">
+      <i class="fa-solid fa-key"></i>
+      <%= link_to "pub", page_path("public_key") %>
+    </span>
+    <% if authenticated? %>
+      <span class="mx-2">
+        <%= button_to "Sign out", session_path, method: :delete, class: "btn btn-link"  %>
+      </span>
+    <% end %>
+  </div>
+</footer>

@@ -1,8 +1,0 @@
-env ../bin/shdotenv 
-#sidekiq: bin/bundle exec sidekiq
-css: yarn build:css --watch
-devlog: tail -f log/development.log
-pumalog: tail -f ~/Library/Logs/puma-dev.log
-#anycable: bundle exec anycable
-#ws: anycable-go --port=8080
-testlog: tail -f log/test.log

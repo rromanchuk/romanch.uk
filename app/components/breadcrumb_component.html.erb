@@ -1,0 +1,14 @@
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
+    <% crumbs.each do |crumb| %>
+      <li class="breadcrumb-item <%= current_page?(crumb.url) ? 'active' : '' %>">
+        <% if crumb.url %>
+          <%= link_to crumb.name, crumb.url, class: class_names("link-body-emphasis fw-semibold text-decoration-none") %>
+        <% else %>
+          <%= crumb.name %>
+        <% end %>
+      </li>
+    <% end%>    
+  </ol>
+</nav>

@@ -1,0 +1,113 @@
+/* // $enable-grid-classes: false;
+// $enable-cssgrid: true;
+// $container-classes: true;
+$enable-container-classes: true;
+$offcanvas-horizontal-width: 40vw;
+
+@import 'bootstrap/scss/bootstrap';
+@import 'custom/container';
+@import 'highlight.js/scss/github-dark-dimmed';
+@import "simple_form-bootstrap/simple_form-bootstrap";
+@import "pdf_viewer/pdf_viewer";
+@import "video.js/dist/video-js"; */
+
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  66% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.5;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+  }
+}
+
+@-webkit-keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  66% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.5;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+  }
+}
+
+.loggedOut {
+  -webkit-animation: 15s ease 0s normal forwards 1 fadeout;
+  animation: 15s ease 0s normal forwards 1 fadeout;
+  // filter: blur(10px);
+  // -webkit-filter: blur(10px);
+  // -moz-filter: blur(10px);
+  // -o-filter: blur(10px);
+  // -ms-filter: blur(10px);
+}
+
+.navbar {
+  margin-bottom: 2rem;
+  border-bottom: 0.125rem solid hsl(0, 0%, 30%);
+}
+
+.archive-year {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.archive-date {
+  float: right;
+  margin-left: 1rem;
+}
+
+.archive-item {
+  margin-bottom: 0.5rem;
+}
+
+.footer-container {
+  text-align: center;
+}
+
+
+.archive-title {
+  color: #212529;
+}
+
+
+
+
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 3px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+}
+
+blockquote p {
+  display: inline-block;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}

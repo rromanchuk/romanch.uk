@@ -1,6 +1,0 @@
-<%= simple_form_for user, html: { data: {controller: :post, turbo_frame: :_top} } do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
-<% end %>

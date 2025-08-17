@@ -1,0 +1,12 @@
+<div
+  id="current_user"
+  data-controller="current-user"
+  data-action="change->current-user#didUpdate"
+  data-current-user-user-id-value="<%= Current.user&.id %>"
+  data-current-user-fcm-value
+  data-current-user-iid-value>
+
+  <% form_with url: client_sessions_path, method: :post, id: "login-form", data: {"current-user-target": "login"} do |form| %>
+    <%= form.hidden_field :fcm_token, data: {"current-user-target": "fcmToken"} %>
+  <% end %>
+</div>

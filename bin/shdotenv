@@ -2,9 +2,10 @@
 # Copyright (c) 2021-2022 Koichi Nakashima
 # shdotenv is released under the MIT license
 # https://opensource.org/licenses/MIT
+#!/bin/sh
 set -eu
 IFS=$(printf '\n\t')&&IFS=" ${IFS#?}${IFS%?}"
-version(){ echo 0.9.0;}
+version(){ echo 0.13.0;}
 usage(){
 printf '%s\n' "Usage: shdotenv [OPTION]... [--] [[COMMAND | export] [ARG]...]" \
 "" \
@@ -17,23 +18,20 @@ printf '%s\n' "Usage: shdotenv [OPTION]... [--] [[COMMAND | export] [ARG]...]" \
 "                                posix, ruby, node, python," \
 "                                php, go, rust, docker" \
 "  -f, --format FORMAT       Output in the specified format [default: sh]" \
-"                                sh, fish" \
+"                                sh, csh, fish, json, jsonl, yaml, name" \
 "  -e, --env ENV_PATH        Location of the .env file [default: .env]" \
 "                              Multiple -e options are allowed" \
 '                              If the ENV_PATH is "-", read from stdin' \
 "  -i, --ignore-environment  Ignore the current environment variables" \
-"      --overload            Overload predefined environment variables" \
-'      --noexport            Do not append "export" prefix' \
+"      --overload            Overload predefined variables" \
+"      --no-allexport        Disable all variable export" \
+"                              Same as deprecated --noexport" \
+"      --no-nounset          Allow references to undefined variables" \
 "      --grep PATTERN        Output only names that match the regexp pattern" \
-"      --name-only           Output only environment variable names" \
+"  -s, --sort                Sort variable names" \
 "  -q, --quiet               Suppress all output (useful for test .env files)" \
 "  -v, --version             Show the version and exit" \
 "  -h, --help                Show this message and exit" \
-"" \
-"  Deprecated: (to be removed in the next version)" \
-"  -s, --shell SHELL         Use the -f (--format) option instead" \
-"  -k, --keyonly             Use the --name-only option instead" \
-"  -o, -n, -g                Use long options instead" \
 "" \
 "Usage: shdotenv export [-n | -p] [--] [NAME]..." \
 "  Exports environment variables in posix-compliant .env format." \
@@ -46,33 +44,30 @@ printf '%s\n' "Usage: shdotenv [OPTION]... [--] [[COMMAND | export] [ARG]...]" \
 '  and "printenv" commands, but quoting correctly and exports only portable' \
 "  environment variable name that are valid as identifier for posix shell."
 }
-abort(){ echo "shdotenv:" "$@" >&2&&exit 1;}
+abort(){ echo "$_shdotenv_progname:" "$1" >&2&&exit "${2:-1}";}
 requires(){
-[ $# -gt 1 ]||abort "Error: $1 option requires an argument"
+[ $# -gt 1 ]||abort "error: $1 option requires an argument"
 _shdotenv_pos=$((_shdotenv_pos+1))
 }
 parse_options(){
 while [ $# -gt 0 ];do
 case $1 in
 -d|--dialect)requires "$@"&&shift&&_shdotenv_dialect="$1";;
--s|--shell)requires "$@"&&shift&&\
-_shdotenv_format="$1"
-[ "$_shdotenv_format" = "posix" ]&&_shdotenv_format="sh"
-;;
 -f|--format)requires "$@"&&shift&&_shdotenv_format="$1";;
 -e|--env)requires "$@"&&shift
 _shdotenv_envfiles="$_shdotenv_envfiles \"\${$_shdotenv_pos}\""
 ;;
 -i|--ignore-environment)_shdotenv_ignore=1;;
--o|--overload)_shdotenv_overload=1;;
--n|--noexport)_shdotenv_allexport='';;
--g|--grep)requires "$@"&&shift&&_shdotenv_grep="$1";;
--k|--keyonly|--name-only)_shdotenv_nameonly=1;;
+--overload)_shdotenv_overload=1;;
+--no-allexport|--noexport)_shdotenv_allexport='';;
+--no-nounset)_shdotenv_nounset='';;
+--grep)requires "$@"&&shift&&_shdotenv_grep="$1";;
+-s|--sort)_shdotenv_sort=1;;
 -q|--quiet)_shdotenv_quiet=1;;
 -v|--version)version&&exit 0;;
 -h|--help)usage&&exit 0;;
 --)_shdotenv_pos=$((_shdotenv_pos+1))&&break;;
--*)abort "Unknown option: $1";;
+-*)abort "unknown option: $1";;
 *)break
 esac
 shift
@@ -82,34 +77,62 @@ done
 trim(){
 eval "$1=\${2#\"\${2%%[!\$IFS]*}\"} && $1=\${$1%\"\${$1##*[!\$IFS]}\"}"
 }
+escape_awk_value(){
+set -- "$1" "$2\\" ""
+while [ "$2" ];do
+set -- "$1" "${2#*\\}" "$3${2%%\\*}\\\\"
+done
+eval "$1=\${3%??}"
+}
 unexport(){
-set -- "$@" "$*"
-while [ $# -gt 1 ];do
+while [ $# -gt 0 ];do
 unset "${1%%=*}"
+eval "${1%%=*}=\${1#*=}"
 shift
 done
-eval "$*"
 }
 init_vars(){
-set --
-set -- "$@" _shdotenv_dialect= _shdotenv_format= _shdotenv_grep=
-set -- "$@" _shdotenv_envfiles= _shdotenv_overload= _shdotenv_allexport=1
-set -- "$@" _shdotenv_nameonly= _shdotenv_quiet= _shdotenv_ignore=
-set -- "$@" _shdotenv_pos=1 _shdotenv_line=
+set -- _shdotenv_progname= _shdotenv_pos=1 _shdotenv_line=
+set -- "$@" _shdotenv_libawk= _shdotenv_parser= _shdotenv_exporter=
+set -- "$@" _shdotenv_dialect= _shdotenv_format="${SHDOTENV_FORMAT:-}"
+set -- "$@" _shdotenv_envfiles= _shdotenv_overload= _shdotenv_grep=
+set -- "$@" _shdotenv_allexport=1 _shdotenv_nounset=1
+set -- "$@" _shdotenv_quiet= _shdotenv_ignore= _shdotenv_sort=
 unexport "$@"
-_shdotenv_format="${SHDOTENV_FORMAT:-}"
-[ "$_shdotenv_format" ]||_shdotenv_format="${SHDOTENV_SHELL:-}"
-_shdotenv_parser='#!/usr/bin/awk -f
-function abort(msg) {
-print msg > "/dev/stderr"
+_shdotenv_libawk='function abort(msg) {
+print PROGNAME ": " msg > "/dev/stderr"
 exit 1
 }
-function syntax_error(msg) {
+function quotes(value) {
+if (match(value, /'\''/)) {
+gsub(/[$`"\\]/, "\\\\&", value)
+return "\"" value "\""
+}
+return "'\''" value "'\''"
+}
+function sort(ary,  len, min, tmp, i, j) {
+len = 0
+for (i in ary) len++
+for (i = 0; i < len - 1; i++) {
+min = i
+for (j = i + 1; j < len; j++) {
+if (ary[min] > ary[j]) min = j
+}
+tmp = ary[min]
+ary[min] = ary[i]
+ary[i] = tmp
+}
+}'
+_shdotenv_parser='function syntax_error(msg) {
 sub("[\n]+$", "", CURRENT_LINE)
 abort(sprintf("`%s'\'': %s", CURRENT_LINE, msg))
 }
 function trim(str) {
-sub("(^[ \t]+)|([ \t]+$)", "", str)
+gsub("(^[ \t]+)|([ \t]+$)", "", str)
+return str
+}
+function rtrim(str) {
+sub("[ \t]+$", "", str)
 return str
 }
 function chomp(str) {
@@ -135,7 +158,9 @@ return str
 syntax_error("unterminated quoted string")
 }
 function expand_env(key) {
-return (key in environ) ? environ[key] : ""
+if (key in environ) return environ[key]
+if (!NOUNSET) return ""
+abort(sprintf("%s: the key is not set", key))
 }
 function parse_key(key) {
 if (dialect("ruby|node|python|php|go")) {
@@ -231,24 +256,112 @@ return substr(value, 1, len) rest
 }
 function output(flag, key, value) {
 if (FORMAT == "sh") output_sh(flag, key, value)
+if (FORMAT == "csh") output_csh(flag, key, value)
 if (FORMAT == "fish") output_fish(flag, key, value)
+if (FORMAT == "json") output_json(flag, key, value)
+if (FORMAT == "jsonl") output_jsonl(flag, key, value)
+if (FORMAT == "yaml") output_yaml(flag, key, value)
+if (FORMAT == "name") output_name_only(flag, key, value)
 }
 function output_sh(flag, key, value) {
-if (match(value, /'\''/)) {
-gsub(/[$`"\\]/, "\\\\&", value)
+value = quotes(value)
+if (flag == ONLY_EXPORT) print "export " key
+if (flag == DO_EXPORT) print "export " key "=" value
+if (flag == NO_EXPORT) print key "=" value
+}
+function output_csh(flag, key, value) {
+if (match(value, /['\''\n]/)) {
+gsub(/[$`"\\]/, "\"'\''&'\''\"", value)
+gsub(/[\n]/, "${newline:q}", value)
 value = "\"" value "\""
 } else {
 value = "'\''" value "'\''"
 }
-if (flag == ONLY_EXPORT) print "export " key
-if (flag == DO_EXPORT) print "export " key "=" value
-if (flag == NO_EXPORT) print key "=" value
+if (flag == ONLY_EXPORT) print "setenv " key ";"
+if (flag == DO_EXPORT) print "setenv " key " " value ";"
+if (flag == NO_EXPORT) print "set " key "=" value ";"
 }
 function output_fish(flag, key, value) {
 gsub(/[\\'\'']/, "\\\\&", value)
 if (flag == ONLY_EXPORT) print "set --export " key " \"$" key "\";"
 if (flag == DO_EXPORT) print "set --export " key " '\''" value "'\'';"
 if (flag == NO_EXPORT) print "set " key " '\''" value "'\'';"
+}
+function output_json(flag, key, value) {
+if (flag == BEFORE_ALL) {
+print "{"
+delim = ""
+} else if (flag == AFTER_ALL) {
+printf "\n}\n"
+} else if (flag == ONLY_EXPORT || flag == DO_EXPORT || flag == NO_EXPORT) {
+printf delim "  \"%s\": \"%s\"", key, json_escape(value)
+delim = ",\n"
+}
+}
+function output_jsonl(flag, key, value) {
+if (flag == BEFORE_ALL) {
+printf "{"
+delim = ""
+} else if (flag == AFTER_ALL) {
+print " }"
+} else if (flag == ONLY_EXPORT || flag == DO_EXPORT || flag == NO_EXPORT) {
+printf delim " \"%s\": \"%s\"", key, json_escape(value)
+delim = ","
+}
+}
+function output_yaml(flag, key, value) {
+if (flag == ONLY_EXPORT || flag == DO_EXPORT || flag == NO_EXPORT) {
+printf "%s: \"%s\"\n", key, json_escape(value)
+}
+}
+function json_escape(value) {
+gsub(/\\/, "&&", value)
+gsub(/\10/, "\\b", value)
+gsub(/\f/, "\\f", value)
+gsub(/\n/, "\\n", value)
+gsub(/\r/, "\\r", value)
+gsub(/\t/, "\\t", value)
+gsub(/["]/, "\\\"", value)
+return value
+}
+function output_name_only(flag, key, value) {
+if (flag == ONLY_EXPORT || flag == DO_EXPORT || flag == NO_EXPORT) {
+print key
+}
+}
+function process_begin() {
+output(BEFORE_ALL)
+}
+function process_main(export, key, value) {
+if (OVERLOAD) {
+environ[key] = value
+vars[key] = export ":" value
+if (key in defined_key) return
+defined_key[key] = FILENAME
+} else {
+if (key in defined_key) {
+msg = "%s: `%s'\'' is already defined in the %s"
+abort(sprintf(msg, FILENAME, key, defined_key[key]))
+}
+defined_key[key] = FILENAME
+if (key in environ) return
+environ[key] = value
+vars[key] = export ":" value
+}
+defined_keys = defined_keys " " key
+}
+function process_finish() {
+len = split(trim(defined_keys), keys)
+if (SORT) sort(keys)
+for(i = 1; i <= len; i++) {
+key = keys[i]
+if (!match(key, GREP)) continue
+match(vars[key], ":")
+export = substr(vars[key], 1, RSTART - 1)
+value = substr(vars[key], RSTART + 1)
+output(export, key, value)
+}
+output(AFTER_ALL)
 }
 function parse(lines) {
 SQ_VALUE = "'\''[^\\\\'\'']*'\''?"
@@ -273,11 +386,7 @@ key = parse_key_only(line)
 } else {
 key = parse_key(substr(line, 1, equal_pos - 1))
 }
-if (NAMEONLY) {
-if (!OVERLOAD && key in environ) continue
-print key
-environ[key] = ""
-} else if (equal_pos == 0) {
+if (equal_pos == 0) {
 output(ONLY_EXPORT, key)
 } else {
 export = (ALLEXPORT ? DO_EXPORT : NO_EXPORT)
@@ -295,18 +404,21 @@ value = parse_double_quoted_value(unquote(value, "\""))
 if (match(value, "[ \t]#")) {
 value = remove_optional_comment(value, RSTART - 1)
 }
-value = parse_unquoted_value(trim(value))
+if (dialect("posix")) {
+value = rtrim(value)
+} else {
+value = trim(value)
 }
-if (!OVERLOAD && key in environ) continue
-environ[key] = value
-if (match(key, GREP)) output(export, key, value)
+value = parse_unquoted_value(value)
+}
+process_main(export, key, value)
 }
 }
 }
 BEGIN {
 IDENTIFIER = "[a-zA-Z_][a-zA-Z0-9_]*"
 KEEP = 1; NO_KEEP = 0
-ONLY_EXPORT = 0; DO_EXPORT = 1; NO_EXPORT = 2
+BEFORE_ALL = 0; ONLY_EXPORT = 1; DO_EXPORT = 2; NO_EXPORT = 3; AFTER_ALL = 9
 NO_QUOTES = 0; SINGLE_QUOTES = 1; DOUBLE_QUOTES = 2
 ESCAPE["$"] = "$"
 ESCAPE["`"] = "`"
@@ -326,55 +438,33 @@ environ[key] = ENVIRON[key]
 }
 }
 if (FORMAT == "") FORMAT = "sh"
-if (!match(FORMAT, "^(sh|fish)$")) {
+if (!match(FORMAT, "^(sh|csh|fish|json|jsonl|yaml|name)$")) {
 abort("unsupported format: " FORMAT)
 }
 if (ARGC == 1) {
 ARGV[1] = "/dev/stdin"
 ARGC = 2
 }
+process_begin()
 for (i = 1; i < ARGC; i++) {
-getline < ARGV[i]
+FILENAME = ARGV[i]
+getline < FILENAME
 lines = $0 "\n"
 if (DIALECT == "" && sub("^# dotenv ", "")) DIALECT = $0
 if (DIALECT == "") DIALECT = "posix"
 if (!dialect("posix|docker|ruby|node|python|php|go|rust")) {
 abort("unsupported dotenv dialect: " DIALECT)
 }
-while (getline < ARGV[i] > 0) {
+while (getline < FILENAME > 0) {
 lines = lines $0 "\n"
 }
-if (!match(ARGV[i], "^(/dev/stdin|-)$")) close(ARGV[i])
+if (!match(FILENAME, "^(/dev/stdin|-)$")) close(FILENAME)
 parse(lines)
 }
+process_finish()
 exit
 }'
-_shdotenv_exporter='#!/usr/bin/awk -f
-function abort(msg) {
-print msg > "/dev/stderr"
-exit 1
-}
-function quotes(value) {
-if (match(value, /'\''/)) {
-gsub(/[$`"\\]/, "\\\\&", value)
-return "\"" value "\""
-}
-return "'\''" value "'\''"
-}
-function sort(ary,  len, min, tmp, i, j) {
-len = 0
-for (i in ary) len++
-for (i = 0; i < len - 1; i++) {
-min = i
-for (j = i + 1; j < len; j++) {
-if (ary[min] > ary[j]) min = j
-}
-tmp = ary[min]
-ary[min] = ary[i]
-ary[i] = tmp
-}
-}
-BEGIN {
+_shdotenv_exporter='BEGIN {
 ex = envkeys_length = 0
 prefix = nameonly = ""
 for (key in ENVIRON) {
@@ -404,7 +494,7 @@ nameonly = 1
 i++
 break
 } else if (substr(ARGV[i], 1, 1) == "-") {
-abort("shdotenv export: Unknown option: " ARGV[i])
+abort("export: Unknown option: " ARGV[i])
 } else {
 break
 }
@@ -438,33 +528,55 @@ _shdotenv_line=${_shdotenv_line%%#*}
 trim _shdotenv_line "$_shdotenv_line"
 case $_shdotenv_line in
 dialect:*)trim _shdotenv_dialect "${_shdotenv_line#*:}";;
-*)abort "Unknown line in $1: $_shdotenv_line"
+*)abort "unknown line in $1: $_shdotenv_line"
 esac
 done <"$1"
 }
 exec_parser(){
 eval "set -- ${_shdotenv_envfiles:-.env}"
-set -- "$_shdotenv_parser" "$@"
-[ "$_shdotenv_dialect" ]&&set -- -v DIALECT="$_shdotenv_dialect" "$@"
-[ "$_shdotenv_format" ]&&set -- -v FORMAT="$_shdotenv_format" "$@"
-[ "$_shdotenv_overload" ]&&set -- -v OVERLOAD="$_shdotenv_overload" "$@"
-[ "$_shdotenv_allexport" ]&&set -- -v ALLEXPORT="$_shdotenv_allexport" "$@"
-[ "$_shdotenv_grep" ]&&set -- -v GREP="$_shdotenv_grep" "$@"
-[ "$_shdotenv_nameonly" ]&&set -- -v NAMEONLY="$_shdotenv_nameonly" "$@"
-[ "$_shdotenv_ignore" ]&&set -- -v IGNORE="$_shdotenv_ignore" "$@"
+set -- "$_shdotenv_libawk$_shdotenv_parser" "$@"
+set -- -v PROGNAME="$_shdotenv_progname" "$@"
+set -- -v DIALECT="$_shdotenv_dialect" "$@"
+set -- -v FORMAT="$_shdotenv_format" "$@"
+set -- -v OVERLOAD="$_shdotenv_overload" "$@"
+set -- -v ALLEXPORT="$_shdotenv_allexport" "$@"
+set -- -v NOUNSET="$_shdotenv_nounset" "$@"
+set -- -v GREP="$_shdotenv_grep" "$@"
+set -- -v IGNORE="$_shdotenv_ignore" "$@"
+set -- -v SORT="$_shdotenv_sort" "$@"
 "${SHDOTENV_AWK:-awk}" "$@"
 }
 exec_exporter(){
 set -- - "$@"
 [ "${AWKPATH+x}" ]&&set -- "AWKPATH=$AWKPATH" "$@"
 [ "${AWKLIBPATH+x}" ]&&set -- "AWKLIBPATH=$AWKLIBPATH" "$@"
-set -- "$_shdotenv_exporter" "$@"
+set -- "$_shdotenv_libawk$_shdotenv_exporter" "$@"
+set -- -v PROGNAME="$_shdotenv_progname" "$@"
 "${SHDOTENV_AWK:-awk}" "$@"
 }
+exists(){
+case $1 in
+*/*)[ -x "$1" ]&&return 0;;
+*)set -- "$1" "${PATH:-}:"
+while [ "$2" ];do
+set -- "$1" "${2#*:}" "${2%%:*}"
+if [ -f "${3:-./}/$1" ]&&[ -x "${3:-./}/$1" ];then
+return 0
+fi
+done
+esac
+return 1
+}
 init_vars
+_shdotenv_progname="${0##*/}"
 parse_options "$@"
 read_config_file ".shdotenv"
-if [ $(($#-_shdotenv_pos+1)) -eq 0 ]||[ "$_shdotenv_nameonly" ];then
+escape_awk_value _shdotenv_format "$_shdotenv_format"
+escape_awk_value _shdotenv_grep "$_shdotenv_grep"
+if ! exists "${SHDOTENV_AWK:-awk}";then
+abort "the awk command is required"
+fi
+if [ $(($#-_shdotenv_pos+1)) -eq 0 ];then
 [ "$_shdotenv_quiet" ]&&exec >/dev/null
 exec_parser "$@"
 else
@@ -476,6 +588,7 @@ case $1 in
 export)shift
 exec_exporter "$@"
 ;;
-*)exec env "$@"
+*)exists "$1"||abort "$1: command not found" 127
+exec "$@"
 esac
 fi

@@ -1,0 +1,34 @@
+<% content_for(:page_title, post.title)  %>
+<% content_for(:page_description, post.description) %>
+<% content_for(:page_keywords, post.tags.pluck(:name).join(',')) %>
+<% content_for(:canonical_url, post_url(post, host: 'romanch.uk')) %>
+<%= turbo_frame_tag "edit_post", target: "_top" %>
+<% cache post do %>
+  <%= turbo_frame_tag post do %>
+    <article class="post">
+      <!-- Post header-->
+      <header class="mb-4">
+        <!-- Post title-->
+        <h1 class="fw-bolder mb-1"><%= post.title %></h1>
+        <!-- Post meta content-->
+        <div class="mb-1">
+          <span>By Ryan Romanchuk</span><br/>
+          <span class="text-muted fst-italic mb-2 fs-6"">On <%= time_tag  post.created_at, post.created_at.strftime("%B %d, %Y")%></span>
+        </div>
+        <!-- Post categories-->
+        <ul class="list-unstyled list-inline mb-0">
+          <%= render partial: 'tag', collection: post.tags, cached: true %>
+        </ul>
+      </header>
+      <%# Helper Dependency Updated: Sep 14, 2022 at 4pm %>
+      <%= render PostBodyComponent.new(post) %>
+    </article>
+  <% end %>
+  <%= tag.script post_json_ld(post).target!.html_safe, type: "application/ld+json" %>
+<% end %>
+<% if authenticated? %>
+  <div class="d-flex">
+    <%= link_to "Edit", edit_post_path(post), class: 'btn btn-link btn-sm', data: { turbo_action: "replace" } %>
+    <%= button_to "Destory", post_path(post), method: :delete, class: 'btn btn-danger btn-sm', data: {turbo_method: :delete}, form_class: ''  %>
+  </div>
+<% end %>

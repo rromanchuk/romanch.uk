@@ -1,0 +1,28 @@
+<% content_for(:page_title, tournament.title) %>
+<% content_for(:canonical_url, ro_tournament_url(tournament)) %>
+
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light"><%= tournament.title %></h1>
+      <p class="lead text-body-secondary"><%= "#{tournament.ocurred_on&.strftime("%B, %Y")}, #{tournament.location}" %></p>
+      <p>
+        <%= link_to "Golfers", ro_tournament_golfers_path(tournament), class: "btn btn-primary my-2" %>
+        <% if authenticated? %>
+          <%= link_to "Edit", edit_ro_tournament_path(tournament), class: 'btn btn-secondary my-2', data: { turbo_action: "replace" } %>
+          <%= button_to "Destory", ro_tournament_path(tournament), method: :delete, class: 'btn btn-danger my-2', data: {turbo_method: :delete}, form_class: ''  %>
+        <% end %>
+        <%# <a href="#" class="btn btn-secondary my-2">Secondary action</a> %>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <%= render partial: 'image', collection: tournament.images, cached: true %>
+    </div>
+  </div>
+</section>

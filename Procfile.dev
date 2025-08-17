@@ -1,0 +1,5 @@
+env ../bin/shdotenv 
+#sidekiq: bin/bundle exec sidekiq
+devlog: tail -f log/development.log
+pumalog: tail -f ~/Library/Logs/puma-dev.log
+testlog: tail -f log/test.log

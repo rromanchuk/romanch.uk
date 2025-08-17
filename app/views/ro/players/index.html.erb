@@ -1,0 +1,39 @@
+<% content_for(:page_title, "All players") %>
+<% content_for(:canonical_url, ro_players_url) %>
+
+
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">All participants</h1>
+      <p class="lead text-body-secondary">1985-2025</p>
+      <p>
+        <%= link_to "All players", ro_players_path, class: "btn btn-primary my-2" %>
+        <% if authenticated? %>
+          <%= link_to "New player", new_ro_player_path, class: "btn btn-secondary my-2",  data: { turbo_frame: 'player_modal'  } %>
+        <% end %>
+        <%# <a href="#" class="btn btn-secondary my-2">Secondary action</a> %>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Years played</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "player", collection: players, cached: true %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<%= turbo_frame_tag "player_modal" %>
