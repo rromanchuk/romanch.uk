@@ -2,7 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /app
-    destination: /home/ubuntu/codedeploy/app
+    destination: /home/ubuntu/codedeploy/romanch.uk/app
+  - source: /config
+    destination: /home/ubuntu/codedeploy/romanch.uk/config
+  - source: /Gemfile
+    destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile
 
 file_exists_behavior: OVERWRITE
 permissions:
