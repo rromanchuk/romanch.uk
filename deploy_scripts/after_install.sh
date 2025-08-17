@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 eval "$(shdotenv -e ${HOME}/.env)"
+printenv
+
+sudo chown -R ubuntu:ubuntu /home/ubuntu/codedeploy
 
 cd /home/ubuntu/codedeploy/romanch.uk
 rm -rf log tmp
