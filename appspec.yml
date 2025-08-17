@@ -38,6 +38,9 @@ permissions:
       - file
       - directory
 hooks:
+  BeforeInstall:
+    - location: deploy_scripts/before_install.sh
+      runas: ubuntu
   AfterInstall:
     - location: deploy_scripts/after_install.sh
       runas: ubuntu
