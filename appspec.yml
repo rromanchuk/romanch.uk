@@ -6,9 +6,9 @@ files:
   - source: /config
     destination: /home/ubuntu/codedeploy/romanch.uk/config
   - source: ./Gemfile
-    destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile
+    destination: /home/ubuntu/codedeploy/romanch.uk
   - source: ./Gemfile.lock
-    destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile.lock
+    destination: /home/ubuntu/codedeploy/romanch.uk
   - source: /db
     destination: /home/ubuntu/codedeploy/romanch.uk/db
   - source: /lib
@@ -20,9 +20,9 @@ files:
   - source: /bin
     destination: /home/ubuntu/codedeploy/romanch.uk/bin
   - source: ./config.ru
-    destination: /home/ubuntu/codedeploy/romanch.uk/config.ru
+    destination: /home/ubuntu/codedeploy/romanch.uk
   - source: ./Rakefile
-    destination: /home/ubuntu/codedeploy/romanch.uk/Rakefile
+    destination: /home/ubuntu/codedeploy/romanch.uk
 file_exists_behavior: OVERWRITE
 permissions:
   - object: /var/www/ubuntu/codedeploy
