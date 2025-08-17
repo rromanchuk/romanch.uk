@@ -1,5 +1,0 @@
-alias logs="tail -f /home/ubuntu/log/*.log"
-alias sysl="journalctl -fn500"
-alias www="cd /var/www/romanch.uk/current"
-alias c="cd /var/www/romanch.uk/current && bin/rails c"
-alias status="systemctl status nginx puma puma.socket sidekiq redis-server anycable-go"
