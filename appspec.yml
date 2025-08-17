@@ -7,6 +7,11 @@ files:
     destination: /home/ubuntu/codedeploy/romanch.uk/config
   - source: /Gemfile
     destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile
+  - source: /Gemfile.lock
+    destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile.lock
+  - source: /db
+    destination: /home/ubuntu/codedeploy/romanch.uk/db
+    
 
 file_exists_behavior: OVERWRITE
 permissions:
@@ -20,5 +25,5 @@ permissions:
       - directory
 hooks:
   AfterInstall:
-    - location: /var/home/ubuntu/codedeploy/deploy_scripts/after_install.sh
+    - location: deploy_scripts/after_install.sh
       runas: ubuntu
