@@ -5,17 +5,27 @@ files:
     destination: /home/ubuntu/codedeploy/romanch.uk/app
   - source: /config
     destination: /home/ubuntu/codedeploy/romanch.uk/config
-  - source: /Gemfile
+  - source: ./Gemfile
     destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile
-  - source: /Gemfile.lock
+  - source: ./Gemfile.lock
     destination: /home/ubuntu/codedeploy/romanch.uk/Gemfile.lock
   - source: /db
     destination: /home/ubuntu/codedeploy/romanch.uk/db
-    
-
+  - source: /lib
+    destination: /home/ubuntu/codedeploy/romanch.uk/lib
+  - source: /public
+    destination: /home/ubuntu/codedeploy/romanch.uk/public
+  - source: /vendor
+    destination: /home/ubuntu/codedeploy/romanch.uk/vendor
+  - source: /bin
+    destination: /home/ubuntu/codedeploy/romanch.uk/bin
+  - source: ./config.ru
+    destination: /home/ubuntu/codedeploy/romanch.uk/config.ru
+  - source: ./Rakefile
+    destination: /home/ubuntu/codedeploy/romanch.uk/Rakefile
 file_exists_behavior: OVERWRITE
 permissions:
-  - object: /var/www/romanch.uk/codedeploy
+  - object: /var/www/ubuntu/codedeploy
     owner: ubuntu
     group: ubuntu
     pattern: "**"
@@ -26,4 +36,7 @@ permissions:
 hooks:
   AfterInstall:
     - location: deploy_scripts/after_install.sh
+      runas: ubuntu
+  ValidateService:
+    - location: deploy_scripts/cleanup.sh
       runas: ubuntu
