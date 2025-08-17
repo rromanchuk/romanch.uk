@@ -97,14 +97,6 @@ Rails.application.routes.draw do
     resources :videos, only: [:show]
   end
 
-  
-
-  namespace :oauth do
-    get 'cognito/token', to: 'cognito#token'
-    get 'cognito/authorize', to: 'cognito#authorize'
-    get 'cognito/authorize_apple', to: 'cognito#authorize_apple'
-    get 'cognito/logout', to: 'cognito#logout'
-  end
 
   # namespace :romanchuk_open do
     

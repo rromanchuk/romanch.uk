@@ -1,9 +1,10 @@
 require 'test_helper'
-
-class PostTest < ActiveSupport::TestCase
-  test 'sanity' do
-    assert_nothing_raised do
-      posts(:one)
+module RyanRomanchuk
+  class PostTest < ActiveSupport::TestCase
+    test 'sanity' do
+      assert_nothing_raised do
+        ryan_romanchuk_posts(:one)
+      end
     end
   end
 end

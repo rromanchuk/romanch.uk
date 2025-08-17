@@ -6,6 +6,8 @@
 #
 ryan:
   email_address: ryan@example.org
+  password_digest: <%= BCrypt::Password.create("password") %>
 
 one:
-  username: alice
+  email_address: alice@example.com
+  password_digest: <%= BCrypt::Password.create("password") %>

@@ -13,9 +13,12 @@ module RyanRomanchuk
     end
 
     def show
+      Rails.logger.info authenticated?
       add_breadcrumb('Posts', posts_url)
       add_breadcrumb(post.title)
-      authorize! post
+      unless allowed_to?(:show?, post, with: RyanRomanchuk::PostPolicy)
+       raise ActionController::RoutingError, 'Not Found'
+      end
     end
 
     def new
@@ -36,7 +39,7 @@ module RyanRomanchuk
     def create
       @new_post = Post.new(post_params)
       if @new_post.save
-        redirect_to request.referer, status: :see_other
+        redirect_to post_path(@new_post), status: :see_other
       else
         render :new, status: :unprocessable_entity
       end
@@ -44,12 +47,12 @@ module RyanRomanchuk
 
     def update
       post.update!(post_params)
-      redirect_to request.referer, status: :see_other
+      redirect_to posts_path, status: :see_other
     end
 
     def destroy
       post.destroy
-      redirect_to request.referer, status: :see_other
+      redirect_to posts_path, status: :see_other
     end
 
     def recently_updated

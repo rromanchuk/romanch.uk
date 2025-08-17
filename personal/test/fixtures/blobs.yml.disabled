@@ -1,0 +1,18 @@
+# image:
+#   key: /static/one.jpg
+#   title: Image Number One
+#   description: Image number one. Image number one.
+#   content_type: image/jpeg
+#   slug: image-one
+
+# video:
+#   key: /static/l35/master.m3u8
+#   title: Video Number One
+#   description: Video number one. Video number one.
+#   content_type: application/vnd.apple.mpegurl
+#   slug: video-one
+#   data: >
+#     {
+#       "thumbnail_key": "/static/l35/thumbnail.jpg",
+#       "aspect": "9x16"
+#     }

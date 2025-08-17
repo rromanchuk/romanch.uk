@@ -3,7 +3,7 @@ require 'utils/csv/aircraft_report_tools'
 class AircraftReportToolsTest < ActiveSupport::TestCase
   include Utils::Csv::AircraftReportTools
   def setup
-    @batch = wx_batches(:first)
+    @batch = tds_batches(:first)
   end
 
   test 'sanity' do

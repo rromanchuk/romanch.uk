@@ -61,6 +61,14 @@ test:
     username: postgres
     host: localhost
     migrations_paths: db/ro
+  cache:
+    adapter: sqlite3
+    database: storage/test_cache.sqlite3
+    migrations_paths: db/cache
+  cable:
+    adapter: sqlite3
+    database: storage/test_cable.sqlite3
+    migrations_paths: db/cable
 
 production:
   primary:

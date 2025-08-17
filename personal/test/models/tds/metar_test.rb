@@ -1,10 +1,10 @@
 require 'test_helper'
 
-module Wx
-  class PirepTest < ActiveSupport::TestCase
+module Tds
+  class MetarTest < ActiveSupport::TestCase
     test 'sanity' do
       assert_nothing_raised do
-        wx_pireps(:ua)
+        tds_metars(:kmfv)
       end
     end
   end
