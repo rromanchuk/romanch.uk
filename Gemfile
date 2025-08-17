@@ -1,11 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-<<<<<<< HEAD:personal/Gemfile
-ruby "3.4.1"
-=======
 ruby "3.4.5"
->>>>>>> dev:Gemfile
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.0"
@@ -22,10 +18,6 @@ gem 'puma', github: 'puma/puma'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-<<<<<<< HEAD:personal/Gemfile
-gem "cssbundling-rails"
-=======
->>>>>>> dev:Gemfile
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -117,11 +109,7 @@ end
 
 
 gem "pagy"
-<<<<<<< HEAD:personal/Gemfile
-gem 'activerecord-postgis-adapter', github: "rgeo/activerecord-postgis-adapter", branch: "rails8"
-=======
 gem 'activerecord-postgis-adapter'
->>>>>>> dev:Gemfile
 gem 'httparty'
 gem "pghero"
 gem "pg_query"
@@ -134,7 +122,4 @@ gem "solid_cache", "~> 1.0"
 gem "sqlite3"
 
 gem "solid_cable", "~> 3.0"
-<<<<<<< HEAD:personal/Gemfile
-=======
 gem "propshaft"
->>>>>>> dev:Gemfile
