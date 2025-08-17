@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD:personal/db/ryan_romanchuk_schema.rb
-ActiveRecord::Schema[8.0].define(version: 2024_04_10_055524) do
-=======
 ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
->>>>>>> dev:db/ryan_romanchuk_schema.rb
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -47,8 +43,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-<<<<<<< HEAD:personal/db/ryan_romanchuk_schema.rb
-=======
   create_table "alb_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "cognito_id"
     t.string "slug"
@@ -59,7 +53,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
     t.index ["slug"], name: "index_alb_users_on_slug"
   end
 
->>>>>>> dev:db/ryan_romanchuk_schema.rb
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -112,8 +105,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
     t.index ["slug"], name: "index_posts_on_slug"
   end
 
-<<<<<<< HEAD:personal/db/ryan_romanchuk_schema.rb
-=======
   create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "ip_address"
@@ -123,7 +114,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
->>>>>>> dev:db/ryan_romanchuk_schema.rb
   create_table "streaming_videos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "content_type"
@@ -137,28 +127,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_25_061857) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-<<<<<<< HEAD:personal/db/ryan_romanchuk_schema.rb
-    t.uuid "cognito_id"
-    t.string "slug"
-    t.string "username"
-    t.jsonb "data", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_users_on_slug"
-=======
     t.string "email_address", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
->>>>>>> dev:db/ryan_romanchuk_schema.rb
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "gutentag_taggings", "gutentag_tags", column: "tag_id"
-<<<<<<< HEAD:personal/db/ryan_romanchuk_schema.rb
-=======
   add_foreign_key "sessions", "users"
->>>>>>> dev:db/ryan_romanchuk_schema.rb
 end

@@ -173,13 +173,8 @@ Rails.application.routes.draw do
     end
 
     mount ActionCable.server => "/cable" 
-<<<<<<< HEAD:personal/config/routes.rb
-    get '/c/*attributed', to: 'pages#show', id: 'home'
-    root to: 'pages#show', id: 'home'
-=======
     #get '/c/*attributed', to: 'pages#show', id: 'home'
     root to: "ryan_romanchuk/pages#show", id: "home"
     
->>>>>>> dev:config/routes.rb
   end
 end

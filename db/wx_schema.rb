@@ -16,17 +16,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_04_10_023029) do
   enable_extension "pg_stat_statements"
   enable_extension "postgis"
 
-<<<<<<< HEAD:personal/db/wx_schema.rb
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
-    t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
-  end
-
-=======
->>>>>>> dev:db/wx_schema.rb
   create_table "tds_aircraft_type_designators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "icao_code", null: false
     t.text "aircraft_class"
