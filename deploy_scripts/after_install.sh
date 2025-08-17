@@ -2,7 +2,7 @@
 set -euxo pipefail
 eval "$(shdotenv -e ${HOME}/.env)"
 
-cd cd /home/ubuntu/codedeploy/romanch.uk
+cd /home/ubuntu/codedeploy/romanch.uk
 rm -rf log tmp
 ln -s /home/ubuntu/assets public/assets
 ln -s /home/ubuntu/tmp tmp
