@@ -23,6 +23,12 @@ files:
     destination: /home/ubuntu/codedeploy/romanch.uk
   - source: ./Rakefile
     destination: /home/ubuntu/codedeploy/romanch.uk
+  - source: ./.ruby-version
+    destination: /home/ubuntu/codedeploy/romanch.uk
+  - source: /deploy_scripts
+    destination: /home/ubuntu/codedeploy/romanch.uk/deploy_scripts
+  - source: /public
+    destination: /home/ubuntu/codedeploy/romanch.uk/public
 file_exists_behavior: OVERWRITE
 permissions:
   - object: /var/www/ubuntu/codedeploy
