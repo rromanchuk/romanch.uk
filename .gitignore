@@ -1,26 +1,69 @@
 .DS_Store
-.env
-.sass-cache
-.tex
+*.key
 
-/ignore/*
-!/ignore/.keep
 
-/node_modules
-personal/public/videos/*
+*.rbc
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+/public/system
+/coverage/
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
 
-iam.ts
-
-/client/*
-/personal/public/assets
-/personal/public/static/*
+# Ignore all logfiles and tempfiles.
+/log/*
 /tmp/*
-dump.sql
-*.cache
-/xcode/Demo*
-/xcode/Realm*
-personal/public/sitemap.xml
-personal/public/sitemaps/*
-personal/app/views/pages/fiddle.html.erb
-/ios
-personal/tafs.cache.xml
+!/log/.keep
+!/tmp/.keep
+
+
+# dotenv, dotenv-rails
+# TODO Comment out these rules if environment variables can be committed
+.env
+.env*.local
+
+## Environment normalization:
+/.bundle
+/vendor/bundle
+
+# these should all be checked in to normalize the environment:
+# Gemfile.lock, .ruby-version, .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+# if using bower-rails ignore default bower_components path bower.json files
+/vendor/assets/bower_components
+*.bowerrc
+bower.json
+
+# Ignore pow environment settings
+.powenv
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore node_modules
+node_modules/
+
+# Ignore precompiled javascript packs
+/public/packs
+/public/packs-test
+/public/assets
+
+# Ignore yarn files
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+/public/uploads
+
+/config/credentials/production.key

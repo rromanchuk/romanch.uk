@@ -12,7 +12,7 @@ module Personal
     require "utils/formatters/lograge"
     require "custom_logger"
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 8.0
     config.active_record.schema_format = :ruby
     config.active_record.dump_schemas = :all
     config.generators do |g|

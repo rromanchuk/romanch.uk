@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   post '/data/report', to: 'data#report'
   resources :wx_station_observations, only: %i[index]
 
-  # config/routes.rb
   direct :cdn_image do |model, options|
     expires_in = options.delete(:expires_in) { ActiveStorage.urls_expire_in }
 
@@ -66,13 +65,12 @@ Rails.application.routes.draw do
       resources :posts, only: [:index], on: :collection
     end
     get '/pages/*id' => 'pages#show', as: :page, format: false
-    #root "pages#show", id: 'home'
   end
   
   
   resources :videos
   resources :blobs
-  
+
   resources :attachments
 
   scope 'romanchuk_open' do
@@ -80,37 +78,12 @@ Rails.application.routes.draw do
       resources :blobs, shallow: true
     end
   end
-
-  # resource :sessions, only: [] do
-  #   get :apple_signin
-  #   post :client
-  # end
-
-  # get 'account', to: 'sessions#account'
-  # get 'logout', to: 'sessions#logout'
-  # get 'login', to: 'sessions#login'
-  # post 'sign_in', to: 'sessions#sign_in'
   
-
   namespace :serve, path: '/serve' do
     resources :images, only: [:show]
     resources :videos, only: [:show]
   end
 
-
-  # namespace :romanchuk_open do
-    
-  #   resources :golfers
-  #   resources :players do
-  #     resources :golfers, only: [:new]
-  #   end
-  #   resources :tournaments do
-  #     resources :images, only: [:show]
-  #     resources :golfers, only: [:index]
-  #     get :newsletter, on: :member
-  #   end
-  #   get '/pages/*id' => 'pages#show', as: :page, format: false
-  # end
 
   namespace :ro do
     resources :images
@@ -123,7 +96,6 @@ Rails.application.routes.draw do
       resources :golfers, only: [:index]
       get :newsletter, on: :member
     end
-    #get '/pages/*id' => 'pages#show', as: :page, format: false
   end
 
   mount Sidekiq::Web, at: '/sidekiq', constraints: AdminConstraint.new # mount Sidekiq::Web in your Rails app
@@ -173,8 +145,6 @@ Rails.application.routes.draw do
     end
 
     mount ActionCable.server => "/cable" 
-    #get '/c/*attributed', to: 'pages#show', id: 'home'
     root to: "ryan_romanchuk/pages#show", id: "home"
-    
   end
 end
